@@ -3,7 +3,7 @@
 # Hecho con ayuda de ChatGPT
 # Objetivo: entrenar un agente con Q-learning para que aprenda a jugar tic tac toe
 # Funcionamiento: El archivo entrena durante un número de episodios seleccionados jugando contra elección aleatoria,
-# y cada 1% del total de episodios evalúa contra un oponente aleatorio (100 juegos) y guarda el porcentaje de victorias.
+# y cada 1% del total de episodios evalúa contra un oponente aleatorio (100 juegos) y guarda el porcentaje de victorias y empates.
 
 # -----------------------  1. Librerías -----------------------------
 
@@ -86,6 +86,7 @@ def train_q_learning_agent_random_opponent(episodes=10000):
     agent = QLearningAgent(alpha=0.001, gamma=0.9, epsilon=0.5)
     rewards = []
     win_percentages = []
+    draw_percentages = []
     eval_interval = int(round(episodes * 0.01))  # Evaluación cada 1% de los episodios
     evaluation_episodes = eval_interval  # Usar el mismo valor para eval_interval y evaluation_episodes
 
@@ -94,25 +95,45 @@ def train_q_learning_agent_random_opponent(episodes=10000):
         done = False
         episode_reward = 0
 
+        # Alternar entre empezar primero y segundo
+        if episode % 2 == 0:
+            agent_letter, opponent_letter = 'X', 'O'
+        else:
+            agent_letter, opponent_letter = 'O', 'X'
+
         while not done:
-            # Agente como 'X'
-            action = agent.choose_action(state, env.available_moves())
-            env.make_move(action, 'X')
-            next_state = ''.join(env.board)
-            
-            if env.current_winner == 'X':
-                reward = 100
-                agent.update_q_value(state, action, reward, next_state, [])
-                done = True
-            elif env.is_draw():
-                reward = 50
-                agent.update_q_value(state, action, reward, next_state, [])
-                done = True
+            reward = 0  # Aseguramos que reward esté inicializado en 0 al inicio de cada turno
+            next_state = ''.join(env.board)  # Inicializamos next_state aquí para actualizar después de cada movimiento
+
+            if agent_letter == 'X':
+                action = agent.choose_action(state, env.available_moves())
+                env.make_move(action, 'X')
+                next_state = ''.join(env.board)  # Actualizar next_state después del movimiento del agente
+                if env.current_winner == 'X':
+                    reward = 100
+                    agent.update_q_value(state, action, reward, next_state, [])
+                    done = True
+                elif env.is_draw():
+                    reward = 50
+                    agent.update_q_value(state, action, reward, next_state, [])
+                    done = True
+                else:
+                    opponent_action = random.choice(env.available_moves())
+                    env.make_move(opponent_action, 'O')
+                    next_state = ''.join(env.board)  # Actualizar next_state después del movimiento del oponente
+                    if env.current_winner == 'O':
+                        reward = -100
+                        agent.update_q_value(state, action, reward, next_state, [])
+                        done = True
+                    elif env.is_draw():
+                        reward = 50
+                        agent.update_q_value(state, action, reward, next_state, [])
+                        done = True
             else:
-                # Oponente aleatorio como 'O'
                 opponent_action = random.choice(env.available_moves())
-                env.make_move(opponent_action, 'O')
-                if env.current_winner == 'O':
+                env.make_move(opponent_action, 'X')
+                next_state = ''.join(env.board)  # Actualizar next_state después del movimiento del oponente
+                if env.current_winner == 'X':
                     reward = -100
                     agent.update_q_value(state, action, reward, next_state, [])
                     done = True
@@ -121,10 +142,20 @@ def train_q_learning_agent_random_opponent(episodes=10000):
                     agent.update_q_value(state, action, reward, next_state, [])
                     done = True
                 else:
-                    state = next_state
-                    continue
+                    action = agent.choose_action(state, env.available_moves())
+                    env.make_move(action, 'O')
+                    next_state = ''.join(env.board)  # Actualizar next_state después del movimiento del agente
+                    if env.current_winner == 'O':
+                        reward = 100
+                        agent.update_q_value(state, action, reward, next_state, [])
+                        done = True
+                    elif env.is_draw():
+                        reward = 50
+                        agent.update_q_value(state, action, reward, next_state, [])
+                        done = True
 
             episode_reward += reward
+            state = next_state  # Actualizamos el estado actual para el próximo ciclo
 
         rewards.append(episode_reward)
 
@@ -132,9 +163,12 @@ def train_q_learning_agent_random_opponent(episodes=10000):
         if (episode + 1) % eval_interval == 0:
             wins, draws, losses = evaluate_agent(agent, games=evaluation_episodes)  # Evaluación del agente
             win_percentage = (wins / evaluation_episodes) * 100
+            draw_percentage = (draws / evaluation_episodes) * 100
             win_percentages.append(win_percentage)
+            draw_percentages.append(draw_percentage)
 
-    return win_percentages, eval_interval
+    return win_percentages, draw_percentages, eval_interval
+
 
 # ---------------  5. Evaluación del rendimiento ---------------------
 
@@ -146,26 +180,49 @@ def evaluate_agent(agent, games=100):
         state = ''.join(env.reset())
         done = False
 
+        # Alternar quién empieza (agente o oponente aleatorio)
+        if _ % 2 == 0:
+            agent_letter, opponent_letter = 'X', 'O'
+        else:
+            agent_letter, opponent_letter = 'O', 'X'
+
         while not done:
-            # Agente juega como 'X'
-            action = agent.choose_action(state, env.available_moves())
-            env.make_move(action, 'X')
-            if env.current_winner == 'X':
-                wins += 1
-                done = True
-            elif env.is_draw():
-                draws += 1
-                done = True
+            if agent_letter == 'X':
+                action = agent.choose_action(state, env.available_moves())
+                env.make_move(action, 'X')
+                if env.current_winner == 'X':
+                    wins += 1
+                    done = True
+                elif env.is_draw():
+                    draws += 1
+                    done = True
+                else:
+                    opponent_action = random.choice(env.available_moves())
+                    env.make_move(opponent_action, 'O')
+                    if env.current_winner == 'O':
+                        losses += 1
+                        done = True
+                    elif env.is_draw():
+                        draws += 1
+                        done = True
             else:
-                # Oponente aleatorio juega como 'O'
                 opponent_action = random.choice(env.available_moves())
-                env.make_move(opponent_action, 'O')
-                if env.current_winner == 'O':
+                env.make_move(opponent_action, 'X')
+                if env.current_winner == 'X':
                     losses += 1
                     done = True
                 elif env.is_draw():
                     draws += 1
                     done = True
+                else:
+                    action = agent.choose_action(state, env.available_moves())
+                    env.make_move(action, 'O')
+                    if env.current_winner == 'O':
+                        wins += 1
+                        done = True
+                    elif env.is_draw():
+                        draws += 1
+                        done = True
 
             state = ''.join(env.board)
     
@@ -175,19 +232,23 @@ def evaluate_agent(agent, games=100):
 
 if __name__ == "__main__":
     episodes = 100000  # Cambia el número según sea necesario
-    win_percentages, eval_interval = train_q_learning_agent_random_opponent(episodes)
+    win_percentages, draw_percentages, eval_interval = train_q_learning_agent_random_opponent(episodes)
 
-    # Gráfico del porcentaje de victorias en cada intervalo de evaluación
+    # Gráfico del porcentaje de victorias y empates en cada intervalo de evaluación
     sns.set(style="whitegrid")
     plt.figure(figsize=(10, 6))
 
     # Gráfico del porcentaje de victorias
     ax = sns.lineplot(x=range(eval_interval, episodes + 1, eval_interval), y=win_percentages, color="blue", marker="o", linestyle="--", label="Porcentaje de victorias")
+    
+    # Gráfico del porcentaje de empates
+    ax = sns.lineplot(x=range(eval_interval, episodes + 1, eval_interval), y=draw_percentages, color="green", marker="o", linestyle="--", label="Porcentaje de empates")
+    
     ax.set_xlabel("Episodios", fontsize=12)
-    ax.set_ylabel("Porcentaje de victorias", fontsize=12)
+    ax.set_ylabel("Porcentaje", fontsize=12)
 
     # Añadir título y subtítulo
-    plt.title(f"Tic Tac Toe Estándar | Porcentaje de victorias del agente vs elección aleatoria", fontsize=14, fontweight='bold')
+    plt.title(f"Tic Tac Toe Estándar | Porcentaje de victorias y empates del agente vs elección aleatoria", fontsize=14, fontweight='bold')
     plt.suptitle(f"Evaluación cada {eval_interval} episodios", fontsize=12, style='italic')
 
     # Guardar la gráfica en lugar de mostrarla
@@ -196,26 +257,8 @@ if __name__ == "__main__":
     if not os.path.exists(resultados_dir):
         os.makedirs(resultados_dir)
 
-    image_path = os.path.join(resultados_dir, f"tictactoe_winpct_random_{episodes}_episodes.png")
+    image_path = os.path.join(resultados_dir, f"tictactoe_winpct_drawpct_random_{episodes}_episodes.png")
     plt.savefig(image_path)
     plt.close()
 
     print(f"Gráfica guardada como {image_path}")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
