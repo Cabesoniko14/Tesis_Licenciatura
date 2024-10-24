@@ -1,8 +1,13 @@
+# -----------------------  TIC TAC TOE: DEEP Q-LEARNING con LLM (Groq) -----------------------------
+
 import os
 import numpy as np
 import random
 import matplotlib.pyplot as plt
-from collections import defaultdict
+from collections import deque
+import torch
+import torch.nn as nn
+import torch.optim as optim
 import seaborn as sns
 from groq import Groq
 
@@ -50,22 +55,55 @@ class TicTacToe:
     def is_draw(self):
         return ' ' not in self.board
 
-# --------------------  2. Clase del agente con LLM --------------------------
+# --------------------  2. Clase de la red neuronal (Q-Network) --------------------------
 
-class QLearningAgentWithLLM:
-    def __init__(self, alpha=0.001, gamma=0.9, epsilon=0.5):
-        self.q_table = defaultdict(float)
+class DQN(nn.Module):
+    def __init__(self):
+        super(DQN, self).__init__()
+        self.layers = nn.Sequential(
+            nn.Linear(9, 128),
+            nn.ReLU(),
+            nn.Linear(128, 64),
+            nn.ReLU(),
+            nn.Linear(64, 9)  # Output: 9 acciones posibles
+        )
+
+    def forward(self, x):
+        return self.layers(x)
+
+# --------------------  3. Clase del agente Deep Q-Learning con LLM --------------------------
+
+class DQNAgentWithLLM:
+    def __init__(self, alpha=0.001, gamma=0.9, epsilon=1.0, epsilon_decay=0.995, epsilon_min=0.1):
         self.alpha = alpha
         self.gamma = gamma
         self.epsilon = epsilon
+        self.epsilon_decay = epsilon_decay
+        self.epsilon_min = epsilon_min
+
+        self.memory = deque(maxlen=2000)  # Replay buffer
+        self.batch_size = 32
+
+        # Crear el modelo de la red neuronal
+        self.model = DQN()
+        self.optimizer = optim.Adam(self.model.parameters(), lr=self.alpha)
+        self.loss_fn = nn.MSELoss()
 
     def choose_action(self, state, available_actions):
         if random.uniform(0, 1) < self.epsilon:
             return random.choice(available_actions)
-        q_values = [self.q_table[(state, a)] for a in available_actions]
-        max_q_value = max(q_values)
-        max_actions = [a for a in available_actions if self.q_table[(state, a)] == max_q_value]
-        return random.choice(max_actions)
+
+        # Convertir el estado a un tensor y pasar por la red neuronal
+        state_tensor = torch.FloatTensor(state).unsqueeze(0)
+        q_values = self.model(state_tensor)
+
+        # Seleccionar la acción con el valor Q más alto disponible
+        q_values = q_values.squeeze().detach().numpy()
+        best_action = np.argmax(q_values)
+        if best_action in available_actions:
+            return best_action
+        else:
+            return random.choice(available_actions)
 
     def get_llm_evaluation(self, state, agent_letter):
         # Use Groq LLM to get the qualitative evaluation of the state
@@ -82,7 +120,6 @@ class QLearningAgentWithLLM:
         )
         
         llm_value = response.choices[0].message.content.strip()
-        print(f"LLM Response: {llm_value}")  # Print the LLM's response
         return self.transcribe_llm_value(llm_value)
 
     def transcribe_llm_value(self, llm_value):
@@ -96,28 +133,48 @@ class QLearningAgentWithLLM:
         }
         return transcription.get(llm_value, 0)  # Default to 0 if not recognized
 
-    def update_q_value(self, state, action, next_state, agent_letter, next_available_actions):
-        # Use LLM to get the qualitative evaluation of the next state
-        reward = self.get_llm_evaluation(next_state, agent_letter)
-        max_next_q = max([self.q_table[(next_state, a)] for a in next_available_actions], default=0)
-        self.q_table[(state, action)] += self.alpha * (reward + self.gamma * max_next_q - self.q_table[(state, action)])
+    def remember(self, state, action, reward, next_state, done):
+        self.memory.append((state, action, reward, next_state, done))
 
-# ----------------  3. Clase del entreno y evaluación periódica del agente -------------------
+    def replay(self):
+        if len(self.memory) < self.batch_size:
+            return
 
-def train_q_learning_agent_with_llm(episodes=10000):
+        minibatch = random.sample(self.memory, self.batch_size)
+        for state, action, reward, next_state, done in minibatch:
+            target = reward
+            if not done:
+                next_state_tensor = torch.FloatTensor(next_state).unsqueeze(0)
+                target = reward + self.gamma * torch.max(self.model(next_state_tensor)).item()
+
+            state_tensor = torch.FloatTensor(state).unsqueeze(0)
+            target_f = self.model(state_tensor).detach().numpy()
+            target_f[0][action] = target
+
+            # Actualización de la red
+            self.optimizer.zero_grad()
+            predictions = self.model(state_tensor)
+            loss = self.loss_fn(predictions, torch.FloatTensor(target_f))
+            loss.backward()
+            self.optimizer.step()
+
+        # Decaimiento de epsilon
+        if self.epsilon > self.epsilon_min:
+            self.epsilon *= self.epsilon_decay
+
+# ----------------  4. Clase del entreno y evaluación periódica del agente -------------------
+
+def train_dqn_agent_with_llm(episodes=10000):
     env = TicTacToe()
-    agent = QLearningAgentWithLLM(alpha=0.001, gamma=0.9, epsilon=0.5)
-    rewards = []
+    agent = DQNAgentWithLLM(alpha=0.001, gamma=0.9)
     win_percentages = []
     draw_percentages = []
     eval_interval = int(round(episodes * 0.01))  # Evaluación cada 1% de los episodios
     evaluation_episodes = 100  # Usar el mismo valor para eval_interval y evaluation_episodes
 
     for episode in range(episodes):
-        print(f"Starting Episode {episode + 1}")  # Print when a new episode starts
-        state = ''.join(env.reset())
+        state = np.array([1 if x == 'X' else -1 if x == 'O' else 0 for x in env.reset()])
         done = False
-        episode_reward = 0
 
         # Alternar entre empezar primero y segundo
         if episode % 2 == 0:
@@ -126,35 +183,30 @@ def train_q_learning_agent_with_llm(episodes=10000):
             agent_letter, opponent_letter = 'O', 'X'
 
         while not done:
-            next_state = ''.join(env.board)
-
+            available_actions = env.available_moves()
             if agent_letter == 'X':
-                action = agent.choose_action(state, env.available_moves())
+                action = agent.choose_action(state, available_actions)
                 env.make_move(action, 'X')
-                next_state = ''.join(env.board)
-                if env.current_winner == 'X' or env.is_draw():
-                    done = True
-                else:
-                    opponent_action = random.choice(env.available_moves())
-                    env.make_move(opponent_action, 'O')
-                    next_state = ''.join(env.board)
-                    if env.current_winner == 'O' or env.is_draw():
-                        done = True
+                next_state = np.array([1 if x == 'X' else -1 if x == 'O' else 0 for x in env.board])
+                reward = agent.get_llm_evaluation(next_state, agent_letter)
+                done = env.current_winner == 'X' or env.is_draw()
+                agent.remember(state, action, reward, next_state, done)
             else:
                 opponent_action = random.choice(env.available_moves())
                 env.make_move(opponent_action, 'X')
-                next_state = ''.join(env.board)
+                next_state = np.array([1 if x == 'X' else -1 if x == 'O' else 0 for x in env.board])
                 if env.current_winner == 'X' or env.is_draw():
                     done = True
                 else:
-                    action = agent.choose_action(state, env.available_moves())
+                    action = agent.choose_action(state, available_actions)
                     env.make_move(action, 'O')
-                    next_state = ''.join(env.board)
-                    if env.current_winner == 'O' or env.is_draw():
-                        done = True
+                    next_state = np.array([1 if x == 'X' else -1 if x == 'O' else 0 for x in env.board])
+                    reward = agent.get_llm_evaluation(next_state, agent_letter)
+                    done = env.current_winner == 'O' or env.is_draw()
+                    agent.remember(state, action, reward, next_state, done)
 
-            # Update Q-value using LLM's assessment
-            agent.update_q_value(state, action, next_state, agent_letter, env.available_moves())
+            # Entrenar la red con experiencias acumuladas
+            agent.replay()
             state = next_state
 
         # Evaluar el rendimiento del agente cada eval_interval episodios
@@ -174,7 +226,7 @@ def evaluate_agent(agent, games=100):
     wins, draws, losses = 0, 0, 0
 
     for _ in range(games):
-        state = ''.join(env.reset())
+        state = np.array([1 if x == 'X' else -1 if x == 'O' else 0 for x in env.reset()])
         done = False
 
         # Alternar quién empieza (agente o oponente aleatorio)
@@ -184,9 +236,11 @@ def evaluate_agent(agent, games=100):
             agent_letter, opponent_letter = 'O', 'X'
 
         while not done:
+            available_actions = env.available_moves()
             if agent_letter == 'X':
-                action = agent.choose_action(state, env.available_moves())
+                action = agent.choose_action(state, available_actions)
                 env.make_move(action, 'X')
+                next_state = np.array([1 if x == 'X' else -1 if x == 'O' else 0 for x in env.board])
                 if env.current_winner == 'X':
                     wins += 1
                     done = True
@@ -196,6 +250,7 @@ def evaluate_agent(agent, games=100):
                 else:
                     opponent_action = random.choice(env.available_moves())
                     env.make_move(opponent_action, 'O')
+                    next_state = np.array([1 if x == 'X' else -1 if x == 'O' else 0 for x in env.board])
                     if env.current_winner == 'O':
                         losses += 1
                         done = True
@@ -205,6 +260,7 @@ def evaluate_agent(agent, games=100):
             else:
                 opponent_action = random.choice(env.available_moves())
                 env.make_move(opponent_action, 'X')
+                next_state = np.array([1 if x == 'X' else -1 if x == 'O' else 0 for x in env.board])
                 if env.current_winner == 'X':
                     losses += 1
                     done = True
@@ -212,8 +268,9 @@ def evaluate_agent(agent, games=100):
                     draws += 1
                     done = True
                 else:
-                    action = agent.choose_action(state, env.available_moves())
+                    action = agent.choose_action(state, available_actions)
                     env.make_move(action, 'O')
+                    next_state = np.array([1 if x == 'X' else -1 if x == 'O' else 0 for x in env.board])
                     if env.current_winner == 'O':
                         wins += 1
                         done = True
@@ -221,15 +278,15 @@ def evaluate_agent(agent, games=100):
                         draws += 1
                         done = True
 
-            state = ''.join(env.board)
-    
+            state = next_state
+
     return wins, draws, losses
 
 # ------------------  6. Invocar main con Seaborn ------------------------
 
 if __name__ == "__main__":
-    episodes = 1000  # Change the number according to your needs
-    win_percentages, draw_percentages, eval_interval = train_q_learning_agent_with_llm(episodes)
+    episodes = 1000  # Cambia el número según sea necesario
+    win_percentages, draw_percentages, eval_interval = train_dqn_agent_with_llm(episodes)
 
     # Gráfico del porcentaje de victorias y empates en cada intervalo de evaluación
     sns.set(style="whitegrid")
@@ -254,7 +311,7 @@ if __name__ == "__main__":
     if not os.path.exists(resultados_dir):
         os.makedirs(resultados_dir)
 
-    image_path = os.path.join(resultados_dir, f"tictactoe_winpct_groq_random_{episodes}_episodes.png")
+    image_path = os.path.join(resultados_dir, f"tictactoe_winpct_groq_dqn_{episodes}_episodes.png")
     plt.savefig(image_path)
     plt.close()
 
