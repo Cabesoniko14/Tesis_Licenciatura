@@ -1,12 +1,5 @@
 # -----------------------  TIC TAC TOE: DEEP Q-LEARNING STANDARD -----------------------------
 
-# Hecho con ayuda de ChatGPT
-# Objetivo: entrenar un agente con Deep Q-learning para que aprenda a jugar tic tac toe
-# Funcionamiento: El archivo entrena durante un número de episodios seleccionados jugando contra un oponente aleatorio,
-# y cada 1% del total de episodios evalúa contra un oponente aleatorio (100 juegos) y guarda el porcentaje de victorias y empates.
-
-# -----------------------  1. Librerías -----------------------------
-
 import os
 import numpy as np
 import random
@@ -16,8 +9,9 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 import seaborn as sns
+import pandas as pd
 
-# --------------------  2. Clase del juego --------------------------
+# --------------------  1. Clase del juego --------------------------
 
 class TicTacToe:
     def __init__(self):
@@ -61,7 +55,7 @@ class TicTacToe:
     def is_draw(self):
         return ' ' not in self.board
 
-# --------------------  3. Clase de la red neuronal (Q-Network) --------------------------
+# --------------------  2. Clase de la red neuronal (Q-Network) --------------------------
 
 class DQN(nn.Module):
     def __init__(self):
@@ -77,7 +71,7 @@ class DQN(nn.Module):
     def forward(self, x):
         return self.layers(x)
 
-# --------------------  4. Clase del agente Deep Q-Learning --------------------------
+# --------------------  3. Clase del agente Deep Q-Learning --------------------------
 
 class DQNAgent:
     def __init__(self, alpha=0.001, gamma=0.9, epsilon=1.0, epsilon_decay=0.995, epsilon_min=0.1):
@@ -140,7 +134,7 @@ class DQNAgent:
         if self.epsilon > self.epsilon_min:
             self.epsilon *= self.epsilon_decay
 
-# ----------------  5. Clase del entreno y evaluación periódica del agente -------------------
+# ----------------  4. Clase del entreno y evaluación periódica del agente -------------------
 
 def train_dqn_agent_random_opponent(episodes=10000):
     env = TicTacToe()
@@ -149,6 +143,9 @@ def train_dqn_agent_random_opponent(episodes=10000):
     draw_percentages = []
     eval_interval = int(round(episodes * 0.01))  # Evaluación cada 1% de los episodios
     evaluation_episodes = eval_interval  # Usar el mismo valor para eval_interval y evaluation_episodes
+
+    # DataFrame para almacenar resultados
+    results_df = pd.DataFrame(columns=["test", "num_evaluacion", "partida_eval", "ganado", "movimientos"])
 
     for episode in range(episodes):
         state = np.array([1 if x == 'X' else -1 if x == 'O' else 0 for x in env.reset()])
@@ -213,26 +210,32 @@ def train_dqn_agent_random_opponent(episodes=10000):
 
         # Evaluar el rendimiento del agente cada eval_interval episodios
         if (episode + 1) % eval_interval == 0:
-            wins, draws, losses = evaluate_agent(agent, games=evaluation_episodes)
+            wins, draws, losses, eval_results = evaluate_agent(agent, games=evaluation_episodes, eval_num=(episode + 1) // eval_interval)
             win_percentage = (wins / evaluation_episodes) * 100
             draw_percentage = (draws / evaluation_episodes) * 100
             win_percentages.append(win_percentage)
             draw_percentages.append(draw_percentage)
 
-    return win_percentages, draw_percentages, eval_interval
+            # Añadir resultados al DataFrame
+            results_df = pd.concat([results_df, eval_results], ignore_index=True)
 
-# ---------------  6. Evaluación del rendimiento ---------------------
+    return win_percentages, draw_percentages, eval_interval, results_df
 
-def evaluate_agent(agent, games=100):
+# ---------------  5. Evaluación del rendimiento ---------------------
+
+def evaluate_agent(agent, games=100, eval_num=1):
     env = TicTacToe()
     wins, draws, losses = 0, 0, 0
 
-    for _ in range(games):
+    eval_results = pd.DataFrame(columns=["test", "num_evaluacion", "partida_eval", "ganado", "movimientos"])
+
+    for game in range(games):
         state = np.array([1 if x == 'X' else -1 if x == 'O' else 0 for x in env.reset()])
         done = False
+        move_count = 0
 
         # Alternar quién empieza (agente o oponente aleatorio)
-        if _ % 2 == 0:
+        if game % 2 == 0:
             agent_letter, opponent_letter = 'X', 'O'
         else:
             agent_letter, opponent_letter = 'O', 'X'
@@ -242,53 +245,80 @@ def evaluate_agent(agent, games=100):
             if agent_letter == 'X':
                 action = agent.choose_action(state, available_actions)
                 env.make_move(action, 'X')
-                next_state = np.array([1 if x == 'X' else -1 if x == 'O' else 0 for x in env.board])
+                move_count += 1
                 if env.current_winner == 'X':
                     wins += 1
+                    ganado = 1
                     done = True
                 elif env.is_draw():
                     draws += 1
+                    ganado = 0
                     done = True
                 else:
                     opponent_action = random.choice(env.available_moves())
                     env.make_move(opponent_action, 'O')
-                    next_state = np.array([1 if x == 'X' else -1 if x == 'O' else 0 for x in env.board])
                     if env.current_winner == 'O':
                         losses += 1
+                        ganado = 0
                         done = True
                     elif env.is_draw():
                         draws += 1
+                        ganado = 0
                         done = True
             else:
                 opponent_action = random.choice(env.available_moves())
                 env.make_move(opponent_action, 'X')
-                next_state = np.array([1 if x == 'X' else -1 if x == 'O' else 0 for x in env.board])
                 if env.current_winner == 'X':
                     losses += 1
+                    ganado = 0
                     done = True
                 elif env.is_draw():
                     draws += 1
+                    ganado = 0
                     done = True
                 else:
                     action = agent.choose_action(state, available_actions)
                     env.make_move(action, 'O')
-                    next_state = np.array([1 if x == 'X' else -1 if x == 'O' else 0 for x in env.board])
+                    move_count += 1
                     if env.current_winner == 'O':
                         wins += 1
+                        ganado = 1
                         done = True
                     elif env.is_draw():
                         draws += 1
+                        ganado = 0
                         done = True
 
-            state = next_state
+            state = np.array([1 if x == 'X' else -1 if x == 'O' else 0 for x in env.board])
 
-    return wins, draws, losses
+        # Registrar los resultados usando pd.concat en lugar de append
+        new_row = pd.DataFrame({
+            "test": ["Random DeepQ"],
+            "num_evaluacion": [eval_num],
+            "partida_eval": [game + 1],
+            "ganado": [ganado],
+            "movimientos": [move_count]
+        })
+        eval_results = pd.concat([eval_results, new_row], ignore_index=True)
 
-# ------------------  7. Invocar main con Seaborn ------------------------
+    return wins, draws, losses, eval_results
+
+
+# ------------------  6. Invocar main con Seaborn ------------------------
 
 if __name__ == "__main__":
     episodes = 10000  # Cambia el número según sea necesario
-    win_percentages, draw_percentages, eval_interval = train_dqn_agent_random_opponent(episodes)
+    win_percentages, draw_percentages, eval_interval, results_df = train_dqn_agent_random_opponent(episodes)
+
+    # Guardar resultados en CSV
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    resultados_dir = os.path.join(base_dir, "resultados")
+    if not os.path.exists(resultados_dir):
+        os.makedirs(resultados_dir)
+
+    csv_path = os.path.join(resultados_dir, "evaluacion_resultados.csv")
+    results_df.to_csv(csv_path, index=False)
+    print(f"Resultados de evaluación guardados en: {csv_path}")
 
     # Gráfico del porcentaje de victorias y empates en cada intervalo de evaluación
     sns.set(style="whitegrid")
@@ -308,11 +338,6 @@ if __name__ == "__main__":
     plt.suptitle(f"Evaluación cada {eval_interval} episodios", fontsize=12, style='italic')
 
     # Guardar la gráfica en lugar de mostrarla
-    base_dir = os.path.dirname(os.path.abspath(__file__))
-    resultados_dir = os.path.join(base_dir, "resultados")
-    if not os.path.exists(resultados_dir):
-        os.makedirs(resultados_dir)
-
     image_path = os.path.join(resultados_dir, f"tictactoe_winpct_drawpct_dqn_{episodes}_episodes.png")
     plt.savefig(image_path)
     plt.close()
