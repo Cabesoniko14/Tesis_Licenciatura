@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 
 # Configuración
 zork_path = "jericho-game-suite/zork1.z5"  # Ruta al archivo Zork
-NUM_EPISODES = 200  # Número de episodios de entrenamiento
+NUM_EPISODES = 1000  # Número de episodios de entrenamiento
 GAMMA = 0.99  # Factor de descuento
 EPSILON = 1.0  # Probabilidad inicial de tomar una acción aleatoria
 EPSILON_DECAY = 0.995  # Decaimiento de epsilon
@@ -125,10 +125,13 @@ with open(log_file_path, "w") as log_file:
         done = False
         successful = False
 
+        log_file.write(f"\n--- Inicio del Episodio {episode + 1} ---\n")
+
         while not done:
             valid_actions = get_valid_actions(env)
             action = select_action(state, env, EPSILON)
             if action is None:
+                log_file.write("No hay acciones válidas. Terminando episodio.\n")
                 break
 
             next_state, reward, done, info = env.step(action)
@@ -137,14 +140,26 @@ with open(log_file_path, "w") as log_file:
             memory.append((state, valid_actions.index(action), reward, next_state, done))
             state = next_state
             total_reward += reward
+
+            # Registrar estado y acción en el log
+            log_file.write(f"Acción: {action}, Recompensa: {reward}, Info: {info}\n")
+
             if done and reward > 0:
                 successful = True
+
             train_dqn()
 
         EPSILON = max(EPSILON_MIN, EPSILON * EPSILON_DECAY)
         total_rewards.append(total_reward)
         episode_status.append(1 if successful else 0)
-        log_file.write(f"Episode {episode + 1}: Total Reward: {total_reward}\n")
+
+        # Resumen del episodio
+        log_file.write(f"--- Fin del Episodio {episode + 1} ---\n")
+        log_file.write(f"Recompensa Total: {total_reward}\n")
+        log_file.write(f"Estado final: {'Exitoso' if successful else 'Estancado/Muerto'}\n")
+        log_file.write("-" * 50 + "\n")
+
+        print(f"Episode {episode + 1}: Total Reward: {total_reward}, Status: {'Success' if successful else 'Stuck/Dead'}")
 
 # Guardar el modelo entrenado
 torch.save(policy_net.state_dict(), os.path.join(models_dir, f"model_zork_deepqn_{timestamp}_{NUM_EPISODES}_episodes.pth"))
