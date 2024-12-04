@@ -120,14 +120,19 @@ epoch_end_points = []
 
 with open(log_file_path, "w") as log_file:
     for epoch in range(NUM_EPOCHS):
+        print(f"\n----------------- EPOCH {epoch + 1} -----------------")
+        log_file.write(f"\n----------------- EPOCH {epoch + 1} -----------------\n")
+
         epoch_total_reward = 0
         for episode in range(EPISODES_PER_EPOCH):
+            episode_number = epoch * EPISODES_PER_EPOCH + episode + 1
+            print(f"Procesando episodio {episode_number}...")
+            log_file.write(f"--- Inicio del Episodio {episode_number} ---\n")
+
             state, _ = env.reset()
             state = encode_state(state)
             total_reward = 0
             done = False
-
-            log_file.write(f"\n--- Inicio del Episodio {epoch * EPISODES_PER_EPOCH + episode + 1} ---\n")
 
             while not done:
                 valid_actions = get_valid_actions(env)
@@ -151,13 +156,18 @@ with open(log_file_path, "w") as log_file:
             episode_rewards.append(total_reward)
             epoch_total_reward += total_reward
 
-            log_file.write(f"--- Fin del Episodio {epoch * EPISODES_PER_EPOCH + episode + 1} ---\n")
+            log_file.write(f"--- Fin del Episodio {episode_number} ---\n")
             log_file.write(f"Recompensa Total: {total_reward}\n")
             log_file.write("-" * 50 + "\n")
 
         # Marcar el final del epoch
         epoch_end_points.append(len(episode_rewards))
-        print(f"Epoch {epoch + 1}: Recompensa Promedio = {epoch_total_reward / EPISODES_PER_EPOCH}")
+
+        epoch_average_reward = epoch_total_reward / EPISODES_PER_EPOCH
+        print(f"Epoch {epoch + 1} completado. Recompensa Promedio: {epoch_average_reward}")
+        log_file.write(f"--- Fin del EPOCH {epoch + 1} ---\n")
+        log_file.write(f"Recompensa Promedio del EPOCH: {epoch_average_reward}\n")
+        log_file.write("=" * 50 + "\n")
 
         # Actualizar red objetivo periódicamente
         if (epoch + 1) % 5 == 0:
