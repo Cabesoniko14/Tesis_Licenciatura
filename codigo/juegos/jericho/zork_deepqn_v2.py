@@ -8,6 +8,8 @@ from collections import deque
 from jericho import *
 from datetime import datetime
 import matplotlib.pyplot as plt
+import psutil
+import gc
 
 # Configuración
 zork_path = "jericho-game-suite/zork1.z5"  # Ruta al archivo Zork
@@ -114,6 +116,12 @@ def train_dqn():
     loss.backward()
     optimizer.step()
 
+# Función para registrar memoria usada
+def log_memory():
+    print(f"Memoria RAM usada: {psutil.virtual_memory().used / 1e9:.2f} GB")
+    print(f"Memoria GPU usada: {torch.cuda.memory_allocated() / 1e9:.2f} GB")
+    gc.collect()
+
 # Entrenamiento
 episode_rewards = []
 epoch_end_points = []
@@ -122,6 +130,11 @@ with open(log_file_path, "w") as log_file:
     for epoch in range(NUM_EPOCHS):
         print(f"\n----------------- EPOCH {epoch + 1} -----------------")
         log_file.write(f"\n----------------- EPOCH {epoch + 1} -----------------\n")
+
+        # Reiniciar el entorno al inicio de cada epoch
+        if env is not None:
+            env.close()
+        env = FrotzEnv(zork_path)
 
         epoch_total_reward = 0
         for episode in range(EPISODES_PER_EPOCH):
@@ -133,13 +146,22 @@ with open(log_file_path, "w") as log_file:
             state = encode_state(state)
             total_reward = 0
             done = False
+            steps = 0  # Contador de pasos
+            action_history = []  # Historial de acciones
 
-            while not done:
+            while not done and steps < 100:  # Límite de pasos
+                steps += 1
                 valid_actions = get_valid_actions(env)
                 action = select_action(state, env, EPSILON)
                 if action is None:
                     log_file.write("No hay acciones válidas. Terminando episodio.\n")
                     break
+
+                # Verificar acciones repetitivas
+                if len(action_history) > 10 and all(a == action for a in action_history[-10:]):
+                    print("Acciones repetitivas detectadas. Terminando episodio.")
+                    break
+                action_history.append(action)
 
                 next_state, reward, done, info = env.step(action)
                 next_state = encode_state(next_state)
@@ -172,6 +194,11 @@ with open(log_file_path, "w") as log_file:
         # Actualizar red objetivo periódicamente
         if (epoch + 1) % 5 == 0:
             target_net.load_state_dict(policy_net.state_dict())
+
+        # Liberar memoria
+        torch.cuda.empty_cache()
+        gc.collect()
+        log_memory()  # Registrar uso de memoria
 
 # Guardar el modelo entrenado
 torch.save(policy_net.state_dict(), os.path.join(models_dir, f"model__zork_deepqnv2_{timestamp}_epochs_{NUM_EPOCHS}.pth"))
