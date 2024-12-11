@@ -1,0 +1,1550 @@
+
+----------------- EPOCH 1 -----------------
+--- Inicio del Episodio 1 ---
+Acción: west, Recompensa: 0, Info: {'moves': 1, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 2, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 3, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 4, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 5, 'score': 0}
+Acción: take leaves, Recompensa: 0, Info: {'moves': 6, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 7, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 8, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 9, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 10, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 11, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 12, 'score': 0}
+Acción: put down leaves, Recompensa: 0, Info: {'moves': 13, 'score': 0}
+Acción: northwest, Recompensa: 0, Info: {'moves': 14, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 15, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 16, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 17, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 18, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 19, 'score': 0}
+Acción: open window, Recompensa: 0, Info: {'moves': 20, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 21, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 22, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 23, 'score': 0}
+Acción: take leaves, Recompensa: 0, Info: {'moves': 24, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 25, 'score': 0}
+Acción: put down leaves, Recompensa: 0, Info: {'moves': 26, 'score': 0}
+Acción: go around forest, Recompensa: 0, Info: {'moves': 27, 'score': 0}
+Acción: go around forest, Recompensa: 0, Info: {'moves': 28, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 29, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 30, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 31, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 32, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 33, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 34, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 35, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 36, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 37, 'score': 0}
+Acción: northwest, Recompensa: 0, Info: {'moves': 38, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 39, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 40, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 41, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 42, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 43, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 44, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 45, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 46, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 47, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 48, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 49, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 50, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 51, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 52, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 53, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 54, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 55, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 56, 'score': 0}
+Acción: go around forest, Recompensa: 0, Info: {'moves': 57, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 58, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 59, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 60, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 61, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 62, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 63, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 64, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 65, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 66, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 67, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 68, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 69, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 70, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 71, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 72, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 73, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 74, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 75, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 76, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 77, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 78, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 79, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 80, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 81, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 82, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 83, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 84, 'score': 0}
+Acción: go around forest, Recompensa: 0, Info: {'moves': 85, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 86, 'score': 0}
+Acción: go around forest, Recompensa: 0, Info: {'moves': 87, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 88, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 89, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 90, 'score': 0}
+Acción: close window, Recompensa: 0, Info: {'moves': 91, 'score': 0}
+Acción: open window, Recompensa: 0, Info: {'moves': 92, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 93, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 94, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 95, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 96, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 97, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 98, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 99, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 100, 'score': 0}
+--- Fin del Episodio 1 ---
+Recompensa Total: 0
+--------------------------------------------------
+--- Inicio del Episodio 2 ---
+Acción: open mailbox, Recompensa: 0, Info: {'moves': 1, 'score': 0}
+Acción: take leaflet, Recompensa: 0, Info: {'moves': 2, 'score': 0}
+Acción: close mailbox, Recompensa: 0, Info: {'moves': 3, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 4, 'score': 0}
+Acción: put down leaflet, Recompensa: 0, Info: {'moves': 5, 'score': 0}
+Acción: take leaflet, Recompensa: 0, Info: {'moves': 6, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 7, 'score': 0}
+Acción: put down leaflet, Recompensa: 0, Info: {'moves': 8, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 9, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 10, 'score': 0}
+Acción: up, Recompensa: 0, Info: {'moves': 11, 'score': 0}
+Acción: down, Recompensa: 0, Info: {'moves': 12, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 13, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 14, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 15, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 16, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 17, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 18, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 19, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 20, 'score': 0}
+Acción: pull leaves, Recompensa: 0, Info: {'moves': 21, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 22, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 23, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 24, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 25, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 26, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 27, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 28, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 29, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 30, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 31, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 32, 'score': 0}
+Acción: open window, Recompensa: 0, Info: {'moves': 33, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 34, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 35, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 36, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 37, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 38, 'score': 0}
+Acción: up, Recompensa: 0, Info: {'moves': 39, 'score': 0}
+Acción: take on egg, Recompensa: 0, Info: {'moves': 40, 'score': 0}
+Acción: close nest, Recompensa: 0, Info: {'moves': 41, 'score': 0}
+Acción: open nest, Recompensa: 0, Info: {'moves': 42, 'score': 0}
+Acción: take nest, Recompensa: 0, Info: {'moves': 43, 'score': 0}
+Acción: down, Recompensa: 0, Info: {'moves': 44, 'score': 0}
+Acción: shake nest, Recompensa: 0, Info: {'moves': 45, 'score': 0}
+Acción: close egg, Recompensa: 0, Info: {'moves': 46, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 47, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 48, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 49, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 50, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 51, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 52, 'score': 0}
+Acción: up, Recompensa: 0, Info: {'moves': 53, 'score': 0}
+Acción: down, Recompensa: 0, Info: {'moves': 54, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 55, 'score': 0}
+Acción: take leaves, Recompensa: 0, Info: {'moves': 56, 'score': 0}
+Acción: put nest in grating, Recompensa: 0, Info: {'moves': 57, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 58, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 59, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 60, 'score': 0}
+Acción: open mailbox, Recompensa: 0, Info: {'moves': 61, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 62, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 63, 'score': 0}
+Acción: close mailbox, Recompensa: 0, Info: {'moves': 64, 'score': 0}
+Acción: put down leaves, Recompensa: 0, Info: {'moves': 65, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 66, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 67, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 68, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 69, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 70, 'score': 0}
+Acción: open egg, Recompensa: 0, Info: {'moves': 71, 'score': 0}
+Acción: take canary, Recompensa: 0, Info: {'moves': 72, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 73, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 74, 'score': 0}
+Acción: put canary in grating, Recompensa: 0, Info: {'moves': 75, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 76, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 77, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 78, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 79, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 80, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 81, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 82, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 83, 'score': 0}
+Acción: take all, Recompensa: 0, Info: {'moves': 84, 'score': 0}
+Acción: open mailbox, Recompensa: 0, Info: {'moves': 85, 'score': 0}
+Acción: close mailbox, Recompensa: 0, Info: {'moves': 86, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 87, 'score': 0}
+Acción: put down leaves, Recompensa: 0, Info: {'moves': 88, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 89, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 90, 'score': 0}
+Acción: take leaves, Recompensa: 0, Info: {'moves': 91, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 92, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 93, 'score': 0}
+Acción: go around forest, Recompensa: 0, Info: {'moves': 94, 'score': 0}
+Acción: go around forest, Recompensa: 0, Info: {'moves': 95, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 96, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 97, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 98, 'score': 0}
+Acción: up, Recompensa: 0, Info: {'moves': 99, 'score': 0}
+Acción: put down all, Recompensa: 0, Info: {'moves': 100, 'score': 0}
+--- Fin del Episodio 2 ---
+Recompensa Total: 0
+--------------------------------------------------
+--- Inicio del Episodio 3 ---
+Acción: open mailbox, Recompensa: 0, Info: {'moves': 1, 'score': 0}
+Acción: close mailbox, Recompensa: 0, Info: {'moves': 2, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 3, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 4, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 5, 'score': 0}
+Acción: pull leaves, Recompensa: 0, Info: {'moves': 6, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 7, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 8, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 9, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 10, 'score': 0}
+Acción: go around forest, Recompensa: 0, Info: {'moves': 11, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 12, 'score': 0}
+Acción: northwest, Recompensa: 0, Info: {'moves': 13, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 14, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 15, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 16, 'score': 0}
+Acción: open window, Recompensa: 0, Info: {'moves': 17, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 18, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 19, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 20, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 21, 'score': 0}
+Acción: open mailbox, Recompensa: 0, Info: {'moves': 22, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 23, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 24, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 25, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 26, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 27, 'score': 0}
+Acción: go around forest, Recompensa: 0, Info: {'moves': 28, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 29, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 30, 'score': 0}
+Acción: up, Recompensa: 0, Info: {'moves': 31, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 32, 'score': 0}
+Acción: down, Recompensa: 0, Info: {'moves': 33, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 34, 'score': 0}
+Acción: southwest, Recompensa: 0, Info: {'moves': 35, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 36, 'score': 0}
+Acción: southwest, Recompensa: 0, Info: {'moves': 37, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 38, 'score': 0}
+Acción: southwest, Recompensa: 0, Info: {'moves': 39, 'score': 0}
+Acción: up, Recompensa: 0, Info: {'moves': 40, 'score': 0}
+Acción: down, Recompensa: 0, Info: {'moves': 41, 'score': 0}
+Acción: up, Recompensa: 0, Info: {'moves': 42, 'score': 0}
+Acción: down, Recompensa: 0, Info: {'moves': 43, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 44, 'score': 0}
+Acción: southwest, Recompensa: 0, Info: {'moves': 45, 'score': 0}
+Acción: up, Recompensa: 0, Info: {'moves': 46, 'score': 0}
+Acción: up, Recompensa: 0, Info: {'moves': 47, 'score': 0}
+Acción: jump, Recompensa: -10, Info: {'moves': 48, 'score': -10}
+--- Fin del Episodio 3 ---
+Recompensa Total: -10
+--------------------------------------------------
+--- Inicio del Episodio 4 ---
+Acción: open mailbox, Recompensa: 0, Info: {'moves': 1, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 2, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 3, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 4, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 5, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 6, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 7, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 8, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 9, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 10, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 11, 'score': 0}
+Acción: jump, Recompensa: -10, Info: {'moves': 12, 'score': -10}
+--- Fin del Episodio 4 ---
+Recompensa Total: -10
+--------------------------------------------------
+--- Inicio del Episodio 5 ---
+Acción: open mailbox, Recompensa: 0, Info: {'moves': 1, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 2, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 3, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 4, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 5, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 6, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 7, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 8, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 9, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 10, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 11, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 12, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 13, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 14, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 15, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 16, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 17, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 18, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 19, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 20, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 21, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 22, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 23, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 24, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 25, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 26, 'score': 0}
+Acción: open window, Recompensa: 0, Info: {'moves': 27, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 28, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 29, 'score': 0}
+Acción: close window, Recompensa: 0, Info: {'moves': 30, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 31, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 32, 'score': 0}
+Acción: northwest, Recompensa: 0, Info: {'moves': 33, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 34, 'score': 0}
+Acción: open window, Recompensa: 0, Info: {'moves': 35, 'score': 0}
+Acción: west, Recompensa: 10, Info: {'moves': 36, 'score': 10}
+Acción: open bottle, Recompensa: 0, Info: {'moves': 37, 'score': 10}
+Acción: take sack, Recompensa: 0, Info: {'moves': 38, 'score': 10}
+Acción: east, Recompensa: 0, Info: {'moves': 39, 'score': 10}
+Acción: close window, Recompensa: 0, Info: {'moves': 40, 'score': 10}
+Acción: open sack, Recompensa: 0, Info: {'moves': 41, 'score': 10}
+Acción: close sack, Recompensa: 0, Info: {'moves': 42, 'score': 10}
+Acción: east, Recompensa: 0, Info: {'moves': 43, 'score': 10}
+Acción: open sack, Recompensa: 0, Info: {'moves': 44, 'score': 10}
+Acción: take all from sack, Recompensa: 0, Info: {'moves': 45, 'score': 10}
+Acción: put lunch in sack, Recompensa: 0, Info: {'moves': 46, 'score': 10}
+Acción: put down lunch, Recompensa: 0, Info: {'moves': 47, 'score': 10}
+Acción: east, Recompensa: 0, Info: {'moves': 48, 'score': 10}
+Acción: put down all, Recompensa: 0, Info: {'moves': 49, 'score': 10}
+Acción: jump, Recompensa: -10, Info: {'moves': 50, 'score': 0}
+--- Fin del Episodio 5 ---
+Recompensa Total: 0
+--------------------------------------------------
+--- Inicio del Episodio 6 ---
+Acción: west, Recompensa: 0, Info: {'moves': 1, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 2, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 3, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 4, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 5, 'score': 0}
+Acción: open window, Recompensa: 0, Info: {'moves': 6, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 7, 'score': 0}
+Acción: go around forest, Recompensa: 0, Info: {'moves': 8, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 9, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 10, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 11, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 12, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 13, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 14, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 15, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 16, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 17, 'score': 0}
+Acción: up, Recompensa: 0, Info: {'moves': 18, 'score': 0}
+Acción: down, Recompensa: 0, Info: {'moves': 19, 'score': 0}
+Acción: up, Recompensa: 0, Info: {'moves': 20, 'score': 0}
+Acción: take on egg, Recompensa: 0, Info: {'moves': 21, 'score': 0}
+Acción: take egg, Recompensa: 0, Info: {'moves': 22, 'score': 0}
+Acción: down, Recompensa: 0, Info: {'moves': 23, 'score': 0}
+Acción: take canary, Recompensa: 0, Info: {'moves': 24, 'score': 0}
+Acción: up, Recompensa: 0, Info: {'moves': 25, 'score': 0}
+Acción: take nest, Recompensa: 0, Info: {'moves': 26, 'score': 0}
+Acción: down, Recompensa: 0, Info: {'moves': 27, 'score': 0}
+Acción: close nest, Recompensa: 0, Info: {'moves': 28, 'score': 0}
+Acción: put down egg, Recompensa: 0, Info: {'moves': 29, 'score': 0}
+Acción: take egg, Recompensa: 0, Info: {'moves': 30, 'score': 0}
+Acción: up, Recompensa: 0, Info: {'moves': 31, 'score': 0}
+Acción: put canary in egg, Recompensa: 0, Info: {'moves': 32, 'score': 0}
+Acción: throw canary at egg, Recompensa: 0, Info: {'moves': 33, 'score': 0}
+Acción: throw egg at canary, Recompensa: 0, Info: {'moves': 34, 'score': 0}
+Acción: put down nest, Recompensa: 0, Info: {'moves': 35, 'score': 0}
+Acción: close egg, Recompensa: 0, Info: {'moves': 36, 'score': 0}
+Acción: take egg, Recompensa: 0, Info: {'moves': 37, 'score': 0}
+Acción: open egg, Recompensa: 0, Info: {'moves': 38, 'score': 0}
+Acción: put down egg, Recompensa: 0, Info: {'moves': 39, 'score': 0}
+Acción: take canary, Recompensa: 0, Info: {'moves': 40, 'score': 0}
+Acción: down, Recompensa: 0, Info: {'moves': 41, 'score': 0}
+Acción: take egg, Recompensa: 0, Info: {'moves': 42, 'score': 0}
+Acción: take nest, Recompensa: 0, Info: {'moves': 43, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 44, 'score': 0}
+Acción: put down egg, Recompensa: 0, Info: {'moves': 45, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 46, 'score': 0}
+Acción: open nest, Recompensa: 0, Info: {'moves': 47, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 48, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 49, 'score': 0}
+Acción: go around forest, Recompensa: 0, Info: {'moves': 50, 'score': 0}
+Acción: put down all, Recompensa: 0, Info: {'moves': 51, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 52, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 53, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 54, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 55, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 56, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 57, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 58, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 59, 'score': 0}
+Acción: take all, Recompensa: 0, Info: {'moves': 60, 'score': 0}
+Acción: put down all, Recompensa: 0, Info: {'moves': 61, 'score': 0}
+Acción: take canary, Recompensa: 0, Info: {'moves': 62, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 63, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 64, 'score': 0}
+Acción: go around forest, Recompensa: 0, Info: {'moves': 65, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 66, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 67, 'score': 0}
+Acción: go around forest, Recompensa: 0, Info: {'moves': 68, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 69, 'score': 0}
+Acción: pull leaves, Recompensa: 0, Info: {'moves': 70, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 71, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 72, 'score': 0}
+Acción: take leaves, Recompensa: 0, Info: {'moves': 73, 'score': 0}
+Acción: put down all, Recompensa: 0, Info: {'moves': 74, 'score': 0}
+Acción: take canary, Recompensa: 0, Info: {'moves': 75, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 76, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 77, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 78, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 79, 'score': 0}
+Acción: go around forest, Recompensa: 0, Info: {'moves': 80, 'score': 0}
+Acción: put down canary, Recompensa: 0, Info: {'moves': 81, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 82, 'score': 0}
+Acción: west, Recompensa: 10, Info: {'moves': 83, 'score': 10}
+Acción: close window, Recompensa: 0, Info: {'moves': 84, 'score': 10}
+Acción: take bottle, Recompensa: 0, Info: {'moves': 85, 'score': 10}
+Acción: open sack, Recompensa: 0, Info: {'moves': 86, 'score': 10}
+Acción: put bottle on table, Recompensa: 0, Info: {'moves': 87, 'score': 10}
+Acción: jump, Recompensa: -10, Info: {'moves': 88, 'score': 0}
+--- Fin del Episodio 6 ---
+Recompensa Total: 0
+--------------------------------------------------
+--- Inicio del Episodio 7 ---
+Acción: open mailbox, Recompensa: 0, Info: {'moves': 1, 'score': 0}
+Acción: close mailbox, Recompensa: 0, Info: {'moves': 2, 'score': 0}
+Acción: open mailbox, Recompensa: 0, Info: {'moves': 3, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 4, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 5, 'score': 0}
+Acción: close mailbox, Recompensa: 0, Info: {'moves': 6, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 7, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 8, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 9, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 10, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 11, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 12, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 13, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 14, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 15, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 16, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 17, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 18, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 19, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 20, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 21, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 22, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 23, 'score': 0}
+Acción: up, Recompensa: 0, Info: {'moves': 24, 'score': 0}
+Acción: take nest, Recompensa: 0, Info: {'moves': 25, 'score': 0}
+Acción: throw nest at ground, Recompensa: 0, Info: {'moves': 26, 'score': 0}
+Acción: take on egg, Recompensa: 0, Info: {'moves': 27, 'score': 0}
+Acción: close egg, Recompensa: 0, Info: {'moves': 28, 'score': 0}
+Acción: open egg, Recompensa: 0, Info: {'moves': 29, 'score': 0}
+Acción: take egg, Recompensa: 0, Info: {'moves': 30, 'score': 0}
+Acción: take canary, Recompensa: 0, Info: {'moves': 31, 'score': 0}
+Acción: close nest, Recompensa: 0, Info: {'moves': 32, 'score': 0}
+Acción: put down egg, Recompensa: 0, Info: {'moves': 33, 'score': 0}
+Acción: open nest, Recompensa: 0, Info: {'moves': 34, 'score': 0}
+Acción: close nest, Recompensa: 0, Info: {'moves': 35, 'score': 0}
+Acción: put down canary, Recompensa: 0, Info: {'moves': 36, 'score': 0}
+Acción: open nest, Recompensa: 0, Info: {'moves': 37, 'score': 0}
+Acción: close nest, Recompensa: 0, Info: {'moves': 38, 'score': 0}
+Acción: open nest, Recompensa: 0, Info: {'moves': 39, 'score': 0}
+Acción: take nest, Recompensa: 0, Info: {'moves': 40, 'score': 0}
+Acción: down, Recompensa: 0, Info: {'moves': 41, 'score': 0}
+Acción: put nest in egg, Recompensa: 0, Info: {'moves': 42, 'score': 0}
+Acción: take egg, Recompensa: 0, Info: {'moves': 43, 'score': 0}
+Acción: close nest, Recompensa: 0, Info: {'moves': 44, 'score': 0}
+Acción: go around forest, Recompensa: 0, Info: {'moves': 45, 'score': 0}
+Acción: shake egg, Recompensa: 0, Info: {'moves': 46, 'score': 0}
+Acción: go around forest, Recompensa: 0, Info: {'moves': 47, 'score': 0}
+Acción: close egg, Recompensa: 0, Info: {'moves': 48, 'score': 0}
+Acción: put down egg, Recompensa: 0, Info: {'moves': 49, 'score': 0}
+Acción: open egg, Recompensa: 0, Info: {'moves': 50, 'score': 0}
+Acción: close egg, Recompensa: 0, Info: {'moves': 51, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 52, 'score': 0}
+Acción: go around forest, Recompensa: 0, Info: {'moves': 53, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 54, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 55, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 56, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 57, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 58, 'score': 0}
+Acción: northwest, Recompensa: 0, Info: {'moves': 59, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 60, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 61, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 62, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 63, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 64, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 65, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 66, 'score': 0}
+Acción: northwest, Recompensa: 0, Info: {'moves': 67, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 68, 'score': 0}
+Acción: open mailbox, Recompensa: 0, Info: {'moves': 69, 'score': 0}
+Acción: take leaflet, Recompensa: 0, Info: {'moves': 70, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 71, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 72, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 73, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 74, 'score': 0}
+Acción: put down leaflet, Recompensa: 0, Info: {'moves': 75, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 76, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 77, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 78, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 79, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 80, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 81, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 82, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 83, 'score': 0}
+Acción: pull leaves, Recompensa: 0, Info: {'moves': 84, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 85, 'score': 0}
+Acción: take egg, Recompensa: 0, Info: {'moves': 86, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 87, 'score': 0}
+Acción: put down egg, Recompensa: 0, Info: {'moves': 88, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 89, 'score': 0}
+Acción: up, Recompensa: 0, Info: {'moves': 90, 'score': 0}
+Acción: down, Recompensa: 0, Info: {'moves': 91, 'score': 0}
+Acción: take canary, Recompensa: 0, Info: {'moves': 92, 'score': 0}
+Acción: put down canary, Recompensa: 0, Info: {'moves': 93, 'score': 0}
+Acción: go around forest, Recompensa: 0, Info: {'moves': 94, 'score': 0}
+Acción: open nest, Recompensa: 0, Info: {'moves': 95, 'score': 0}
+Acción: go around forest, Recompensa: 0, Info: {'moves': 96, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 97, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 98, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 99, 'score': 0}
+Acción: take nest, Recompensa: 0, Info: {'moves': 100, 'score': 0}
+--- Fin del Episodio 7 ---
+Recompensa Total: 0
+--------------------------------------------------
+--- Inicio del Episodio 8 ---
+Acción: south, Recompensa: 0, Info: {'moves': 1, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 2, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 3, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 4, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 5, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 6, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 7, 'score': 0}
+Acción: go around forest, Recompensa: 0, Info: {'moves': 8, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 9, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 10, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 11, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 12, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 13, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 14, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 15, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 16, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 17, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 18, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 19, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 20, 'score': 0}
+Acción: go around forest, Recompensa: 0, Info: {'moves': 21, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 22, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 23, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 24, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 25, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 26, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 27, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 28, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 29, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 30, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 31, 'score': 0}
+Acción: northwest, Recompensa: 0, Info: {'moves': 32, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 33, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 34, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 35, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 36, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 37, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 38, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 39, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 40, 'score': 0}
+Acción: up, Recompensa: 0, Info: {'moves': 41, 'score': 0}
+Acción: close nest, Recompensa: 0, Info: {'moves': 42, 'score': 0}
+Acción: down, Recompensa: 0, Info: {'moves': 43, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 44, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 45, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 46, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 47, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 48, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 49, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 50, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 51, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 52, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 53, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 54, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 55, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 56, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 57, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 58, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 59, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 60, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 61, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 62, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 63, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 64, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 65, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 66, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 67, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 68, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 69, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 70, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 71, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 72, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 73, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 74, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 75, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 76, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 77, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 78, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 79, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 80, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 81, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 82, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 83, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 84, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 85, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 86, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 87, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 88, 'score': 0}
+Acción: open mailbox, Recompensa: 0, Info: {'moves': 89, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 90, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 91, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 92, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 93, 'score': 0}
+Acción: open window, Recompensa: 0, Info: {'moves': 94, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 95, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 96, 'score': 0}
+Acción: northwest, Recompensa: 0, Info: {'moves': 97, 'score': 0}
+Acción: go around forest, Recompensa: 0, Info: {'moves': 98, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 99, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 100, 'score': 0}
+--- Fin del Episodio 8 ---
+Recompensa Total: 0
+--------------------------------------------------
+--- Inicio del Episodio 9 ---
+Acción: open mailbox, Recompensa: 0, Info: {'moves': 1, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 2, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 3, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 4, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 5, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 6, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 7, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 8, 'score': 0}
+Acción: up, Recompensa: 0, Info: {'moves': 9, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 10, 'score': 0}
+Acción: up, Recompensa: 0, Info: {'moves': 11, 'score': 0}
+Acción: northwest, Recompensa: 0, Info: {'moves': 12, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 13, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 14, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 15, 'score': 0}
+Acción: up, Recompensa: 0, Info: {'moves': 16, 'score': 0}
+Acción: close nest, Recompensa: 0, Info: {'moves': 17, 'score': 0}
+Acción: down, Recompensa: 0, Info: {'moves': 18, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 19, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 20, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 21, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 22, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 23, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 24, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 25, 'score': 0}
+Acción: open window, Recompensa: 0, Info: {'moves': 26, 'score': 0}
+Acción: west, Recompensa: 10, Info: {'moves': 27, 'score': 10}
+Acción: west, Recompensa: 0, Info: {'moves': 28, 'score': 10}
+Acción: push rug, Recompensa: 0, Info: {'moves': 29, 'score': 10}
+Acción: east, Recompensa: 0, Info: {'moves': 30, 'score': 10}
+Acción: east, Recompensa: 0, Info: {'moves': 31, 'score': 10}
+Acción: close window, Recompensa: 0, Info: {'moves': 32, 'score': 10}
+Acción: east, Recompensa: 0, Info: {'moves': 33, 'score': 10}
+Acción: go around forest, Recompensa: 0, Info: {'moves': 34, 'score': 10}
+Acción: south, Recompensa: 0, Info: {'moves': 35, 'score': 10}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 36, 'score': 10}
+Acción: up, Recompensa: 0, Info: {'moves': 37, 'score': 10}
+Acción: down, Recompensa: 0, Info: {'moves': 38, 'score': 10}
+Acción: south, Recompensa: 0, Info: {'moves': 39, 'score': 10}
+Acción: east, Recompensa: 0, Info: {'moves': 40, 'score': 10}
+Acción: open window, Recompensa: 0, Info: {'moves': 41, 'score': 10}
+Acción: south, Recompensa: 0, Info: {'moves': 42, 'score': 10}
+Acción: west, Recompensa: 0, Info: {'moves': 43, 'score': 10}
+Acción: west, Recompensa: 0, Info: {'moves': 44, 'score': 10}
+Acción: north, Recompensa: 0, Info: {'moves': 45, 'score': 10}
+Acción: pull leaves, Recompensa: 0, Info: {'moves': 46, 'score': 10}
+Acción: east, Recompensa: 0, Info: {'moves': 47, 'score': 10}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 48, 'score': 10}
+Acción: north, Recompensa: 0, Info: {'moves': 49, 'score': 10}
+Acción: go around forest, Recompensa: 0, Info: {'moves': 50, 'score': 10}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 51, 'score': 10}
+Acción: east, Recompensa: 0, Info: {'moves': 52, 'score': 10}
+Acción: north, Recompensa: 0, Info: {'moves': 53, 'score': 10}
+Acción: south, Recompensa: 0, Info: {'moves': 54, 'score': 10}
+Acción: north, Recompensa: 0, Info: {'moves': 55, 'score': 10}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 56, 'score': 10}
+Acción: west, Recompensa: 0, Info: {'moves': 57, 'score': 10}
+Acción: south, Recompensa: 0, Info: {'moves': 58, 'score': 10}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 59, 'score': 10}
+Acción: go around forest, Recompensa: 0, Info: {'moves': 60, 'score': 10}
+Acción: go around forest, Recompensa: 0, Info: {'moves': 61, 'score': 10}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 62, 'score': 10}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 63, 'score': 10}
+Acción: northwest, Recompensa: 0, Info: {'moves': 64, 'score': 10}
+Acción: west, Recompensa: 0, Info: {'moves': 65, 'score': 10}
+Acción: west, Recompensa: 0, Info: {'moves': 66, 'score': 10}
+Acción: south, Recompensa: 0, Info: {'moves': 67, 'score': 10}
+Acción: north, Recompensa: 0, Info: {'moves': 68, 'score': 10}
+Acción: north, Recompensa: 0, Info: {'moves': 69, 'score': 10}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 70, 'score': 10}
+Acción: west, Recompensa: 0, Info: {'moves': 71, 'score': 10}
+Acción: north, Recompensa: 0, Info: {'moves': 72, 'score': 10}
+Acción: east, Recompensa: 0, Info: {'moves': 73, 'score': 10}
+Acción: east, Recompensa: 0, Info: {'moves': 74, 'score': 10}
+Acción: north, Recompensa: 0, Info: {'moves': 75, 'score': 10}
+Acción: south, Recompensa: 0, Info: {'moves': 76, 'score': 10}
+Acción: south, Recompensa: 0, Info: {'moves': 77, 'score': 10}
+Acción: northwest, Recompensa: 0, Info: {'moves': 78, 'score': 10}
+Acción: west, Recompensa: 0, Info: {'moves': 79, 'score': 10}
+Acción: south, Recompensa: 0, Info: {'moves': 80, 'score': 10}
+Acción: west, Recompensa: 0, Info: {'moves': 81, 'score': 10}
+Acción: west, Recompensa: 0, Info: {'moves': 82, 'score': 10}
+Acción: north, Recompensa: 0, Info: {'moves': 83, 'score': 10}
+Acción: east, Recompensa: 0, Info: {'moves': 84, 'score': 10}
+Acción: south, Recompensa: 0, Info: {'moves': 85, 'score': 10}
+Acción: go around forest, Recompensa: 0, Info: {'moves': 86, 'score': 10}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 87, 'score': 10}
+Acción: south, Recompensa: 0, Info: {'moves': 88, 'score': 10}
+Acción: south, Recompensa: 0, Info: {'moves': 89, 'score': 10}
+Acción: north, Recompensa: 0, Info: {'moves': 90, 'score': 10}
+Acción: north, Recompensa: 0, Info: {'moves': 91, 'score': 10}
+Acción: east, Recompensa: 0, Info: {'moves': 92, 'score': 10}
+Acción: north, Recompensa: 0, Info: {'moves': 93, 'score': 10}
+Acción: south, Recompensa: 0, Info: {'moves': 94, 'score': 10}
+Acción: west, Recompensa: 0, Info: {'moves': 95, 'score': 10}
+Acción: south, Recompensa: 0, Info: {'moves': 96, 'score': 10}
+Acción: east, Recompensa: 0, Info: {'moves': 97, 'score': 10}
+Acción: close window, Recompensa: 0, Info: {'moves': 98, 'score': 10}
+Acción: north, Recompensa: 0, Info: {'moves': 99, 'score': 10}
+Acción: north, Recompensa: 0, Info: {'moves': 100, 'score': 10}
+--- Fin del Episodio 9 ---
+Recompensa Total: 10
+--------------------------------------------------
+--- Inicio del Episodio 10 ---
+Acción: west, Recompensa: 0, Info: {'moves': 1, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 2, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 3, 'score': 0}
+Acción: northwest, Recompensa: 0, Info: {'moves': 4, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 5, 'score': 0}
+Acción: open mailbox, Recompensa: 0, Info: {'moves': 6, 'score': 0}
+Acción: close mailbox, Recompensa: 0, Info: {'moves': 7, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 8, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 9, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 10, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 11, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 12, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 13, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 14, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 15, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 16, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 17, 'score': 0}
+Acción: pull leaves, Recompensa: 0, Info: {'moves': 18, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 19, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 20, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 21, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 22, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 23, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 24, 'score': 0}
+Acción: northwest, Recompensa: 0, Info: {'moves': 25, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 26, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 27, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 28, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 29, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 30, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 31, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 32, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 33, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 34, 'score': 0}
+Acción: open mailbox, Recompensa: 0, Info: {'moves': 35, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 36, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 37, 'score': 0}
+Acción: up, Recompensa: 0, Info: {'moves': 38, 'score': 0}
+Acción: take nest, Recompensa: 0, Info: {'moves': 39, 'score': 0}
+Acción: take on egg, Recompensa: 0, Info: {'moves': 40, 'score': 0}
+Acción: put canary in nest, Recompensa: 0, Info: {'moves': 41, 'score': 0}
+Acción: throw egg at canary, Recompensa: 0, Info: {'moves': 42, 'score': 0}
+Acción: close nest, Recompensa: 0, Info: {'moves': 43, 'score': 0}
+Acción: throw nest at ground, Recompensa: 0, Info: {'moves': 44, 'score': 0}
+Acción: close egg, Recompensa: 0, Info: {'moves': 45, 'score': 0}
+Acción: down, Recompensa: 0, Info: {'moves': 46, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 47, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 48, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 49, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 50, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 51, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 52, 'score': 0}
+Acción: open window, Recompensa: 0, Info: {'moves': 53, 'score': 0}
+Acción: west, Recompensa: 10, Info: {'moves': 54, 'score': 10}
+Acción: east, Recompensa: 0, Info: {'moves': 55, 'score': 10}
+Acción: north, Recompensa: 0, Info: {'moves': 56, 'score': 10}
+Acción: north, Recompensa: 0, Info: {'moves': 57, 'score': 10}
+Acción: south, Recompensa: 0, Info: {'moves': 58, 'score': 10}
+Acción: east, Recompensa: 0, Info: {'moves': 59, 'score': 10}
+Acción: east, Recompensa: 0, Info: {'moves': 60, 'score': 10}
+Acción: east, Recompensa: 0, Info: {'moves': 61, 'score': 10}
+Acción: west, Recompensa: 0, Info: {'moves': 62, 'score': 10}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 63, 'score': 10}
+Acción: north, Recompensa: 0, Info: {'moves': 64, 'score': 10}
+Acción: south, Recompensa: 0, Info: {'moves': 65, 'score': 10}
+Acción: up, Recompensa: 0, Info: {'moves': 66, 'score': 10}
+Acción: take all, Recompensa: 0, Info: {'moves': 67, 'score': 10}
+Acción: open egg, Recompensa: 0, Info: {'moves': 68, 'score': 10}
+Acción: down, Recompensa: 0, Info: {'moves': 69, 'score': 10}
+Acción: north, Recompensa: 0, Info: {'moves': 70, 'score': 10}
+Acción: put nest in grating, Recompensa: 0, Info: {'moves': 71, 'score': 10}
+Acción: close egg, Recompensa: 0, Info: {'moves': 72, 'score': 10}
+Acción: open egg, Recompensa: 0, Info: {'moves': 73, 'score': 10}
+Acción: west, Recompensa: 0, Info: {'moves': 74, 'score': 10}
+Acción: put down egg, Recompensa: 0, Info: {'moves': 75, 'score': 10}
+Acción: close egg, Recompensa: 0, Info: {'moves': 76, 'score': 10}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 77, 'score': 10}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 78, 'score': 10}
+Acción: west, Recompensa: 0, Info: {'moves': 79, 'score': 10}
+Acción: south, Recompensa: 0, Info: {'moves': 80, 'score': 10}
+Acción: northwest, Recompensa: 0, Info: {'moves': 81, 'score': 10}
+Acción: south, Recompensa: 0, Info: {'moves': 82, 'score': 10}
+Acción: northwest, Recompensa: 0, Info: {'moves': 83, 'score': 10}
+Acción: east, Recompensa: 0, Info: {'moves': 84, 'score': 10}
+Acción: south, Recompensa: 0, Info: {'moves': 85, 'score': 10}
+Acción: east, Recompensa: 0, Info: {'moves': 86, 'score': 10}
+Acción: north, Recompensa: 0, Info: {'moves': 87, 'score': 10}
+Acción: east, Recompensa: 0, Info: {'moves': 88, 'score': 10}
+Acción: west, Recompensa: 0, Info: {'moves': 89, 'score': 10}
+Acción: take all, Recompensa: 0, Info: {'moves': 90, 'score': 10}
+Acción: put bottle on table, Recompensa: 0, Info: {'moves': 91, 'score': 10}
+Acción: open sack, Recompensa: 0, Info: {'moves': 92, 'score': 10}
+Acción: put food on table, Recompensa: 0, Info: {'moves': 93, 'score': 10}
+Acción: shake sack, Recompensa: 0, Info: {'moves': 94, 'score': 10}
+Acción: east, Recompensa: 0, Info: {'moves': 95, 'score': 10}
+Acción: close sack, Recompensa: 0, Info: {'moves': 96, 'score': 10}
+Acción: north, Recompensa: 0, Info: {'moves': 97, 'score': 10}
+Acción: east, Recompensa: 0, Info: {'moves': 98, 'score': 10}
+Acción: open sack, Recompensa: 0, Info: {'moves': 99, 'score': 10}
+Acción: close window, Recompensa: 0, Info: {'moves': 100, 'score': 10}
+--- Fin del Episodio 10 ---
+Recompensa Total: 10
+--------------------------------------------------
+--- Inicio del Episodio 11 ---
+Acción: north, Recompensa: 0, Info: {'moves': 1, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 2, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 3, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 4, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 5, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 6, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 7, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 8, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 9, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 10, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 11, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 12, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 13, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 14, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 15, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 16, 'score': 0}
+Acción: open window, Recompensa: 0, Info: {'moves': 17, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 18, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 19, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 20, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 21, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 22, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 23, 'score': 0}
+Acción: go around forest, Recompensa: 0, Info: {'moves': 24, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 25, 'score': 0}
+Acción: northwest, Recompensa: 0, Info: {'moves': 26, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 27, 'score': 0}
+Acción: northwest, Recompensa: 0, Info: {'moves': 28, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 29, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 30, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 31, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 32, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 33, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 34, 'score': 0}
+Acción: go around forest, Recompensa: 0, Info: {'moves': 35, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 36, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 37, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 38, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 39, 'score': 0}
+Acción: take leaves, Recompensa: 0, Info: {'moves': 40, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 41, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 42, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 43, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 44, 'score': 0}
+Acción: northwest, Recompensa: 0, Info: {'moves': 45, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 46, 'score': 0}
+Acción: open mailbox, Recompensa: 0, Info: {'moves': 47, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 48, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 49, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 50, 'score': 0}
+Acción: go around forest, Recompensa: 0, Info: {'moves': 51, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 52, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 53, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 54, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 55, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 56, 'score': 0}
+Acción: go around forest, Recompensa: 0, Info: {'moves': 57, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 58, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 59, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 60, 'score': 0}
+Acción: up, Recompensa: 0, Info: {'moves': 61, 'score': 0}
+Acción: take nest, Recompensa: 0, Info: {'moves': 62, 'score': 0}
+Acción: throw nest at egg, Recompensa: 0, Info: {'moves': 63, 'score': 0}
+Acción: down, Recompensa: 0, Info: {'moves': 64, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 65, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 66, 'score': 0}
+Acción: put down leaves, Recompensa: 0, Info: {'moves': 67, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 68, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 69, 'score': 0}
+Acción: take leaves, Recompensa: 0, Info: {'moves': 70, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 71, 'score': 0}
+Acción: put down leaves, Recompensa: 0, Info: {'moves': 72, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 73, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 74, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 75, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 76, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 77, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 78, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 79, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 80, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 81, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 82, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 83, 'score': 0}
+Acción: take leaves, Recompensa: 0, Info: {'moves': 84, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 85, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 86, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 87, 'score': 0}
+Acción: put down leaves, Recompensa: 0, Info: {'moves': 88, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 89, 'score': 0}
+Acción: northwest, Recompensa: 0, Info: {'moves': 90, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 91, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 92, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 93, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 94, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 95, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 96, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 97, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 98, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 99, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 100, 'score': 0}
+--- Fin del Episodio 11 ---
+Recompensa Total: 0
+--------------------------------------------------
+--- Inicio del Episodio 12 ---
+Acción: west, Recompensa: 0, Info: {'moves': 1, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 2, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 3, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 4, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 5, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 6, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 7, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 8, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 9, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 10, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 11, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 12, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 13, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 14, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 15, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 16, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 17, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 18, 'score': 0}
+Acción: northwest, Recompensa: 0, Info: {'moves': 19, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 20, 'score': 0}
+Acción: northwest, Recompensa: 0, Info: {'moves': 21, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 22, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 23, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 24, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 25, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 26, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 27, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 28, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 29, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 30, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 31, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 32, 'score': 0}
+Acción: go around forest, Recompensa: 0, Info: {'moves': 33, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 34, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 35, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 36, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 37, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 38, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 39, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 40, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 41, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 42, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 43, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 44, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 45, 'score': 0}
+Acción: go around forest, Recompensa: 0, Info: {'moves': 46, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 47, 'score': 0}
+Acción: northwest, Recompensa: 0, Info: {'moves': 48, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 49, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 50, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 51, 'score': 0}
+Acción: open window, Recompensa: 0, Info: {'moves': 52, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 53, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 54, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 55, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 56, 'score': 0}
+Acción: up, Recompensa: 0, Info: {'moves': 57, 'score': 0}
+Acción: close nest, Recompensa: 0, Info: {'moves': 58, 'score': 0}
+Acción: open nest, Recompensa: 0, Info: {'moves': 59, 'score': 0}
+Acción: take egg, Recompensa: 5, Info: {'moves': 60, 'score': 5}
+Acción: put egg in nest, Recompensa: 0, Info: {'moves': 61, 'score': 5}
+Acción: take on egg, Recompensa: 0, Info: {'moves': 62, 'score': 5}
+Acción: close egg, Recompensa: 0, Info: {'moves': 63, 'score': 5}
+Acción: take egg, Recompensa: 0, Info: {'moves': 64, 'score': 5}
+Acción: close nest, Recompensa: 0, Info: {'moves': 65, 'score': 5}
+Acción: throw egg at ground, Recompensa: 0, Info: {'moves': 66, 'score': 5}
+Acción: take egg, Recompensa: 0, Info: {'moves': 67, 'score': 5}
+Acción: open egg, Recompensa: 0, Info: {'moves': 68, 'score': 5}
+Acción: put down canary, Recompensa: 0, Info: {'moves': 69, 'score': 5}
+Acción: take nest, Recompensa: 0, Info: {'moves': 70, 'score': 5}
+Acción: put down all, Recompensa: 0, Info: {'moves': 71, 'score': 5}
+Acción: down, Recompensa: 0, Info: {'moves': 72, 'score': 5}
+Acción: south, Recompensa: 0, Info: {'moves': 73, 'score': 5}
+Acción: north, Recompensa: 0, Info: {'moves': 74, 'score': 5}
+Acción: south, Recompensa: 0, Info: {'moves': 75, 'score': 5}
+Acción: west, Recompensa: 0, Info: {'moves': 76, 'score': 5}
+Acción: west, Recompensa: 0, Info: {'moves': 77, 'score': 5}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 78, 'score': 5}
+Acción: west, Recompensa: 0, Info: {'moves': 79, 'score': 5}
+Acción: open nest, Recompensa: 0, Info: {'moves': 80, 'score': 5}
+Acción: take nest, Recompensa: 0, Info: {'moves': 81, 'score': 5}
+Acción: south, Recompensa: 0, Info: {'moves': 82, 'score': 5}
+Acción: put down nest, Recompensa: 0, Info: {'moves': 83, 'score': 5}
+Acción: north, Recompensa: 0, Info: {'moves': 84, 'score': 5}
+Acción: up, Recompensa: 0, Info: {'moves': 85, 'score': 5}
+Acción: down, Recompensa: 0, Info: {'moves': 86, 'score': 5}
+Acción: west, Recompensa: 0, Info: {'moves': 87, 'score': 5}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 88, 'score': 5}
+Acción: west, Recompensa: 0, Info: {'moves': 89, 'score': 5}
+Acción: go around forest, Recompensa: 0, Info: {'moves': 90, 'score': 5}
+Acción: go around forest, Recompensa: 0, Info: {'moves': 91, 'score': 5}
+Acción: north, Recompensa: 0, Info: {'moves': 92, 'score': 5}
+Acción: take leaves, Recompensa: 0, Info: {'moves': 93, 'score': 5}
+Acción: south, Recompensa: 0, Info: {'moves': 94, 'score': 5}
+Acción: put down leaves, Recompensa: 0, Info: {'moves': 95, 'score': 5}
+Acción: south, Recompensa: 0, Info: {'moves': 96, 'score': 5}
+Acción: east, Recompensa: 0, Info: {'moves': 97, 'score': 5}
+Acción: west, Recompensa: 10, Info: {'moves': 98, 'score': 15}
+Acción: east, Recompensa: 0, Info: {'moves': 99, 'score': 15}
+Acción: west, Recompensa: 0, Info: {'moves': 100, 'score': 15}
+--- Fin del Episodio 12 ---
+Recompensa Total: 15
+--------------------------------------------------
+--- Inicio del Episodio 13 ---
+Acción: south, Recompensa: 0, Info: {'moves': 1, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 2, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 3, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 4, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 5, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 6, 'score': 0}
+Acción: go around forest, Recompensa: 0, Info: {'moves': 7, 'score': 0}
+Acción: go around forest, Recompensa: 0, Info: {'moves': 8, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 9, 'score': 0}
+Acción: pull leaves, Recompensa: 0, Info: {'moves': 10, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 11, 'score': 0}
+Acción: up, Recompensa: 0, Info: {'moves': 12, 'score': 0}
+Acción: close nest, Recompensa: 0, Info: {'moves': 13, 'score': 0}
+Acción: take nest, Recompensa: 0, Info: {'moves': 14, 'score': 0}
+Acción: put down nest, Recompensa: 0, Info: {'moves': 15, 'score': 0}
+Acción: down, Recompensa: 0, Info: {'moves': 16, 'score': 0}
+Acción: take egg, Recompensa: 0, Info: {'moves': 17, 'score': 0}
+Acción: put down egg, Recompensa: 0, Info: {'moves': 18, 'score': 0}
+Acción: take canary, Recompensa: 0, Info: {'moves': 19, 'score': 0}
+Acción: put down canary, Recompensa: 0, Info: {'moves': 20, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 21, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 22, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 23, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 24, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 25, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 26, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 27, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 28, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 29, 'score': 0}
+Acción: go around forest, Recompensa: 0, Info: {'moves': 30, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 31, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 32, 'score': 0}
+Acción: northwest, Recompensa: 0, Info: {'moves': 33, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 34, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 35, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 36, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 37, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 38, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 39, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 40, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 41, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 42, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 43, 'score': 0}
+Acción: northwest, Recompensa: 0, Info: {'moves': 44, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 45, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 46, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 47, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 48, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 49, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 50, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 51, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 52, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 53, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 54, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 55, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 56, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 57, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 58, 'score': 0}
+Acción: take egg, Recompensa: 0, Info: {'moves': 59, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 60, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 61, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 62, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 63, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 64, 'score': 0}
+Acción: northwest, Recompensa: 0, Info: {'moves': 65, 'score': 0}
+Acción: put down egg, Recompensa: 0, Info: {'moves': 66, 'score': 0}
+Acción: go around forest, Recompensa: 0, Info: {'moves': 67, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 68, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 69, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 70, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 71, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 72, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 73, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 74, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 75, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 76, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 77, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 78, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 79, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 80, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 81, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 82, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 83, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 84, 'score': 0}
+Acción: northwest, Recompensa: 0, Info: {'moves': 85, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 86, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 87, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 88, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 89, 'score': 0}
+Acción: go around forest, Recompensa: 0, Info: {'moves': 90, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 91, 'score': 0}
+Acción: take leaves, Recompensa: 0, Info: {'moves': 92, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 93, 'score': 0}
+Acción: take canary, Recompensa: 0, Info: {'moves': 94, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 95, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 96, 'score': 0}
+Acción: put down leaves, Recompensa: 0, Info: {'moves': 97, 'score': 0}
+Acción: take leaves, Recompensa: 0, Info: {'moves': 98, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 99, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 100, 'score': 0}
+--- Fin del Episodio 13 ---
+Recompensa Total: 0
+--------------------------------------------------
+--- Inicio del Episodio 14 ---
+Acción: west, Recompensa: 0, Info: {'moves': 1, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 2, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 3, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 4, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 5, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 6, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 7, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 8, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 9, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 10, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 11, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 12, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 13, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 14, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 15, 'score': 0}
+Acción: northwest, Recompensa: 0, Info: {'moves': 16, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 17, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 18, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 19, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 20, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 21, 'score': 0}
+Acción: pull leaves, Recompensa: 0, Info: {'moves': 22, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 23, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 24, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 25, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 26, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 27, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 28, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 29, 'score': 0}
+Acción: go around forest, Recompensa: 0, Info: {'moves': 30, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 31, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 32, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 33, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 34, 'score': 0}
+Acción: go around forest, Recompensa: 0, Info: {'moves': 35, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 36, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 37, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 38, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 39, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 40, 'score': 0}
+Acción: up, Recompensa: 0, Info: {'moves': 41, 'score': 0}
+Acción: close nest, Recompensa: 0, Info: {'moves': 42, 'score': 0}
+Acción: down, Recompensa: 0, Info: {'moves': 43, 'score': 0}
+Acción: up, Recompensa: 0, Info: {'moves': 44, 'score': 0}
+Acción: take nest, Recompensa: 0, Info: {'moves': 45, 'score': 0}
+Acción: put down nest, Recompensa: 0, Info: {'moves': 46, 'score': 0}
+Acción: down, Recompensa: 0, Info: {'moves': 47, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 48, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 49, 'score': 0}
+Acción: northwest, Recompensa: 0, Info: {'moves': 50, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 51, 'score': 0}
+Acción: open window, Recompensa: 0, Info: {'moves': 52, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 53, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 54, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 55, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 56, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 57, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 58, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 59, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 60, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 61, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 62, 'score': 0}
+Acción: down, Recompensa: 0, Info: {'moves': 63, 'score': 0}
+Acción: up, Recompensa: 0, Info: {'moves': 64, 'score': 0}
+Acción: down, Recompensa: 0, Info: {'moves': 65, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 66, 'score': 0}
+Acción: southwest, Recompensa: 0, Info: {'moves': 67, 'score': 0}
+Acción: up, Recompensa: 0, Info: {'moves': 68, 'score': 0}
+Acción: down, Recompensa: 0, Info: {'moves': 69, 'score': 0}
+Acción: up, Recompensa: 0, Info: {'moves': 70, 'score': 0}
+Acción: down, Recompensa: 0, Info: {'moves': 71, 'score': 0}
+Acción: up, Recompensa: 0, Info: {'moves': 72, 'score': 0}
+Acción: down, Recompensa: 0, Info: {'moves': 73, 'score': 0}
+Acción: up, Recompensa: 0, Info: {'moves': 74, 'score': 0}
+Acción: down, Recompensa: 0, Info: {'moves': 75, 'score': 0}
+Acción: up, Recompensa: 0, Info: {'moves': 76, 'score': 0}
+Acción: down, Recompensa: 0, Info: {'moves': 77, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 78, 'score': 0}
+Acción: southwest, Recompensa: 0, Info: {'moves': 79, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 80, 'score': 0}
+Acción: southwest, Recompensa: 0, Info: {'moves': 81, 'score': 0}
+Acción: up, Recompensa: 0, Info: {'moves': 82, 'score': 0}
+Acción: down, Recompensa: 0, Info: {'moves': 83, 'score': 0}
+Acción: up, Recompensa: 0, Info: {'moves': 84, 'score': 0}
+Acción: up, Recompensa: 0, Info: {'moves': 85, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 86, 'score': 0}
+Acción: down, Recompensa: 0, Info: {'moves': 87, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 88, 'score': 0}
+Acción: southwest, Recompensa: 0, Info: {'moves': 89, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 90, 'score': 0}
+Acción: southwest, Recompensa: 0, Info: {'moves': 91, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 92, 'score': 0}
+Acción: southwest, Recompensa: 0, Info: {'moves': 93, 'score': 0}
+Acción: up, Recompensa: 0, Info: {'moves': 94, 'score': 0}
+Acción: up, Recompensa: 0, Info: {'moves': 95, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 96, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 97, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 98, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 99, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 100, 'score': 0}
+--- Fin del Episodio 14 ---
+Recompensa Total: 0
+--------------------------------------------------
+--- Inicio del Episodio 15 ---
+Acción: west, Recompensa: 0, Info: {'moves': 1, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 2, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 3, 'score': 0}
+Acción: up, Recompensa: 0, Info: {'moves': 4, 'score': 0}
+Acción: close nest, Recompensa: 0, Info: {'moves': 5, 'score': 0}
+Acción: open nest, Recompensa: 0, Info: {'moves': 6, 'score': 0}
+Acción: take egg, Recompensa: 5, Info: {'moves': 7, 'score': 5}
+Acción: put egg in nest, Recompensa: 0, Info: {'moves': 8, 'score': 5}
+Acción: close nest, Recompensa: 0, Info: {'moves': 9, 'score': 5}
+Acción: down, Recompensa: 0, Info: {'moves': 10, 'score': 5}
+Acción: west, Recompensa: 0, Info: {'moves': 11, 'score': 5}
+Acción: east, Recompensa: 0, Info: {'moves': 12, 'score': 5}
+Acción: east, Recompensa: 0, Info: {'moves': 13, 'score': 5}
+Acción: west, Recompensa: 0, Info: {'moves': 14, 'score': 5}
+Acción: west, Recompensa: 0, Info: {'moves': 15, 'score': 5}
+Acción: south, Recompensa: 0, Info: {'moves': 16, 'score': 5}
+Acción: northwest, Recompensa: 0, Info: {'moves': 17, 'score': 5}
+Acción: east, Recompensa: 0, Info: {'moves': 18, 'score': 5}
+Acción: north, Recompensa: 0, Info: {'moves': 19, 'score': 5}
+Acción: west, Recompensa: 0, Info: {'moves': 20, 'score': 5}
+Acción: north, Recompensa: 0, Info: {'moves': 21, 'score': 5}
+Acción: north, Recompensa: 0, Info: {'moves': 22, 'score': 5}
+Acción: east, Recompensa: 0, Info: {'moves': 23, 'score': 5}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 24, 'score': 5}
+Acción: west, Recompensa: 0, Info: {'moves': 25, 'score': 5}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 26, 'score': 5}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 27, 'score': 5}
+Acción: north, Recompensa: 0, Info: {'moves': 28, 'score': 5}
+Acción: north, Recompensa: 0, Info: {'moves': 29, 'score': 5}
+Acción: south, Recompensa: 0, Info: {'moves': 30, 'score': 5}
+Acción: go around forest, Recompensa: 0, Info: {'moves': 31, 'score': 5}
+Acción: north, Recompensa: 0, Info: {'moves': 32, 'score': 5}
+Acción: west, Recompensa: 0, Info: {'moves': 33, 'score': 5}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 34, 'score': 5}
+Acción: east, Recompensa: 0, Info: {'moves': 35, 'score': 5}
+Acción: north, Recompensa: 0, Info: {'moves': 36, 'score': 5}
+Acción: west, Recompensa: 0, Info: {'moves': 37, 'score': 5}
+Acción: west, Recompensa: 0, Info: {'moves': 38, 'score': 5}
+Acción: south, Recompensa: 0, Info: {'moves': 39, 'score': 5}
+Acción: west, Recompensa: 0, Info: {'moves': 40, 'score': 5}
+Acción: north, Recompensa: 0, Info: {'moves': 41, 'score': 5}
+Acción: take leaves, Recompensa: 0, Info: {'moves': 42, 'score': 5}
+Acción: east, Recompensa: 0, Info: {'moves': 43, 'score': 5}
+Acción: south, Recompensa: 0, Info: {'moves': 44, 'score': 5}
+Acción: north, Recompensa: 0, Info: {'moves': 45, 'score': 5}
+Acción: east, Recompensa: 0, Info: {'moves': 46, 'score': 5}
+Acción: north, Recompensa: 0, Info: {'moves': 47, 'score': 5}
+Acción: west, Recompensa: 0, Info: {'moves': 48, 'score': 5}
+Acción: north, Recompensa: 0, Info: {'moves': 49, 'score': 5}
+Acción: east, Recompensa: 0, Info: {'moves': 50, 'score': 5}
+Acción: put down leaves, Recompensa: 0, Info: {'moves': 51, 'score': 5}
+Acción: west, Recompensa: 0, Info: {'moves': 52, 'score': 5}
+Acción: north, Recompensa: 0, Info: {'moves': 53, 'score': 5}
+Acción: south, Recompensa: 0, Info: {'moves': 54, 'score': 5}
+Acción: west, Recompensa: 0, Info: {'moves': 55, 'score': 5}
+Acción: east, Recompensa: 0, Info: {'moves': 56, 'score': 5}
+Acción: up, Recompensa: 0, Info: {'moves': 57, 'score': 5}
+Acción: take nest, Recompensa: 0, Info: {'moves': 58, 'score': 5}
+Acción: throw nest at ground, Recompensa: 0, Info: {'moves': 59, 'score': 5}
+Acción: take nest, Recompensa: 0, Info: {'moves': 60, 'score': 5}
+Acción: put down nest, Recompensa: 0, Info: {'moves': 61, 'score': 5}
+Acción: take nest, Recompensa: 0, Info: {'moves': 62, 'score': 5}
+Acción: down, Recompensa: 0, Info: {'moves': 63, 'score': 5}
+Acción: go around forest, Recompensa: 0, Info: {'moves': 64, 'score': 5}
+Acción: put down nest, Recompensa: 0, Info: {'moves': 65, 'score': 5}
+Acción: east, Recompensa: 0, Info: {'moves': 66, 'score': 5}
+Acción: east, Recompensa: 0, Info: {'moves': 67, 'score': 5}
+Acción: up, Recompensa: 0, Info: {'moves': 68, 'score': 5}
+Acción: northwest, Recompensa: 0, Info: {'moves': 69, 'score': 5}
+Acción: west, Recompensa: 0, Info: {'moves': 70, 'score': 5}
+Acción: south, Recompensa: 0, Info: {'moves': 71, 'score': 5}
+Acción: south, Recompensa: 0, Info: {'moves': 72, 'score': 5}
+Acción: northwest, Recompensa: 0, Info: {'moves': 73, 'score': 5}
+Acción: east, Recompensa: 0, Info: {'moves': 74, 'score': 5}
+Acción: open window, Recompensa: 0, Info: {'moves': 75, 'score': 5}
+Acción: north, Recompensa: 0, Info: {'moves': 76, 'score': 5}
+Acción: north, Recompensa: 0, Info: {'moves': 77, 'score': 5}
+Acción: take egg, Recompensa: 0, Info: {'moves': 78, 'score': 5}
+Acción: south, Recompensa: 0, Info: {'moves': 79, 'score': 5}
+Acción: north, Recompensa: 0, Info: {'moves': 80, 'score': 5}
+Acción: up, Recompensa: 0, Info: {'moves': 81, 'score': 5}
+Acción: down, Recompensa: 0, Info: {'moves': 82, 'score': 5}
+Acción: shake egg, Recompensa: 0, Info: {'moves': 83, 'score': 5}
+Acción: take canary, Recompensa: 0, Info: {'moves': 84, 'score': 5}
+Acción: put canary in egg, Recompensa: 0, Info: {'moves': 85, 'score': 5}
+Acción: take canary, Recompensa: 0, Info: {'moves': 86, 'score': 5}
+Acción: up, Recompensa: 0, Info: {'moves': 87, 'score': 5}
+Acción: put canary in egg, Recompensa: 0, Info: {'moves': 88, 'score': 5}
+Acción: take canary, Recompensa: 0, Info: {'moves': 89, 'score': 5}
+Acción: put canary in egg, Recompensa: 0, Info: {'moves': 90, 'score': 5}
+Acción: take canary, Recompensa: 0, Info: {'moves': 91, 'score': 5}
+Acción: throw egg at canary, Recompensa: 0, Info: {'moves': 92, 'score': 5}
+Acción: throw canary at ground, Recompensa: 0, Info: {'moves': 93, 'score': 5}
+Acción: take canary, Recompensa: 0, Info: {'moves': 94, 'score': 5}
+Acción: close egg, Recompensa: 0, Info: {'moves': 95, 'score': 5}
+Acción: throw canary at egg, Recompensa: 0, Info: {'moves': 96, 'score': 5}
+Acción: down, Recompensa: 0, Info: {'moves': 97, 'score': 5}
+Acción: south, Recompensa: 0, Info: {'moves': 98, 'score': 5}
+Acción: east, Recompensa: 0, Info: {'moves': 99, 'score': 5}
+Acción: close window, Recompensa: 0, Info: {'moves': 100, 'score': 5}
+--- Fin del Episodio 15 ---
+Recompensa Total: 5
+--------------------------------------------------
+--- Inicio del Episodio 16 ---
+Acción: open mailbox, Recompensa: 0, Info: {'moves': 1, 'score': 0}
+Acción: close mailbox, Recompensa: 0, Info: {'moves': 2, 'score': 0}
+Acción: open mailbox, Recompensa: 0, Info: {'moves': 3, 'score': 0}
+Acción: close mailbox, Recompensa: 0, Info: {'moves': 4, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 5, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 6, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 7, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 8, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 9, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 10, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 11, 'score': 0}
+Acción: go around forest, Recompensa: 0, Info: {'moves': 12, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 13, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 14, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 15, 'score': 0}
+Acción: jump, Recompensa: -10, Info: {'moves': 16, 'score': -10}
+--- Fin del Episodio 16 ---
+Recompensa Total: -10
+--------------------------------------------------
+--- Inicio del Episodio 17 ---
+Acción: west, Recompensa: 0, Info: {'moves': 1, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 2, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 3, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 4, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 5, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 6, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 7, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 8, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 9, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 10, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 11, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 12, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 13, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 14, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 15, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 16, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 17, 'score': 0}
+Acción: northwest, Recompensa: 0, Info: {'moves': 18, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 19, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 20, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 21, 'score': 0}
+Acción: northwest, Recompensa: 0, Info: {'moves': 22, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 23, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 24, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 25, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 26, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 27, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 28, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 29, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 30, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 31, 'score': 0}
+Acción: open mailbox, Recompensa: 0, Info: {'moves': 32, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 33, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 34, 'score': 0}
+Acción: open window, Recompensa: 0, Info: {'moves': 35, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 36, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 37, 'score': 0}
+Acción: close window, Recompensa: 0, Info: {'moves': 38, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 39, 'score': 0}
+Acción: go around forest, Recompensa: 0, Info: {'moves': 40, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 41, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 42, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 43, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 44, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 45, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 46, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 47, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 48, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 49, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 50, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 51, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 52, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 53, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 54, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 55, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 56, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 57, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 58, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 59, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 60, 'score': 0}
+Acción: northwest, Recompensa: 0, Info: {'moves': 61, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 62, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 63, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 64, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 65, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 66, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 67, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 68, 'score': 0}
+Acción: open window, Recompensa: 0, Info: {'moves': 69, 'score': 0}
+Acción: west, Recompensa: 10, Info: {'moves': 70, 'score': 10}
+Acción: open sack, Recompensa: 0, Info: {'moves': 71, 'score': 10}
+Acción: take bottle, Recompensa: 0, Info: {'moves': 72, 'score': 10}
+Acción: put water on table, Recompensa: 0, Info: {'moves': 73, 'score': 10}
+Acción: west, Recompensa: 0, Info: {'moves': 74, 'score': 10}
+Acción: throw bottle at lantern, Recompensa: 0, Info: {'moves': 75, 'score': 10}
+Acción: east, Recompensa: 0, Info: {'moves': 76, 'score': 10}
+Acción: east, Recompensa: 0, Info: {'moves': 77, 'score': 10}
+Acción: east, Recompensa: 0, Info: {'moves': 78, 'score': 10}
+Acción: go around forest, Recompensa: 0, Info: {'moves': 79, 'score': 10}
+Acción: south, Recompensa: 0, Info: {'moves': 80, 'score': 10}
+Acción: put down bottle, Recompensa: 0, Info: {'moves': 81, 'score': 10}
+Acción: northwest, Recompensa: 0, Info: {'moves': 82, 'score': 10}
+Acción: south, Recompensa: 0, Info: {'moves': 83, 'score': 10}
+Acción: west, Recompensa: 0, Info: {'moves': 84, 'score': 10}
+Acción: east, Recompensa: 0, Info: {'moves': 85, 'score': 10}
+Acción: go around forest, Recompensa: 0, Info: {'moves': 86, 'score': 10}
+Acción: go around forest, Recompensa: 0, Info: {'moves': 87, 'score': 10}
+Acción: north, Recompensa: 0, Info: {'moves': 88, 'score': 10}
+Acción: west, Recompensa: 0, Info: {'moves': 89, 'score': 10}
+Acción: south, Recompensa: 0, Info: {'moves': 90, 'score': 10}
+Acción: open bottle, Recompensa: 0, Info: {'moves': 91, 'score': 10}
+Acción: close bottle, Recompensa: 0, Info: {'moves': 92, 'score': 10}
+Acción: north, Recompensa: 0, Info: {'moves': 93, 'score': 10}
+Acción: go around forest, Recompensa: 0, Info: {'moves': 94, 'score': 10}
+Acción: south, Recompensa: 0, Info: {'moves': 95, 'score': 10}
+Acción: north, Recompensa: 0, Info: {'moves': 96, 'score': 10}
+Acción: west, Recompensa: 0, Info: {'moves': 97, 'score': 10}
+Acción: west, Recompensa: 0, Info: {'moves': 98, 'score': 10}
+Acción: up, Recompensa: 0, Info: {'moves': 99, 'score': 10}
+Acción: down, Recompensa: 0, Info: {'moves': 100, 'score': 10}
+--- Fin del Episodio 17 ---
+Recompensa Total: 10
+--------------------------------------------------
+--- Inicio del Episodio 18 ---
+Acción: open mailbox, Recompensa: 0, Info: {'moves': 1, 'score': 0}
+Acción: close mailbox, Recompensa: 0, Info: {'moves': 2, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 3, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 4, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 5, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 6, 'score': 0}
+Acción: take leaves, Recompensa: 0, Info: {'moves': 7, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 8, 'score': 0}
+Acción: put down leaves, Recompensa: 0, Info: {'moves': 9, 'score': 0}
+Acción: take leaves, Recompensa: 0, Info: {'moves': 10, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 11, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 12, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 13, 'score': 0}
+Acción: put down leaves, Recompensa: 0, Info: {'moves': 14, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 15, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 16, 'score': 0}
+Acción: jump, Recompensa: -10, Info: {'moves': 17, 'score': -10}
+--- Fin del Episodio 18 ---
+Recompensa Total: -10
+--------------------------------------------------
+--- Inicio del Episodio 19 ---
+Acción: north, Recompensa: 0, Info: {'moves': 1, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 2, 'score': 0}
+Acción: open mailbox, Recompensa: 0, Info: {'moves': 3, 'score': 0}
+Acción: close mailbox, Recompensa: 0, Info: {'moves': 4, 'score': 0}
+Acción: north, Recompensa: 0, Info: {'moves': 5, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 6, 'score': 0}
+Acción: open window, Recompensa: 0, Info: {'moves': 7, 'score': 0}
+Acción: west, Recompensa: 10, Info: {'moves': 8, 'score': 10}
+Acción: up, Recompensa: 0, Info: {'moves': 9, 'score': 10}
+Acción: down, Recompensa: 0, Info: {'moves': 10, 'score': 10}
+Acción: west, Recompensa: 0, Info: {'moves': 11, 'score': 10}
+Acción: turn on lantern, Recompensa: 0, Info: {'moves': 12, 'score': 10}
+Acción: take lantern, Recompensa: 0, Info: {'moves': 13, 'score': 10}
+Acción: put out lantern, Recompensa: 0, Info: {'moves': 14, 'score': 10}
+Acción: east, Recompensa: 0, Info: {'moves': 15, 'score': 10}
+Acción: jump, Recompensa: -10, Info: {'moves': 16, 'score': 0}
+--- Fin del Episodio 19 ---
+Recompensa Total: 0
+--------------------------------------------------
+--- Inicio del Episodio 20 ---
+Acción: north, Recompensa: 0, Info: {'moves': 1, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 2, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 3, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 4, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 5, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 6, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 7, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 8, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 9, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 10, 'score': 0}
+Acción: east, Recompensa: 0, Info: {'moves': 11, 'score': 0}
+Acción: south, Recompensa: 0, Info: {'moves': 12, 'score': 0}
+Acción: go around forest, Recompensa: 0, Info: {'moves': 13, 'score': 0}
+Acción: go around trees, Recompensa: 0, Info: {'moves': 14, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 15, 'score': 0}
+Acción: go around forest, Recompensa: 0, Info: {'moves': 16, 'score': 0}
+Acción: west, Recompensa: 0, Info: {'moves': 17, 'score': 0}
+Acción: open window, Recompensa: 0, Info: {'moves': 18, 'score': 0}
+Acción: west, Recompensa: 10, Info: {'moves': 19, 'score': 10}
+Acción: close window, Recompensa: 0, Info: {'moves': 20, 'score': 10}
+Acción: jump, Recompensa: -10, Info: {'moves': 21, 'score': 0}
+--- Fin del Episodio 20 ---
+Recompensa Total: 0
+--------------------------------------------------
