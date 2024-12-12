@@ -1,0 +1,411 @@
+
+----------------- EPOCH 1 -----------------
+--- Inicio del Episodio 1 ---
+Estado: Copyright (c) 1981, 1982, 1983 Infocom, Inc. All rights reserved.
+ZORK is a registered trademark of Infocom, Inc.
+Revision 88 / Serial number 840726
+
+West of House
+You are standing in an open field west of a white house, with a boarded front door.
+There is a small mailbox here.
+
+
+Acción: south, Recompensa asignada por LLM: 0, Info: {'moves': 1, 'score': 0}
+Estado: South of House
+You are facing the south side of a white house. There is no door here, and all the windows are boarded.
+
+
+Acción: south, Recompensa asignada por LLM: 0, Info: {'moves': 2, 'score': 0}
+Estado: Forest
+This is a dimly lit forest, with large trees all around.
+
+
+Acción: north, Recompensa asignada por LLM: 0, Info: {'moves': 3, 'score': 0}
+Estado: Clearing
+You are in a small clearing in a well marked forest path that extends to the east and west.
+
+
+Acción: go around forest, Recompensa asignada por LLM: 2, Info: {'moves': 4, 'score': 0}
+Estado: Forest
+This is a forest, with trees in all directions. To the east, there appears to be sunlight.
+
+
+Acción: south, Recompensa asignada por LLM: 0, Info: {'moves': 5, 'score': 0}
+Estado: Forest
+
+
+Acción: go around trees, Recompensa asignada por LLM: 2, Info: {'moves': 6, 'score': 0}
+Estado: Forest Path
+This is a path winding through a dimly lit forest. The path heads north-south here. One particularly large tree with some low branches stands at the edge of the path.
+
+
+Acción: up, Recompensa asignada por LLM: 0, Info: {'moves': 7, 'score': 0}
+Estado: Up a Tree
+You are about 10 feet above the ground nestled among some large branches. The nearest branch above you is above your reach.
+Beside you on the branch is a small bird's nest.
+In the bird's nest is a large egg encrusted with precious jewels, apparently scavenged by a childless songbird. The egg is covered with fine gold inlay, and ornamented in lapis lazuli and mother-of-pearl. Unlike most eggs, this one is hinged and closed with a delicate looking clasp. The egg appears extremely fragile.
+
+
+Acción: take egg, Recompensa asignada por LLM: 4, Info: {'moves': 8, 'score': 5}
+Estado: Taken.
+
+
+Acción: take on egg, Recompensa asignada por LLM: 2, Info: {'moves': 9, 'score': 5}
+Estado: There is a noticeable crunch from beneath you, and inspection reveals that the egg is lying open, badly damaged. There is a golden clockwork canary nestled in the egg. It seems to have recently had a bad experience. The mountings for its jewel-like eyes are empty, and its silver beak is crumpled. Through a cracked crystal window below its left wing you can see the remains of intricate machinery. It is not clear what result winding it would have, as the mainspring seems sprung.
+
+
+Acción: put canary in nest, Recompensa asignada por LLM: 0, Info: {'moves': 10, 'score': 5}
+Estado: Done.
+You hear in the distance the chirping of a song bird.
+
+
+Acción: down, Recompensa asignada por LLM: -2, Info: {'moves': 11, 'score': 5}
+Estado: Forest Path
+You hear in the distance the chirping of a song bird.
+
+
+Acción: west, Recompensa asignada por LLM: 0, Info: {'moves': 12, 'score': 5}
+Estado: Forest
+
+
+Acción: close egg, Recompensa asignada por LLM: 0, Info: {'moves': 13, 'score': 5}
+Estado: Closed.
+You hear in the distance the chirping of a song bird.
+
+
+Acción: open egg, Recompensa asignada por LLM: 0, Info: {'moves': 14, 'score': 5}
+Estado: Opened.
+
+
+Acción: put down egg, Recompensa asignada por LLM: 0, Info: {'moves': 15, 'score': 5}
+Estado: Dropped.
+
+
+Acción: go around trees, Recompensa asignada por LLM: -2, Info: {'moves': 16, 'score': 5}
+Estado: Forest
+This is a dimly lit forest, with large trees all around.
+
+
+Acción: go around trees, Recompensa asignada por LLM: 2, Info: {'moves': 17, 'score': 5}
+Estado: Forest
+
+
+Acción: northwest, Recompensa asignada por LLM: 0, Info: {'moves': 18, 'score': 5}
+Estado: South of House
+
+
+Acción: east, Recompensa asignada por LLM: -2, Info: {'moves': 19, 'score': 5}
+Estado: Behind House
+You are behind the white house. A path leads into the forest to the east. In one corner of the house there is a small window which is slightly ajar.
+
+
+Acción: east, Recompensa asignada por LLM: 0, Info: {'moves': 20, 'score': 5}
+Estado: Clearing
+
+
+Acción: west, Recompensa asignada por LLM: 0, Info: {'moves': 21, 'score': 5}
+Estado: Behind House
+
+
+Acción: north, Recompensa asignada por LLM: 2, Info: {'moves': 22, 'score': 5}
+Estado: North of House
+You are facing the north side of a white house. There is no door here, and all the windows are boarded up. To the north a narrow path winds through the trees.
+
+
+Acción: west, Recompensa asignada por LLM: -2, Info: {'moves': 23, 'score': 5}
+Estado: West of House
+There is a small mailbox here.
+
+
+Acción: open mailbox, Recompensa asignada por LLM: 0, Info: {'moves': 24, 'score': 5}
+Estado: Opening the small mailbox reveals a leaflet.
+
+
+Acción: south, Recompensa asignada por LLM: 0, Info: {'moves': 25, 'score': 5}
+Estado: South of House
+
+
+Acción: east, Recompensa asignada por LLM: -2, Info: {'moves': 26, 'score': 5}
+Estado: Behind House
+
+
+Acción: south, Recompensa asignada por LLM: 0, Info: {'moves': 27, 'score': 5}
+Estado: South of House
+
+
+Acción: west, Recompensa asignada por LLM: -2, Info: {'moves': 28, 'score': 5}
+Estado: West of House
+There is a small mailbox here.
+The small mailbox contains:
+  A leaflet
+
+
+Acción: close mailbox, Recompensa asignada por LLM: 0, Info: {'moves': 29, 'score': 5}
+Estado: Closed.
+
+
+Acción: open mailbox, Recompensa asignada por LLM: -4, Info: {'moves': 30, 'score': 5}
+Estado: Opening the small mailbox reveals a leaflet.
+
+
+Acción: close mailbox, Recompensa asignada por LLM: 0, Info: {'moves': 31, 'score': 5}
+Estado: Closed.
+
+
+Acción: west, Recompensa asignada por LLM: -2, Info: {'moves': 32, 'score': 5}
+Estado: Forest
+There is a somewhat ruined egg here.
+
+
+Acción: go around trees, Recompensa asignada por LLM: 2, Info: {'moves': 33, 'score': 5}
+Estado: Forest
+You hear in the distance the chirping of a song bird.
+
+
+Acción: east, Recompensa asignada por LLM: 0, Info: {'moves': 34, 'score': 5}
+Estado: Forest
+The forest thins out, revealing impassable mountains.
+
+
+Acción: north, Recompensa asignada por LLM: 0, Info: {'moves': 35, 'score': 5}
+Estado: Forest
+
+
+Acción: go around trees, Recompensa asignada por LLM: 0, Info: {'moves': 36, 'score': 5}
+Estado: Forest
+
+
+Acción: go around trees, Recompensa asignada por LLM: 2, Info: {'moves': 37, 'score': 5}
+Estado: Forest Path
+You hear in the distance the chirping of a song bird.
+
+
+Acción: south, Recompensa asignada por LLM: 0, Info: {'moves': 38, 'score': 5}
+Estado: North of House
+
+
+Acción: west, Recompensa asignada por LLM: -2, Info: {'moves': 39, 'score': 5}
+Estado: West of House
+There is a small mailbox here.
+
+
+Acción: north, Recompensa asignada por LLM: -2, Info: {'moves': 40, 'score': 5}
+Estado: North of House
+
+
+Acción: east, Recompensa asignada por LLM: -2, Info: {'moves': 41, 'score': 5}
+Estado: Behind House
+
+
+Acción: east, Recompensa asignada por LLM: 0, Info: {'moves': 42, 'score': 5}
+Estado: Clearing
+
+
+Acción: north, Recompensa asignada por LLM: 2, Info: {'moves': 43, 'score': 5}
+Estado: Forest
+
+
+Acción: go around trees, Recompensa asignada por LLM: 2, Info: {'moves': 44, 'score': 5}
+Estado: Forest
+
+
+Acción: go around trees, Recompensa asignada por LLM: 4, Info: {'moves': 45, 'score': 5}
+Estado: Forest Path
+
+
+Acción: east, Recompensa asignada por LLM: 0, Info: {'moves': 46, 'score': 5}
+Estado: Forest
+You hear in the distance the chirping of a song bird.
+
+
+Acción: south, Recompensa asignada por LLM: -2, Info: {'moves': 47, 'score': 5}
+Estado: Clearing
+
+
+Acción: north, Recompensa asignada por LLM: 2, Info: {'moves': 48, 'score': 5}
+Estado: Forest
+
+
+Acción: go around trees, Recompensa asignada por LLM: 0, Info: {'moves': 49, 'score': 5}
+Estado: Forest
+
+
+Acción: west, Recompensa asignada por LLM: 0, Info: {'moves': 50, 'score': 5}
+Estado: Forest
+There is a somewhat ruined egg here.
+
+
+Acción: south, Recompensa asignada por LLM: 0, Info: {'moves': 51, 'score': 5}
+Estado: Forest
+
+
+Acción: go around trees, Recompensa asignada por LLM: 0, Info: {'moves': 52, 'score': 5}
+Estado: Forest Path
+
+
+Acción: east, Recompensa asignada por LLM: 0, Info: {'moves': 53, 'score': 5}
+Estado: Forest
+
+
+Acción: east, Recompensa asignada por LLM: 0, Info: {'moves': 54, 'score': 5}
+Estado: Forest
+
+
+Acción: north, Recompensa asignada por LLM: 0, Info: {'moves': 55, 'score': 5}
+Estado: Forest
+
+
+Acción: go around trees, Recompensa asignada por LLM: 0, Info: {'moves': 56, 'score': 5}
+Estado: Forest
+
+
+Acción: west, Recompensa asignada por LLM: 0, Info: {'moves': 57, 'score': 5}
+Estado: Forest
+There is a somewhat ruined egg here.
+
+
+Acción: south, Recompensa asignada por LLM: -2, Info: {'moves': 58, 'score': 5}
+Estado: Forest
+
+
+Acción: go around trees, Recompensa asignada por LLM: 2, Info: {'moves': 59, 'score': 5}
+Estado: Forest Path
+
+
+Acción: north, Recompensa asignada por LLM: 2, Info: {'moves': 60, 'score': 5}
+Estado: Clearing
+You are in a clearing, with a forest surrounding you on all sides. A path leads south.
+On the ground is a pile of leaves.
+
+
+Acción: west, Recompensa asignada por LLM: -2, Info: {'moves': 61, 'score': 5}
+Estado: Forest
+There is a somewhat ruined egg here.
+
+
+Acción: go around trees, Recompensa asignada por LLM: 0, Info: {'moves': 62, 'score': 5}
+Estado: Forest
+You hear in the distance the chirping of a song bird.
+
+
+Acción: south, Recompensa asignada por LLM: 0, Info: {'moves': 63, 'score': 5}
+Estado: Clearing
+
+
+Acción: north, Recompensa asignada por LLM: 0, Info: {'moves': 64, 'score': 5}
+Estado: Forest
+
+
+Acción: east, Recompensa asignada por LLM: 0, Info: {'moves': 65, 'score': 5}
+Estado: Forest
+
+
+Acción: north, Recompensa asignada por LLM: 2, Info: {'moves': 66, 'score': 5}
+Estado: Forest
+
+
+Acción: south, Recompensa asignada por LLM: 0, Info: {'moves': 67, 'score': 5}
+Estado: Clearing
+
+
+Acción: west, Recompensa asignada por LLM: 0, Info: {'moves': 68, 'score': 5}
+Estado: Behind House
+
+
+Acción: east, Recompensa asignada por LLM: -2, Info: {'moves': 69, 'score': 5}
+Estado: Clearing
+
+
+Acción: east, Recompensa asignada por LLM: 0, Info: {'moves': 70, 'score': 5}
+Estado: Canyon View
+You are at the top of the Great Canyon on its west wall. From here there is a marvelous view of the canyon and parts of the Frigid River upstream. Across the canyon, the walls of the White Cliffs join the mighty ramparts of the Flathead Mountains to the east. Following the Canyon upstream to the north, Aragain Falls may be seen, complete with rainbow. The mighty Frigid River flows out from a great dark cavern. To the west and south can be seen an immense forest, stretching for miles around. A path leads northwest. It is possible to climb down into the canyon from here.
+
+
+Acción: jump, Recompensa asignada por LLM: -2, Info: {'moves': 71, 'score': -5}
+--- Fin del Episodio 1 ---
+Recompensa Total: 0
+--------------------------------------------------
+--- Inicio del Episodio 2 ---
+Estado: Copyright (c) 1981, 1982, 1983 Infocom, Inc. All rights reserved.
+ZORK is a registered trademark of Infocom, Inc.
+Revision 88 / Serial number 840726
+
+West of House
+You are standing in an open field west of a white house, with a boarded front door.
+There is a small mailbox here.
+
+
+Acción: open mailbox, Recompensa asignada por LLM: 2, Info: {'moves': 1, 'score': 0}
+Estado: Opening the small mailbox reveals a leaflet.
+
+
+Acción: close mailbox, Recompensa asignada por LLM: 2, Info: {'moves': 2, 'score': 0}
+Estado: Closed.
+
+
+Acción: open mailbox, Recompensa asignada por LLM: -2, Info: {'moves': 3, 'score': 0}
+Estado: Opening the small mailbox reveals a leaflet.
+
+
+Acción: south, Recompensa asignada por LLM: 0, Info: {'moves': 4, 'score': 0}
+Estado: South of House
+You are facing the south side of a white house. There is no door here, and all the windows are boarded.
+
+
+Acción: east, Recompensa asignada por LLM: -2, Info: {'moves': 5, 'score': 0}
+Estado: Behind House
+You are behind the white house. A path leads into the forest to the east. In one corner of the house there is a small window which is slightly ajar.
+
+
+Acción: north, Recompensa asignada por LLM: -2, Info: {'moves': 6, 'score': 0}
+Estado: North of House
+You are facing the north side of a white house. There is no door here, and all the windows are boarded up. To the north a narrow path winds through the trees.
+
+
+Acción: west, Recompensa asignada por LLM: -2, Info: {'moves': 7, 'score': 0}
+Estado: West of House
+There is a small mailbox here.
+The small mailbox contains:
+  A leaflet
+
+
+Acción: take leaflet, Recompensa asignada por LLM: 2, Info: {'moves': 8, 'score': 0}
+Estado: Taken.
+
+
+Acción: put down leaflet, Recompensa asignada por LLM: 0, Info: {'moves': 9, 'score': 0}
+Estado: Dropped.
+
+
+Acción: close mailbox, Recompensa asignada por LLM: 0, Info: {'moves': 10, 'score': 0}
+Estado: Closed.
+
+
+Acción: south, Recompensa asignada por LLM: 0, Info: {'moves': 11, 'score': 0}
+Estado: South of House
+
+
+Acción: west, Recompensa asignada por LLM: -2, Info: {'moves': 12, 'score': 0}
+Estado: West of House
+A small leaflet is on the ground.
+There is a small mailbox here.
+
+
+Acción: open mailbox, Recompensa asignada por LLM: 2, Info: {'moves': 13, 'score': 0}
+Estado: Opened.
+
+
+Acción: close mailbox, Recompensa asignada por LLM: 0, Info: {'moves': 14, 'score': 0}
+Estado: Closed.
+
+
+Acción: north, Recompensa asignada por LLM: -2, Info: {'moves': 15, 'score': 0}
+Estado: North of House
+
+
+Acción: north, Recompensa asignada por LLM: 2, Info: {'moves': 16, 'score': 0}
+Estado: Forest Path
+This is a path winding through a dimly lit forest. The path heads north-south here. One particularly large tree with some low branches stands at the edge of the path.
+
+
+Acción: go around forest, Recompensa asignada por LLM: 0, Info: {'moves': 17, 'score': 0}
