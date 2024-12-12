@@ -3,7 +3,7 @@
 <img src="imgs/itam.png" width="500" height="200">
 
 
-**Tema:** Modelos Extensos de Lenguaje como alternativa a la función de recompensas en Q-Learning aplicado a juegos por turnos.
+**Tema:** Modelos Extensos de Lenguaje como alternativa a la función de recompensas en Q-Learning aplicado a juegos.
 
 ## Tabla de contenidos
 
