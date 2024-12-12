@@ -1,0 +1,618 @@
+
+----------------- EPOCH 1 -----------------
+--- Inicio del Episodio 1 ---
+Estado Inicial: Copyright (c) 1981, 1982, 1983 Infocom, Inc. All rights reserved.
+ZORK is a registered trademark of Infocom, Inc.
+Revision 88 / Serial number 840726
+
+West of House
+You are standing in an open field west of a white house, with a boarded front door.
+There is a small mailbox here.
+
+
+Estado: North of House
+You are facing the north side of a white house. There is no door here, and all the windows are boarded up. To the north a narrow path winds through the trees.
+
+
+Acción: north, Recompensa: 0, Info: {'moves': 1, 'score': 0}
+Estado: Forest Path
+This is a path winding through a dimly lit forest. The path heads north-south here. One particularly large tree with some low branches stands at the edge of the path.
+
+
+Acción: north, Recompensa: 0, Info: {'moves': 2, 'score': 0}
+Estado: Forest
+This is a dimly lit forest, with large trees all around.
+
+
+Acción: east, Recompensa: 0, Info: {'moves': 3, 'score': 0}
+Estado: Forest
+This is a dimly lit forest, with large trees all around.
+
+
+Acción: go around trees, Recompensa: 0, Info: {'moves': 4, 'score': 0}
+Estado: Forest Path
+
+
+Acción: go around trees, Recompensa: 0, Info: {'moves': 5, 'score': 0}
+Estado: North of House
+
+
+Acción: south, Recompensa: 0, Info: {'moves': 6, 'score': 0}
+Estado: Forest Path
+
+
+Acción: north, Recompensa: 0, Info: {'moves': 7, 'score': 0}
+Estado: Clearing
+You are in a clearing, with a forest surrounding you on all sides. A path leads south.
+On the ground is a pile of leaves.
+
+
+Acción: north, Recompensa: 0, Info: {'moves': 8, 'score': 0}
+Estado: Done.
+In disturbing the pile of leaves, a grating is revealed.
+
+
+Acción: pull leaves, Recompensa: 0, Info: {'moves': 9, 'score': 0}
+Estado: Forest
+
+
+Acción: east, Recompensa: 0, Info: {'moves': 10, 'score': 0}
+Estado: Forest
+The forest thins out, revealing impassable mountains.
+
+
+Acción: east, Recompensa: 0, Info: {'moves': 11, 'score': 0}
+Estado: Forest
+
+
+Acción: north, Recompensa: 0, Info: {'moves': 12, 'score': 0}
+Estado: Forest
+
+
+Acción: east, Recompensa: 0, Info: {'moves': 13, 'score': 0}
+Estado: Forest
+You hear in the distance the chirping of a song bird.
+
+
+Acción: north, Recompensa: 0, Info: {'moves': 14, 'score': 0}
+Estado: Clearing
+You are in a small clearing in a well marked forest path that extends to the east and west.
+
+
+Acción: south, Recompensa: 0, Info: {'moves': 15, 'score': 0}
+Estado: Forest
+This is a forest, with trees in all directions. To the east, there appears to be sunlight.
+You hear in the distance the chirping of a song bird.
+
+
+Acción: go around forest, Recompensa: 0, Info: {'moves': 16, 'score': 0}
+Estado: Clearing
+On the ground is a pile of leaves.
+
+
+Acción: north, Recompensa: 0, Info: {'moves': 17, 'score': 0}
+Estado: Forest Path
+
+
+Acción: south, Recompensa: 0, Info: {'moves': 18, 'score': 0}
+Estado: Up a Tree
+You are about 10 feet above the ground nestled among some large branches. The nearest branch above you is above your reach.
+Beside you on the branch is a small bird's nest.
+In the bird's nest is a large egg encrusted with precious jewels, apparently scavenged by a childless songbird. The egg is covered with fine gold inlay, and ornamented in lapis lazuli and mother-of-pearl. Unlike most eggs, this one is hinged and closed with a delicate looking clasp. The egg appears extremely fragile.
+You hear in the distance the chirping of a song bird.
+
+
+Acción: up, Recompensa: 0, Info: {'moves': 19, 'score': 0}
+Estado: Taken.
+
+
+Acción: take egg, Recompensa: 5, Info: {'moves': 20, 'score': 5}
+Estado: Taken.
+
+
+Acción: take nest, Recompensa: 0, Info: {'moves': 21, 'score': 5}
+Estado: Done.
+
+
+Acción: put egg in nest, Recompensa: 0, Info: {'moves': 22, 'score': 5}
+Estado: Your rather indelicate handling of the egg has caused it some damage, although you have succeeded in opening it. There is a golden clockwork canary nestled in the egg. It seems to have recently had a bad experience. The mountings for its jewel-like eyes are empty, and its silver beak is crumpled. Through a cracked crystal window below its left wing you can see the remains of intricate machinery. It is not clear what result winding it would have, as the mainspring seems sprung.
+
+
+Acción: throw egg at ground, Recompensa: 0, Info: {'moves': 23, 'score': 5}
+Estado: Closed.
+
+
+Acción: close egg, Recompensa: 0, Info: {'moves': 24, 'score': 5}
+Estado: Taken.
+You hear in the distance the chirping of a song bird.
+
+
+Acción: take egg, Recompensa: 0, Info: {'moves': 25, 'score': 5}
+Estado: The bird's nest falls to the ground.
+
+
+Acción: put down nest, Recompensa: 0, Info: {'moves': 26, 'score': 5}
+Estado: The broken jewel-encrusted egg opens.
+There is a golden clockwork canary nestled in the egg. It seems to have recently had a bad experience. The mountings for its jewel-like eyes are empty, and its silver beak is crumpled. Through a cracked crystal window below its left wing you can see the remains of intricate machinery. It is not clear what result winding it would have, as the mainspring seems sprung.
+
+
+Acción: open egg, Recompensa: 0, Info: {'moves': 27, 'score': 5}
+Estado: Thrown.
+You hear in the distance the chirping of a song bird.
+
+
+Acción: throw canary at egg, Recompensa: 0, Info: {'moves': 28, 'score': 5}
+Estado: Closed.
+
+
+Acción: close egg, Recompensa: 0, Info: {'moves': 29, 'score': 5}
+Estado: The broken jewel-encrusted egg falls to the ground.
+
+
+Acción: put down egg, Recompensa: 0, Info: {'moves': 30, 'score': 5}
+Estado: Taken.
+
+
+Acción: take canary, Recompensa: 0, Info: {'moves': 31, 'score': 5}
+Estado: Forest Path
+There is a somewhat ruined egg here.
+There is a bird's nest here.
+You hear in the distance the chirping of a song bird.
+
+
+Acción: down, Recompensa: 0, Info: {'moves': 32, 'score': 5}
+Estado: Taken.
+
+
+Acción: take nest, Recompensa: 0, Info: {'moves': 33, 'score': 5}
+Estado: bird's nest: Dropped.
+broken clockwork canary: Dropped.
+
+
+Acción: put down all, Recompensa: 0, Info: {'moves': 34, 'score': 5}
+Estado: Forest
+
+
+Acción: west, Recompensa: 0, Info: {'moves': 35, 'score': 5}
+Estado: Forest
+
+
+Acción: go around trees, Recompensa: 0, Info: {'moves': 36, 'score': 5}
+Estado: Forest
+
+
+Acción: east, Recompensa: 0, Info: {'moves': 37, 'score': 5}
+Estado: Forest
+
+
+Acción: north, Recompensa: 0, Info: {'moves': 38, 'score': 5}
+Estado: Clearing
+
+
+Acción: south, Recompensa: 0, Info: {'moves': 39, 'score': 5}
+Estado: Forest
+
+
+Acción: south, Recompensa: 0, Info: {'moves': 40, 'score': 5}
+Estado: Forest
+
+
+Acción: west, Recompensa: 0, Info: {'moves': 41, 'score': 5}
+Estado: Forest
+
+
+Acción: south, Recompensa: 0, Info: {'moves': 42, 'score': 5}
+Estado: Forest Path
+There is a broken clockwork canary here.
+There is a bird's nest here.
+There is a somewhat ruined egg here.
+
+
+Acción: go around trees, Recompensa: 0, Info: {'moves': 43, 'score': 5}
+Estado: Taken.
+
+
+Acción: take nest, Recompensa: 0, Info: {'moves': 44, 'score': 5}
+Estado: Closed.
+
+
+Acción: close nest, Recompensa: 0, Info: {'moves': 45, 'score': 5}
+Estado: Dropped.
+
+
+Acción: put down nest, Recompensa: 0, Info: {'moves': 46, 'score': 5}
+Estado: bird's nest: Taken.
+broken clockwork canary: Taken.
+broken jewel-encrusted egg: Taken.
+You hear in the distance the chirping of a song bird.
+
+
+Acción: take all, Recompensa: 0, Info: {'moves': 47, 'score': 5}
+Estado: Dropped.
+
+
+Acción: put down nest, Recompensa: 0, Info: {'moves': 48, 'score': 5}
+Estado: broken jewel-encrusted egg: Dropped.
+broken clockwork canary: Dropped.
+
+
+Acción: put down all, Recompensa: 0, Info: {'moves': 49, 'score': 5}
+Estado: North of House
+
+
+Acción: south, Recompensa: 0, Info: {'moves': 50, 'score': 5}
+Estado: West of House
+There is a small mailbox here.
+
+
+Acción: west, Recompensa: 0, Info: {'moves': 51, 'score': 5}
+Estado: Forest
+
+
+Acción: west, Recompensa: 0, Info: {'moves': 52, 'score': 5}
+Estado: Clearing
+On the ground is a pile of leaves.
+
+
+Acción: north, Recompensa: 0, Info: {'moves': 53, 'score': 5}
+Estado: Forest
+
+
+Acción: west, Recompensa: 0, Info: {'moves': 54, 'score': 5}
+Estado: Clearing
+On the ground is a pile of leaves.
+
+
+Acción: north, Recompensa: 0, Info: {'moves': 55, 'score': 5}
+Estado: Forest Path
+There is a broken clockwork canary here.
+There is a somewhat ruined egg here.
+There is a bird's nest here.
+
+
+Acción: south, Recompensa: 0, Info: {'moves': 56, 'score': 5}
+Estado: Clearing
+On the ground is a pile of leaves.
+
+
+Acción: north, Recompensa: 0, Info: {'moves': 57, 'score': 5}
+Estado: Taken.
+
+
+Acción: take leaves, Recompensa: 0, Info: {'moves': 58, 'score': 5}
+Estado: Forest
+
+
+Acción: west, Recompensa: 0, Info: {'moves': 59, 'score': 5}
+Estado: Forest
+
+
+Acción: go around trees, Recompensa: 0, Info: {'moves': 60, 'score': 5}
+Estado: Forest Path
+There is a broken clockwork canary here.
+There is a somewhat ruined egg here.
+There is a bird's nest here.
+
+
+Acción: west, Recompensa: 0, Info: {'moves': 61, 'score': 5}
+Estado: Clearing
+
+
+Acción: north, Recompensa: 0, Info: {'moves': 62, 'score': 5}
+Estado: Forest
+
+
+Acción: east, Recompensa: 0, Info: {'moves': 63, 'score': 5}
+Estado: Dropped.
+You hear in the distance the chirping of a song bird.
+
+
+Acción: put down leaves, Recompensa: 0, Info: {'moves': 64, 'score': 5}
+Estado: Forest
+
+
+Acción: go around trees, Recompensa: 0, Info: {'moves': 65, 'score': 5}
+Estado: Forest
+
+
+Acción: west, Recompensa: 0, Info: {'moves': 66, 'score': 5}
+Estado: Clearing
+
+
+Acción: north, Recompensa: 0, Info: {'moves': 67, 'score': 5}
+Estado: Forest
+
+
+Acción: west, Recompensa: 0, Info: {'moves': 68, 'score': 5}
+Estado: Forest
+On the ground is a pile of leaves.
+
+
+Acción: go around trees, Recompensa: 0, Info: {'moves': 69, 'score': 5}
+Estado: Forest
+
+
+Acción: east, Recompensa: 0, Info: {'moves': 70, 'score': 5}
+Estado: Forest
+On the ground is a pile of leaves.
+
+
+Acción: north, Recompensa: 0, Info: {'moves': 71, 'score': 5}
+Estado: Forest
+
+
+Acción: go around trees, Recompensa: 0, Info: {'moves': 72, 'score': 5}
+Estado: Forest Path
+There is a broken clockwork canary here.
+There is a somewhat ruined egg here.
+There is a bird's nest here.
+You hear in the distance the chirping of a song bird.
+
+
+Acción: go around trees, Recompensa: 0, Info: {'moves': 73, 'score': 5}
+Estado: Taken.
+
+
+Acción: take canary, Recompensa: 0, Info: {'moves': 74, 'score': 5}
+Estado: Taken.
+
+
+Acción: take nest, Recompensa: 0, Info: {'moves': 75, 'score': 5}
+Estado: bird's nest: Dropped.
+broken clockwork canary: Dropped.
+
+
+Acción: put down all, Recompensa: 0, Info: {'moves': 76, 'score': 5}
+Estado: Taken.
+
+
+Acción: take egg, Recompensa: 0, Info: {'moves': 77, 'score': 5}
+Estado: broken clockwork canary: Taken.
+bird's nest: Taken.
+
+
+Acción: take all, Recompensa: 0, Info: {'moves': 78, 'score': 5}
+Estado: Opened.
+
+
+Acción: open egg, Recompensa: 0, Info: {'moves': 79, 'score': 5}
+Estado: North of House
+
+
+Acción: south, Recompensa: 0, Info: {'moves': 80, 'score': 5}
+Estado: Done.
+
+
+Acción: put nest in egg, Recompensa: 0, Info: {'moves': 81, 'score': 5}
+Estado: Dropped.
+
+
+Acción: put down egg, Recompensa: 0, Info: {'moves': 82, 'score': 5}
+Estado: Forest Path
+
+
+Acción: north, Recompensa: 0, Info: {'moves': 83, 'score': 5}
+Estado: Clearing
+
+
+Acción: go around forest, Recompensa: 0, Info: {'moves': 84, 'score': 5}
+Estado: Canyon View
+You are at the top of the Great Canyon on its west wall. From here there is a marvelous view of the canyon and parts of the Frigid River upstream. Across the canyon, the walls of the White Cliffs join the mighty ramparts of the Flathead Mountains to the east. Following the Canyon upstream to the north, Aragain Falls may be seen, complete with rainbow. The mighty Frigid River flows out from a great dark cavern. To the west and south can be seen an immense forest, stretching for miles around. A path leads northwest. It is possible to climb down into the canyon from here.
+
+
+Acción: east, Recompensa: 0, Info: {'moves': 85, 'score': 5}
+Estado: Dropped.
+
+
+Acción: put down canary, Recompensa: 0, Info: {'moves': 86, 'score': 5}
+Estado: Clearing
+
+
+Acción: northwest, Recompensa: 0, Info: {'moves': 87, 'score': 5}
+Estado: Forest
+
+
+Acción: go around forest, Recompensa: 0, Info: {'moves': 88, 'score': 5}
+Estado: Forest
+
+
+Acción: south, Recompensa: 0, Info: {'moves': 89, 'score': 5}
+Estado: Forest Path
+
+
+Acción: go around trees, Recompensa: 0, Info: {'moves': 90, 'score': 5}
+Estado: Forest
+On the ground is a pile of leaves.
+
+
+Acción: east, Recompensa: 0, Info: {'moves': 91, 'score': 5}
+Estado: Forest Path
+
+
+Acción: west, Recompensa: 0, Info: {'moves': 92, 'score': 5}
+Estado: Clearing
+
+
+Acción: go around forest, Recompensa: 0, Info: {'moves': 93, 'score': 5}
+Estado: Forest
+
+
+Acción: south, Recompensa: 0, Info: {'moves': 94, 'score': 5}
+Estado: Forest Path
+You hear in the distance the chirping of a song bird.
+
+
+Acción: go around trees, Recompensa: 0, Info: {'moves': 95, 'score': 5}
+Estado: Clearing
+
+
+Acción: go around forest, Recompensa: 0, Info: {'moves': 96, 'score': 5}
+Estado: Behind House
+You are behind the white house. A path leads into the forest to the east. In one corner of the house there is a small window which is slightly ajar.
+
+
+Acción: west, Recompensa: 0, Info: {'moves': 97, 'score': 5}
+Estado: North of House
+There is a somewhat ruined egg here.
+The broken jewel-encrusted egg contains:
+  A bird's nest
+
+
+Acción: north, Recompensa: 0, Info: {'moves': 98, 'score': 5}
+Estado: Opened.
+
+
+Acción: open nest, Recompensa: 0, Info: {'moves': 99, 'score': 5}
+Estado: Taken.
+
+
+Acción: take nest, Recompensa: 0, Info: {'moves': 100, 'score': 5}
+Estado: Behind House
+
+
+Acción: east, Recompensa: 0, Info: {'moves': 101, 'score': 5}
+Estado: Dropped.
+
+
+Acción: put down nest, Recompensa: 0, Info: {'moves': 102, 'score': 5}
+Estado: North of House
+There is a somewhat ruined egg here.
+
+
+Acción: north, Recompensa: 0, Info: {'moves': 103, 'score': 5}
+Estado: Forest Path
+
+
+Acción: north, Recompensa: 0, Info: {'moves': 104, 'score': 5}
+Estado: Forest
+On the ground is a pile of leaves.
+
+
+Acción: east, Recompensa: 0, Info: {'moves': 105, 'score': 5}
+Estado: Forest
+
+
+Acción: east, Recompensa: 0, Info: {'moves': 106, 'score': 5}
+Estado: Forest
+On the ground is a pile of leaves.
+
+
+Acción: north, Recompensa: 0, Info: {'moves': 107, 'score': 5}
+Estado: Taken.
+
+
+Acción: take leaves, Recompensa: 0, Info: {'moves': 108, 'score': 5}
+Estado: Forest
+
+
+Acción: go around trees, Recompensa: 0, Info: {'moves': 109, 'score': 5}
+Estado: South of House
+You are facing the south side of a white house. There is no door here, and all the windows are boarded.
+
+
+Acción: northwest, Recompensa: 0, Info: {'moves': 110, 'score': 5}
+Estado: West of House
+There is a small mailbox here.
+
+
+Acción: west, Recompensa: 0, Info: {'moves': 111, 'score': 5}
+Estado: North of House
+There is a somewhat ruined egg here.
+
+
+Acción: north, Recompensa: 0, Info: {'moves': 112, 'score': 5}
+Estado: West of House
+There is a small mailbox here.
+
+
+Acción: west, Recompensa: 0, Info: {'moves': 113, 'score': 5}
+Estado: Forest
+
+
+Acción: west, Recompensa: 0, Info: {'moves': 114, 'score': 5}
+Estado: Forest Path
+
+
+Acción: east, Recompensa: 0, Info: {'moves': 115, 'score': 5}
+Estado: North of House
+There is a somewhat ruined egg here.
+
+
+Acción: south, Recompensa: 0, Info: {'moves': 116, 'score': 5}
+Estado: Taken.
+
+
+Acción: take egg, Recompensa: 0, Info: {'moves': 117, 'score': 5}
+Estado: Dropped.
+
+
+Acción: put down egg, Recompensa: 0, Info: {'moves': 118, 'score': 5}
+Estado: Forest Path
+
+
+Acción: north, Recompensa: 0, Info: {'moves': 119, 'score': 5}
+Estado: Clearing
+
+
+Acción: go around forest, Recompensa: 0, Info: {'moves': 120, 'score': 5}
+Estado: Behind House
+There is a bird's nest here.
+
+
+Acción: west, Recompensa: 0, Info: {'moves': 121, 'score': 5}
+Estado: Clearing
+
+
+Acción: east, Recompensa: 0, Info: {'moves': 122, 'score': 5}
+Estado: Forest
+You hear in the distance the chirping of a song bird.
+
+
+Acción: south, Recompensa: 0, Info: {'moves': 123, 'score': 5}
+Estado: Forest
+
+
+Acción: west, Recompensa: 0, Info: {'moves': 124, 'score': 5}
+Estado: Forest Path
+
+
+Acción: east, Recompensa: 0, Info: {'moves': 125, 'score': 5}
+Estado: North of House
+There is a somewhat ruined egg here.
+
+
+Acción: south, Recompensa: 0, Info: {'moves': 126, 'score': 5}
+Estado: West of House
+There is a small mailbox here.
+
+
+Acción: west, Recompensa: 0, Info: {'moves': 127, 'score': 5}
+Estado: Opening the small mailbox reveals a leaflet.
+
+
+Acción: open mailbox, Recompensa: 0, Info: {'moves': 128, 'score': 5}
+Estado: Forest
+
+
+Acción: west, Recompensa: 0, Info: {'moves': 129, 'score': 5}
+Estado: Clearing
+
+
+Acción: north, Recompensa: 0, Info: {'moves': 130, 'score': 5}
+Estado: Forest Path
+
+
+Acción: south, Recompensa: 0, Info: {'moves': 131, 'score': 5}
+Estado: North of House
+There is a somewhat ruined egg here.
+
+
+Acción: south, Recompensa: 0, Info: {'moves': 132, 'score': 5}
+Estado: Closed.
+
+
+Acción: close egg, Recompensa: 0, Info: {'moves': 133, 'score': 5}
+Estado: Opened.
+
+
+Acción: open egg, Recompensa: 0, Info: {'moves': 134, 'score': 5}

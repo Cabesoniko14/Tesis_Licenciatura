@@ -1,0 +1,168 @@
+
+----------------- EPOCH 1 -----------------
+--- Inicio del Episodio 1 ---
+Estado Inicial: Copyright (c) 1981, 1982, 1983 Infocom, Inc. All rights reserved.
+ZORK is a registered trademark of Infocom, Inc.
+Revision 88 / Serial number 840726
+
+West of House
+You are standing in an open field west of a white house, with a boarded front door.
+There is a small mailbox here.
+
+
+Estado: North of House
+You are facing the north side of a white house. There is no door here, and all the windows are boarded up. To the north a narrow path winds through the trees.
+
+
+Acción: north, Recompensa: 0, Info: {'moves': 1, 'score': 0}
+Estado: Forest Path
+This is a path winding through a dimly lit forest. The path heads north-south here. One particularly large tree with some low branches stands at the edge of the path.
+
+
+Acción: north, Recompensa: 0, Info: {'moves': 2, 'score': 0}
+Estado: Forest
+This is a forest, with trees in all directions. To the east, there appears to be sunlight.
+
+
+Acción: west, Recompensa: 0, Info: {'moves': 3, 'score': 0}
+Estado: Forest
+This is a dimly lit forest, with large trees all around.
+
+
+Acción: go around trees, Recompensa: 0, Info: {'moves': 4, 'score': 0}
+Estado: Forest
+This is a dimly lit forest, with large trees all around.
+
+
+Acción: go around trees, Recompensa: 0, Info: {'moves': 5, 'score': 0}
+Estado: Forest Path
+
+
+Acción: go around trees, Recompensa: 0, Info: {'moves': 6, 'score': 0}
+Estado: Forest
+
+
+Acción: east, Recompensa: 0, Info: {'moves': 7, 'score': 0}
+Estado: Forest
+
+
+Acción: go around trees, Recompensa: 0, Info: {'moves': 8, 'score': 0}
+Estado: Forest Path
+You hear in the distance the chirping of a song bird.
+
+
+Acción: go around trees, Recompensa: 0, Info: {'moves': 9, 'score': 0}
+Estado: Clearing
+You are in a clearing, with a forest surrounding you on all sides. A path leads south.
+On the ground is a pile of leaves.
+
+
+Acción: north, Recompensa: 0, Info: {'moves': 10, 'score': 0}
+Estado: Forest
+You hear in the distance the chirping of a song bird.
+
+
+Acción: west, Recompensa: 0, Info: {'moves': 11, 'score': 0}
+Estado: Clearing
+On the ground is a pile of leaves.
+
+
+Acción: north, Recompensa: 0, Info: {'moves': 12, 'score': 0}
+Estado: In disturbing the pile of leaves, a grating is revealed.
+Taken.
+
+
+Acción: take leaves, Recompensa: 0, Info: {'moves': 13, 'score': 0}
+Estado: Forest
+
+
+Acción: west, Recompensa: 0, Info: {'moves': 14, 'score': 0}
+Estado: Dropped.
+You hear in the distance the chirping of a song bird.
+
+
+Acción: put down leaves, Recompensa: 0, Info: {'moves': 15, 'score': 0}
+Estado: Forest
+
+
+Acción: south, Recompensa: 0, Info: {'moves': 16, 'score': 0}
+Estado: Forest
+On the ground is a pile of leaves.
+
+
+Acción: west, Recompensa: 0, Info: {'moves': 17, 'score': 0}
+Estado: Forest
+
+
+Acción: go around trees, Recompensa: 0, Info: {'moves': 18, 'score': 0}
+Estado: Forest
+
+
+Acción: go around trees, Recompensa: 0, Info: {'moves': 19, 'score': 0}
+Estado: Clearing
+You are in a small clearing in a well marked forest path that extends to the east and west.
+
+
+Acción: north, Recompensa: 0, Info: {'moves': 20, 'score': 0}
+Estado: Forest
+On the ground is a pile of leaves.
+
+
+Acción: go around forest, Recompensa: 0, Info: {'moves': 21, 'score': 0}
+Estado: Forest Path
+You hear in the distance the chirping of a song bird.
+
+
+Acción: east, Recompensa: 0, Info: {'moves': 22, 'score': 0}
+Estado: Forest
+On the ground is a pile of leaves.
+
+
+Acción: west, Recompensa: 0, Info: {'moves': 23, 'score': 0}
+Estado: Taken.
+
+
+Acción: take leaves, Recompensa: 0, Info: {'moves': 24, 'score': 0}
+Estado: Clearing
+
+
+Acción: north, Recompensa: 0, Info: {'moves': 25, 'score': 0}
+Estado: Forest
+You hear in the distance the chirping of a song bird.
+
+
+Acción: west, Recompensa: 0, Info: {'moves': 26, 'score': 0}
+Estado: Clearing
+
+
+Acción: north, Recompensa: 0, Info: {'moves': 27, 'score': 0}
+Estado: Forest Path
+
+
+Acción: south, Recompensa: 0, Info: {'moves': 28, 'score': 0}
+Estado: Dropped.
+
+
+Acción: put down leaves, Recompensa: 0, Info: {'moves': 29, 'score': 0}
+Estado: North of House
+
+
+Acción: south, Recompensa: 0, Info: {'moves': 30, 'score': 0}
+Estado: West of House
+There is a small mailbox here.
+
+
+Acción: west, Recompensa: 0, Info: {'moves': 31, 'score': 0}
+Estado: Opening the small mailbox reveals a leaflet.
+
+
+Acción: open mailbox, Recompensa: 0, Info: {'moves': 32, 'score': 0}
+Estado: Closed.
+
+
+Acción: close mailbox, Recompensa: 0, Info: {'moves': 33, 'score': 0}
+Estado: South of House
+You are facing the south side of a white house. There is no door here, and all the windows are boarded.
+
+
+Acción: south, Recompensa: 0, Info: {'moves': 34, 'score': 0}

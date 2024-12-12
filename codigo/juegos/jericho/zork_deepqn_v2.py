@@ -10,6 +10,7 @@ from datetime import datetime
 import matplotlib.pyplot as plt
 import psutil
 import gc
+import csv
 
 # Configuración
 zork_path = "jericho-game-suite/zork1.z5"  # Ruta al archivo Zork
@@ -28,17 +29,20 @@ state_size = 512  # Tamaño del vector que representa el estado (ajustado al mod
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print(f"Usando dispositivo: {device}")
 
-# Crear carpetas de logs, resultados y modelos
+# Crear carpetas de logs, resultados, modelos y datos de salida
 log_dir = "logs"
 results_dir = "resultados"
 models_dir = "modelos"
+data_output_dir = "datos_output"
 os.makedirs(log_dir, exist_ok=True)
 os.makedirs(results_dir, exist_ok=True)
 os.makedirs(models_dir, exist_ok=True)
+os.makedirs(data_output_dir, exist_ok=True)
 
 # Generar un nombre único para el archivo de logs
 timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 log_file_path = os.path.join(log_dir, f"log_zork_deepqnv2_{timestamp}_epochs_{NUM_EPOCHS}.txt")
+data_file_path = os.path.join(data_output_dir, f"data_zork_{timestamp}.csv")
 
 # Crear el entorno
 env = FrotzEnv(zork_path)
@@ -116,100 +120,79 @@ def train_dqn():
     loss.backward()
     optimizer.step()
 
-# Función para registrar memoria usada
+# Crear archivo CSV
+with open(data_file_path, mode='w', newline='') as csv_file:
+    csv_writer = csv.writer(csv_file)
+    csv_writer.writerow(["Episodio", "Epoch", "Recompensa", "Epsilon"])
+
 def log_memory():
     print(f"Memoria RAM usada: {psutil.virtual_memory().used / 1e9:.2f} GB")
     print(f"Memoria GPU usada: {torch.cuda.memory_allocated() / 1e9:.2f} GB")
     gc.collect()
 
-# Entrenamiento
 
+# Entrenamiento
 epoch_rewards = []
 
 with open(log_file_path, "w") as log_file:
-
     for epoch in range(NUM_EPOCHS):
-
         print(f"\n----------------- EPOCH {epoch + 1} -----------------")
-
         log_file.write(f"\n----------------- EPOCH {epoch + 1} -----------------\n")
-
         epoch_total_reward = 0
 
         for episode in range(EPISODES_PER_EPOCH):
-
             episode_number = epoch * EPISODES_PER_EPOCH + episode + 1
-
             print(f"Procesando episodio {episode_number}...")
-
             log_file.write(f"--- Inicio del Episodio {episode_number} ---\n")
 
             state_text, _ = env.reset()
-
             state = encode_state(state_text)
-
             total_reward = 0
-
             done = False
 
             log_file.write(f"Estado Inicial: {state_text}\n")
 
             while not done:
-
                 valid_actions = get_valid_actions(env)
-
                 action = select_action(state, env, EPSILON)
-
                 if action is None:
-
                     log_file.write("No hay acciones válidas. Terminando episodio.\n")
-
                     break
 
                 next_state_text, reward, done, info = env.step(action)
+                log_file.write(f"Estado: {state_text}\n")
+                log_file.write(f"Acción: {action}, Recompensa: {reward}, Info: {info}\n")
 
                 next_state = encode_state(next_state_text)
-
                 memory.append((state, valid_actions.index(action), reward, next_state, done))
-
                 state = next_state
-
+                state_text = next_state_text
                 total_reward += reward
-
-                log_file.write(f"Estado: {next_state_text}\n")
-
-                log_file.write(f"Acción: {action}, Recompensa: {reward}, Info: {info}\n")
 
                 train_dqn()
 
             EPSILON = max(EPSILON_MIN, EPSILON * EPSILON_DECAY)
-
             epoch_total_reward += total_reward
 
             log_file.write(f"--- Fin del Episodio {episode_number} ---\n")
-
             log_file.write(f"Recompensa Total: {total_reward}\n")
-
             log_file.write("-" * 50 + "\n")
 
+            # Escribir al archivo CSV
+            with open(data_file_path, mode='a', newline='') as csv_file:
+                csv_writer = csv.writer(csv_file)
+                csv_writer.writerow([episode_number, epoch + 1, total_reward, EPSILON])
+
         # Almacenar recompensa promedio del epoch
-
         epoch_average_reward = epoch_total_reward / EPISODES_PER_EPOCH
-
         epoch_rewards.append(epoch_average_reward)
-
         print(f"Epoch {epoch + 1} completado. Recompensa Promedio: {epoch_average_reward}")
-
         log_file.write(f"--- Fin del EPOCH {epoch + 1} ---\n")
-
         log_file.write(f"Recompensa Promedio del EPOCH: {epoch_average_reward}\n")
-
         log_file.write("=" * 50 + "\n")
 
         # Actualizar red objetivo periódicamente
-
         if (epoch + 1) % 5 == 0:
-
             target_net.load_state_dict(policy_net.state_dict())
 
         # Liberar memoria
@@ -238,6 +221,6 @@ plt.savefig(os.path.join(results_dir, f"viz_zork_avg_rewards_{timestamp}_epochs_
 
 plt.close()
 
-print(f"Gráfica guardada en {results_dir}.") 
+print(f"Gráfica guardada en {results_dir}.")
 
 print(f"Gráfica guardada en {results_dir}.")

@@ -1,0 +1,340 @@
+
+----------------- EPOCH 1 -----------------
+--- Inicio del Episodio 1 ---
+Estado Inicial: Copyright (c) 1981, 1982, 1983 Infocom, Inc. All rights reserved.
+ZORK is a registered trademark of Infocom, Inc.
+Revision 88 / Serial number 840726
+
+West of House
+You are standing in an open field west of a white house, with a boarded front door.
+There is a small mailbox here.
+
+
+Estado: Forest
+This is a forest, with trees in all directions. To the east, there appears to be sunlight.
+
+
+Acción: west, Recompensa: 0, Info: {'moves': 1, 'score': 0}
+Estado: Forest
+This is a dimly lit forest, with large trees all around.
+
+
+Acción: go around trees, Recompensa: 0, Info: {'moves': 2, 'score': 0}
+Estado: Forest Path
+This is a path winding through a dimly lit forest. The path heads north-south here. One particularly large tree with some low branches stands at the edge of the path.
+
+
+Acción: west, Recompensa: 0, Info: {'moves': 3, 'score': 0}
+Estado: North of House
+You are facing the north side of a white house. There is no door here, and all the windows are boarded up. To the north a narrow path winds through the trees.
+
+
+Acción: south, Recompensa: 0, Info: {'moves': 4, 'score': 0}
+Estado: West of House
+There is a small mailbox here.
+
+
+Acción: west, Recompensa: 0, Info: {'moves': 5, 'score': 0}
+Estado: North of House
+
+
+Acción: north, Recompensa: 0, Info: {'moves': 6, 'score': 0}
+Estado: West of House
+There is a small mailbox here.
+
+
+Acción: west, Recompensa: 0, Info: {'moves': 7, 'score': 0}
+Estado: Opening the small mailbox reveals a leaflet.
+
+
+Acción: open mailbox, Recompensa: 0, Info: {'moves': 8, 'score': 0}
+Estado: South of House
+You are facing the south side of a white house. There is no door here, and all the windows are boarded.
+
+
+Acción: south, Recompensa: 0, Info: {'moves': 9, 'score': 0}
+Estado: Forest
+This is a dimly lit forest, with large trees all around.
+
+
+Acción: south, Recompensa: 0, Info: {'moves': 10, 'score': 0}
+Estado: Clearing
+You are in a small clearing in a well marked forest path that extends to the east and west.
+
+
+Acción: north, Recompensa: 0, Info: {'moves': 11, 'score': 0}
+Estado: Forest
+
+
+Acción: go around forest, Recompensa: 0, Info: {'moves': 12, 'score': 0}
+Estado: Clearing
+You are in a clearing, with a forest surrounding you on all sides. A path leads south.
+On the ground is a pile of leaves.
+
+
+Acción: north, Recompensa: 0, Info: {'moves': 13, 'score': 0}
+Estado: Forest Path
+
+
+Acción: south, Recompensa: 0, Info: {'moves': 14, 'score': 0}
+Estado: Clearing
+On the ground is a pile of leaves.
+
+
+Acción: north, Recompensa: 0, Info: {'moves': 15, 'score': 0}
+Estado: In disturbing the pile of leaves, a grating is revealed.
+Taken.
+
+
+Acción: take leaves, Recompensa: 0, Info: {'moves': 16, 'score': 0}
+Estado: Forest
+
+
+Acción: east, Recompensa: 0, Info: {'moves': 17, 'score': 0}
+Estado: Forest
+You hear in the distance the chirping of a song bird.
+
+
+Acción: go around trees, Recompensa: 0, Info: {'moves': 18, 'score': 0}
+Estado: South of House
+
+
+Acción: northwest, Recompensa: 0, Info: {'moves': 19, 'score': 0}
+Estado: Behind House
+You are behind the white house. A path leads into the forest to the east. In one corner of the house there is a small window which is slightly ajar.
+
+
+Acción: east, Recompensa: 0, Info: {'moves': 20, 'score': 0}
+Estado: With great effort, you open the window far enough to allow entry.
+
+
+Acción: open window, Recompensa: 0, Info: {'moves': 21, 'score': 0}
+Estado: Dropped.
+
+
+Acción: put down leaves, Recompensa: 0, Info: {'moves': 22, 'score': 0}
+Estado: North of House
+
+
+Acción: north, Recompensa: 0, Info: {'moves': 23, 'score': 0}
+Estado: West of House
+There is a small mailbox here.
+The small mailbox contains:
+  A leaflet
+
+
+Acción: west, Recompensa: 0, Info: {'moves': 24, 'score': 0}
+Estado: South of House
+
+
+Acción: south, Recompensa: 0, Info: {'moves': 25, 'score': 0}
+Estado: West of House
+There is a small mailbox here.
+The small mailbox contains:
+  A leaflet
+
+
+Acción: west, Recompensa: 0, Info: {'moves': 26, 'score': 0}
+Estado: Taken.
+
+
+Acción: take leaflet, Recompensa: 0, Info: {'moves': 27, 'score': 0}
+Estado: Forest
+You hear in the distance the chirping of a song bird.
+
+
+Acción: west, Recompensa: 0, Info: {'moves': 28, 'score': 0}
+Estado: Dropped.
+
+
+Acción: put down leaflet, Recompensa: 0, Info: {'moves': 29, 'score': 0}
+Estado: Forest
+You hear in the distance the chirping of a song bird.
+
+
+Acción: south, Recompensa: 0, Info: {'moves': 30, 'score': 0}
+Estado: Clearing
+
+
+Acción: north, Recompensa: 0, Info: {'moves': 31, 'score': 0}
+Estado: Behind House
+On the ground is a pile of leaves.
+
+
+Acción: west, Recompensa: 0, Info: {'moves': 32, 'score': 0}
+Estado: South of House
+
+
+Acción: south, Recompensa: 0, Info: {'moves': 33, 'score': 0}
+Estado: Behind House
+On the ground is a pile of leaves.
+
+
+Acción: east, Recompensa: 0, Info: {'moves': 34, 'score': 0}
+Estado: Kitchen
+You are in the kitchen of the white house. A table seems to have been used recently for the preparation of food. A passage leads to the west and a dark staircase can be seen leading upward. A dark chimney leads down and to the east is a small window which is open.
+On the table is an elongated brown sack, smelling of hot peppers.
+A bottle is sitting on the table.
+The glass bottle contains:
+  A quantity of water
+
+
+Acción: west, Recompensa: 10, Info: {'moves': 35, 'score': 10}
+Estado: The window closes (more easily than it opened).
+
+
+Acción: close window, Recompensa: 0, Info: {'moves': 36, 'score': 10}
+Estado: Taken.
+
+
+Acción: take sack, Recompensa: 0, Info: {'moves': 37, 'score': 10}
+Estado: Opening the brown sack reveals a lunch, and a clove of garlic.
+
+
+Acción: open sack, Recompensa: 0, Info: {'moves': 38, 'score': 10}
+Estado: This was not a very safe place to try jumping.
+You should have looked before you leaped.
+ 
+   ****  You have died  **** 
+
+Now, let's take a look here... Well, you probably deserve another chance. I can't quite fix you up completely, but you can't have everything.
+
+Forest
+A small leaflet is on the ground.
+
+
+Acción: jump, Recompensa: -10, Info: {'moves': 39, 'score': 0}
+--- Fin del Episodio 1 ---
+Recompensa Total: 0
+--------------------------------------------------
+--- Inicio del Episodio 2 ---
+Estado Inicial: Copyright (c) 1981, 1982, 1983 Infocom, Inc. All rights reserved.
+ZORK is a registered trademark of Infocom, Inc.
+Revision 88 / Serial number 840726
+
+West of House
+You are standing in an open field west of a white house, with a boarded front door.
+There is a small mailbox here.
+
+
+Estado: Forest
+This is a forest, with trees in all directions. To the east, there appears to be sunlight.
+
+
+Acción: west, Recompensa: 0, Info: {'moves': 1, 'score': 0}
+Estado: Forest
+This is a dimly lit forest, with large trees all around.
+
+
+Acción: south, Recompensa: 0, Info: {'moves': 2, 'score': 0}
+Estado: Forest
+
+
+Acción: west, Recompensa: 0, Info: {'moves': 3, 'score': 0}
+Estado: Clearing
+You are in a clearing, with a forest surrounding you on all sides. A path leads south.
+On the ground is a pile of leaves.
+
+
+Acción: north, Recompensa: 0, Info: {'moves': 4, 'score': 0}
+Estado: Done.
+In disturbing the pile of leaves, a grating is revealed.
+
+
+Acción: pull leaves, Recompensa: 0, Info: {'moves': 5, 'score': 0}
+Estado: Forest
+This is a dimly lit forest, with large trees all around.
+
+
+Acción: east, Recompensa: 0, Info: {'moves': 6, 'score': 0}
+Estado: Forest
+
+
+Acción: go around trees, Recompensa: 0, Info: {'moves': 7, 'score': 0}
+Estado: Clearing
+You are in a small clearing in a well marked forest path that extends to the east and west.
+
+
+Acción: north, Recompensa: 0, Info: {'moves': 8, 'score': 0}
+Estado: Behind House
+You are behind the white house. A path leads into the forest to the east. In one corner of the house there is a small window which is slightly ajar.
+
+
+Acción: west, Recompensa: 0, Info: {'moves': 9, 'score': 0}
+Estado: South of House
+You are facing the south side of a white house. There is no door here, and all the windows are boarded.
+
+
+Acción: south, Recompensa: 0, Info: {'moves': 10, 'score': 0}
+Estado: Forest
+
+
+Acción: south, Recompensa: 0, Info: {'moves': 11, 'score': 0}
+Estado: Forest
+
+
+Acción: west, Recompensa: 0, Info: {'moves': 12, 'score': 0}
+Estado: Forest
+You hear in the distance the chirping of a song bird.
+
+
+Acción: south, Recompensa: 0, Info: {'moves': 13, 'score': 0}
+Estado: Forest Path
+This is a path winding through a dimly lit forest. The path heads north-south here. One particularly large tree with some low branches stands at the edge of the path.
+You hear in the distance the chirping of a song bird.
+
+
+Acción: go around trees, Recompensa: 0, Info: {'moves': 14, 'score': 0}
+Estado: Up a Tree
+You are about 10 feet above the ground nestled among some large branches. The nearest branch above you is above your reach.
+Beside you on the branch is a small bird's nest.
+In the bird's nest is a large egg encrusted with precious jewels, apparently scavenged by a childless songbird. The egg is covered with fine gold inlay, and ornamented in lapis lazuli and mother-of-pearl. Unlike most eggs, this one is hinged and closed with a delicate looking clasp. The egg appears extremely fragile.
+
+
+Acción: up, Recompensa: 0, Info: {'moves': 15, 'score': 0}
+Estado: Forest Path
+You hear in the distance the chirping of a song bird.
+
+
+Acción: down, Recompensa: 0, Info: {'moves': 16, 'score': 0}
+Estado: North of House
+You are facing the north side of a white house. There is no door here, and all the windows are boarded up. To the north a narrow path winds through the trees.
+
+
+Acción: south, Recompensa: 0, Info: {'moves': 17, 'score': 0}
+Estado: Behind House
+
+
+Acción: east, Recompensa: 0, Info: {'moves': 18, 'score': 0}
+Estado: Clearing
+
+
+Acción: east, Recompensa: 0, Info: {'moves': 19, 'score': 0}
+Estado: Canyon View
+You are at the top of the Great Canyon on its west wall. From here there is a marvelous view of the canyon and parts of the Frigid River upstream. Across the canyon, the walls of the White Cliffs join the mighty ramparts of the Flathead Mountains to the east. Following the Canyon upstream to the north, Aragain Falls may be seen, complete with rainbow. The mighty Frigid River flows out from a great dark cavern. To the west and south can be seen an immense forest, stretching for miles around. A path leads northwest. It is possible to climb down into the canyon from here.
+
+
+Acción: east, Recompensa: 0, Info: {'moves': 20, 'score': 0}
+Estado: Rocky Ledge
+You are on a ledge about halfway up the wall of the river canyon. You can see from here that the main flow from Aragain Falls twists along a passage which it is impossible for you to enter. Below you is the canyon bottom. Above you is more cliff, which appears climbable.
+
+
+Acción: east, Recompensa: 0, Info: {'moves': 21, 'score': 0}
+Estado: Canyon Bottom
+You are beneath the walls of the river canyon which may be climbable here. The lesser part of the runoff of Aragain Falls flows by below. To the north is a narrow path.
+
+
+Acción: down, Recompensa: 0, Info: {'moves': 22, 'score': 0}
+Estado: Rocky Ledge
+
+
+Acción: up, Recompensa: 0, Info: {'moves': 23, 'score': 0}
+Estado: Canyon Bottom
+
+
+Acción: down, Recompensa: 0, Info: {'moves': 24, 'score': 0}
+Estado: End of Rainbow
+You are on a small, rocky beach on the continuation of the Frigid River past the Falls. The beach is narrow due to the presence of the White Cliffs. The river canyon opens here and sunlight shines in from above. A rainbow crosses over the falls to the east and a narrow path continues to the southwest.
+
+
+Acción: north, Recompensa: 0, Info: {'moves': 25, 'score': 0}
