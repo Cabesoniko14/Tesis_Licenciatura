@@ -184,6 +184,8 @@ with open(log_file_path, "w") as log_file:
                 
                 log_file.write(f"Estado: {state_text}\n")
                 log_file.write(f"Acción: {action}, Recompensa asignada por LLM: {reward}, Info: {info}\n")
+                print(f"Estado: {state_text}\n")
+                print(f"Acción: {action}, Recompensa asignada por LLM: {reward}, Info: {info}\n")
 
                 next_state = encode_state(next_state_text)
                 memory.append((state, valid_actions.index(action), reward, next_state, done))
