@@ -15,7 +15,7 @@ from groq import Groq
 
 # Configuración
 zork_path = "jericho-game-suite/zork1.z5"  # Ruta al archivo Zork
-NUM_EPOCHS = 50  # Número de epochs
+NUM_EPOCHS = 20  # Número de epochs
 EPISODES_PER_EPOCH = 20  # Número de episodios por epoch
 GAMMA = 0.99  # Factor de descuento
 EPSILON = 1.0  # Probabilidad inicial de tomar una acción aleatoria
