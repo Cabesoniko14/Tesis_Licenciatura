@@ -1,0 +1,252 @@
+import os
+import torch
+import torch.nn as nn
+import torch.optim as optim
+import random
+import numpy as np
+from collections import deque
+from datetime import datetime
+import matplotlib.pyplot as plt
+import gc
+import csv
+
+# Environment setup
+class ShoppingEnv:
+    def __init__(self):
+        self.aisles = ["Dairy", "Bakery", "Produce"]
+        self.items = {"Dairy": "milk", "Bakery": "bread", "Produce": "apples"}
+        self.shopping_list = list(self.items.values())
+        self.current_location = "Entrance"
+        self.collected_items = []
+        self.step_count = 0
+        self.max_steps = 10  # Limit the number of steps per episode
+
+    def reset(self):
+        self.current_location = "Entrance"
+        self.collected_items = []
+        self.step_count = 0
+        return self.get_state()
+
+    def get_state(self):
+        return {
+            "location": self.current_location,
+            "collected_items": self.collected_items,
+            "remaining_items": [item for item in self.shopping_list if item not in self.collected_items]
+        }
+
+    def step(self, action):
+        self.step_count += 1
+        reward = 0
+        done = False
+        info = ""
+
+        if action.startswith("go to"):
+            location = action.split("go to ")[1]
+            if location in self.aisles:
+                self.current_location = location
+                info = f"Moved to {location}"
+            else:
+                reward = -1  # Penalty for invalid moves
+                info = "Invalid location"
+
+        elif action.startswith("take"):
+            item = action.split("take ")[1]
+            if self.current_location in self.items and self.items[self.current_location] == item:
+                if item not in self.collected_items:
+                    self.collected_items.append(item)
+                    reward = 10  # Reward for collecting an item
+                    info = f"Collected {item}"
+                else:
+                    reward = -1  # Penalty for taking an already collected item
+                    info = f"Already collected {item}"
+            else:
+                reward = -1  # Penalty for taking an item not in the current location
+                info = f"{item} not found in {self.current_location}"
+
+        elif action == "checkout":
+            if set(self.collected_items) == set(self.shopping_list):
+                reward = 50  # Big reward for completing the shopping list
+                done = True
+                info = "Checked out successfully"
+            else:
+                reward = -10  # Penalty for checking out early
+                info = "Shopping list not complete"
+
+        else:
+            reward = -1  # Penalty for invalid actions
+            info = "Invalid action"
+
+        if self.step_count >= self.max_steps:
+            done = True
+            info = "Max steps reached"
+
+        return self.get_state(), reward, done, info
+
+    def get_valid_actions(self):
+        actions = [f"go to {aisle}" for aisle in self.aisles]
+        if self.current_location in self.items:
+            actions.append(f"take {self.items[self.current_location]}")
+        actions.append("checkout")
+        return actions
+
+# DQN setup
+class DQNetwork(nn.Module):
+    def __init__(self, input_dim, output_dim):
+        super(DQNetwork, self).__init__()
+        self.fc1 = nn.Linear(input_dim, 256)
+        self.fc2 = nn.Linear(256, 256)
+        self.fc3 = nn.Linear(256, output_dim)
+
+    def forward(self, x):
+        x = torch.relu(self.fc1(x))
+        x = torch.relu(self.fc2(x))
+        return self.fc3(x)
+
+# Helper functions
+def encode_state(state):
+    state_vector = np.zeros(state_size)
+    hash_value = hash(str(state)) % state_size
+    state_vector[hash_value] = 1
+    return state_vector
+
+def select_action(state, valid_actions, epsilon):
+    if random.random() < epsilon:
+        return random.choice(valid_actions)
+
+    state_tensor = torch.FloatTensor(state).unsqueeze(0).to(device)
+    q_values = policy_net(state_tensor)
+
+    action_q_values = {action: q_values[0, idx].item() for idx, action in enumerate(valid_actions)}
+    return max(action_q_values, key=action_q_values.get)
+
+def train_dqn():
+    if len(memory) < BATCH_SIZE:
+        return
+    batch = random.sample(memory, BATCH_SIZE)
+    states, actions, rewards, next_states, dones = zip(*batch)
+
+    states = torch.FloatTensor(np.array(states)).to(device)
+    next_states = torch.FloatTensor(np.array(next_states)).to(device)
+    rewards = torch.FloatTensor(rewards).to(device)
+    dones = torch.FloatTensor(dones).to(device)
+
+    q_values = policy_net(states)
+    next_q_values = target_net(next_states).max(1)[0]
+
+    expected_q_values = torch.FloatTensor([reward + (GAMMA * next_q_value * (1 - done))
+                                           for reward, next_q_value, done in zip(rewards, next_q_values, dones)])
+
+    optimizer.zero_grad()
+    loss = criterion(q_values, expected_q_values.unsqueeze(1))
+    loss.backward()
+    optimizer.step()
+
+# Configuration
+NUM_EPOCHS = 50
+EPISODES_PER_EPOCH = 20
+GAMMA = 0.99
+EPSILON = 1.0
+EPSILON_DECAY = 0.995
+EPSILON_MIN = 0.1
+LEARNING_RATE = 1e-3
+BATCH_SIZE = 64
+MEMORY_SIZE = 10000
+state_size = 512
+
+# Directories
+log_dir = "logs"
+results_dir = "resultados"
+models_dir = "modelos"
+data_output_dir = "datos_output"
+os.makedirs(log_dir, exist_ok=True)
+os.makedirs(results_dir, exist_ok=True)
+os.makedirs(models_dir, exist_ok=True)
+os.makedirs(data_output_dir, exist_ok=True)
+
+# Logging
+timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+log_file_path = os.path.join(log_dir, f"log_shopping_{timestamp}.txt")
+data_file_path = os.path.join(data_output_dir, f"data_shopping_{timestamp}.csv")
+
+# Create CSV file
+with open(data_file_path, mode='w', newline='') as csv_file:
+    csv_writer = csv.writer(csv_file)
+    csv_writer.writerow(["Episodio", "Epoch", "Recompensa", "Epsilon"])
+
+# Environment and device
+env = ShoppingEnv()
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+# DQN setup
+policy_net = DQNetwork(state_size, state_size).to(device)
+target_net = DQNetwork(state_size, state_size).to(device)
+target_net.load_state_dict(policy_net.state_dict())
+target_net.eval()
+optimizer = optim.Adam(policy_net.parameters(), lr=LEARNING_RATE)
+criterion = nn.MSELoss()
+memory = deque(maxlen=MEMORY_SIZE)
+
+# Training loop
+epoch_rewards = []
+with open(log_file_path, "w") as log_file:
+    for epoch in range(NUM_EPOCHS):
+        epoch_total_reward = 0
+        log_file.write(f"--- Inicio del Epoch {epoch + 1} ---\n")
+        print(f"Epoch {epoch + 1}...")
+
+        for episode in range(EPISODES_PER_EPOCH):
+            state = encode_state(env.reset())
+            done = False
+            total_reward = 0
+
+            log_file.write(f"Episodio {episode + 1}:\n")
+            print(f"  Episodio {episode + 1}...")
+
+            while not done:
+                valid_actions = env.get_valid_actions()
+                action = select_action(state, valid_actions, EPSILON)
+
+                next_state, reward, done, info = env.step(action)
+                next_state_encoded = encode_state(next_state)
+
+                memory.append((state, valid_actions.index(action), reward, next_state_encoded, done))
+                state = next_state_encoded
+                total_reward += reward
+
+                train_dqn()
+
+            epoch_total_reward += total_reward
+
+            # Write episode data to CSV
+            with open(data_file_path, mode='a', newline='') as csv_file:
+                csv_writer = csv.writer(csv_file)
+                csv_writer.writerow([episode + 1 + epoch * EPISODES_PER_EPOCH, epoch + 1, total_reward, EPSILON])
+
+            log_file.write(f"Recompensa del Episodio: {total_reward}\n")
+            log_file.write("-------------------------------\n")
+
+        EPSILON = max(EPSILON_MIN, EPSILON * EPSILON_DECAY)
+        epoch_average_reward = epoch_total_reward / EPISODES_PER_EPOCH
+        epoch_rewards.append(epoch_average_reward)
+
+        log_file.write(f"Recompensa Promedio del Epoch {epoch + 1}: {epoch_average_reward}\n")
+        log_file.write("===================================\n")
+
+        # Update target network
+        if (epoch + 1) % 5 == 0:
+            target_net.load_state_dict(policy_net.state_dict())
+
+# Save model
+torch.save(policy_net.state_dict(), os.path.join(models_dir, f"model_shopping_{timestamp}.pth"))
+
+# Plot average rewards
+plt.figure(figsize=(10, 6))
+plt.title(f"Promedio de Recompensas por Epoch")
+plt.xlabel("Epoch")
+plt.ylabel("Recompensa Promedio")
+plt.plot(range(1, NUM_EPOCHS + 1), epoch_rewards, marker="o", label="Promedio por Epoch")
+plt.legend()
+plt.savefig(os.path.join(results_dir, f"shopping_rewards_{timestamp}.png"))
+plt.close()
+
+print("Entrenamiento completado. Modelo y resultados guardados.")
