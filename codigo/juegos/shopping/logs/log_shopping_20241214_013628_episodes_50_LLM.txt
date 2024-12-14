@@ -1,0 +1,84 @@
+--- Inicio del Epoch 1 ---
+Episodio 1:Lista de compras: ['cake', 'butter']
+Instrucción: {'location': 'Bakery', 'collected_items': [], 'remaining_items': ['cake', 'butter']}, Acción tomada: go to Bakery, Respuesta: Moved to Bakery, Recompensa: 0
+Instrucción: {'location': 'Bakery', 'collected_items': ['bagel'], 'remaining_items': ['cake', 'butter']}, Acción tomada: take bagel, Respuesta: Collected bagel, Recompensa: 0
+Instrucción: {'location': 'Bakery', 'collected_items': ['bagel', 'cake'], 'remaining_items': ['butter']}, Acción tomada: take cake, Respuesta: Collected cake, Recompensa: 0
+Instrucción: {'location': 'Bakery', 'collected_items': ['bagel', 'cake'], 'remaining_items': ['butter']}, Acción tomada: take cake, Respuesta: Already collected cake, Recompensa: 0
+Instrucción: {'location': 'Dairy', 'collected_items': ['bagel', 'cake'], 'remaining_items': ['butter']}, Acción tomada: go to Dairy, Respuesta: Moved to Dairy, Recompensa: 0
+Instrucción: {'location': 'Dairy', 'collected_items': ['bagel', 'cake', 'milk'], 'remaining_items': ['butter']}, Acción tomada: take milk, Respuesta: Collected milk, Recompensa: 0
+Instrucción: {'location': 'Dairy', 'collected_items': ['bagel', 'cake', 'milk'], 'remaining_items': ['butter']}, Acción tomada: checkout, Respuesta: Shopping list not complete, Recompensa: 0
+Instrucción: {'location': 'Dairy', 'collected_items': ['bagel', 'cake', 'milk'], 'remaining_items': ['butter']}, Acción tomada: go to Dairy, Respuesta: Moved to Dairy, Recompensa: 0
+Instrucción: {'location': 'Dairy', 'collected_items': ['bagel', 'cake', 'milk', 'yogurt'], 'remaining_items': ['butter']}, Acción tomada: take yogurt, Respuesta: Collected yogurt, Recompensa: 0
+Instrucción: {'location': 'Produce', 'collected_items': ['bagel', 'cake', 'milk', 'yogurt'], 'remaining_items': ['butter']}, Acción tomada: go to Produce, Respuesta: Moved to Produce, Recompensa: 0
+Instrucción: {'location': 'Dairy', 'collected_items': ['bagel', 'cake', 'milk', 'yogurt'], 'remaining_items': ['butter']}, Acción tomada: go to Dairy, Respuesta: Moved to Dairy, Recompensa: 0
+Instrucción: {'location': 'Dairy', 'collected_items': ['bagel', 'cake', 'milk', 'yogurt'], 'remaining_items': ['butter']}, Acción tomada: take yogurt, Respuesta: Already collected yogurt, Recompensa: 0
+Instrucción: {'location': 'Produce', 'collected_items': ['bagel', 'cake', 'milk', 'yogurt'], 'remaining_items': ['butter']}, Acción tomada: go to Produce, Respuesta: Moved to Produce, Recompensa: 0
+Instrucción: {'location': 'Produce', 'collected_items': ['bagel', 'cake', 'milk', 'yogurt'], 'remaining_items': ['butter']}, Acción tomada: checkout, Respuesta: Shopping list not complete, Recompensa: 0
+Instrucción: {'location': 'Produce', 'collected_items': ['bagel', 'cake', 'milk', 'yogurt'], 'remaining_items': ['butter']}, Acción tomada: checkout, Respuesta: Max steps reached, Recompensa: 0
+Recompensa del Episodio: 0
+-------------------------------
+Episodio 2:Lista de compras: ['lettuce', 'butter', 'cake']
+Instrucción: {'location': 'Produce', 'collected_items': [], 'remaining_items': ['lettuce', 'butter', 'cake']}, Acción tomada: go to Produce, Respuesta: Moved to Produce, Recompensa: 0
+Instrucción: {'location': 'Bakery', 'collected_items': [], 'remaining_items': ['lettuce', 'butter', 'cake']}, Acción tomada: go to Bakery, Respuesta: Moved to Bakery, Recompensa: 0
+Instrucción: {'location': 'Bakery', 'collected_items': ['croissant'], 'remaining_items': ['lettuce', 'butter', 'cake']}, Acción tomada: take croissant, Respuesta: Collected croissant, Recompensa: 0
+Instrucción: {'location': 'Bakery', 'collected_items': ['croissant'], 'remaining_items': ['lettuce', 'butter', 'cake']}, Acción tomada: go to Bakery, Respuesta: Moved to Bakery, Recompensa: 0
+Instrucción: {'location': 'Bakery', 'collected_items': ['croissant', 'cake'], 'remaining_items': ['lettuce', 'butter']}, Acción tomada: take cake, Respuesta: Collected cake, Recompensa: 0
+Instrucción: {'location': 'Dairy', 'collected_items': ['croissant', 'cake'], 'remaining_items': ['lettuce', 'butter']}, Acción tomada: go to Dairy, Respuesta: Moved to Dairy, Recompensa: 0
+Instrucción: {'location': 'Bakery', 'collected_items': ['croissant', 'cake'], 'remaining_items': ['lettuce', 'butter']}, Acción tomada: go to Bakery, Respuesta: Moved to Bakery, Recompensa: 0
+Instrucción: {'location': 'Bakery', 'collected_items': ['croissant', 'cake'], 'remaining_items': ['lettuce', 'butter']}, Acción tomada: checkout, Respuesta: Shopping list not complete, Recompensa: 0
+Instrucción: {'location': 'Produce', 'collected_items': ['croissant', 'cake'], 'remaining_items': ['lettuce', 'butter']}, Acción tomada: go to Produce, Respuesta: Moved to Produce, Recompensa: 0
+Instrucción: {'location': 'Bakery', 'collected_items': ['croissant', 'cake'], 'remaining_items': ['lettuce', 'butter']}, Acción tomada: go to Bakery, Respuesta: Moved to Bakery, Recompensa: 0
+Instrucción: {'location': 'Bakery', 'collected_items': ['croissant', 'cake', 'bagel'], 'remaining_items': ['lettuce', 'butter']}, Acción tomada: take bagel, Respuesta: Collected bagel, Recompensa: 0
+Instrucción: {'location': 'Bakery', 'collected_items': ['croissant', 'cake', 'bagel'], 'remaining_items': ['lettuce', 'butter']}, Acción tomada: take croissant, Respuesta: Already collected croissant, Recompensa: 0
+Instrucción: {'location': 'Bakery', 'collected_items': ['croissant', 'cake', 'bagel'], 'remaining_items': ['lettuce', 'butter']}, Acción tomada: take bagel, Respuesta: Already collected bagel, Recompensa: 0
+Instrucción: {'location': 'Bakery', 'collected_items': ['croissant', 'cake', 'bagel'], 'remaining_items': ['lettuce', 'butter']}, Acción tomada: checkout, Respuesta: Shopping list not complete, Recompensa: 0
+Instrucción: {'location': 'Bakery', 'collected_items': ['croissant', 'cake', 'bagel'], 'remaining_items': ['lettuce', 'butter']}, Acción tomada: take cake, Respuesta: Max steps reached, Recompensa: 0
+Recompensa del Episodio: 0
+-------------------------------
+Recompensa Promedio del Epoch 1: 0.0
+===================================
+--- Inicio del Epoch 2 ---
+Episodio 1:Lista de compras: ['lettuce', 'bananas', 'butter']
+Instrucción: {'location': 'Bakery', 'collected_items': [], 'remaining_items': ['lettuce', 'bananas', 'butter']}, Acción tomada: go to Bakery, Respuesta: Moved to Bakery, Recompensa: 0
+Instrucción: {'location': 'Bakery', 'collected_items': ['cake'], 'remaining_items': ['lettuce', 'bananas', 'butter']}, Acción tomada: take cake, Respuesta: Collected cake, Recompensa: 0
+Instrucción: {'location': 'Bakery', 'collected_items': ['cake', 'croissant'], 'remaining_items': ['lettuce', 'bananas', 'butter']}, Acción tomada: take croissant, Respuesta: Collected croissant, Recompensa: 0
+Instrucción: {'location': 'Bakery', 'collected_items': ['cake', 'croissant'], 'remaining_items': ['lettuce', 'bananas', 'butter']}, Acción tomada: checkout, Respuesta: Shopping list not complete, Recompensa: 0
+Instrucción: {'location': 'Bakery', 'collected_items': ['cake', 'croissant', 'bagel'], 'remaining_items': ['lettuce', 'bananas', 'butter']}, Acción tomada: take bagel, Respuesta: Collected bagel, Recompensa: 0
+Instrucción: {'location': 'Bakery', 'collected_items': ['cake', 'croissant', 'bagel'], 'remaining_items': ['lettuce', 'bananas', 'butter']}, Acción tomada: take cake, Respuesta: Already collected cake, Recompensa: 0
+Instrucción: {'location': 'Bakery', 'collected_items': ['cake', 'croissant', 'bagel', 'bread'], 'remaining_items': ['lettuce', 'bananas', 'butter']}, Acción tomada: take bread, Respuesta: Collected bread, Recompensa: 0
+Instrucción: {'location': 'Bakery', 'collected_items': ['cake', 'croissant', 'bagel', 'bread'], 'remaining_items': ['lettuce', 'bananas', 'butter']}, Acción tomada: take bagel, Respuesta: Already collected bagel, Recompensa: 0
+Instrucción: {'location': 'Bakery', 'collected_items': ['cake', 'croissant', 'bagel', 'bread'], 'remaining_items': ['lettuce', 'bananas', 'butter']}, Acción tomada: take bagel, Respuesta: Already collected bagel, Recompensa: 0
+Instrucción: {'location': 'Bakery', 'collected_items': ['cake', 'croissant', 'bagel', 'bread'], 'remaining_items': ['lettuce', 'bananas', 'butter']}, Acción tomada: go to Bakery, Respuesta: Moved to Bakery, Recompensa: 0
+Instrucción: {'location': 'Bakery', 'collected_items': ['cake', 'croissant', 'bagel', 'bread'], 'remaining_items': ['lettuce', 'bananas', 'butter']}, Acción tomada: take bagel, Respuesta: Already collected bagel, Recompensa: 0
+Instrucción: {'location': 'Bakery', 'collected_items': ['cake', 'croissant', 'bagel', 'bread'], 'remaining_items': ['lettuce', 'bananas', 'butter']}, Acción tomada: take cake, Respuesta: Already collected cake, Recompensa: 0
+Instrucción: {'location': 'Bakery', 'collected_items': ['cake', 'croissant', 'bagel', 'bread'], 'remaining_items': ['lettuce', 'bananas', 'butter']}, Acción tomada: take croissant, Respuesta: Already collected croissant, Recompensa: 0
+Instrucción: {'location': 'Bakery', 'collected_items': ['cake', 'croissant', 'bagel', 'bread'], 'remaining_items': ['lettuce', 'bananas', 'butter']}, Acción tomada: take bread, Respuesta: Already collected bread, Recompensa: 0
+Instrucción: {'location': 'Bakery', 'collected_items': ['cake', 'croissant', 'bagel', 'bread'], 'remaining_items': ['lettuce', 'bananas', 'butter']}, Acción tomada: take bread, Respuesta: Max steps reached, Recompensa: 0
+Recompensa del Episodio: 0
+-------------------------------
+Episodio 2:Lista de compras: ['bread', 'apples']
+Instrucción: {'location': 'Bakery', 'collected_items': [], 'remaining_items': ['bread', 'apples']}, Acción tomada: go to Bakery, Respuesta: Moved to Bakery, Recompensa: 0
+Instrucción: {'location': 'Bakery', 'collected_items': [], 'remaining_items': ['bread', 'apples']}, Acción tomada: checkout, Respuesta: Shopping list not complete, Recompensa: 0
+Instrucción: {'location': 'Produce', 'collected_items': [], 'remaining_items': ['bread', 'apples']}, Acción tomada: go to Produce, Respuesta: Moved to Produce, Recompensa: 0
+Instrucción: {'location': 'Produce', 'collected_items': [], 'remaining_items': ['bread', 'apples']}, Acción tomada: go to Produce, Respuesta: Moved to Produce, Recompensa: 0
+Instrucción: {'location': 'Bakery', 'collected_items': [], 'remaining_items': ['bread', 'apples']}, Acción tomada: go to Bakery, Respuesta: Moved to Bakery, Recompensa: 0
+Instrucción: {'location': 'Bakery', 'collected_items': ['bread'], 'remaining_items': ['apples']}, Acción tomada: take bread, Respuesta: Collected bread, Recompensa: 0
+Instrucción: {'location': 'Bakery', 'collected_items': ['bread'], 'remaining_items': ['apples']}, Acción tomada: go to Bakery, Respuesta: Moved to Bakery, Recompensa: 0
+Instrucción: {'location': 'Dairy', 'collected_items': ['bread'], 'remaining_items': ['apples']}, Acción tomada: go to Dairy, Respuesta: Moved to Dairy, Recompensa: 0
+Instrucción: {'location': 'Produce', 'collected_items': ['bread'], 'remaining_items': ['apples']}, Acción tomada: go to Produce, Respuesta: Moved to Produce, Recompensa: 0
+Instrucción: {'location': 'Bakery', 'collected_items': ['bread'], 'remaining_items': ['apples']}, Acción tomada: go to Bakery, Respuesta: Moved to Bakery, Recompensa: 0
+Instrucción: {'location': 'Bakery', 'collected_items': ['bread'], 'remaining_items': ['apples']}, Acción tomada: checkout, Respuesta: Shopping list not complete, Recompensa: 0
+Instrucción: {'location': 'Produce', 'collected_items': ['bread'], 'remaining_items': ['apples']}, Acción tomada: go to Produce, Respuesta: Moved to Produce, Recompensa: 0
+Instrucción: {'location': 'Produce', 'collected_items': ['bread'], 'remaining_items': ['apples']}, Acción tomada: checkout, Respuesta: Shopping list not complete, Recompensa: 0
+Instrucción: {'location': 'Produce', 'collected_items': ['bread', 'bananas'], 'remaining_items': ['apples']}, Acción tomada: take bananas, Respuesta: Collected bananas, Recompensa: 0
+Instrucción: {'location': 'Produce', 'collected_items': ['bread', 'bananas', 'lettuce'], 'remaining_items': ['apples']}, Acción tomada: take lettuce, Respuesta: Max steps reached, Recompensa: 0
+Recompensa del Episodio: 0
+-------------------------------
+Recompensa Promedio del Epoch 2: 0.0
+===================================
+--- Inicio del Epoch 3 ---
+Episodio 1:Lista de compras: ['cheese', 'milk']
+Instrucción: {'location': 'Entrance', 'collected_items': [], 'remaining_items': ['cheese', 'milk']}, Acción tomada: checkout, Respuesta: Shopping list not complete, Recompensa: 0
+Instrucción: {'location': 'Dairy', 'collected_items': [], 'remaining_items': ['cheese', 'milk']}, Acción tomada: go to Dairy, Respuesta: Moved to Dairy, Recompensa: 0
+Instrucción: {'location': 'Dairy', 'collected_items': [], 'remaining_items': ['cheese', 'milk']}, Acción tomada: checkout, Respuesta: Shopping list not complete, Recompensa: 0
+Instrucción: {'location': 'Produce', 'collected_items': [], 'remaining_items': ['cheese', 'milk']}, Acción tomada: go to Produce, Respuesta: Moved to Produce, Recompensa: 0

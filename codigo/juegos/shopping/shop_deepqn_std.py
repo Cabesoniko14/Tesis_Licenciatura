@@ -13,18 +13,25 @@ import csv
 # Environment setup
 class ShoppingEnv:
     def __init__(self):
-        self.aisles = ["Dairy", "Bakery", "Produce"]
-        self.items = {"Dairy": "milk", "Bakery": "bread", "Produce": "apples"}
-        self.shopping_list = list(self.items.values())
+        self.aisles = {
+            "Dairy": ["milk", "cheese", "yogurt", "butter"],
+            "Bakery": ["bread", "cake", "croissant", "bagel"],
+            "Produce": ["apples", "bananas", "carrots", "lettuce"]
+        }
+        self.all_items = [item for aisle_items in self.aisles.values() for item in aisle_items]
+        self.shopping_list = []
         self.current_location = "Entrance"
         self.collected_items = []
         self.step_count = 0
-        self.max_steps = 10  # Limit the number of steps per episode
+        self.max_steps = 15  # Limit the number of steps per episode
 
     def reset(self):
         self.current_location = "Entrance"
         self.collected_items = []
         self.step_count = 0
+        # Randomize shopping list (min 2, max 3 items)
+        num_items = random.randint(2, 3)
+        self.shopping_list = random.sample(self.all_items, num_items)
         return self.get_state()
 
     def get_state(self):
@@ -51,7 +58,7 @@ class ShoppingEnv:
 
         elif action.startswith("take"):
             item = action.split("take ")[1]
-            if self.current_location in self.items and self.items[self.current_location] == item:
+            if self.current_location in self.aisles and item in self.aisles[self.current_location]:
                 if item not in self.collected_items:
                     self.collected_items.append(item)
                     reward = 10  # Reward for collecting an item
@@ -84,8 +91,8 @@ class ShoppingEnv:
 
     def get_valid_actions(self):
         actions = [f"go to {aisle}" for aisle in self.aisles]
-        if self.current_location in self.items:
-            actions.append(f"take {self.items[self.current_location]}")
+        if self.current_location in self.aisles:
+            actions.extend([f"take {item}" for item in self.aisles[self.current_location]])
         actions.append("checkout")
         return actions
 
@@ -126,24 +133,30 @@ def train_dqn():
     states, actions, rewards, next_states, dones = zip(*batch)
 
     states = torch.FloatTensor(np.array(states)).to(device)
-    next_states = torch.FloatTensor(np.array(next_states)).to(device)
+    actions = torch.LongTensor(actions).to(device)
     rewards = torch.FloatTensor(rewards).to(device)
+    next_states = torch.FloatTensor(np.array(next_states)).to(device)
     dones = torch.FloatTensor(dones).to(device)
 
-    q_values = policy_net(states)
+    # Get Q-values for the actions taken
+    q_values = policy_net(states).gather(1, actions.unsqueeze(1)).squeeze(1)
+    
+    # Get max Q-values for the next states
     next_q_values = target_net(next_states).max(1)[0]
-
-    expected_q_values = torch.FloatTensor([reward + (GAMMA * next_q_value * (1 - done))
-                                           for reward, next_q_value, done in zip(rewards, next_q_values, dones)])
-
+    
+    # Compute expected Q-values
+    expected_q_values = rewards + GAMMA * next_q_values * (1 - dones)
+    
+    # Compute loss
+    loss = criterion(q_values, expected_q_values)
     optimizer.zero_grad()
-    loss = criterion(q_values, expected_q_values.unsqueeze(1))
     loss.backward()
     optimizer.step()
 
 # Configuration
-NUM_EPOCHS = 50
-EPISODES_PER_EPOCH = 20
+NUM_EPOCHS = 20
+EPISODES_PER_EPOCH = 2
+TOTAL_EPISODES = NUM_EPOCHS * EPISODES_PER_EPOCH
 GAMMA = 0.99
 EPSILON = 1.0
 EPSILON_DECAY = 0.995
@@ -165,8 +178,8 @@ os.makedirs(data_output_dir, exist_ok=True)
 
 # Logging
 timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-log_file_path = os.path.join(log_dir, f"log_shopping_{timestamp}.txt")
-data_file_path = os.path.join(data_output_dir, f"data_shopping_{timestamp}.csv")
+log_file_path = os.path.join(log_dir, f"log_shopping_{timestamp}_episodes_{TOTAL_EPISODES}.txt")
+data_file_path = os.path.join(data_output_dir, f"data_shopping_{timestamp}_episodes_{TOTAL_EPISODES}.csv")
 
 # Create CSV file
 with open(data_file_path, mode='w', newline='') as csv_file:
@@ -195,18 +208,24 @@ with open(log_file_path, "w") as log_file:
         print(f"Epoch {epoch + 1}...")
 
         for episode in range(EPISODES_PER_EPOCH):
-            state = encode_state(env.reset())
+            state_text = env.reset()
+            state = encode_state(state_text)
             done = False
             total_reward = 0
 
-            log_file.write(f"Episodio {episode + 1}:\n")
-            print(f"  Episodio {episode + 1}...")
+            shopping_list = env.shopping_list
+            log_file.write(f"Episodio {episode + 1}:")
+            log_file.write(f"Lista de compras: {shopping_list}\n")
+            print(f"  Episodio {episode + 1} - Lista de compras: {shopping_list}...")
 
             while not done:
                 valid_actions = env.get_valid_actions()
                 action = select_action(state, valid_actions, EPSILON)
 
                 next_state, reward, done, info = env.step(action)
+                
+                log_file.write(f"Instrucción: {env.get_state()}, Acción tomada: {action}, Respuesta: {info}, Recompensa: {reward}\n")
+
                 next_state_encoded = encode_state(next_state)
 
                 memory.append((state, valid_actions.index(action), reward, next_state_encoded, done))
@@ -237,7 +256,7 @@ with open(log_file_path, "w") as log_file:
             target_net.load_state_dict(policy_net.state_dict())
 
 # Save model
-torch.save(policy_net.state_dict(), os.path.join(models_dir, f"model_shopping_{timestamp}.pth"))
+torch.save(policy_net.state_dict(), os.path.join(models_dir, f"model_shopping_{timestamp}_episodes_{TOTAL_EPISODES}.pth"))
 
 # Plot average rewards
 plt.figure(figsize=(10, 6))
@@ -246,7 +265,7 @@ plt.xlabel("Epoch")
 plt.ylabel("Recompensa Promedio")
 plt.plot(range(1, NUM_EPOCHS + 1), epoch_rewards, marker="o", label="Promedio por Epoch")
 plt.legend()
-plt.savefig(os.path.join(results_dir, f"shopping_rewards_{timestamp}.png"))
+plt.savefig(os.path.join(results_dir, f"shopping_rewards_{timestamp}_episodes_{TOTAL_EPISODES}.png"))
 plt.close()
 
 print("Entrenamiento completado. Modelo y resultados guardados.")
