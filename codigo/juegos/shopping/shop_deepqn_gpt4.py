@@ -9,7 +9,8 @@ from datetime import datetime
 import matplotlib.pyplot as plt
 import gc
 import csv
-from groq import Groq
+import openai
+
 
 # Environment setup
 class ShoppingEnv:
@@ -97,18 +98,36 @@ class ShoppingEnv:
         actions.append("checkout")
         return actions
 
-# Evaluate actions with LLM
-client = Groq(api_key="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")
+# Evaluate actions with OpenAI's GPT-4y
+
 def evaluate_with_llm(state, action):
-    message = (f"Evaluate the following action for a state in the shopping game. The objective is to go to the corresponding aisles and selecting the appropiate products depending on the shopping list. At the end you have to checkout with the appropiate items. Respond with one of the following: SUPER BAD, BAD, REGULAR, GOOD, SUPER GOOD.\nState: {state}. The user performed: {action}. ONLY respond with one of the mentioned options. Not an explanation or anything, just: SUPER BAD, BAD, REGULAR, GOOD, SUPER GOOD. ")
-    response = client.chat.completions.create(
-        messages=[{"role": "user", "content": message}],
-        model="llama3-8b-8192"
+    """
+    Evaluate the action using GPT-4 and assign a reward.
+    """
+    message = (
+        f"Evaluate the following action for a state in the shopping game. "
+        f"The objective is to go to the corresponding aisles and select the appropriate products depending on the shopping list. "
+        f"At the end, you have to checkout with the appropriate items. Respond with one of the following: SUPER BAD, BAD, REGULAR, GOOD, SUPER GOOD.\n\n"
+        f"State: {state}\nAction: {action}\n\n"
+        f"ONLY respond with one of the mentioned options. Not an explanation or anything, just: SUPER BAD, BAD, REGULAR, GOOD, SUPER GOOD."
     )
-    llm_value = response.choices[0].message.content.strip()
-    return transcribe_llm_value(llm_value)
+
+    try:
+        response = openai.ChatCompletion.create(
+            model="gpt-4-turbo",  # Use a valid GPT-4 model
+            messages=[{"role": "user", "content": message}]
+        )
+        llm_value = response["choices"][0]["message"]["content"].strip()
+        return transcribe_llm_value(llm_value)  # Ensure transcribe_llm_value is correctly defined
+    except openai.error.OpenAIError as e:
+        print(f"Error with LLM evaluation: {e}")
+        return "REGULAR"  # Default reward if there's an error
+
 
 def transcribe_llm_value(llm_value):
+    """
+    Convert LLM's qualitative evaluation to a numeric reward.
+    """
     transcription = {
         "SUPER BAD": -4,
         "BAD": -2,
