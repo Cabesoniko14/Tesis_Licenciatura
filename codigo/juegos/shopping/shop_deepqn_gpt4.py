@@ -12,7 +12,6 @@ import csv
 import openai
 import concurrent.futures  # For timeouts
 import time  # For enforcing delays
-
 # Evaluate actions with OpenAI's GPT-4 and timeout
 
 # Environment setup
@@ -145,8 +144,8 @@ def evaluate_with_llm(state, action):
         reward = 0  # Default reward if there's an error
 
     elapsed_time = time.time() - start_time
-    if elapsed_time < 3:
-        delay = 3 - elapsed_time
+    if elapsed_time < 5:
+        delay = 5 - elapsed_time
         print(f"[DEBUG] Enforcing delay of {delay:.2f} seconds to maintain minimum step time.")
         time.sleep(delay)
 
