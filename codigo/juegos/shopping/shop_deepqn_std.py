@@ -23,7 +23,7 @@ class ShoppingEnv:
         self.current_location = "Entrance"
         self.collected_items = []
         self.step_count = 0
-        self.max_steps = 15  # Limit the number of steps per episode
+        self.max_steps = 10  # Limit the number of steps per episode
 
     def reset(self):
         self.current_location = "Entrance"
@@ -155,7 +155,7 @@ def train_dqn():
 
 # Configuration
 NUM_EPOCHS = 20
-EPISODES_PER_EPOCH = 2
+EPISODES_PER_EPOCH = 20
 TOTAL_EPISODES = NUM_EPOCHS * EPISODES_PER_EPOCH
 GAMMA = 0.99
 EPSILON = 1.0
