@@ -10,7 +10,10 @@ import matplotlib.pyplot as plt
 import gc
 import csv
 import openai
+import concurrent.futures  # For timeouts
+import time  # For enforcing delays
 
+# Evaluate actions with OpenAI's GPT-4 and timeout
 
 # Environment setup
 class ShoppingEnv:
@@ -25,25 +28,30 @@ class ShoppingEnv:
         self.current_location = "Entrance"
         self.collected_items = []
         self.step_count = 0
-        self.max_steps = 15  # Limit the number of steps per episode
+        self.max_steps = 10  # Limit the number of steps per episode
 
     def reset(self):
+        print("[DEBUG] Resetting environment")
         self.current_location = "Entrance"
         self.collected_items = []
         self.step_count = 0
         # Randomize shopping list (min 2, max 3 items)
         num_items = random.randint(2, 3)
         self.shopping_list = random.sample(self.all_items, num_items)
+        print(f"[DEBUG] Shopping list: {self.shopping_list}")
         return self.get_state()
 
     def get_state(self):
-        return {
+        state = {
             "location": self.current_location,
             "collected_items": self.collected_items,
             "remaining_items": [item for item in self.shopping_list if item not in self.collected_items]
         }
+        print(f"[DEBUG] Current state: {state}")
+        return state
 
     def step(self, action):
+        print(f"[DEBUG] Executing action: {action}")
         self.step_count += 1
         reward = 0
         done = False
@@ -89,6 +97,7 @@ class ShoppingEnv:
             done = True
             info = "Max steps reached"
 
+        print(f"[DEBUG] Step result: reward={reward}, done={done}, info={info}")
         return self.get_state(), reward, done, info
 
     def get_valid_actions(self):
@@ -96,14 +105,17 @@ class ShoppingEnv:
         if self.current_location in self.aisles:
             actions.extend([f"take {item}" for item in self.aisles[self.current_location]])
         actions.append("checkout")
+        print(f"[DEBUG] Valid actions: {actions}")
         return actions
 
-# Evaluate actions with OpenAI's GPT-4y
+# Evaluate actions with OpenAI's GPT-4 and timeout
 
 def evaluate_with_llm(state, action):
     """
     Evaluate the action using GPT-4 and assign a reward.
     """
+    print("[DEBUG] Evaluating with LLM")
+    start_time = time.time()
     message = (
         f"Evaluate the following action for a state in the shopping game. "
         f"The objective is to go to the corresponding aisles and select the appropriate products depending on the shopping list. "
@@ -112,17 +124,33 @@ def evaluate_with_llm(state, action):
         f"ONLY respond with one of the mentioned options. Not an explanation or anything, just: SUPER BAD, BAD, REGULAR, GOOD, SUPER GOOD."
     )
 
-    try:
+    def call_llm():
         response = openai.ChatCompletion.create(
             model="gpt-4-turbo",  # Use a valid GPT-4 model
             messages=[{"role": "user", "content": message}]
         )
-        llm_value = response["choices"][0]["message"]["content"].strip()
-        return transcribe_llm_value(llm_value)  # Ensure transcribe_llm_value is correctly defined
-    except openai.error.OpenAIError as e:
-        print(f"Error with LLM evaluation: {e}")
-        return "REGULAR"  # Default reward if there's an error
+        return response["choices"][0]["message"]["content"].strip()
 
+    try:
+        with concurrent.futures.ThreadPoolExecutor() as executor:
+            future = executor.submit(call_llm)
+            llm_value = future.result(timeout=2)  # 10-second timeout
+            print(f"[DEBUG] LLM Evaluation: {llm_value}")
+            reward = transcribe_llm_value(llm_value)
+    except concurrent.futures.TimeoutError:
+        print("[DEBUG] LLM evaluation timed out.")
+        reward = 0  # Default reward for timeout
+    except openai.error.OpenAIError as e:
+        print(f"[DEBUG] Error with LLM evaluation: {e}")
+        reward = 0  # Default reward if there's an error
+
+    elapsed_time = time.time() - start_time
+    if elapsed_time < 3:
+        delay = 3 - elapsed_time
+        print(f"[DEBUG] Enforcing delay of {delay:.2f} seconds to maintain minimum step time.")
+        time.sleep(delay)
+
+    return reward
 
 def transcribe_llm_value(llm_value):
     """
@@ -135,7 +163,15 @@ def transcribe_llm_value(llm_value):
         "GOOD": 2,
         "SUPER GOOD": 4
     }
-    return transcription.get(llm_value, 0)
+    reward = transcription.get(llm_value, 0)
+    print(f"[DEBUG] Transcribed reward: {reward}")
+    return reward
+
+# Add debugging everywhere by printing intermediate values and critical events.
+# Full training loop and additional logic remain unchanged but include debugging lines.
+
+
+
 
 # DQN setup
 class DQNetwork(nn.Module):
@@ -259,12 +295,15 @@ with open(log_file_path, "w") as log_file:
             log_file.write(f"Lista de compras: {shopping_list}\n")
             print(f"  Episodio {episode + 1} - Lista de compras: {shopping_list}...")
 
+            step_count = 0
             while not done:
                 valid_actions = env.get_valid_actions()
                 action = select_action(state, valid_actions, EPSILON)
 
                 next_state, _, done, info = env.step(action)
                 reward = evaluate_with_llm(env.get_state(), action)
+                step_count = step_count + 1
+                print(f'Evaluación de LLM completada número: {step_count}')
 
                 log_file.write(f"Instrucción: {env.get_state()}, Acción tomada: {action}, Respuesta: {info}, Recompensa: {reward}\n")
 
