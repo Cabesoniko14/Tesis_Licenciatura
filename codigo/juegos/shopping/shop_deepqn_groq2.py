@@ -7,11 +7,11 @@ import numpy as np
 from collections import deque
 from datetime import datetime
 import time
-import csv
 import psutil
+import pandas as pd
 from groq import Groq
 
-# ===== Environment (igual que antes) =====
+# ===== Environment =====
 class ShoppingEnv:
     def __init__(self):
         self.aisles = {
@@ -86,12 +86,16 @@ class ShoppingEnv:
         return actions
 
 # ===== LLM evaluator =====
-client = Groq(api_key="YOUR_API_KEY")
+client = Groq(api_key="MY_KEY")
 def evaluate_with_llm(state, action):
-    message = (f"Evaluate action. State: {state}. Action: {action}. Respond with SUPER BAD, BAD, REGULAR, GOOD, SUPER GOOD.")
+    message = (f"Evaluate the following action for a state in the shopping game. "
+               f"The objective is to go to the corresponding aisles and selecting the appropriate products "
+               f"depending on the shopping list. At the end you have to checkout with the appropriate items. "
+               f"Respond with one of the following: SUPER BAD, BAD, REGULAR, GOOD, SUPER GOOD.\n"
+               f"State: {state}. The user performed: {action}. ONLY respond with one option.")
     response = client.chat.completions.create(
         messages=[{"role": "user", "content": message}],
-        model="llama3-8b-8192"
+        model="llama-3.1-8b-instant"
     )
     llm_value = response.choices[0].message.content.strip()
     return {"SUPER BAD": -4, "BAD": -2, "REGULAR": 0, "GOOD": 2, "SUPER GOOD": 4}.get(llm_value, 0)
@@ -149,18 +153,13 @@ LEARNING_RATE, BATCH_SIZE, MEMORY_SIZE, state_size = 1e-3, 64, 10000, 512
 # ===== Directories =====
 timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 base_name = f"shopping_{timestamp}_episodes_{TOTAL_EPISODES}"
-dirs = {name: os.path.join(name) for name in ["logs", "resultados", "modelos", "datos_output"]}
+dirs = {name: os.path.join(name) for name in ["datos_output"]}
 for d in dirs.values(): os.makedirs(d, exist_ok=True)
 
 # Paths
-detail_path = os.path.join(dirs["datos_output"], f"detalle_{base_name}.csv")
+actions_path = os.path.join(dirs["datos_output"], f"acciones_{base_name}.csv")
 compute_path = os.path.join(dirs["datos_output"], f"computo_{base_name}.csv")
 summary_path = os.path.join(dirs["datos_output"], f"resumen_{base_name}.csv")
-
-# CSV headers
-with open(detail_path, "w", newline="") as f: csv.writer(f).writerow(["Episodio","Epoch","Recompensa","Pasos","Éxito","Epsilon"])
-with open(compute_path, "w", newline="") as f: csv.writer(f).writerow(["Episodio","Epoch","Tiempo(s)","CPU(%)","RAM(MB)","GPU_mem(MB)"])
-with open(summary_path, "w", newline="") as f: csv.writer(f).writerow(["Métrica","Valor"])
 
 # ===== Setup =====
 env, device = ShoppingEnv(), torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -168,12 +167,20 @@ policy_net, target_net = DQNetwork(state_size, state_size).to(device), DQNetwork
 target_net.load_state_dict(policy_net.state_dict()); target_net.eval()
 optimizer, criterion, memory = optim.Adam(policy_net.parameters(), lr=LEARNING_RATE), nn.MSELoss(), deque(maxlen=MEMORY_SIZE)
 
+# ===== DataFrames =====
+acciones_df = pd.DataFrame(columns=["Episodio","Epoch","Acción","CanastaActual","CanastaObjetivo","RecompensaObtenida","RecompensaAcumulada"])
+computo_df = pd.DataFrame(columns=["Episodio","Epoch","Tiempo(s)","CPU(%)","RAM(MB)","GPU_mem(MB)"])
+resumen_df = pd.DataFrame(columns=["Métrica","Valor"])
+
 # ===== Training =====
 total_rewards, total_success, total_time = [], 0, 0
 for epoch in range(NUM_EPOCHS):
+    print(f"\n===== Inicio de Epoch {epoch+1} =====")
+    epoch_total_reward = 0
     for episode in range(EPISODES_PER_EPOCH):
         start_time = time.perf_counter()
-        state_text, state, done, total_reward, steps = env.reset(), encode_state(env.reset()), False, 0, 0
+        state = encode_state(env.reset())
+        done, total_reward, steps = False, 0, 0
         success = 0
 
         while not done:
@@ -187,28 +194,42 @@ for epoch in range(NUM_EPOCHS):
             state, total_reward = next_state_encoded, total_reward + reward
             train_dqn()
 
+            # Tracking por acción
+            print(f"[Epoch {epoch+1} | Episodio {episode+1} | Paso {steps}] Acción={action} "
+                  f"| Canasta={env.collected_items} | Objetivo={env.shopping_list} "
+                  f"| Recompensa={reward} | Acumulada={total_reward}")
+
+            acciones_df.loc[len(acciones_df)] = [
+                episode+1+epoch*EPISODES_PER_EPOCH, epoch+1, action,
+                list(env.collected_items), list(env.shopping_list),
+                reward, total_reward
+            ]
+
         if set(env.collected_items) == set(env.shopping_list): success = 1
+        epoch_total_reward += total_reward
         total_rewards.append(total_reward); total_success += success
         elapsed = time.perf_counter() - start_time
         total_time += elapsed
 
-        # ===== Save detail =====
-        with open(detail_path, "a", newline="") as f:
-            csv.writer(f).writerow([episode+1+epoch*EPISODES_PER_EPOCH, epoch+1, total_reward, steps, success, EPSILON])
-
-        # ===== Save compute =====
+        # Computo por episodio
         process = psutil.Process(os.getpid())
         cpu, ram = psutil.cpu_percent(), process.memory_info().rss / 1024 / 1024
         gpu_mem = torch.cuda.memory_allocated()/1024/1024 if torch.cuda.is_available() else 0
-        with open(compute_path, "a", newline="") as f:
-            csv.writer(f).writerow([episode+1+epoch*EPISODES_PER_EPOCH, epoch+1, elapsed, cpu, ram, gpu_mem])
+        computo_df.loc[len(computo_df)] = [episode+1+epoch*EPISODES_PER_EPOCH, epoch+1, elapsed, cpu, ram, gpu_mem]
 
     EPSILON = max(EPSILON_MIN, EPSILON * EPSILON_DECAY)
+    promedio = epoch_total_reward / EPISODES_PER_EPOCH
+    print(f"=== Fin del Epoch {epoch+1} | Promedio Recompensa={promedio:.2f} | Epsilon={EPSILON:.3f} ===")
 
 # ===== Summary =====
-with open(summary_path, "a", newline="") as f:
-    writer = csv.writer(f)
-    writer.writerow(["Recompensa Promedio", np.mean(total_rewards)])
-    writer.writerow(["Éxito (%)", 100*total_success/TOTAL_EPISODES])
-    writer.writerow(["Tiempo Total (s)", total_time])
-    writer.writerow(["GPU usada", torch.cuda.is_available()])
+resumen_df.loc[len(resumen_df)] = ["Recompensa Promedio", np.mean(total_rewards)]
+resumen_df.loc[len(resumen_df)] = ["Éxito (%)", 100*total_success/TOTAL_EPISODES]
+resumen_df.loc[len(resumen_df)] = ["Tiempo Total (s)", total_time]
+resumen_df.loc[len(resumen_df)] = ["GPU usada", torch.cuda.is_available()]
+
+# ===== Save =====
+acciones_df.to_csv(actions_path, index=False)
+computo_df.to_csv(compute_path, index=False)
+resumen_df.to_csv(summary_path, index=False)
+
+print("\n=== Entrenamiento completado y tablas guardadas ===")
