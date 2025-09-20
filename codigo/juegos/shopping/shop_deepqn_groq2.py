@@ -153,13 +153,16 @@ LEARNING_RATE, BATCH_SIZE, MEMORY_SIZE, state_size = 1e-3, 64, 10000, 512
 # ===== Directories =====
 timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 base_name = f"shopping_{timestamp}_episodes_{TOTAL_EPISODES}"
-dirs = {name: os.path.join(name) for name in ["datos_output"]}
+dirs = {name: os.path.join(name) for name in ["datos_output", "logs", "modelos"]}
 for d in dirs.values(): os.makedirs(d, exist_ok=True)
 
 # Paths
 actions_path = os.path.join(dirs["datos_output"], f"acciones_{base_name}.csv")
 compute_path = os.path.join(dirs["datos_output"], f"computo_{base_name}.csv")
 summary_path = os.path.join(dirs["datos_output"], f"resumen_{base_name}.csv")
+log_path = os.path.join(dirs["logs"], f"log_{base_name}.txt")
+model_policy_path = os.path.join(dirs["modelos"], f"policy_net_{base_name}.pth")
+model_target_path = os.path.join(dirs["modelos"], f"target_net_{base_name}.pth")
 
 # ===== Setup =====
 env, device = ShoppingEnv(), torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -174,52 +177,52 @@ resumen_df = pd.DataFrame(columns=["Métrica","Valor"])
 
 # ===== Training =====
 total_rewards, total_success, total_time = [], 0, 0
-for epoch in range(NUM_EPOCHS):
-    print(f"\n===== Inicio de Epoch {epoch+1} =====")
-    epoch_total_reward = 0
-    for episode in range(EPISODES_PER_EPOCH):
-        start_time = time.perf_counter()
-        state = encode_state(env.reset())
-        done, total_reward, steps = False, 0, 0
-        success = 0
+with open(log_path, "w") as log_file:
+    for epoch in range(NUM_EPOCHS):
+        log_file.write(f"\n--- Inicio del Epoch {epoch+1} ---\n")
+        print(f"\n===== Inicio de Epoch {epoch+1} =====")
+        epoch_total_reward = 0
+        for episode in range(EPISODES_PER_EPOCH):
+            log_file.write(f"Episodio {episode+1}:\n")
+            start_time = time.perf_counter()
+            state = encode_state(env.reset())
+            done, total_reward, steps = False, 0, 0
+            success = 0
 
-        while not done:
-            steps += 1
-            valid_actions = env.get_valid_actions()
-            action = select_action(state, valid_actions, EPSILON)
-            next_state, _, done, _ = env.step(action)
-            reward = evaluate_with_llm(env.get_state(), action)
-            next_state_encoded = encode_state(next_state)
-            memory.append((state, valid_actions.index(action), reward, next_state_encoded, done))
-            state, total_reward = next_state_encoded, total_reward + reward
-            train_dqn()
+            while not done:
+                steps += 1
+                valid_actions = env.get_valid_actions()
+                action = select_action(state, valid_actions, EPSILON)
+                next_state, _, done, info = env.step(action)
+                reward = evaluate_with_llm(env.get_state(), action)
+                next_state_encoded = encode_state(next_state)
+                memory.append((state, valid_actions.index(action), reward, next_state_encoded, done))
+                state, total_reward = next_state_encoded, total_reward + reward
+                train_dqn()
 
-            # Tracking por acción
-            print(f"[Epoch {epoch+1} | Episodio {episode+1} | Paso {steps}] Acción={action} "
-                  f"| Canasta={env.collected_items} | Objetivo={env.shopping_list} "
-                  f"| Recompensa={reward} | Acumulada={total_reward}")
+                # Tracking
+                acciones_df.loc[len(acciones_df)] = [
+                    episode+1+epoch*EPISODES_PER_EPOCH, epoch+1, action,
+                    list(env.collected_items), list(env.shopping_list),
+                    reward, total_reward
+                ]
+                log_file.write(f"Instrucción: {env.get_state()}, Acción tomada: {action}, Respuesta: {info}, Recompensa: {reward}\n")
 
-            acciones_df.loc[len(acciones_df)] = [
-                episode+1+epoch*EPISODES_PER_EPOCH, epoch+1, action,
-                list(env.collected_items), list(env.shopping_list),
-                reward, total_reward
-            ]
+            if set(env.collected_items) == set(env.shopping_list): success = 1
+            epoch_total_reward += total_reward
+            total_rewards.append(total_reward); total_success += success
+            elapsed = time.perf_counter() - start_time
+            total_time += elapsed
 
-        if set(env.collected_items) == set(env.shopping_list): success = 1
-        epoch_total_reward += total_reward
-        total_rewards.append(total_reward); total_success += success
-        elapsed = time.perf_counter() - start_time
-        total_time += elapsed
+            computo_df.loc[len(computo_df)] = [episode+1+epoch*EPISODES_PER_EPOCH, epoch+1, elapsed,
+                                               psutil.cpu_percent(), psutil.Process(os.getpid()).memory_info().rss/1024/1024,
+                                               torch.cuda.memory_allocated()/1024/1024 if torch.cuda.is_available() else 0]
+            log_file.write(f"Recompensa del Episodio: {total_reward}\n-------------------------------\n")
 
-        # Computo por episodio
-        process = psutil.Process(os.getpid())
-        cpu, ram = psutil.cpu_percent(), process.memory_info().rss / 1024 / 1024
-        gpu_mem = torch.cuda.memory_allocated()/1024/1024 if torch.cuda.is_available() else 0
-        computo_df.loc[len(computo_df)] = [episode+1+epoch*EPISODES_PER_EPOCH, epoch+1, elapsed, cpu, ram, gpu_mem]
-
-    EPSILON = max(EPSILON_MIN, EPSILON * EPSILON_DECAY)
-    promedio = epoch_total_reward / EPISODES_PER_EPOCH
-    print(f"=== Fin del Epoch {epoch+1} | Promedio Recompensa={promedio:.2f} | Epsilon={EPSILON:.3f} ===")
+        EPSILON = max(EPSILON_MIN, EPSILON * EPSILON_DECAY)
+        promedio = epoch_total_reward / EPISODES_PER_EPOCH
+        log_file.write(f"Recompensa Promedio del Epoch {epoch+1}: {promedio}\n===================================\n")
+        print(f"=== Fin del Epoch {epoch+1} | Promedio Recompensa={promedio:.2f} | Epsilon={EPSILON:.3f} ===")
 
 # ===== Summary =====
 resumen_df.loc[len(resumen_df)] = ["Recompensa Promedio", np.mean(total_rewards)]
@@ -232,4 +235,7 @@ acciones_df.to_csv(actions_path, index=False)
 computo_df.to_csv(compute_path, index=False)
 resumen_df.to_csv(summary_path, index=False)
 
-print("\n=== Entrenamiento completado y tablas guardadas ===")
+torch.save(policy_net.state_dict(), model_policy_path)
+torch.save(target_net.state_dict(), model_target_path)
+
+print("\n=== Entrenamiento completado, logs y modelos guardados ===")
