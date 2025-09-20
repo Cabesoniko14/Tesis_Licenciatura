@@ -86,7 +86,7 @@ class ShoppingEnv:
         return actions
 
 # ===== LLM evaluator =====
-client = Groq(api_key="MY_KEY")
+client = Groq(api_key=MY_KEY)
 def evaluate_with_llm(state, action):
     message = (f"Evaluate the following action for a state in the shopping game. "
                f"The objective is to go to the corresponding aisles and selecting the appropriate products "
