@@ -9,8 +9,11 @@ from datetime import datetime
 import time
 import psutil
 import pandas as pd
-import openai
 import concurrent.futures
+from openai import OpenAI   # ✅ nuevo cliente
+
+# ====== OPENAI API KEY ======
+client = OpenAI(api_key="")
 
 # ========== ENVIRONMENT ==========
 class ShoppingEnv:
@@ -80,16 +83,19 @@ def evaluate_with_llm(state, action):
     )
 
     def call_llm():
-        response = openai.ChatCompletion.create(
+        response = client.chat.completions.create(   # ✅ nuevo formato
             model="gpt-4-turbo",
-            messages=[{"role": "user", "content": msg}]
+            messages=[{"role": "user", "content": msg}],
+            temperature=0
         )
-        return response["choices"][0]["message"]["content"].strip()
+        return response.choices[0].message.content.strip()
 
     try:
         with concurrent.futures.ThreadPoolExecutor() as executor:
             llm_value = executor.submit(call_llm).result(timeout=5)
-    except Exception:
+        print(f"   [LLM Response] {llm_value}")
+    except Exception as e:
+        print(f"   [LLM Error] {e} → fallback a REGULAR")
         llm_value = "REGULAR"
 
     mapping = {"SUPER BAD": -4, "BAD": -2, "REGULAR": 0, "GOOD": 2, "SUPER GOOD": 4}
@@ -108,7 +114,8 @@ def encode_state(state):
 def select_action(state, valid_actions, eps):
     if random.random() < eps: return random.choice(valid_actions)
     st = torch.FloatTensor(state).unsqueeze(0).to(device)
-    q_vals = policy_net(st); return max({a: q_vals[0, i].item() for i, a in enumerate(valid_actions)}, key=lambda k: q_vals[0, valid_actions.index(k)].item())
+    q_vals = policy_net(st)
+    return max(valid_actions, key=lambda a: q_vals[0, valid_actions.index(a)].item())
 
 def train_dqn():
     if len(memory) < BATCH_SIZE: return
@@ -121,7 +128,8 @@ def train_dqn():
     loss = criterion(q_vals, expected); optimizer.zero_grad(); loss.backward(); optimizer.step()
 
 # ========== CONFIG ==========
-NUM_EPOCHS, EPISODES_PER_EPOCH, TOTAL_EPISODES = 5, 10, 50
+NUM_EPOCHS, EPISODES_PER_EPOCH = 10, 10
+TOTAL_EPISODES  = NUM_EPOCHS * EPISODES_PER_EPOCH
 GAMMA, EPSILON, EPSILON_DECAY, EPSILON_MIN = 0.99, 1.0, 0.995, 0.1
 LR, BATCH_SIZE, MEMORY_SIZE, state_size = 1e-3, 64, 10000, 512
 
@@ -144,30 +152,46 @@ policy_net, target_net = DQNetwork(state_size, state_size).to(device), DQNetwork
 target_net.load_state_dict(policy_net.state_dict()); target_net.eval()
 optimizer, criterion, memory = optim.Adam(policy_net.parameters(), lr=LR), nn.MSELoss(), deque(maxlen=MEMORY_SIZE)
 
-acciones_df, computo_df, resumen_df = pd.DataFrame(columns=["Episodio","Epoch","Acción","CanastaActual","CanastaObjetivo","RecompensaObtenida","RecompensaAcumulada"]), pd.DataFrame(columns=["Episodio","Epoch","Tiempo(s)","CPU(%)","RAM(MB)","GPU_mem(MB)"]), pd.DataFrame(columns=["Métrica","Valor"])
+acciones_df = pd.DataFrame(columns=["Episodio","Epoch","Acción","CanastaActual","CanastaObjetivo","RecompensaObtenida","RecompensaAcumulada"])
+computo_df = pd.DataFrame(columns=["Episodio","Epoch","Tiempo(s)","CPU(%)","RAM(MB)","GPU_mem(MB)"])
+resumen_df = pd.DataFrame(columns=["Métrica","Valor"])
 
 # ========== TRAIN ==========
 total_rewards, total_success, total_time = [], 0, 0
 with open(paths["log"], "w") as logf:
     for epoch in range(NUM_EPOCHS):
-        logf.write(f"\n--- Epoch {epoch+1} ---\n"); epoch_total = 0
+        print(f"\n=== Inicio Epoch {epoch+1}/{NUM_EPOCHS} ===")
+        epoch_total = 0
+
         for ep in range(EPISODES_PER_EPOCH):
-            start = time.perf_counter(); state, done, total_r, steps, success = encode_state(env.reset()), False, 0, 0, 0
+            print(f"\n[Epoch {epoch+1} | Episodio {ep+1}]")
+            start = time.perf_counter()
+            state, done, total_r, steps, success = encode_state(env.reset()), False, 0, 0, 0
+            print(f"   Lista objetivo: {env.shopping_list}")
+
             while not done:
                 steps += 1
                 action = select_action(state, env.get_valid_actions(), EPSILON)
                 next_state, _, done, info = env.step(action)
                 reward = evaluate_with_llm(env.get_state(), action)
+
                 state, total_r = encode_state(next_state), total_r + reward
                 memory.append((state, env.get_valid_actions().index(action), reward, encode_state(next_state), done))
                 acciones_df.loc[len(acciones_df)] = [ep+1+epoch*EPISODES_PER_EPOCH, epoch+1, action, list(env.collected_items), list(env.shopping_list), reward, total_r]
-                logf.write(f"Action: {action}, Reward: {reward}, Total: {total_r}\n"); train_dqn()
+
+                print(f"   Acción: {action} | Recompensa: {reward} | Total acumulado: {total_r}")
+                train_dqn()
+
             if set(env.collected_items) == set(env.shopping_list): success = 1
             epoch_total += total_r; total_rewards.append(total_r); total_success += success
             elapsed = time.perf_counter()-start; total_time += elapsed
             computo_df.loc[len(computo_df)] = [ep+1+epoch*EPISODES_PER_EPOCH, epoch+1, elapsed, psutil.cpu_percent(), psutil.Process(os.getpid()).memory_info().rss/1024/1024, torch.cuda.memory_allocated()/1024/1024 if torch.cuda.is_available() else 0]
+
+            print(f"   Episodio terminado | Total Reward: {total_r} | Éxito: {success} | Pasos: {steps}")
+
         EPSILON = max(EPSILON_MIN, EPSILON*EPSILON_DECAY)
-        logf.write(f"Epoch {epoch+1} avg reward: {epoch_total/EPISODES_PER_EPOCH}\n")
+        avg_reward = epoch_total/EPISODES_PER_EPOCH
+        print(f"=== Fin Epoch {epoch+1} | Promedio Recompensa={avg_reward:.2f} | Epsilon={EPSILON:.3f} ===")
 
 # ========== SAVE ==========
 resumen_df.loc[len(resumen_df)] = ["Recompensa Promedio", np.mean(total_rewards)]
@@ -177,4 +201,4 @@ resumen_df.loc[len(resumen_df)] = ["GPU usada", torch.cuda.is_available()]
 acciones_df.to_csv(paths["acciones"], index=False); computo_df.to_csv(paths["computo"], index=False); resumen_df.to_csv(paths["resumen"], index=False)
 torch.save(policy_net.state_dict(), paths["policy"]); torch.save(target_net.state_dict(), paths["target"])
 
-print("\n=== Entrenamiento completado con ChatGPT como función de recompensas ===")
+print("\n=== Entrenamiento completado con ChatGPT (API moderna) como función de recompensas ===")
