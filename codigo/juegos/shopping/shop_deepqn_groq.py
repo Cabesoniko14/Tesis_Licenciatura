@@ -86,7 +86,7 @@ class ShoppingEnv:
         return actions
 
 # ===== LLM evaluator =====
-client = Groq(api_key=MY_KEY)
+client = Groq(api_key="")
 def evaluate_with_llm(state, action):
     message = (f"Evaluate the following action for a state in the shopping game. "
                f"The objective is to go to the corresponding aisles and selecting the appropriate products "
@@ -145,7 +145,7 @@ def train_dqn():
     optimizer.step()
 
 # ===== Config =====
-NUM_EPOCHS, EPISODES_PER_EPOCH = 5, 10
+NUM_EPOCHS, EPISODES_PER_EPOCH = 10, 10
 TOTAL_EPISODES = NUM_EPOCHS * EPISODES_PER_EPOCH
 GAMMA, EPSILON, EPSILON_DECAY, EPSILON_MIN = 0.99, 1.0, 0.995, 0.1
 LEARNING_RATE, BATCH_SIZE, MEMORY_SIZE, state_size = 1e-3, 64, 10000, 512
