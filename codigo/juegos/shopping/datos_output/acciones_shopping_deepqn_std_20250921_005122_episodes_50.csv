@@ -1,0 +1,751 @@
+Episodio,Epoch,Acción,CanastaActual,CanastaObjetivo,RecompensaObtenida,RecompensaAcumulada
+1,1,go to Bakery,[],"['lettuce', 'bread', 'milk']",0,0
+1,1,go to Bakery,[],"['lettuce', 'bread', 'milk']",0,0
+1,1,take cake,['cake'],"['lettuce', 'bread', 'milk']",10,10
+1,1,checkout,['cake'],"['lettuce', 'bread', 'milk']",-10,0
+1,1,take bread,"['cake', 'bread']","['lettuce', 'bread', 'milk']",10,10
+1,1,take cake,"['cake', 'bread']","['lettuce', 'bread', 'milk']",-1,9
+1,1,go to Dairy,"['cake', 'bread']","['lettuce', 'bread', 'milk']",0,9
+1,1,take butter,"['cake', 'bread', 'butter']","['lettuce', 'bread', 'milk']",10,19
+1,1,go to Dairy,"['cake', 'bread', 'butter']","['lettuce', 'bread', 'milk']",0,19
+1,1,take yogurt,"['cake', 'bread', 'butter', 'yogurt']","['lettuce', 'bread', 'milk']",10,29
+1,1,take cheese,"['cake', 'bread', 'butter', 'yogurt', 'cheese']","['lettuce', 'bread', 'milk']",10,39
+1,1,go to Dairy,"['cake', 'bread', 'butter', 'yogurt', 'cheese']","['lettuce', 'bread', 'milk']",0,39
+1,1,go to Bakery,"['cake', 'bread', 'butter', 'yogurt', 'cheese']","['lettuce', 'bread', 'milk']",0,39
+1,1,checkout,"['cake', 'bread', 'butter', 'yogurt', 'cheese']","['lettuce', 'bread', 'milk']",-10,29
+1,1,checkout,"['cake', 'bread', 'butter', 'yogurt', 'cheese']","['lettuce', 'bread', 'milk']",-10,19
+2,1,go to Produce,[],"['cake', 'apples']",0,0
+2,1,take lettuce,['lettuce'],"['cake', 'apples']",10,10
+2,1,checkout,['lettuce'],"['cake', 'apples']",-10,0
+2,1,go to Produce,['lettuce'],"['cake', 'apples']",0,0
+2,1,take carrots,"['lettuce', 'carrots']","['cake', 'apples']",10,10
+2,1,go to Bakery,"['lettuce', 'carrots']","['cake', 'apples']",0,10
+2,1,take cake,"['lettuce', 'carrots', 'cake']","['cake', 'apples']",10,20
+2,1,take croissant,"['lettuce', 'carrots', 'cake', 'croissant']","['cake', 'apples']",10,30
+2,1,take croissant,"['lettuce', 'carrots', 'cake', 'croissant']","['cake', 'apples']",-1,29
+2,1,take bread,"['lettuce', 'carrots', 'cake', 'croissant', 'bread']","['cake', 'apples']",10,39
+2,1,go to Dairy,"['lettuce', 'carrots', 'cake', 'croissant', 'bread']","['cake', 'apples']",0,39
+2,1,go to Produce,"['lettuce', 'carrots', 'cake', 'croissant', 'bread']","['cake', 'apples']",0,39
+2,1,go to Dairy,"['lettuce', 'carrots', 'cake', 'croissant', 'bread']","['cake', 'apples']",0,39
+2,1,go to Produce,"['lettuce', 'carrots', 'cake', 'croissant', 'bread']","['cake', 'apples']",0,39
+2,1,take apples,"['lettuce', 'carrots', 'cake', 'croissant', 'bread', 'apples']","['cake', 'apples']",10,49
+3,1,checkout,[],"['bread', 'yogurt', 'cheese']",-10,-10
+3,1,checkout,[],"['bread', 'yogurt', 'cheese']",-10,-20
+3,1,go to Dairy,[],"['bread', 'yogurt', 'cheese']",0,-20
+3,1,go to Bakery,[],"['bread', 'yogurt', 'cheese']",0,-20
+3,1,go to Bakery,[],"['bread', 'yogurt', 'cheese']",0,-20
+3,1,checkout,[],"['bread', 'yogurt', 'cheese']",-10,-30
+3,1,take cake,['cake'],"['bread', 'yogurt', 'cheese']",10,-20
+3,1,go to Dairy,['cake'],"['bread', 'yogurt', 'cheese']",0,-20
+3,1,go to Produce,['cake'],"['bread', 'yogurt', 'cheese']",0,-20
+3,1,go to Dairy,['cake'],"['bread', 'yogurt', 'cheese']",0,-20
+3,1,take butter,"['cake', 'butter']","['bread', 'yogurt', 'cheese']",10,-10
+3,1,take milk,"['cake', 'butter', 'milk']","['bread', 'yogurt', 'cheese']",10,0
+3,1,go to Produce,"['cake', 'butter', 'milk']","['bread', 'yogurt', 'cheese']",0,0
+3,1,checkout,"['cake', 'butter', 'milk']","['bread', 'yogurt', 'cheese']",-10,-10
+3,1,checkout,"['cake', 'butter', 'milk']","['bread', 'yogurt', 'cheese']",-10,-20
+4,1,go to Dairy,[],"['bananas', 'apples', 'lettuce']",0,0
+4,1,take cheese,['cheese'],"['bananas', 'apples', 'lettuce']",10,10
+4,1,take milk,"['cheese', 'milk']","['bananas', 'apples', 'lettuce']",10,20
+4,1,go to Bakery,"['cheese', 'milk']","['bananas', 'apples', 'lettuce']",0,20
+4,1,take cake,"['cheese', 'milk', 'cake']","['bananas', 'apples', 'lettuce']",10,30
+4,1,go to Dairy,"['cheese', 'milk', 'cake']","['bananas', 'apples', 'lettuce']",0,30
+4,1,take yogurt,"['cheese', 'milk', 'cake', 'yogurt']","['bananas', 'apples', 'lettuce']",10,40
+4,1,checkout,"['cheese', 'milk', 'cake', 'yogurt']","['bananas', 'apples', 'lettuce']",-10,30
+4,1,take butter,"['cheese', 'milk', 'cake', 'yogurt', 'butter']","['bananas', 'apples', 'lettuce']",10,40
+4,1,take milk,"['cheese', 'milk', 'cake', 'yogurt', 'butter']","['bananas', 'apples', 'lettuce']",-1,39
+4,1,take cheese,"['cheese', 'milk', 'cake', 'yogurt', 'butter']","['bananas', 'apples', 'lettuce']",-1,38
+4,1,go to Bakery,"['cheese', 'milk', 'cake', 'yogurt', 'butter']","['bananas', 'apples', 'lettuce']",0,38
+4,1,go to Dairy,"['cheese', 'milk', 'cake', 'yogurt', 'butter']","['bananas', 'apples', 'lettuce']",0,38
+4,1,go to Dairy,"['cheese', 'milk', 'cake', 'yogurt', 'butter']","['bananas', 'apples', 'lettuce']",0,38
+4,1,checkout,"['cheese', 'milk', 'cake', 'yogurt', 'butter']","['bananas', 'apples', 'lettuce']",-10,28
+5,1,checkout,[],"['bagel', 'cheese', 'lettuce']",-10,-10
+5,1,go to Produce,[],"['bagel', 'cheese', 'lettuce']",0,-10
+5,1,take apples,['apples'],"['bagel', 'cheese', 'lettuce']",10,0
+5,1,take bananas,"['apples', 'bananas']","['bagel', 'cheese', 'lettuce']",10,10
+5,1,take lettuce,"['apples', 'bananas', 'lettuce']","['bagel', 'cheese', 'lettuce']",10,20
+5,1,go to Bakery,"['apples', 'bananas', 'lettuce']","['bagel', 'cheese', 'lettuce']",0,20
+5,1,take croissant,"['apples', 'bananas', 'lettuce', 'croissant']","['bagel', 'cheese', 'lettuce']",10,30
+5,1,checkout,"['apples', 'bananas', 'lettuce', 'croissant']","['bagel', 'cheese', 'lettuce']",-10,20
+5,1,take croissant,"['apples', 'bananas', 'lettuce', 'croissant']","['bagel', 'cheese', 'lettuce']",-1,19
+5,1,go to Dairy,"['apples', 'bananas', 'lettuce', 'croissant']","['bagel', 'cheese', 'lettuce']",0,19
+5,1,take milk,"['apples', 'bananas', 'lettuce', 'croissant', 'milk']","['bagel', 'cheese', 'lettuce']",10,29
+5,1,take butter,"['apples', 'bananas', 'lettuce', 'croissant', 'milk', 'butter']","['bagel', 'cheese', 'lettuce']",10,39
+5,1,take cheese,"['apples', 'bananas', 'lettuce', 'croissant', 'milk', 'butter', 'cheese']","['bagel', 'cheese', 'lettuce']",10,49
+5,1,go to Bakery,"['apples', 'bananas', 'lettuce', 'croissant', 'milk', 'butter', 'cheese']","['bagel', 'cheese', 'lettuce']",0,49
+5,1,go to Dairy,"['apples', 'bananas', 'lettuce', 'croissant', 'milk', 'butter', 'cheese']","['bagel', 'cheese', 'lettuce']",0,49
+6,1,go to Bakery,[],"['butter', 'bagel']",0,0
+6,1,take bread,['bread'],"['butter', 'bagel']",10,10
+6,1,take bread,['bread'],"['butter', 'bagel']",-1,9
+6,1,take bread,['bread'],"['butter', 'bagel']",-1,8
+6,1,go to Produce,['bread'],"['butter', 'bagel']",0,8
+6,1,checkout,['bread'],"['butter', 'bagel']",-10,-2
+6,1,checkout,['bread'],"['butter', 'bagel']",-10,-12
+6,1,go to Dairy,['bread'],"['butter', 'bagel']",0,-12
+6,1,go to Produce,['bread'],"['butter', 'bagel']",0,-12
+6,1,go to Dairy,['bread'],"['butter', 'bagel']",0,-12
+6,1,take butter,"['bread', 'butter']","['butter', 'bagel']",10,-2
+6,1,take butter,"['bread', 'butter']","['butter', 'bagel']",-1,-3
+6,1,go to Dairy,"['bread', 'butter']","['butter', 'bagel']",0,-3
+6,1,checkout,"['bread', 'butter']","['butter', 'bagel']",-10,-13
+6,1,take cheese,"['bread', 'butter', 'cheese']","['butter', 'bagel']",10,-3
+7,1,go to Produce,[],"['cheese', 'butter', 'yogurt']",0,0
+7,1,take apples,['apples'],"['cheese', 'butter', 'yogurt']",10,10
+7,1,take lettuce,"['apples', 'lettuce']","['cheese', 'butter', 'yogurt']",10,20
+7,1,take bananas,"['apples', 'lettuce', 'bananas']","['cheese', 'butter', 'yogurt']",10,30
+7,1,take carrots,"['apples', 'lettuce', 'bananas', 'carrots']","['cheese', 'butter', 'yogurt']",10,40
+7,1,take lettuce,"['apples', 'lettuce', 'bananas', 'carrots']","['cheese', 'butter', 'yogurt']",-1,39
+7,1,checkout,"['apples', 'lettuce', 'bananas', 'carrots']","['cheese', 'butter', 'yogurt']",-10,29
+7,1,go to Dairy,"['apples', 'lettuce', 'bananas', 'carrots']","['cheese', 'butter', 'yogurt']",0,29
+7,1,go to Produce,"['apples', 'lettuce', 'bananas', 'carrots']","['cheese', 'butter', 'yogurt']",0,29
+7,1,go to Dairy,"['apples', 'lettuce', 'bananas', 'carrots']","['cheese', 'butter', 'yogurt']",0,29
+7,1,take milk,"['apples', 'lettuce', 'bananas', 'carrots', 'milk']","['cheese', 'butter', 'yogurt']",10,39
+7,1,go to Dairy,"['apples', 'lettuce', 'bananas', 'carrots', 'milk']","['cheese', 'butter', 'yogurt']",0,39
+7,1,take cheese,"['apples', 'lettuce', 'bananas', 'carrots', 'milk', 'cheese']","['cheese', 'butter', 'yogurt']",10,49
+7,1,take butter,"['apples', 'lettuce', 'bananas', 'carrots', 'milk', 'cheese', 'butter']","['cheese', 'butter', 'yogurt']",10,59
+7,1,take milk,"['apples', 'lettuce', 'bananas', 'carrots', 'milk', 'cheese', 'butter']","['cheese', 'butter', 'yogurt']",-1,58
+8,1,go to Bakery,[],"['bagel', 'apples']",0,0
+8,1,take cake,['cake'],"['bagel', 'apples']",10,10
+8,1,go to Dairy,['cake'],"['bagel', 'apples']",0,10
+8,1,checkout,['cake'],"['bagel', 'apples']",-10,0
+8,1,go to Dairy,['cake'],"['bagel', 'apples']",0,0
+8,1,take butter,"['cake', 'butter']","['bagel', 'apples']",10,10
+8,1,take cheese,"['cake', 'butter', 'cheese']","['bagel', 'apples']",10,20
+8,1,take cheese,"['cake', 'butter', 'cheese']","['bagel', 'apples']",-1,19
+8,1,go to Produce,"['cake', 'butter', 'cheese']","['bagel', 'apples']",0,19
+8,1,go to Bakery,"['cake', 'butter', 'cheese']","['bagel', 'apples']",0,19
+8,1,take bread,"['cake', 'butter', 'cheese', 'bread']","['bagel', 'apples']",10,29
+8,1,take croissant,"['cake', 'butter', 'cheese', 'bread', 'croissant']","['bagel', 'apples']",10,39
+8,1,take bagel,"['cake', 'butter', 'cheese', 'bread', 'croissant', 'bagel']","['bagel', 'apples']",10,49
+8,1,go to Produce,"['cake', 'butter', 'cheese', 'bread', 'croissant', 'bagel']","['bagel', 'apples']",0,49
+8,1,take bananas,"['cake', 'butter', 'cheese', 'bread', 'croissant', 'bagel', 'bananas']","['bagel', 'apples']",10,59
+9,1,go to Bakery,[],"['cheese', 'lettuce']",0,0
+9,1,checkout,[],"['cheese', 'lettuce']",-10,-10
+9,1,go to Bakery,[],"['cheese', 'lettuce']",0,-10
+9,1,checkout,[],"['cheese', 'lettuce']",-10,-20
+9,1,take bagel,['bagel'],"['cheese', 'lettuce']",10,-10
+9,1,checkout,['bagel'],"['cheese', 'lettuce']",-10,-20
+9,1,take bread,"['bagel', 'bread']","['cheese', 'lettuce']",10,-10
+9,1,take bagel,"['bagel', 'bread']","['cheese', 'lettuce']",-1,-11
+9,1,take croissant,"['bagel', 'bread', 'croissant']","['cheese', 'lettuce']",10,-1
+9,1,checkout,"['bagel', 'bread', 'croissant']","['cheese', 'lettuce']",-10,-11
+9,1,go to Bakery,"['bagel', 'bread', 'croissant']","['cheese', 'lettuce']",0,-11
+9,1,go to Dairy,"['bagel', 'bread', 'croissant']","['cheese', 'lettuce']",0,-11
+9,1,take milk,"['bagel', 'bread', 'croissant', 'milk']","['cheese', 'lettuce']",10,-1
+9,1,go to Produce,"['bagel', 'bread', 'croissant', 'milk']","['cheese', 'lettuce']",0,-1
+9,1,take carrots,"['bagel', 'bread', 'croissant', 'milk', 'carrots']","['cheese', 'lettuce']",10,9
+10,1,go to Produce,[],"['lettuce', 'butter']",0,0
+10,1,checkout,[],"['lettuce', 'butter']",-10,-10
+10,1,take apples,['apples'],"['lettuce', 'butter']",10,0
+10,1,go to Bakery,['apples'],"['lettuce', 'butter']",0,0
+10,1,go to Bakery,['apples'],"['lettuce', 'butter']",0,0
+10,1,go to Bakery,['apples'],"['lettuce', 'butter']",0,0
+10,1,go to Produce,['apples'],"['lettuce', 'butter']",0,0
+10,1,go to Dairy,['apples'],"['lettuce', 'butter']",0,0
+10,1,take butter,"['apples', 'butter']","['lettuce', 'butter']",10,10
+10,1,checkout,"['apples', 'butter']","['lettuce', 'butter']",-10,0
+10,1,go to Produce,"['apples', 'butter']","['lettuce', 'butter']",0,0
+10,1,go to Dairy,"['apples', 'butter']","['lettuce', 'butter']",0,0
+10,1,take butter,"['apples', 'butter']","['lettuce', 'butter']",-1,-1
+10,1,take milk,"['apples', 'butter', 'milk']","['lettuce', 'butter']",10,9
+10,1,checkout,"['apples', 'butter', 'milk']","['lettuce', 'butter']",-10,-1
+11,2,go to Produce,[],"['milk', 'bananas']",0,0
+11,2,go to Produce,[],"['milk', 'bananas']",0,0
+11,2,go to Dairy,[],"['milk', 'bananas']",0,0
+11,2,take cheese,['cheese'],"['milk', 'bananas']",10,10
+11,2,go to Dairy,['cheese'],"['milk', 'bananas']",0,10
+11,2,go to Dairy,['cheese'],"['milk', 'bananas']",0,10
+11,2,go to Dairy,['cheese'],"['milk', 'bananas']",0,10
+11,2,checkout,['cheese'],"['milk', 'bananas']",-10,0
+11,2,take butter,"['cheese', 'butter']","['milk', 'bananas']",10,10
+11,2,take yogurt,"['cheese', 'butter', 'yogurt']","['milk', 'bananas']",10,20
+11,2,go to Dairy,"['cheese', 'butter', 'yogurt']","['milk', 'bananas']",0,20
+11,2,go to Dairy,"['cheese', 'butter', 'yogurt']","['milk', 'bananas']",0,20
+11,2,checkout,"['cheese', 'butter', 'yogurt']","['milk', 'bananas']",-10,10
+11,2,take butter,"['cheese', 'butter', 'yogurt']","['milk', 'bananas']",-1,9
+11,2,go to Produce,"['cheese', 'butter', 'yogurt']","['milk', 'bananas']",0,9
+12,2,checkout,[],"['milk', 'apples']",-10,-10
+12,2,go to Produce,[],"['milk', 'apples']",0,-10
+12,2,take carrots,['carrots'],"['milk', 'apples']",10,0
+12,2,take bananas,"['carrots', 'bananas']","['milk', 'apples']",10,10
+12,2,take bananas,"['carrots', 'bananas']","['milk', 'apples']",-1,9
+12,2,take bananas,"['carrots', 'bananas']","['milk', 'apples']",-1,8
+12,2,take apples,"['carrots', 'bananas', 'apples']","['milk', 'apples']",10,18
+12,2,take bananas,"['carrots', 'bananas', 'apples']","['milk', 'apples']",-1,17
+12,2,take bananas,"['carrots', 'bananas', 'apples']","['milk', 'apples']",-1,16
+12,2,go to Dairy,"['carrots', 'bananas', 'apples']","['milk', 'apples']",0,16
+12,2,take milk,"['carrots', 'bananas', 'apples', 'milk']","['milk', 'apples']",10,26
+12,2,take milk,"['carrots', 'bananas', 'apples', 'milk']","['milk', 'apples']",-1,25
+12,2,take yogurt,"['carrots', 'bananas', 'apples', 'milk', 'yogurt']","['milk', 'apples']",10,35
+12,2,take yogurt,"['carrots', 'bananas', 'apples', 'milk', 'yogurt']","['milk', 'apples']",-1,34
+12,2,take yogurt,"['carrots', 'bananas', 'apples', 'milk', 'yogurt']","['milk', 'apples']",-1,33
+13,2,checkout,[],"['butter', 'croissant', 'bread']",-10,-10
+13,2,go to Dairy,[],"['butter', 'croissant', 'bread']",0,-10
+13,2,go to Produce,[],"['butter', 'croissant', 'bread']",0,-10
+13,2,take apples,['apples'],"['butter', 'croissant', 'bread']",10,0
+13,2,take bananas,"['apples', 'bananas']","['butter', 'croissant', 'bread']",10,10
+13,2,go to Bakery,"['apples', 'bananas']","['butter', 'croissant', 'bread']",0,10
+13,2,go to Bakery,"['apples', 'bananas']","['butter', 'croissant', 'bread']",0,10
+13,2,go to Bakery,"['apples', 'bananas']","['butter', 'croissant', 'bread']",0,10
+13,2,go to Dairy,"['apples', 'bananas']","['butter', 'croissant', 'bread']",0,10
+13,2,take yogurt,"['apples', 'bananas', 'yogurt']","['butter', 'croissant', 'bread']",10,20
+13,2,take butter,"['apples', 'bananas', 'yogurt', 'butter']","['butter', 'croissant', 'bread']",10,30
+13,2,go to Produce,"['apples', 'bananas', 'yogurt', 'butter']","['butter', 'croissant', 'bread']",0,30
+13,2,checkout,"['apples', 'bananas', 'yogurt', 'butter']","['butter', 'croissant', 'bread']",-10,20
+13,2,go to Bakery,"['apples', 'bananas', 'yogurt', 'butter']","['butter', 'croissant', 'bread']",0,20
+13,2,take croissant,"['apples', 'bananas', 'yogurt', 'butter', 'croissant']","['butter', 'croissant', 'bread']",10,30
+14,2,checkout,[],"['butter', 'cheese', 'milk']",-10,-10
+14,2,checkout,[],"['butter', 'cheese', 'milk']",-10,-20
+14,2,go to Bakery,[],"['butter', 'cheese', 'milk']",0,-20
+14,2,go to Produce,[],"['butter', 'cheese', 'milk']",0,-20
+14,2,checkout,[],"['butter', 'cheese', 'milk']",-10,-30
+14,2,go to Bakery,[],"['butter', 'cheese', 'milk']",0,-30
+14,2,take croissant,['croissant'],"['butter', 'cheese', 'milk']",10,-20
+14,2,take croissant,['croissant'],"['butter', 'cheese', 'milk']",-1,-21
+14,2,take bread,"['croissant', 'bread']","['butter', 'cheese', 'milk']",10,-11
+14,2,take bagel,"['croissant', 'bread', 'bagel']","['butter', 'cheese', 'milk']",10,-1
+14,2,take croissant,"['croissant', 'bread', 'bagel']","['butter', 'cheese', 'milk']",-1,-2
+14,2,take cake,"['croissant', 'bread', 'bagel', 'cake']","['butter', 'cheese', 'milk']",10,8
+14,2,go to Produce,"['croissant', 'bread', 'bagel', 'cake']","['butter', 'cheese', 'milk']",0,8
+14,2,go to Bakery,"['croissant', 'bread', 'bagel', 'cake']","['butter', 'cheese', 'milk']",0,8
+14,2,checkout,"['croissant', 'bread', 'bagel', 'cake']","['butter', 'cheese', 'milk']",-10,-2
+15,2,go to Produce,[],"['bananas', 'milk', 'bagel']",0,0
+15,2,checkout,[],"['bananas', 'milk', 'bagel']",-10,-10
+15,2,take apples,['apples'],"['bananas', 'milk', 'bagel']",10,0
+15,2,checkout,['apples'],"['bananas', 'milk', 'bagel']",-10,-10
+15,2,go to Dairy,['apples'],"['bananas', 'milk', 'bagel']",0,-10
+15,2,go to Produce,['apples'],"['bananas', 'milk', 'bagel']",0,-10
+15,2,take carrots,"['apples', 'carrots']","['bananas', 'milk', 'bagel']",10,0
+15,2,take bananas,"['apples', 'carrots', 'bananas']","['bananas', 'milk', 'bagel']",10,10
+15,2,take bananas,"['apples', 'carrots', 'bananas']","['bananas', 'milk', 'bagel']",-1,9
+15,2,take lettuce,"['apples', 'carrots', 'bananas', 'lettuce']","['bananas', 'milk', 'bagel']",10,19
+15,2,take carrots,"['apples', 'carrots', 'bananas', 'lettuce']","['bananas', 'milk', 'bagel']",-1,18
+15,2,take carrots,"['apples', 'carrots', 'bananas', 'lettuce']","['bananas', 'milk', 'bagel']",-1,17
+15,2,go to Dairy,"['apples', 'carrots', 'bananas', 'lettuce']","['bananas', 'milk', 'bagel']",0,17
+15,2,go to Dairy,"['apples', 'carrots', 'bananas', 'lettuce']","['bananas', 'milk', 'bagel']",0,17
+15,2,take butter,"['apples', 'carrots', 'bananas', 'lettuce', 'butter']","['bananas', 'milk', 'bagel']",10,27
+16,2,checkout,[],"['yogurt', 'bagel']",-10,-10
+16,2,go to Dairy,[],"['yogurt', 'bagel']",0,-10
+16,2,take cheese,['cheese'],"['yogurt', 'bagel']",10,0
+16,2,take milk,"['cheese', 'milk']","['yogurt', 'bagel']",10,10
+16,2,take yogurt,"['cheese', 'milk', 'yogurt']","['yogurt', 'bagel']",10,20
+16,2,take yogurt,"['cheese', 'milk', 'yogurt']","['yogurt', 'bagel']",-1,19
+16,2,take butter,"['cheese', 'milk', 'yogurt', 'butter']","['yogurt', 'bagel']",10,29
+16,2,take butter,"['cheese', 'milk', 'yogurt', 'butter']","['yogurt', 'bagel']",-1,28
+16,2,go to Produce,"['cheese', 'milk', 'yogurt', 'butter']","['yogurt', 'bagel']",0,28
+16,2,go to Bakery,"['cheese', 'milk', 'yogurt', 'butter']","['yogurt', 'bagel']",0,28
+16,2,go to Dairy,"['cheese', 'milk', 'yogurt', 'butter']","['yogurt', 'bagel']",0,28
+16,2,checkout,"['cheese', 'milk', 'yogurt', 'butter']","['yogurt', 'bagel']",-10,18
+16,2,checkout,"['cheese', 'milk', 'yogurt', 'butter']","['yogurt', 'bagel']",-10,8
+16,2,take cheese,"['cheese', 'milk', 'yogurt', 'butter']","['yogurt', 'bagel']",-1,7
+16,2,take butter,"['cheese', 'milk', 'yogurt', 'butter']","['yogurt', 'bagel']",-1,6
+17,2,go to Bakery,[],"['cake', 'milk', 'bread']",0,0
+17,2,checkout,[],"['cake', 'milk', 'bread']",-10,-10
+17,2,go to Produce,[],"['cake', 'milk', 'bread']",0,-10
+17,2,go to Bakery,[],"['cake', 'milk', 'bread']",0,-10
+17,2,take bagel,['bagel'],"['cake', 'milk', 'bread']",10,0
+17,2,take cake,"['bagel', 'cake']","['cake', 'milk', 'bread']",10,10
+17,2,go to Produce,"['bagel', 'cake']","['cake', 'milk', 'bread']",0,10
+17,2,take lettuce,"['bagel', 'cake', 'lettuce']","['cake', 'milk', 'bread']",10,20
+17,2,take lettuce,"['bagel', 'cake', 'lettuce']","['cake', 'milk', 'bread']",-1,19
+17,2,take carrots,"['bagel', 'cake', 'lettuce', 'carrots']","['cake', 'milk', 'bread']",10,29
+17,2,take apples,"['bagel', 'cake', 'lettuce', 'carrots', 'apples']","['cake', 'milk', 'bread']",10,39
+17,2,take carrots,"['bagel', 'cake', 'lettuce', 'carrots', 'apples']","['cake', 'milk', 'bread']",-1,38
+17,2,take carrots,"['bagel', 'cake', 'lettuce', 'carrots', 'apples']","['cake', 'milk', 'bread']",-1,37
+17,2,go to Bakery,"['bagel', 'cake', 'lettuce', 'carrots', 'apples']","['cake', 'milk', 'bread']",0,37
+17,2,checkout,"['bagel', 'cake', 'lettuce', 'carrots', 'apples']","['cake', 'milk', 'bread']",-10,27
+18,2,go to Bakery,[],"['bread', 'bananas', 'apples']",0,0
+18,2,take croissant,['croissant'],"['bread', 'bananas', 'apples']",10,10
+18,2,take bread,"['croissant', 'bread']","['bread', 'bananas', 'apples']",10,20
+18,2,go to Bakery,"['croissant', 'bread']","['bread', 'bananas', 'apples']",0,20
+18,2,go to Bakery,"['croissant', 'bread']","['bread', 'bananas', 'apples']",0,20
+18,2,go to Produce,"['croissant', 'bread']","['bread', 'bananas', 'apples']",0,20
+18,2,checkout,"['croissant', 'bread']","['bread', 'bananas', 'apples']",-10,10
+18,2,go to Bakery,"['croissant', 'bread']","['bread', 'bananas', 'apples']",0,10
+18,2,take cake,"['croissant', 'bread', 'cake']","['bread', 'bananas', 'apples']",10,20
+18,2,take croissant,"['croissant', 'bread', 'cake']","['bread', 'bananas', 'apples']",-1,19
+18,2,take bagel,"['croissant', 'bread', 'cake', 'bagel']","['bread', 'bananas', 'apples']",10,29
+18,2,take cake,"['croissant', 'bread', 'cake', 'bagel']","['bread', 'bananas', 'apples']",-1,28
+18,2,take bagel,"['croissant', 'bread', 'cake', 'bagel']","['bread', 'bananas', 'apples']",-1,27
+18,2,take cake,"['croissant', 'bread', 'cake', 'bagel']","['bread', 'bananas', 'apples']",-1,26
+18,2,take cake,"['croissant', 'bread', 'cake', 'bagel']","['bread', 'bananas', 'apples']",-1,25
+19,2,go to Dairy,[],"['yogurt', 'bread', 'apples']",0,0
+19,2,go to Dairy,[],"['yogurt', 'bread', 'apples']",0,0
+19,2,take cheese,['cheese'],"['yogurt', 'bread', 'apples']",10,10
+19,2,go to Produce,['cheese'],"['yogurt', 'bread', 'apples']",0,10
+19,2,take bananas,"['cheese', 'bananas']","['yogurt', 'bread', 'apples']",10,20
+19,2,take bananas,"['cheese', 'bananas']","['yogurt', 'bread', 'apples']",-1,19
+19,2,go to Dairy,"['cheese', 'bananas']","['yogurt', 'bread', 'apples']",0,19
+19,2,go to Dairy,"['cheese', 'bananas']","['yogurt', 'bread', 'apples']",0,19
+19,2,take cheese,"['cheese', 'bananas']","['yogurt', 'bread', 'apples']",-1,18
+19,2,go to Dairy,"['cheese', 'bananas']","['yogurt', 'bread', 'apples']",0,18
+19,2,take cheese,"['cheese', 'bananas']","['yogurt', 'bread', 'apples']",-1,17
+19,2,take butter,"['cheese', 'bananas', 'butter']","['yogurt', 'bread', 'apples']",10,27
+19,2,go to Produce,"['cheese', 'bananas', 'butter']","['yogurt', 'bread', 'apples']",0,27
+19,2,checkout,"['cheese', 'bananas', 'butter']","['yogurt', 'bread', 'apples']",-10,17
+19,2,go to Dairy,"['cheese', 'bananas', 'butter']","['yogurt', 'bread', 'apples']",0,17
+20,2,go to Produce,[],"['bagel', 'milk']",0,0
+20,2,take lettuce,['lettuce'],"['bagel', 'milk']",10,10
+20,2,take apples,"['lettuce', 'apples']","['bagel', 'milk']",10,20
+20,2,go to Produce,"['lettuce', 'apples']","['bagel', 'milk']",0,20
+20,2,take carrots,"['lettuce', 'apples', 'carrots']","['bagel', 'milk']",10,30
+20,2,take carrots,"['lettuce', 'apples', 'carrots']","['bagel', 'milk']",-1,29
+20,2,go to Produce,"['lettuce', 'apples', 'carrots']","['bagel', 'milk']",0,29
+20,2,take lettuce,"['lettuce', 'apples', 'carrots']","['bagel', 'milk']",-1,28
+20,2,go to Produce,"['lettuce', 'apples', 'carrots']","['bagel', 'milk']",0,28
+20,2,checkout,"['lettuce', 'apples', 'carrots']","['bagel', 'milk']",-10,18
+20,2,take lettuce,"['lettuce', 'apples', 'carrots']","['bagel', 'milk']",-1,17
+20,2,take bananas,"['lettuce', 'apples', 'carrots', 'bananas']","['bagel', 'milk']",10,27
+20,2,take apples,"['lettuce', 'apples', 'carrots', 'bananas']","['bagel', 'milk']",-1,26
+20,2,go to Dairy,"['lettuce', 'apples', 'carrots', 'bananas']","['bagel', 'milk']",0,26
+20,2,take butter,"['lettuce', 'apples', 'carrots', 'bananas', 'butter']","['bagel', 'milk']",10,36
+21,3,go to Produce,[],"['cake', 'butter']",0,0
+21,3,go to Bakery,[],"['cake', 'butter']",0,0
+21,3,checkout,[],"['cake', 'butter']",-10,-10
+21,3,checkout,[],"['cake', 'butter']",-10,-20
+21,3,go to Produce,[],"['cake', 'butter']",0,-20
+21,3,take lettuce,['lettuce'],"['cake', 'butter']",10,-10
+21,3,go to Dairy,['lettuce'],"['cake', 'butter']",0,-10
+21,3,go to Bakery,['lettuce'],"['cake', 'butter']",0,-10
+21,3,checkout,['lettuce'],"['cake', 'butter']",-10,-20
+21,3,checkout,['lettuce'],"['cake', 'butter']",-10,-30
+21,3,take cake,"['lettuce', 'cake']","['cake', 'butter']",10,-20
+21,3,go to Produce,"['lettuce', 'cake']","['cake', 'butter']",0,-20
+21,3,go to Bakery,"['lettuce', 'cake']","['cake', 'butter']",0,-20
+21,3,take bagel,"['lettuce', 'cake', 'bagel']","['cake', 'butter']",10,-10
+21,3,take bagel,"['lettuce', 'cake', 'bagel']","['cake', 'butter']",-1,-11
+22,3,go to Bakery,[],"['milk', 'apples', 'butter']",0,0
+22,3,checkout,[],"['milk', 'apples', 'butter']",-10,-10
+22,3,go to Dairy,[],"['milk', 'apples', 'butter']",0,-10
+22,3,checkout,[],"['milk', 'apples', 'butter']",-10,-20
+22,3,checkout,[],"['milk', 'apples', 'butter']",-10,-30
+22,3,take butter,['butter'],"['milk', 'apples', 'butter']",10,-20
+22,3,go to Dairy,['butter'],"['milk', 'apples', 'butter']",0,-20
+22,3,checkout,['butter'],"['milk', 'apples', 'butter']",-10,-30
+22,3,take yogurt,"['butter', 'yogurt']","['milk', 'apples', 'butter']",10,-20
+22,3,go to Produce,"['butter', 'yogurt']","['milk', 'apples', 'butter']",0,-20
+22,3,checkout,"['butter', 'yogurt']","['milk', 'apples', 'butter']",-10,-30
+22,3,take lettuce,"['butter', 'yogurt', 'lettuce']","['milk', 'apples', 'butter']",10,-20
+22,3,take carrots,"['butter', 'yogurt', 'lettuce', 'carrots']","['milk', 'apples', 'butter']",10,-10
+22,3,take lettuce,"['butter', 'yogurt', 'lettuce', 'carrots']","['milk', 'apples', 'butter']",-1,-11
+22,3,go to Produce,"['butter', 'yogurt', 'lettuce', 'carrots']","['milk', 'apples', 'butter']",0,-11
+23,3,checkout,[],"['bananas', 'yogurt', 'croissant']",-10,-10
+23,3,go to Produce,[],"['bananas', 'yogurt', 'croissant']",0,-10
+23,3,take lettuce,['lettuce'],"['bananas', 'yogurt', 'croissant']",10,0
+23,3,take bananas,"['lettuce', 'bananas']","['bananas', 'yogurt', 'croissant']",10,10
+23,3,take lettuce,"['lettuce', 'bananas']","['bananas', 'yogurt', 'croissant']",-1,9
+23,3,go to Dairy,"['lettuce', 'bananas']","['bananas', 'yogurt', 'croissant']",0,9
+23,3,take yogurt,"['lettuce', 'bananas', 'yogurt']","['bananas', 'yogurt', 'croissant']",10,19
+23,3,go to Dairy,"['lettuce', 'bananas', 'yogurt']","['bananas', 'yogurt', 'croissant']",0,19
+23,3,take yogurt,"['lettuce', 'bananas', 'yogurt']","['bananas', 'yogurt', 'croissant']",-1,18
+23,3,take milk,"['lettuce', 'bananas', 'yogurt', 'milk']","['bananas', 'yogurt', 'croissant']",10,28
+23,3,go to Dairy,"['lettuce', 'bananas', 'yogurt', 'milk']","['bananas', 'yogurt', 'croissant']",0,28
+23,3,take yogurt,"['lettuce', 'bananas', 'yogurt', 'milk']","['bananas', 'yogurt', 'croissant']",-1,27
+23,3,go to Dairy,"['lettuce', 'bananas', 'yogurt', 'milk']","['bananas', 'yogurt', 'croissant']",0,27
+23,3,take milk,"['lettuce', 'bananas', 'yogurt', 'milk']","['bananas', 'yogurt', 'croissant']",-1,26
+23,3,go to Bakery,"['lettuce', 'bananas', 'yogurt', 'milk']","['bananas', 'yogurt', 'croissant']",0,26
+24,3,go to Dairy,[],"['butter', 'cheese']",0,0
+24,3,go to Bakery,[],"['butter', 'cheese']",0,0
+24,3,go to Bakery,[],"['butter', 'cheese']",0,0
+24,3,take cake,['cake'],"['butter', 'cheese']",10,10
+24,3,take bagel,"['cake', 'bagel']","['butter', 'cheese']",10,20
+24,3,go to Dairy,"['cake', 'bagel']","['butter', 'cheese']",0,20
+24,3,go to Dairy,"['cake', 'bagel']","['butter', 'cheese']",0,20
+24,3,take yogurt,"['cake', 'bagel', 'yogurt']","['butter', 'cheese']",10,30
+24,3,take milk,"['cake', 'bagel', 'yogurt', 'milk']","['butter', 'cheese']",10,40
+24,3,checkout,"['cake', 'bagel', 'yogurt', 'milk']","['butter', 'cheese']",-10,30
+24,3,take cheese,"['cake', 'bagel', 'yogurt', 'milk', 'cheese']","['butter', 'cheese']",10,40
+24,3,go to Bakery,"['cake', 'bagel', 'yogurt', 'milk', 'cheese']","['butter', 'cheese']",0,40
+24,3,take cake,"['cake', 'bagel', 'yogurt', 'milk', 'cheese']","['butter', 'cheese']",-1,39
+24,3,go to Dairy,"['cake', 'bagel', 'yogurt', 'milk', 'cheese']","['butter', 'cheese']",0,39
+24,3,take yogurt,"['cake', 'bagel', 'yogurt', 'milk', 'cheese']","['butter', 'cheese']",-1,38
+25,3,checkout,[],"['bananas', 'yogurt']",-10,-10
+25,3,go to Bakery,[],"['bananas', 'yogurt']",0,-10
+25,3,take bread,['bread'],"['bananas', 'yogurt']",10,0
+25,3,take cake,"['bread', 'cake']","['bananas', 'yogurt']",10,10
+25,3,take croissant,"['bread', 'cake', 'croissant']","['bananas', 'yogurt']",10,20
+25,3,go to Bakery,"['bread', 'cake', 'croissant']","['bananas', 'yogurt']",0,20
+25,3,take croissant,"['bread', 'cake', 'croissant']","['bananas', 'yogurt']",-1,19
+25,3,take croissant,"['bread', 'cake', 'croissant']","['bananas', 'yogurt']",-1,18
+25,3,take croissant,"['bread', 'cake', 'croissant']","['bananas', 'yogurt']",-1,17
+25,3,checkout,"['bread', 'cake', 'croissant']","['bananas', 'yogurt']",-10,7
+25,3,checkout,"['bread', 'cake', 'croissant']","['bananas', 'yogurt']",-10,-3
+25,3,take cake,"['bread', 'cake', 'croissant']","['bananas', 'yogurt']",-1,-4
+25,3,take bread,"['bread', 'cake', 'croissant']","['bananas', 'yogurt']",-1,-5
+25,3,take bagel,"['bread', 'cake', 'croissant', 'bagel']","['bananas', 'yogurt']",10,5
+25,3,go to Dairy,"['bread', 'cake', 'croissant', 'bagel']","['bananas', 'yogurt']",0,5
+26,3,go to Dairy,[],"['bananas', 'cake', 'cheese']",0,0
+26,3,take cheese,['cheese'],"['bananas', 'cake', 'cheese']",10,10
+26,3,take yogurt,"['cheese', 'yogurt']","['bananas', 'cake', 'cheese']",10,20
+26,3,take milk,"['cheese', 'yogurt', 'milk']","['bananas', 'cake', 'cheese']",10,30
+26,3,go to Produce,"['cheese', 'yogurt', 'milk']","['bananas', 'cake', 'cheese']",0,30
+26,3,go to Dairy,"['cheese', 'yogurt', 'milk']","['bananas', 'cake', 'cheese']",0,30
+26,3,checkout,"['cheese', 'yogurt', 'milk']","['bananas', 'cake', 'cheese']",-10,20
+26,3,checkout,"['cheese', 'yogurt', 'milk']","['bananas', 'cake', 'cheese']",-10,10
+26,3,take yogurt,"['cheese', 'yogurt', 'milk']","['bananas', 'cake', 'cheese']",-1,9
+26,3,go to Produce,"['cheese', 'yogurt', 'milk']","['bananas', 'cake', 'cheese']",0,9
+26,3,go to Bakery,"['cheese', 'yogurt', 'milk']","['bananas', 'cake', 'cheese']",0,9
+26,3,checkout,"['cheese', 'yogurt', 'milk']","['bananas', 'cake', 'cheese']",-10,-1
+26,3,take bagel,"['cheese', 'yogurt', 'milk', 'bagel']","['bananas', 'cake', 'cheese']",10,9
+26,3,checkout,"['cheese', 'yogurt', 'milk', 'bagel']","['bananas', 'cake', 'cheese']",-10,-1
+26,3,go to Dairy,"['cheese', 'yogurt', 'milk', 'bagel']","['bananas', 'cake', 'cheese']",0,-1
+27,3,go to Bakery,[],"['apples', 'croissant']",0,0
+27,3,checkout,[],"['apples', 'croissant']",-10,-10
+27,3,go to Dairy,[],"['apples', 'croissant']",0,-10
+27,3,take butter,['butter'],"['apples', 'croissant']",10,0
+27,3,go to Produce,['butter'],"['apples', 'croissant']",0,0
+27,3,checkout,['butter'],"['apples', 'croissant']",-10,-10
+27,3,go to Dairy,['butter'],"['apples', 'croissant']",0,-10
+27,3,take milk,"['butter', 'milk']","['apples', 'croissant']",10,0
+27,3,go to Bakery,"['butter', 'milk']","['apples', 'croissant']",0,0
+27,3,take croissant,"['butter', 'milk', 'croissant']","['apples', 'croissant']",10,10
+27,3,take bagel,"['butter', 'milk', 'croissant', 'bagel']","['apples', 'croissant']",10,20
+27,3,go to Dairy,"['butter', 'milk', 'croissant', 'bagel']","['apples', 'croissant']",0,20
+27,3,go to Bakery,"['butter', 'milk', 'croissant', 'bagel']","['apples', 'croissant']",0,20
+27,3,take bagel,"['butter', 'milk', 'croissant', 'bagel']","['apples', 'croissant']",-1,19
+27,3,take bagel,"['butter', 'milk', 'croissant', 'bagel']","['apples', 'croissant']",-1,18
+28,3,go to Dairy,[],"['bananas', 'cheese']",0,0
+28,3,go to Dairy,[],"['bananas', 'cheese']",0,0
+28,3,take milk,['milk'],"['bananas', 'cheese']",10,10
+28,3,take milk,['milk'],"['bananas', 'cheese']",-1,9
+28,3,take yogurt,"['milk', 'yogurt']","['bananas', 'cheese']",10,19
+28,3,go to Bakery,"['milk', 'yogurt']","['bananas', 'cheese']",0,19
+28,3,checkout,"['milk', 'yogurt']","['bananas', 'cheese']",-10,9
+28,3,checkout,"['milk', 'yogurt']","['bananas', 'cheese']",-10,-1
+28,3,take cake,"['milk', 'yogurt', 'cake']","['bananas', 'cheese']",10,9
+28,3,take cake,"['milk', 'yogurt', 'cake']","['bananas', 'cheese']",-1,8
+28,3,go to Bakery,"['milk', 'yogurt', 'cake']","['bananas', 'cheese']",0,8
+28,3,take bagel,"['milk', 'yogurt', 'cake', 'bagel']","['bananas', 'cheese']",10,18
+28,3,take croissant,"['milk', 'yogurt', 'cake', 'bagel', 'croissant']","['bananas', 'cheese']",10,28
+28,3,take bagel,"['milk', 'yogurt', 'cake', 'bagel', 'croissant']","['bananas', 'cheese']",-1,27
+28,3,checkout,"['milk', 'yogurt', 'cake', 'bagel', 'croissant']","['bananas', 'cheese']",-10,17
+29,3,go to Produce,[],"['bread', 'milk', 'croissant']",0,0
+29,3,go to Produce,[],"['bread', 'milk', 'croissant']",0,0
+29,3,go to Dairy,[],"['bread', 'milk', 'croissant']",0,0
+29,3,checkout,[],"['bread', 'milk', 'croissant']",-10,-10
+29,3,go to Produce,[],"['bread', 'milk', 'croissant']",0,-10
+29,3,go to Bakery,[],"['bread', 'milk', 'croissant']",0,-10
+29,3,take cake,['cake'],"['bread', 'milk', 'croissant']",10,0
+29,3,go to Produce,['cake'],"['bread', 'milk', 'croissant']",0,0
+29,3,take lettuce,"['cake', 'lettuce']","['bread', 'milk', 'croissant']",10,10
+29,3,take lettuce,"['cake', 'lettuce']","['bread', 'milk', 'croissant']",-1,9
+29,3,go to Produce,"['cake', 'lettuce']","['bread', 'milk', 'croissant']",0,9
+29,3,go to Produce,"['cake', 'lettuce']","['bread', 'milk', 'croissant']",0,9
+29,3,go to Dairy,"['cake', 'lettuce']","['bread', 'milk', 'croissant']",0,9
+29,3,take butter,"['cake', 'lettuce', 'butter']","['bread', 'milk', 'croissant']",10,19
+29,3,take milk,"['cake', 'lettuce', 'butter', 'milk']","['bread', 'milk', 'croissant']",10,29
+30,3,go to Dairy,[],"['lettuce', 'yogurt']",0,0
+30,3,go to Dairy,[],"['lettuce', 'yogurt']",0,0
+30,3,take milk,['milk'],"['lettuce', 'yogurt']",10,10
+30,3,take cheese,"['milk', 'cheese']","['lettuce', 'yogurt']",10,20
+30,3,go to Produce,"['milk', 'cheese']","['lettuce', 'yogurt']",0,20
+30,3,take carrots,"['milk', 'cheese', 'carrots']","['lettuce', 'yogurt']",10,30
+30,3,checkout,"['milk', 'cheese', 'carrots']","['lettuce', 'yogurt']",-10,20
+30,3,take apples,"['milk', 'cheese', 'carrots', 'apples']","['lettuce', 'yogurt']",10,30
+30,3,take lettuce,"['milk', 'cheese', 'carrots', 'apples', 'lettuce']","['lettuce', 'yogurt']",10,40
+30,3,take apples,"['milk', 'cheese', 'carrots', 'apples', 'lettuce']","['lettuce', 'yogurt']",-1,39
+30,3,go to Produce,"['milk', 'cheese', 'carrots', 'apples', 'lettuce']","['lettuce', 'yogurt']",0,39
+30,3,checkout,"['milk', 'cheese', 'carrots', 'apples', 'lettuce']","['lettuce', 'yogurt']",-10,29
+30,3,take bananas,"['milk', 'cheese', 'carrots', 'apples', 'lettuce', 'bananas']","['lettuce', 'yogurt']",10,39
+30,3,checkout,"['milk', 'cheese', 'carrots', 'apples', 'lettuce', 'bananas']","['lettuce', 'yogurt']",-10,29
+30,3,take bananas,"['milk', 'cheese', 'carrots', 'apples', 'lettuce', 'bananas']","['lettuce', 'yogurt']",-1,28
+31,4,go to Dairy,[],"['yogurt', 'milk', 'apples']",0,0
+31,4,checkout,[],"['yogurt', 'milk', 'apples']",-10,-10
+31,4,take yogurt,['yogurt'],"['yogurt', 'milk', 'apples']",10,0
+31,4,take yogurt,['yogurt'],"['yogurt', 'milk', 'apples']",-1,-1
+31,4,take butter,"['yogurt', 'butter']","['yogurt', 'milk', 'apples']",10,9
+31,4,go to Bakery,"['yogurt', 'butter']","['yogurt', 'milk', 'apples']",0,9
+31,4,go to Dairy,"['yogurt', 'butter']","['yogurt', 'milk', 'apples']",0,9
+31,4,take yogurt,"['yogurt', 'butter']","['yogurt', 'milk', 'apples']",-1,8
+31,4,go to Dairy,"['yogurt', 'butter']","['yogurt', 'milk', 'apples']",0,8
+31,4,take milk,"['yogurt', 'butter', 'milk']","['yogurt', 'milk', 'apples']",10,18
+31,4,go to Produce,"['yogurt', 'butter', 'milk']","['yogurt', 'milk', 'apples']",0,18
+31,4,take lettuce,"['yogurt', 'butter', 'milk', 'lettuce']","['yogurt', 'milk', 'apples']",10,28
+31,4,take carrots,"['yogurt', 'butter', 'milk', 'lettuce', 'carrots']","['yogurt', 'milk', 'apples']",10,38
+31,4,take apples,"['yogurt', 'butter', 'milk', 'lettuce', 'carrots', 'apples']","['yogurt', 'milk', 'apples']",10,48
+31,4,checkout,"['yogurt', 'butter', 'milk', 'lettuce', 'carrots', 'apples']","['yogurt', 'milk', 'apples']",-10,38
+32,4,go to Dairy,[],"['apples', 'lettuce', 'milk']",0,0
+32,4,go to Produce,[],"['apples', 'lettuce', 'milk']",0,0
+32,4,go to Produce,[],"['apples', 'lettuce', 'milk']",0,0
+32,4,take carrots,['carrots'],"['apples', 'lettuce', 'milk']",10,10
+32,4,take bananas,"['carrots', 'bananas']","['apples', 'lettuce', 'milk']",10,20
+32,4,checkout,"['carrots', 'bananas']","['apples', 'lettuce', 'milk']",-10,10
+32,4,take lettuce,"['carrots', 'bananas', 'lettuce']","['apples', 'lettuce', 'milk']",10,20
+32,4,take apples,"['carrots', 'bananas', 'lettuce', 'apples']","['apples', 'lettuce', 'milk']",10,30
+32,4,go to Dairy,"['carrots', 'bananas', 'lettuce', 'apples']","['apples', 'lettuce', 'milk']",0,30
+32,4,go to Bakery,"['carrots', 'bananas', 'lettuce', 'apples']","['apples', 'lettuce', 'milk']",0,30
+32,4,take bagel,"['carrots', 'bananas', 'lettuce', 'apples', 'bagel']","['apples', 'lettuce', 'milk']",10,40
+32,4,take bagel,"['carrots', 'bananas', 'lettuce', 'apples', 'bagel']","['apples', 'lettuce', 'milk']",-1,39
+32,4,take croissant,"['carrots', 'bananas', 'lettuce', 'apples', 'bagel', 'croissant']","['apples', 'lettuce', 'milk']",10,49
+32,4,checkout,"['carrots', 'bananas', 'lettuce', 'apples', 'bagel', 'croissant']","['apples', 'lettuce', 'milk']",-10,39
+32,4,checkout,"['carrots', 'bananas', 'lettuce', 'apples', 'bagel', 'croissant']","['apples', 'lettuce', 'milk']",-10,29
+33,4,go to Dairy,[],"['milk', 'croissant']",0,0
+33,4,go to Produce,[],"['milk', 'croissant']",0,0
+33,4,checkout,[],"['milk', 'croissant']",-10,-10
+33,4,take apples,['apples'],"['milk', 'croissant']",10,0
+33,4,take bananas,"['apples', 'bananas']","['milk', 'croissant']",10,10
+33,4,take lettuce,"['apples', 'bananas', 'lettuce']","['milk', 'croissant']",10,20
+33,4,take lettuce,"['apples', 'bananas', 'lettuce']","['milk', 'croissant']",-1,19
+33,4,take apples,"['apples', 'bananas', 'lettuce']","['milk', 'croissant']",-1,18
+33,4,take carrots,"['apples', 'bananas', 'lettuce', 'carrots']","['milk', 'croissant']",10,28
+33,4,take carrots,"['apples', 'bananas', 'lettuce', 'carrots']","['milk', 'croissant']",-1,27
+33,4,go to Bakery,"['apples', 'bananas', 'lettuce', 'carrots']","['milk', 'croissant']",0,27
+33,4,take bread,"['apples', 'bananas', 'lettuce', 'carrots', 'bread']","['milk', 'croissant']",10,37
+33,4,go to Produce,"['apples', 'bananas', 'lettuce', 'carrots', 'bread']","['milk', 'croissant']",0,37
+33,4,take bananas,"['apples', 'bananas', 'lettuce', 'carrots', 'bread']","['milk', 'croissant']",-1,36
+33,4,go to Dairy,"['apples', 'bananas', 'lettuce', 'carrots', 'bread']","['milk', 'croissant']",0,36
+34,4,go to Bakery,[],"['lettuce', 'milk']",0,0
+34,4,go to Bakery,[],"['lettuce', 'milk']",0,0
+34,4,checkout,[],"['lettuce', 'milk']",-10,-10
+34,4,checkout,[],"['lettuce', 'milk']",-10,-20
+34,4,take cake,['cake'],"['lettuce', 'milk']",10,-10
+34,4,checkout,['cake'],"['lettuce', 'milk']",-10,-20
+34,4,take cake,['cake'],"['lettuce', 'milk']",-1,-21
+34,4,checkout,['cake'],"['lettuce', 'milk']",-10,-31
+34,4,go to Dairy,['cake'],"['lettuce', 'milk']",0,-31
+34,4,take butter,"['cake', 'butter']","['lettuce', 'milk']",10,-21
+34,4,checkout,"['cake', 'butter']","['lettuce', 'milk']",-10,-31
+34,4,go to Produce,"['cake', 'butter']","['lettuce', 'milk']",0,-31
+34,4,go to Bakery,"['cake', 'butter']","['lettuce', 'milk']",0,-31
+34,4,take croissant,"['cake', 'butter', 'croissant']","['lettuce', 'milk']",10,-21
+34,4,take croissant,"['cake', 'butter', 'croissant']","['lettuce', 'milk']",-1,-22
+35,4,checkout,[],"['bananas', 'butter']",-10,-10
+35,4,go to Produce,[],"['bananas', 'butter']",0,-10
+35,4,take apples,['apples'],"['bananas', 'butter']",10,0
+35,4,go to Dairy,['apples'],"['bananas', 'butter']",0,0
+35,4,checkout,['apples'],"['bananas', 'butter']",-10,-10
+35,4,take butter,"['apples', 'butter']","['bananas', 'butter']",10,0
+35,4,checkout,"['apples', 'butter']","['bananas', 'butter']",-10,-10
+35,4,take yogurt,"['apples', 'butter', 'yogurt']","['bananas', 'butter']",10,0
+35,4,take butter,"['apples', 'butter', 'yogurt']","['bananas', 'butter']",-1,-1
+35,4,take yogurt,"['apples', 'butter', 'yogurt']","['bananas', 'butter']",-1,-2
+35,4,take yogurt,"['apples', 'butter', 'yogurt']","['bananas', 'butter']",-1,-3
+35,4,checkout,"['apples', 'butter', 'yogurt']","['bananas', 'butter']",-10,-13
+35,4,go to Produce,"['apples', 'butter', 'yogurt']","['bananas', 'butter']",0,-13
+35,4,take apples,"['apples', 'butter', 'yogurt']","['bananas', 'butter']",-1,-14
+35,4,go to Bakery,"['apples', 'butter', 'yogurt']","['bananas', 'butter']",0,-14
+36,4,checkout,[],"['butter', 'bagel', 'apples']",-10,-10
+36,4,checkout,[],"['butter', 'bagel', 'apples']",-10,-20
+36,4,checkout,[],"['butter', 'bagel', 'apples']",-10,-30
+36,4,go to Dairy,[],"['butter', 'bagel', 'apples']",0,-30
+36,4,take butter,['butter'],"['butter', 'bagel', 'apples']",10,-20
+36,4,take cheese,"['butter', 'cheese']","['butter', 'bagel', 'apples']",10,-10
+36,4,go to Bakery,"['butter', 'cheese']","['butter', 'bagel', 'apples']",0,-10
+36,4,take bagel,"['butter', 'cheese', 'bagel']","['butter', 'bagel', 'apples']",10,0
+36,4,checkout,"['butter', 'cheese', 'bagel']","['butter', 'bagel', 'apples']",-10,-10
+36,4,go to Produce,"['butter', 'cheese', 'bagel']","['butter', 'bagel', 'apples']",0,-10
+36,4,take carrots,"['butter', 'cheese', 'bagel', 'carrots']","['butter', 'bagel', 'apples']",10,0
+36,4,go to Bakery,"['butter', 'cheese', 'bagel', 'carrots']","['butter', 'bagel', 'apples']",0,0
+36,4,go to Bakery,"['butter', 'cheese', 'bagel', 'carrots']","['butter', 'bagel', 'apples']",0,0
+36,4,go to Dairy,"['butter', 'cheese', 'bagel', 'carrots']","['butter', 'bagel', 'apples']",0,0
+36,4,go to Produce,"['butter', 'cheese', 'bagel', 'carrots']","['butter', 'bagel', 'apples']",0,0
+37,4,go to Dairy,[],"['bread', 'croissant', 'butter']",0,0
+37,4,take milk,['milk'],"['bread', 'croissant', 'butter']",10,10
+37,4,checkout,['milk'],"['bread', 'croissant', 'butter']",-10,0
+37,4,go to Produce,['milk'],"['bread', 'croissant', 'butter']",0,0
+37,4,take lettuce,"['milk', 'lettuce']","['bread', 'croissant', 'butter']",10,10
+37,4,go to Produce,"['milk', 'lettuce']","['bread', 'croissant', 'butter']",0,10
+37,4,go to Produce,"['milk', 'lettuce']","['bread', 'croissant', 'butter']",0,10
+37,4,checkout,"['milk', 'lettuce']","['bread', 'croissant', 'butter']",-10,0
+37,4,checkout,"['milk', 'lettuce']","['bread', 'croissant', 'butter']",-10,-10
+37,4,go to Bakery,"['milk', 'lettuce']","['bread', 'croissant', 'butter']",0,-10
+37,4,take bread,"['milk', 'lettuce', 'bread']","['bread', 'croissant', 'butter']",10,0
+37,4,take cake,"['milk', 'lettuce', 'bread', 'cake']","['bread', 'croissant', 'butter']",10,10
+37,4,take bread,"['milk', 'lettuce', 'bread', 'cake']","['bread', 'croissant', 'butter']",-1,9
+37,4,take bagel,"['milk', 'lettuce', 'bread', 'cake', 'bagel']","['bread', 'croissant', 'butter']",10,19
+37,4,go to Produce,"['milk', 'lettuce', 'bread', 'cake', 'bagel']","['bread', 'croissant', 'butter']",0,19
+38,4,go to Bakery,[],"['butter', 'yogurt']",0,0
+38,4,go to Dairy,[],"['butter', 'yogurt']",0,0
+38,4,take butter,['butter'],"['butter', 'yogurt']",10,10
+38,4,take yogurt,"['butter', 'yogurt']","['butter', 'yogurt']",10,20
+38,4,go to Produce,"['butter', 'yogurt']","['butter', 'yogurt']",0,20
+38,4,take apples,"['butter', 'yogurt', 'apples']","['butter', 'yogurt']",10,30
+38,4,go to Produce,"['butter', 'yogurt', 'apples']","['butter', 'yogurt']",0,30
+38,4,go to Dairy,"['butter', 'yogurt', 'apples']","['butter', 'yogurt']",0,30
+38,4,go to Dairy,"['butter', 'yogurt', 'apples']","['butter', 'yogurt']",0,30
+38,4,take milk,"['butter', 'yogurt', 'apples', 'milk']","['butter', 'yogurt']",10,40
+38,4,take yogurt,"['butter', 'yogurt', 'apples', 'milk']","['butter', 'yogurt']",-1,39
+38,4,take butter,"['butter', 'yogurt', 'apples', 'milk']","['butter', 'yogurt']",-1,38
+38,4,take cheese,"['butter', 'yogurt', 'apples', 'milk', 'cheese']","['butter', 'yogurt']",10,48
+38,4,take milk,"['butter', 'yogurt', 'apples', 'milk', 'cheese']","['butter', 'yogurt']",-1,47
+38,4,go to Produce,"['butter', 'yogurt', 'apples', 'milk', 'cheese']","['butter', 'yogurt']",0,47
+39,4,go to Bakery,[],"['cheese', 'lettuce', 'bagel']",0,0
+39,4,take bagel,['bagel'],"['cheese', 'lettuce', 'bagel']",10,10
+39,4,take bagel,['bagel'],"['cheese', 'lettuce', 'bagel']",-1,9
+39,4,checkout,['bagel'],"['cheese', 'lettuce', 'bagel']",-10,-1
+39,4,go to Dairy,['bagel'],"['cheese', 'lettuce', 'bagel']",0,-1
+39,4,checkout,['bagel'],"['cheese', 'lettuce', 'bagel']",-10,-11
+39,4,take yogurt,"['bagel', 'yogurt']","['cheese', 'lettuce', 'bagel']",10,-1
+39,4,go to Produce,"['bagel', 'yogurt']","['cheese', 'lettuce', 'bagel']",0,-1
+39,4,go to Dairy,"['bagel', 'yogurt']","['cheese', 'lettuce', 'bagel']",0,-1
+39,4,take butter,"['bagel', 'yogurt', 'butter']","['cheese', 'lettuce', 'bagel']",10,9
+39,4,take milk,"['bagel', 'yogurt', 'butter', 'milk']","['cheese', 'lettuce', 'bagel']",10,19
+39,4,take cheese,"['bagel', 'yogurt', 'butter', 'milk', 'cheese']","['cheese', 'lettuce', 'bagel']",10,29
+39,4,go to Bakery,"['bagel', 'yogurt', 'butter', 'milk', 'cheese']","['cheese', 'lettuce', 'bagel']",0,29
+39,4,take cake,"['bagel', 'yogurt', 'butter', 'milk', 'cheese', 'cake']","['cheese', 'lettuce', 'bagel']",10,39
+39,4,go to Dairy,"['bagel', 'yogurt', 'butter', 'milk', 'cheese', 'cake']","['cheese', 'lettuce', 'bagel']",0,39
+40,4,go to Dairy,[],"['bananas', 'butter']",0,0
+40,4,take yogurt,['yogurt'],"['bananas', 'butter']",10,10
+40,4,take butter,"['yogurt', 'butter']","['bananas', 'butter']",10,20
+40,4,go to Bakery,"['yogurt', 'butter']","['bananas', 'butter']",0,20
+40,4,take croissant,"['yogurt', 'butter', 'croissant']","['bananas', 'butter']",10,30
+40,4,go to Dairy,"['yogurt', 'butter', 'croissant']","['bananas', 'butter']",0,30
+40,4,go to Produce,"['yogurt', 'butter', 'croissant']","['bananas', 'butter']",0,30
+40,4,take lettuce,"['yogurt', 'butter', 'croissant', 'lettuce']","['bananas', 'butter']",10,40
+40,4,take lettuce,"['yogurt', 'butter', 'croissant', 'lettuce']","['bananas', 'butter']",-1,39
+40,4,take bananas,"['yogurt', 'butter', 'croissant', 'lettuce', 'bananas']","['bananas', 'butter']",10,49
+40,4,take lettuce,"['yogurt', 'butter', 'croissant', 'lettuce', 'bananas']","['bananas', 'butter']",-1,48
+40,4,take apples,"['yogurt', 'butter', 'croissant', 'lettuce', 'bananas', 'apples']","['bananas', 'butter']",10,58
+40,4,take apples,"['yogurt', 'butter', 'croissant', 'lettuce', 'bananas', 'apples']","['bananas', 'butter']",-1,57
+40,4,go to Produce,"['yogurt', 'butter', 'croissant', 'lettuce', 'bananas', 'apples']","['bananas', 'butter']",0,57
+40,4,go to Dairy,"['yogurt', 'butter', 'croissant', 'lettuce', 'bananas', 'apples']","['bananas', 'butter']",0,57
+41,5,go to Bakery,[],"['butter', 'lettuce']",0,0
+41,5,take bread,['bread'],"['butter', 'lettuce']",10,10
+41,5,checkout,['bread'],"['butter', 'lettuce']",-10,0
+41,5,take croissant,"['bread', 'croissant']","['butter', 'lettuce']",10,10
+41,5,go to Produce,"['bread', 'croissant']","['butter', 'lettuce']",0,10
+41,5,take carrots,"['bread', 'croissant', 'carrots']","['butter', 'lettuce']",10,20
+41,5,take lettuce,"['bread', 'croissant', 'carrots', 'lettuce']","['butter', 'lettuce']",10,30
+41,5,go to Produce,"['bread', 'croissant', 'carrots', 'lettuce']","['butter', 'lettuce']",0,30
+41,5,go to Dairy,"['bread', 'croissant', 'carrots', 'lettuce']","['butter', 'lettuce']",0,30
+41,5,go to Produce,"['bread', 'croissant', 'carrots', 'lettuce']","['butter', 'lettuce']",0,30
+41,5,go to Bakery,"['bread', 'croissant', 'carrots', 'lettuce']","['butter', 'lettuce']",0,30
+41,5,go to Bakery,"['bread', 'croissant', 'carrots', 'lettuce']","['butter', 'lettuce']",0,30
+41,5,go to Bakery,"['bread', 'croissant', 'carrots', 'lettuce']","['butter', 'lettuce']",0,30
+41,5,take cake,"['bread', 'croissant', 'carrots', 'lettuce', 'cake']","['butter', 'lettuce']",10,40
+41,5,take cake,"['bread', 'croissant', 'carrots', 'lettuce', 'cake']","['butter', 'lettuce']",-1,39
+42,5,go to Dairy,[],"['milk', 'butter']",0,0
+42,5,go to Produce,[],"['milk', 'butter']",0,0
+42,5,take carrots,['carrots'],"['milk', 'butter']",10,10
+42,5,take apples,"['carrots', 'apples']","['milk', 'butter']",10,20
+42,5,take carrots,"['carrots', 'apples']","['milk', 'butter']",-1,19
+42,5,take carrots,"['carrots', 'apples']","['milk', 'butter']",-1,18
+42,5,take lettuce,"['carrots', 'apples', 'lettuce']","['milk', 'butter']",10,28
+42,5,go to Produce,"['carrots', 'apples', 'lettuce']","['milk', 'butter']",0,28
+42,5,take bananas,"['carrots', 'apples', 'lettuce', 'bananas']","['milk', 'butter']",10,38
+42,5,go to Produce,"['carrots', 'apples', 'lettuce', 'bananas']","['milk', 'butter']",0,38
+42,5,checkout,"['carrots', 'apples', 'lettuce', 'bananas']","['milk', 'butter']",-10,28
+42,5,take lettuce,"['carrots', 'apples', 'lettuce', 'bananas']","['milk', 'butter']",-1,27
+42,5,checkout,"['carrots', 'apples', 'lettuce', 'bananas']","['milk', 'butter']",-10,17
+42,5,take lettuce,"['carrots', 'apples', 'lettuce', 'bananas']","['milk', 'butter']",-1,16
+42,5,take lettuce,"['carrots', 'apples', 'lettuce', 'bananas']","['milk', 'butter']",-1,15
+43,5,go to Produce,[],"['bagel', 'croissant', 'cheese']",0,0
+43,5,take carrots,['carrots'],"['bagel', 'croissant', 'cheese']",10,10
+43,5,go to Dairy,['carrots'],"['bagel', 'croissant', 'cheese']",0,10
+43,5,take cheese,"['carrots', 'cheese']","['bagel', 'croissant', 'cheese']",10,20
+43,5,go to Dairy,"['carrots', 'cheese']","['bagel', 'croissant', 'cheese']",0,20
+43,5,take butter,"['carrots', 'cheese', 'butter']","['bagel', 'croissant', 'cheese']",10,30
+43,5,take yogurt,"['carrots', 'cheese', 'butter', 'yogurt']","['bagel', 'croissant', 'cheese']",10,40
+43,5,take cheese,"['carrots', 'cheese', 'butter', 'yogurt']","['bagel', 'croissant', 'cheese']",-1,39
+43,5,checkout,"['carrots', 'cheese', 'butter', 'yogurt']","['bagel', 'croissant', 'cheese']",-10,29
+43,5,take yogurt,"['carrots', 'cheese', 'butter', 'yogurt']","['bagel', 'croissant', 'cheese']",-1,28
+43,5,take yogurt,"['carrots', 'cheese', 'butter', 'yogurt']","['bagel', 'croissant', 'cheese']",-1,27
+43,5,checkout,"['carrots', 'cheese', 'butter', 'yogurt']","['bagel', 'croissant', 'cheese']",-10,17
+43,5,take milk,"['carrots', 'cheese', 'butter', 'yogurt', 'milk']","['bagel', 'croissant', 'cheese']",10,27
+43,5,take milk,"['carrots', 'cheese', 'butter', 'yogurt', 'milk']","['bagel', 'croissant', 'cheese']",-1,26
+43,5,go to Dairy,"['carrots', 'cheese', 'butter', 'yogurt', 'milk']","['bagel', 'croissant', 'cheese']",0,26
+44,5,checkout,[],"['lettuce', 'yogurt']",-10,-10
+44,5,go to Bakery,[],"['lettuce', 'yogurt']",0,-10
+44,5,go to Dairy,[],"['lettuce', 'yogurt']",0,-10
+44,5,take butter,['butter'],"['lettuce', 'yogurt']",10,0
+44,5,take cheese,"['butter', 'cheese']","['lettuce', 'yogurt']",10,10
+44,5,checkout,"['butter', 'cheese']","['lettuce', 'yogurt']",-10,0
+44,5,go to Bakery,"['butter', 'cheese']","['lettuce', 'yogurt']",0,0
+44,5,go to Bakery,"['butter', 'cheese']","['lettuce', 'yogurt']",0,0
+44,5,go to Produce,"['butter', 'cheese']","['lettuce', 'yogurt']",0,0
+44,5,take apples,"['butter', 'cheese', 'apples']","['lettuce', 'yogurt']",10,10
+44,5,take bananas,"['butter', 'cheese', 'apples', 'bananas']","['lettuce', 'yogurt']",10,20
+44,5,go to Dairy,"['butter', 'cheese', 'apples', 'bananas']","['lettuce', 'yogurt']",0,20
+44,5,go to Bakery,"['butter', 'cheese', 'apples', 'bananas']","['lettuce', 'yogurt']",0,20
+44,5,take bagel,"['butter', 'cheese', 'apples', 'bananas', 'bagel']","['lettuce', 'yogurt']",10,30
+44,5,take bagel,"['butter', 'cheese', 'apples', 'bananas', 'bagel']","['lettuce', 'yogurt']",-1,29
+45,5,checkout,[],"['bread', 'bananas']",-10,-10
+45,5,go to Produce,[],"['bread', 'bananas']",0,-10
+45,5,take carrots,['carrots'],"['bread', 'bananas']",10,0
+45,5,take bananas,"['carrots', 'bananas']","['bread', 'bananas']",10,10
+45,5,go to Bakery,"['carrots', 'bananas']","['bread', 'bananas']",0,10
+45,5,take croissant,"['carrots', 'bananas', 'croissant']","['bread', 'bananas']",10,20
+45,5,go to Produce,"['carrots', 'bananas', 'croissant']","['bread', 'bananas']",0,20
+45,5,go to Dairy,"['carrots', 'bananas', 'croissant']","['bread', 'bananas']",0,20
+45,5,go to Bakery,"['carrots', 'bananas', 'croissant']","['bread', 'bananas']",0,20
+45,5,take bagel,"['carrots', 'bananas', 'croissant', 'bagel']","['bread', 'bananas']",10,30
+45,5,go to Bakery,"['carrots', 'bananas', 'croissant', 'bagel']","['bread', 'bananas']",0,30
+45,5,go to Bakery,"['carrots', 'bananas', 'croissant', 'bagel']","['bread', 'bananas']",0,30
+45,5,go to Bakery,"['carrots', 'bananas', 'croissant', 'bagel']","['bread', 'bananas']",0,30
+45,5,go to Dairy,"['carrots', 'bananas', 'croissant', 'bagel']","['bread', 'bananas']",0,30
+45,5,go to Dairy,"['carrots', 'bananas', 'croissant', 'bagel']","['bread', 'bananas']",0,30
+46,5,checkout,[],"['yogurt', 'cake', 'croissant']",-10,-10
+46,5,go to Dairy,[],"['yogurt', 'cake', 'croissant']",0,-10
+46,5,take yogurt,['yogurt'],"['yogurt', 'cake', 'croissant']",10,0
+46,5,take milk,"['yogurt', 'milk']","['yogurt', 'cake', 'croissant']",10,10
+46,5,checkout,"['yogurt', 'milk']","['yogurt', 'cake', 'croissant']",-10,0
+46,5,checkout,"['yogurt', 'milk']","['yogurt', 'cake', 'croissant']",-10,-10
+46,5,take cheese,"['yogurt', 'milk', 'cheese']","['yogurt', 'cake', 'croissant']",10,0
+46,5,take cheese,"['yogurt', 'milk', 'cheese']","['yogurt', 'cake', 'croissant']",-1,-1
+46,5,take cheese,"['yogurt', 'milk', 'cheese']","['yogurt', 'cake', 'croissant']",-1,-2
+46,5,take cheese,"['yogurt', 'milk', 'cheese']","['yogurt', 'cake', 'croissant']",-1,-3
+46,5,take cheese,"['yogurt', 'milk', 'cheese']","['yogurt', 'cake', 'croissant']",-1,-4
+46,5,take yogurt,"['yogurt', 'milk', 'cheese']","['yogurt', 'cake', 'croissant']",-1,-5
+46,5,go to Produce,"['yogurt', 'milk', 'cheese']","['yogurt', 'cake', 'croissant']",0,-5
+46,5,take apples,"['yogurt', 'milk', 'cheese', 'apples']","['yogurt', 'cake', 'croissant']",10,5
+46,5,go to Bakery,"['yogurt', 'milk', 'cheese', 'apples']","['yogurt', 'cake', 'croissant']",0,5
+47,5,checkout,[],"['lettuce', 'bananas']",-10,-10
+47,5,go to Dairy,[],"['lettuce', 'bananas']",0,-10
+47,5,take butter,['butter'],"['lettuce', 'bananas']",10,0
+47,5,go to Produce,['butter'],"['lettuce', 'bananas']",0,0
+47,5,take apples,"['butter', 'apples']","['lettuce', 'bananas']",10,10
+47,5,go to Dairy,"['butter', 'apples']","['lettuce', 'bananas']",0,10
+47,5,take yogurt,"['butter', 'apples', 'yogurt']","['lettuce', 'bananas']",10,20
+47,5,take butter,"['butter', 'apples', 'yogurt']","['lettuce', 'bananas']",-1,19
+47,5,take cheese,"['butter', 'apples', 'yogurt', 'cheese']","['lettuce', 'bananas']",10,29
+47,5,go to Produce,"['butter', 'apples', 'yogurt', 'cheese']","['lettuce', 'bananas']",0,29
+47,5,take apples,"['butter', 'apples', 'yogurt', 'cheese']","['lettuce', 'bananas']",-1,28
+47,5,checkout,"['butter', 'apples', 'yogurt', 'cheese']","['lettuce', 'bananas']",-10,18
+47,5,take bananas,"['butter', 'apples', 'yogurt', 'cheese', 'bananas']","['lettuce', 'bananas']",10,28
+47,5,take carrots,"['butter', 'apples', 'yogurt', 'cheese', 'bananas', 'carrots']","['lettuce', 'bananas']",10,38
+47,5,go to Bakery,"['butter', 'apples', 'yogurt', 'cheese', 'bananas', 'carrots']","['lettuce', 'bananas']",0,38
+48,5,go to Produce,[],"['croissant', 'milk', 'bagel']",0,0
+48,5,take bananas,['bananas'],"['croissant', 'milk', 'bagel']",10,10
+48,5,take apples,"['bananas', 'apples']","['croissant', 'milk', 'bagel']",10,20
+48,5,take bananas,"['bananas', 'apples']","['croissant', 'milk', 'bagel']",-1,19
+48,5,take apples,"['bananas', 'apples']","['croissant', 'milk', 'bagel']",-1,18
+48,5,go to Produce,"['bananas', 'apples']","['croissant', 'milk', 'bagel']",0,18
+48,5,go to Produce,"['bananas', 'apples']","['croissant', 'milk', 'bagel']",0,18
+48,5,go to Dairy,"['bananas', 'apples']","['croissant', 'milk', 'bagel']",0,18
+48,5,take milk,"['bananas', 'apples', 'milk']","['croissant', 'milk', 'bagel']",10,28
+48,5,checkout,"['bananas', 'apples', 'milk']","['croissant', 'milk', 'bagel']",-10,18
+48,5,go to Dairy,"['bananas', 'apples', 'milk']","['croissant', 'milk', 'bagel']",0,18
+48,5,go to Produce,"['bananas', 'apples', 'milk']","['croissant', 'milk', 'bagel']",0,18
+48,5,checkout,"['bananas', 'apples', 'milk']","['croissant', 'milk', 'bagel']",-10,8
+48,5,go to Produce,"['bananas', 'apples', 'milk']","['croissant', 'milk', 'bagel']",0,8
+48,5,take bananas,"['bananas', 'apples', 'milk']","['croissant', 'milk', 'bagel']",-1,7
+49,5,go to Bakery,[],"['carrots', 'yogurt', 'butter']",0,0
+49,5,go to Bakery,[],"['carrots', 'yogurt', 'butter']",0,0
+49,5,checkout,[],"['carrots', 'yogurt', 'butter']",-10,-10
+49,5,take cake,['cake'],"['carrots', 'yogurt', 'butter']",10,0
+49,5,go to Produce,['cake'],"['carrots', 'yogurt', 'butter']",0,0
+49,5,take carrots,"['cake', 'carrots']","['carrots', 'yogurt', 'butter']",10,10
+49,5,go to Dairy,"['cake', 'carrots']","['carrots', 'yogurt', 'butter']",0,10
+49,5,go to Bakery,"['cake', 'carrots']","['carrots', 'yogurt', 'butter']",0,10
+49,5,go to Produce,"['cake', 'carrots']","['carrots', 'yogurt', 'butter']",0,10
+49,5,go to Bakery,"['cake', 'carrots']","['carrots', 'yogurt', 'butter']",0,10
+49,5,take cake,"['cake', 'carrots']","['carrots', 'yogurt', 'butter']",-1,9
+49,5,go to Produce,"['cake', 'carrots']","['carrots', 'yogurt', 'butter']",0,9
+49,5,go to Bakery,"['cake', 'carrots']","['carrots', 'yogurt', 'butter']",0,9
+49,5,go to Produce,"['cake', 'carrots']","['carrots', 'yogurt', 'butter']",0,9
+49,5,take apples,"['cake', 'carrots', 'apples']","['carrots', 'yogurt', 'butter']",10,19
+50,5,go to Bakery,[],"['apples', 'cake']",0,0
+50,5,go to Bakery,[],"['apples', 'cake']",0,0
+50,5,take croissant,['croissant'],"['apples', 'cake']",10,10
+50,5,take bagel,"['croissant', 'bagel']","['apples', 'cake']",10,20
+50,5,take cake,"['croissant', 'bagel', 'cake']","['apples', 'cake']",10,30
+50,5,go to Dairy,"['croissant', 'bagel', 'cake']","['apples', 'cake']",0,30
+50,5,take butter,"['croissant', 'bagel', 'cake', 'butter']","['apples', 'cake']",10,40
+50,5,checkout,"['croissant', 'bagel', 'cake', 'butter']","['apples', 'cake']",-10,30
+50,5,go to Dairy,"['croissant', 'bagel', 'cake', 'butter']","['apples', 'cake']",0,30
+50,5,take butter,"['croissant', 'bagel', 'cake', 'butter']","['apples', 'cake']",-1,29
+50,5,go to Bakery,"['croissant', 'bagel', 'cake', 'butter']","['apples', 'cake']",0,29
+50,5,take cake,"['croissant', 'bagel', 'cake', 'butter']","['apples', 'cake']",-1,28
+50,5,take cake,"['croissant', 'bagel', 'cake', 'butter']","['apples', 'cake']",-1,27
+50,5,go to Produce,"['croissant', 'bagel', 'cake', 'butter']","['apples', 'cake']",0,27
+50,5,go to Dairy,"['croissant', 'bagel', 'cake', 'butter']","['apples', 'cake']",0,27
