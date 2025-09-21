@@ -1,0 +1,541 @@
+
+=== Epoch 1/10 ===
+[Epoch 1 | Ep 1] Agente: X
+  Acción 0 | Reward 0 | Acum 0
+  Acción 6 | Reward -100 | Acum -100
+  Acción 7 | Reward 0 | Acum -100
+  Acción 2 | Reward 0 | Acum -100
+  Acción 5 | Reward 0 | Acum -100
+[Epoch 1 | Ep 2] Agente: O
+  Acción 3 | Reward -100 | Acum -100
+  Acción 6 | Reward 0 | Acum -100
+  Acción 1 | Reward 0 | Acum -100
+  Acción 5 | Reward -100 | Acum -200
+  Acción 4 | Reward 0 | Acum -200
+[Epoch 1 | Ep 3] Agente: X
+  Acción 8 | Reward -100 | Acum -100
+  Acción 4 | Reward 0 | Acum -100
+  Acción 0 | Reward 0 | Acum -100
+[Epoch 1 | Ep 4] Agente: O
+  Acción 0 | Reward 0 | Acum 0
+  Acción 7 | Reward -100 | Acum -100
+  Acción 8 | Reward 0 | Acum -100
+  Acción 4 | Reward 0 | Acum -100
+[Epoch 1 | Ep 5] Agente: X
+  Acción 4 | Reward 0 | Acum 0
+  Acción 0 | Reward 0 | Acum 0
+  Acción 8 | Reward 0 | Acum 0
+[Epoch 1 | Ep 6] Agente: O
+  Acción 7 | Reward 0 | Acum 0
+  Acción 3 | Reward -100 | Acum -100
+  Acción 1 | Reward 0 | Acum -100
+  Acción 8 | Reward 0 | Acum -100
+  Acción 2 | Reward 0 | Acum -100
+[Epoch 1 | Ep 7] Agente: X
+  Acción 6 | Reward 0 | Acum 0
+  Acción 1 | Reward 0 | Acum 0
+  Acción 5 | Reward 0 | Acum 0
+  Acción 8 | Reward -100 | Acum -100
+  Acción 3 | Reward 0 | Acum -100
+[Epoch 1 | Ep 8] Agente: O
+  Acción 7 | Reward -100 | Acum -100
+  Acción 2 | Reward 0 | Acum -100
+  Acción 6 | Reward 0 | Acum -100
+  Acción 5 | Reward 0 | Acum -100
+  Acción 0 | Reward 0 | Acum -100
+[Epoch 1 | Ep 9] Agente: X
+  Acción 1 | Reward 0 | Acum 0
+  Acción 0 | Reward 0 | Acum 0
+  Acción 4 | Reward -100 | Acum -100
+  Acción 8 | Reward 0 | Acum -100
+[Epoch 1 | Ep 10] Agente: O
+  Acción 3 | Reward 0 | Acum 0
+  Acción 4 | Reward -100 | Acum -100
+  Acción 5 | Reward -100 | Acum -200
+
+=== Epoch 2/10 ===
+[Epoch 2 | Ep 1] Agente: X
+  Acción 7 | Reward 0 | Acum 0
+  Acción 5 | Reward 0 | Acum 0
+  Acción 8 | Reward 0 | Acum 0
+  Acción 1 | Reward 0 | Acum 0
+  Acción 6 | Reward 0 | Acum 0
+[Epoch 2 | Ep 2] Agente: O
+  Acción 7 | Reward -200 | Acum -200
+  Acción 5 | Reward 0 | Acum -200
+  Acción 3 | Reward 0 | Acum -200
+  Acción 2 | Reward 0 | Acum -200
+  Acción 8 | Reward 0 | Acum -200
+[Epoch 2 | Ep 3] Agente: X
+  Acción 0 | Reward 0 | Acum 0
+  Acción 2 | Reward 0 | Acum 0
+  Acción 6 | Reward 0 | Acum 0
+  Acción 1 | Reward 0 | Acum 0
+[Epoch 2 | Ep 4] Agente: O
+  Acción 8 | Reward 0 | Acum 0
+  Acción 7 | Reward 0 | Acum 0
+  Acción 4 | Reward 0 | Acum 0
+[Epoch 2 | Ep 5] Agente: X
+  Acción 5 | Reward 0 | Acum 0
+  Acción 1 | Reward -100 | Acum -100
+  Acción 4 | Reward -100 | Acum -200
+[Epoch 2 | Ep 6] Agente: O
+  Acción 0 | Reward 0 | Acum 0
+  Acción 2 | Reward 0 | Acum 0
+  Acción 1 | Reward 0 | Acum 0
+[Epoch 2 | Ep 7] Agente: X
+  Acción 4 | Reward 0 | Acum 0
+  Acción 2 | Reward 200 | Acum 200
+  Acción 5 | Reward 0 | Acum 200
+  Acción 3 | Reward 0 | Acum 200
+[Epoch 2 | Ep 8] Agente: O
+  Acción 4 | Reward 0 | Acum 0
+  Acción 6 | Reward 0 | Acum 0
+  Acción 2 | Reward 0 | Acum 0
+[Epoch 2 | Ep 9] Agente: X
+  Acción 0 | Reward 0 | Acum 0
+  Acción 3 | Reward 0 | Acum 0
+  Acción 6 | Reward -100 | Acum -100
+[Epoch 2 | Ep 10] Agente: O
+  Acción 4 | Reward 0 | Acum 0
+  Acción 5 | Reward 0 | Acum 0
+  Acción 1 | Reward -100 | Acum -100
+
+=== Epoch 3/10 ===
+[Epoch 3 | Ep 1] Agente: X
+  Acción 1 | Reward 0 | Acum 0
+  Acción 0 | Reward 0 | Acum 0
+  Acción 8 | Reward 0 | Acum 0
+  Acción 2 | Reward 0 | Acum 0
+[Epoch 3 | Ep 2] Agente: O
+  Acción 8 | Reward 0 | Acum 0
+  Acción 2 | Reward 0 | Acum 0
+  Acción 3 | Reward 0 | Acum 0
+  Acción 7 | Reward 0 | Acum 0
+  Acción 1 | Reward 0 | Acum 0
+[Epoch 3 | Ep 3] Agente: X
+  Acción 2 | Reward 0 | Acum 0
+  Acción 0 | Reward 0 | Acum 0
+  Acción 6 | Reward -100 | Acum -100
+  Acción 7 | Reward 0 | Acum -100
+  Acción 3 | Reward -100 | Acum -200
+[Epoch 3 | Ep 4] Agente: O
+  Acción 8 | Reward 0 | Acum 0
+  Acción 0 | Reward 0 | Acum 0
+  Acción 7 | Reward 0 | Acum 0
+  Acción 5 | Reward 0 | Acum 0
+  Acción 4 | Reward 0 | Acum 0
+[Epoch 3 | Ep 5] Agente: X
+  Acción 0 | Reward 0 | Acum 0
+  Acción 4 | Reward 0 | Acum 0
+  Acción 6 | Reward 0 | Acum 0
+  Acción 2 | Reward 0 | Acum 0
+[Epoch 3 | Ep 6] Agente: O
+  Acción 2 | Reward 0 | Acum 0
+  Acción 8 | Reward 0 | Acum 0
+  Acción 5 | Reward 0 | Acum 0
+[Epoch 3 | Ep 7] Agente: X
+  Acción 7 | Reward 0 | Acum 0
+  Acción 0 | Reward 0 | Acum 0
+  Acción 2 | Reward -100 | Acum -100
+  Acción 3 | Reward 0 | Acum -100
+  Acción 8 | Reward 0 | Acum -100
+[Epoch 3 | Ep 8] Agente: O
+  Acción 5 | Reward 0 | Acum 0
+  Acción 2 | Reward 0 | Acum 0
+  Acción 3 | Reward 0 | Acum 0
+  Acción 0 | Reward 0 | Acum 0
+[Epoch 3 | Ep 9] Agente: X
+  Acción 0 | Reward 0 | Acum 0
+  Acción 4 | Reward 0 | Acum 0
+  Acción 8 | Reward 0 | Acum 0
+[Epoch 3 | Ep 10] Agente: O
+  Acción 0 | Reward 0 | Acum 0
+  Acción 7 | Reward 0 | Acum 0
+  Acción 8 | Reward 0 | Acum 0
+  Acción 5 | Reward 0 | Acum 0
+  Acción 6 | Reward 0 | Acum 0
+
+=== Epoch 4/10 ===
+[Epoch 4 | Ep 1] Agente: X
+  Acción 3 | Reward 0 | Acum 0
+  Acción 1 | Reward -100 | Acum -100
+  Acción 6 | Reward 0 | Acum -100
+  Acción 4 | Reward 0 | Acum -100
+  Acción 8 | Reward 0 | Acum -100
+[Epoch 4 | Ep 2] Agente: O
+  Acción 1 | Reward -100 | Acum -100
+  Acción 0 | Reward -200 | Acum -300
+  Acción 7 | Reward 0 | Acum -300
+  Acción 8 | Reward -100 | Acum -400
+[Epoch 4 | Ep 3] Agente: X
+  Acción 4 | Reward 0 | Acum 0
+  Acción 7 | Reward 0 | Acum 0
+  Acción 0 | Reward 0 | Acum 0
+  Acción 1 | Reward 0 | Acum 0
+[Epoch 4 | Ep 4] Agente: O
+  Acción 3 | Reward -100 | Acum -100
+  Acción 7 | Reward 0 | Acum -100
+  Acción 4 | Reward -100 | Acum -200
+  Acción 5 | Reward 0 | Acum -200
+[Epoch 4 | Ep 5] Agente: X
+  Acción 0 | Reward 0 | Acum 0
+  Acción 1 | Reward 0 | Acum 0
+  Acción 2 | Reward 0 | Acum 0
+[Epoch 4 | Ep 6] Agente: O
+  Acción 0 | Reward 0 | Acum 0
+  Acción 2 | Reward 0 | Acum 0
+  Acción 1 | Reward 0 | Acum 0
+[Epoch 4 | Ep 7] Agente: X
+  Acción 0 | Reward -100 | Acum -100
+  Acción 6 | Reward 0 | Acum -100
+  Acción 1 | Reward 0 | Acum -100
+  Acción 3 | Reward 0 | Acum -100
+[Epoch 4 | Ep 8] Agente: O
+  Acción 0 | Reward -100 | Acum -100
+  Acción 4 | Reward 0 | Acum -100
+  Acción 6 | Reward 0 | Acum -100
+  Acción 2 | Reward 0 | Acum -100
+[Epoch 4 | Ep 9] Agente: X
+  Acción 7 | Reward 0 | Acum 0
+  Acción 6 | Reward -100 | Acum -100
+  Acción 8 | Reward 0 | Acum -100
+[Epoch 4 | Ep 10] Agente: O
+  Acción 0 | Reward -100 | Acum -100
+  Acción 8 | Reward -100 | Acum -200
+  Acción 7 | Reward 0 | Acum -200
+  Acción 3 | Reward 0 | Acum -200
+
+=== Epoch 5/10 ===
+[Epoch 5 | Ep 1] Agente: X
+  Acción 3 | Reward 0 | Acum 0
+  Acción 0 | Reward 0 | Acum 0
+  Acción 1 | Reward 0 | Acum 0
+  Acción 8 | Reward -100 | Acum -100
+  Acción 4 | Reward 0 | Acum -100
+[Epoch 5 | Ep 2] Agente: O
+  Acción 4 | Reward 0 | Acum 0
+  Acción 0 | Reward 0 | Acum 0
+  Acción 3 | Reward 0 | Acum 0
+[Epoch 5 | Ep 3] Agente: X
+  Acción 4 | Reward 0 | Acum 0
+  Acción 0 | Reward 0 | Acum 0
+  Acción 2 | Reward 0 | Acum 0
+  Acción 3 | Reward 0 | Acum 0
+[Epoch 5 | Ep 4] Agente: O
+  Acción 0 | Reward 0 | Acum 0
+  Acción 2 | Reward 0 | Acum 0
+  Acción 8 | Reward -100 | Acum -100
+  Acción 1 | Reward 0 | Acum -100
+[Epoch 5 | Ep 5] Agente: X
+  Acción 0 | Reward -100 | Acum -100
+  Acción 1 | Reward 0 | Acum -100
+  Acción 2 | Reward 0 | Acum -100
+[Epoch 5 | Ep 6] Agente: O
+  Acción 8 | Reward -200 | Acum -200
+  Acción 7 | Reward 0 | Acum -200
+  Acción 3 | Reward 0 | Acum -200
+  Acción 5 | Reward 0 | Acum -200
+  Acción 2 | Reward 0 | Acum -200
+[Epoch 5 | Ep 7] Agente: X
+  Acción 1 | Reward 0 | Acum 0
+  Acción 0 | Reward 0 | Acum 0
+  Acción 2 | Reward 0 | Acum 0
+[Epoch 5 | Ep 8] Agente: O
+  Acción 7 | Reward 0 | Acum 0
+  Acción 0 | Reward 0 | Acum 0
+  Acción 8 | Reward 0 | Acum 0
+  Acción 5 | Reward 0 | Acum 0
+  Acción 2 | Reward 0 | Acum 0
+[Epoch 5 | Ep 9] Agente: X
+  Acción 1 | Reward 0 | Acum 0
+  Acción 0 | Reward 0 | Acum 0
+  Acción 8 | Reward -100 | Acum -100
+  Acción 4 | Reward -100 | Acum -200
+[Epoch 5 | Ep 10] Agente: O
+  Acción 1 | Reward 0 | Acum 0
+  Acción 0 | Reward 0 | Acum 0
+  Acción 2 | Reward -100 | Acum -100
+
+=== Epoch 6/10 ===
+[Epoch 6 | Ep 1] Agente: X
+  Acción 0 | Reward 0 | Acum 0
+  Acción 2 | Reward -100 | Acum -100
+  Acción 4 | Reward -100 | Acum -200
+  Acción 7 | Reward 0 | Acum -200
+  Acción 1 | Reward 0 | Acum -200
+[Epoch 6 | Ep 2] Agente: O
+  Acción 8 | Reward -100 | Acum -100
+  Acción 1 | Reward 0 | Acum -100
+  Acción 2 | Reward -100 | Acum -200
+  Acción 0 | Reward 0 | Acum -200
+[Epoch 6 | Ep 3] Agente: X
+  Acción 5 | Reward -100 | Acum -100
+  Acción 0 | Reward 0 | Acum -100
+  Acción 3 | Reward 100 | Acum 0
+  Acción 1 | Reward -100 | Acum -100
+[Epoch 6 | Ep 4] Agente: O
+  Acción 0 | Reward 0 | Acum 0
+  Acción 7 | Reward 0 | Acum 0
+  Acción 6 | Reward 0 | Acum 0
+  Acción 8 | Reward 0 | Acum 0
+[Epoch 6 | Ep 5] Agente: X
+  Acción 0 | Reward 0 | Acum 0
+  Acción 4 | Reward 0 | Acum 0
+  Acción 3 | Reward 0 | Acum 0
+  Acción 1 | Reward 0 | Acum 0
+  Acción 8 | Reward 0 | Acum 0
+[Epoch 6 | Ep 6] Agente: O
+  Acción 0 | Reward 0 | Acum 0
+  Acción 6 | Reward 0 | Acum 0
+  Acción 7 | Reward 0 | Acum 0
+  Acción 5 | Reward 0 | Acum 0
+  Acción 2 | Reward 0 | Acum 0
+[Epoch 6 | Ep 7] Agente: X
+  Acción 1 | Reward 0 | Acum 0
+  Acción 4 | Reward 0 | Acum 0
+  Acción 3 | Reward 0 | Acum 0
+  Acción 2 | Reward 0 | Acum 0
+  Acción 7 | Reward 0 | Acum 0
+[Epoch 6 | Ep 8] Agente: O
+  Acción 0 | Reward 0 | Acum 0
+  Acción 5 | Reward 0 | Acum 0
+  Acción 8 | Reward -100 | Acum -100
+  Acción 1 | Reward 0 | Acum -100
+  Acción 6 | Reward -100 | Acum -200
+[Epoch 6 | Ep 9] Agente: X
+  Acción 1 | Reward 0 | Acum 0
+  Acción 2 | Reward -100 | Acum -100
+  Acción 8 | Reward 0 | Acum -100
+  Acción 3 | Reward 0 | Acum -100
+  Acción 5 | Reward 0 | Acum -100
+[Epoch 6 | Ep 10] Agente: O
+  Acción 1 | Reward 0 | Acum 0
+  Acción 6 | Reward 0 | Acum 0
+  Acción 5 | Reward 0 | Acum 0
+  Acción 2 | Reward -100 | Acum -100
+  Acción 4 | Reward 200 | Acum 100
+
+=== Epoch 7/10 ===
+[Epoch 7 | Ep 1] Agente: X
+  Acción 5 | Reward 0 | Acum 0
+  Acción 1 | Reward 0 | Acum 0
+  Acción 4 | Reward 0 | Acum 0
+  Acción 7 | Reward 0 | Acum 0
+[Epoch 7 | Ep 2] Agente: O
+  Acción 1 | Reward -100 | Acum -100
+  Acción 3 | Reward 0 | Acum -100
+  Acción 5 | Reward 0 | Acum -100
+  Acción 8 | Reward 0 | Acum -100
+  Acción 4 | Reward -100 | Acum -200
+[Epoch 7 | Ep 3] Agente: X
+  Acción 1 | Reward 0 | Acum 0
+  Acción 8 | Reward 0 | Acum 0
+  Acción 7 | Reward 0 | Acum 0
+  Acción 2 | Reward -100 | Acum -100
+  Acción 3 | Reward 0 | Acum -100
+[Epoch 7 | Ep 4] Agente: O
+  Acción 1 | Reward 0 | Acum 0
+  Acción 6 | Reward 0 | Acum 0
+  Acción 2 | Reward -100 | Acum -100
+  Acción 5 | Reward 0 | Acum -100
+  Acción 4 | Reward -100 | Acum -200
+[Epoch 7 | Ep 5] Agente: X
+  Acción 1 | Reward -100 | Acum -100
+  Acción 3 | Reward 0 | Acum -100
+  Acción 8 | Reward 0 | Acum -100
+  Acción 2 | Reward 0 | Acum -100
+  Acción 6 | Reward 0 | Acum -100
+[Epoch 7 | Ep 6] Agente: O
+  Acción 3 | Reward -100 | Acum -100
+  Acción 1 | Reward 0 | Acum -100
+  Acción 0 | Reward 0 | Acum -100
+  Acción 6 | Reward -100 | Acum -200
+[Epoch 7 | Ep 7] Agente: X
+  Acción 1 | Reward -100 | Acum -100
+  Acción 6 | Reward 0 | Acum -100
+  Acción 2 | Reward 0 | Acum -100
+  Acción 0 | Reward 0 | Acum -100
+[Epoch 7 | Ep 8] Agente: O
+  Acción 1 | Reward 0 | Acum 0
+  Acción 8 | Reward -100 | Acum -100
+  Acción 7 | Reward 0 | Acum -100
+  Acción 2 | Reward 0 | Acum -100
+[Epoch 7 | Ep 9] Agente: X
+  Acción 1 | Reward 0 | Acum 0
+  Acción 0 | Reward 0 | Acum 0
+  Acción 2 | Reward 0 | Acum 0
+[Epoch 7 | Ep 10] Agente: O
+  Acción 1 | Reward 0 | Acum 0
+  Acción 0 | Reward 0 | Acum 0
+  Acción 7 | Reward 0 | Acum 0
+  Acción 5 | Reward -100 | Acum -100
+  Acción 6 | Reward 0 | Acum -100
+
+=== Epoch 8/10 ===
+[Epoch 8 | Ep 1] Agente: X
+  Acción 1 | Reward 0 | Acum 0
+  Acción 4 | Reward 0 | Acum 0
+  Acción 6 | Reward 0 | Acum 0
+  Acción 5 | Reward 0 | Acum 0
+  Acción 3 | Reward 0 | Acum 0
+[Epoch 8 | Ep 2] Agente: O
+  Acción 1 | Reward 0 | Acum 0
+  Acción 4 | Reward 0 | Acum 0
+  Acción 6 | Reward 0 | Acum 0
+  Acción 2 | Reward 0 | Acum 0
+[Epoch 8 | Ep 3] Agente: X
+  Acción 1 | Reward 200 | Acum 200
+  Acción 7 | Reward 0 | Acum 200
+  Acción 5 | Reward 0 | Acum 200
+  Acción 8 | Reward -100 | Acum 100
+[Epoch 8 | Ep 4] Agente: O
+  Acción 1 | Reward 0 | Acum 0
+  Acción 3 | Reward 0 | Acum 0
+  Acción 4 | Reward 0 | Acum 0
+  Acción 6 | Reward 0 | Acum 0
+[Epoch 8 | Ep 5] Agente: X
+  Acción 1 | Reward 0 | Acum 0
+  Acción 6 | Reward 0 | Acum 0
+  Acción 8 | Reward 0 | Acum 0
+  Acción 4 | Reward 0 | Acum 0
+  Acción 2 | Reward 0 | Acum 0
+[Epoch 8 | Ep 6] Agente: O
+  Acción 4 | Reward 0 | Acum 0
+  Acción 3 | Reward 0 | Acum 0
+  Acción 2 | Reward 0 | Acum 0
+  Acción 0 | Reward 0 | Acum 0
+  Acción 7 | Reward 0 | Acum 0
+[Epoch 8 | Ep 7] Agente: X
+  Acción 1 | Reward 0 | Acum 0
+  Acción 8 | Reward 0 | Acum 0
+  Acción 6 | Reward 0 | Acum 0
+  Acción 0 | Reward -100 | Acum -100
+[Epoch 8 | Ep 8] Agente: O
+  Acción 6 | Reward 0 | Acum 0
+  Acción 1 | Reward 0 | Acum 0
+  Acción 4 | Reward 0 | Acum 0
+[Epoch 8 | Ep 9] Agente: X
+  Acción 1 | Reward 0 | Acum 0
+  Acción 5 | Reward 0 | Acum 0
+  Acción 6 | Reward 0 | Acum 0
+  Acción 2 | Reward 0 | Acum 0
+[Epoch 8 | Ep 10] Agente: O
+  Acción 1 | Reward -100 | Acum -100
+  Acción 0 | Reward 0 | Acum -100
+  Acción 8 | Reward -100 | Acum -200
+  Acción 3 | Reward 0 | Acum -200
+  Acción 2 | Reward 0 | Acum -200
+
+=== Epoch 9/10 ===
+[Epoch 9 | Ep 1] Agente: X
+  Acción 1 | Reward 0 | Acum 0
+  Acción 4 | Reward 0 | Acum 0
+  Acción 5 | Reward 0 | Acum 0
+  Acción 6 | Reward 0 | Acum 0
+  Acción 2 | Reward 0 | Acum 0
+[Epoch 9 | Ep 2] Agente: O
+  Acción 1 | Reward 0 | Acum 0
+  Acción 8 | Reward 0 | Acum 0
+  Acción 4 | Reward -100 | Acum -100
+  Acción 5 | Reward 200 | Acum 100
+  Acción 0 | Reward 0 | Acum 100
+[Epoch 9 | Ep 3] Agente: X
+  Acción 1 | Reward 0 | Acum 0
+  Acción 5 | Reward 0 | Acum 0
+  Acción 4 | Reward 0 | Acum 0
+  Acción 8 | Reward 0 | Acum 0
+  Acción 3 | Reward 0 | Acum 0
+[Epoch 9 | Ep 4] Agente: O
+  Acción 4 | Reward 0 | Acum 0
+  Acción 5 | Reward 0 | Acum 0
+  Acción 6 | Reward 200 | Acum 200
+  Acción 1 | Reward -100 | Acum 100
+  Acción 2 | Reward -200 | Acum -100
+[Epoch 9 | Ep 5] Agente: X
+  Acción 8 | Reward 0 | Acum 0
+  Acción 0 | Reward 0 | Acum 0
+  Acción 2 | Reward -100 | Acum -100
+  Acción 7 | Reward -100 | Acum -200
+  Acción 3 | Reward 0 | Acum -200
+[Epoch 9 | Ep 6] Agente: O
+  Acción 3 | Reward 0 | Acum 0
+  Acción 4 | Reward 0 | Acum 0
+  Acción 2 | Reward 0 | Acum 0
+  Acción 5 | Reward 0 | Acum 0
+[Epoch 9 | Ep 7] Agente: X
+  Acción 4 | Reward 0 | Acum 0
+  Acción 5 | Reward 0 | Acum 0
+  Acción 2 | Reward 100 | Acum 100
+  Acción 6 | Reward -100 | Acum 0
+[Epoch 9 | Ep 8] Agente: O
+  Acción 4 | Reward 0 | Acum 0
+  Acción 5 | Reward 0 | Acum 0
+  Acción 7 | Reward 0 | Acum 0
+  Acción 2 | Reward 0 | Acum 0
+  Acción 0 | Reward 0 | Acum 0
+[Epoch 9 | Ep 9] Agente: X
+  Acción 6 | Reward 0 | Acum 0
+  Acción 4 | Reward 0 | Acum 0
+  Acción 8 | Reward 0 | Acum 0
+  Acción 5 | Reward -100 | Acum -100
+  Acción 0 | Reward -100 | Acum -200
+[Epoch 9 | Ep 10] Agente: O
+  Acción 4 | Reward 0 | Acum 0
+  Acción 8 | Reward -100 | Acum -100
+  Acción 5 | Reward 0 | Acum -100
+  Acción 2 | Reward 0 | Acum -100
+
+=== Epoch 10/10 ===
+[Epoch 10 | Ep 1] Agente: X
+  Acción 0 | Reward -100 | Acum -100
+  Acción 4 | Reward 0 | Acum -100
+  Acción 6 | Reward -100 | Acum -200
+  Acción 7 | Reward -100 | Acum -300
+[Epoch 10 | Ep 2] Agente: O
+  Acción 1 | Reward 0 | Acum 0
+  Acción 4 | Reward 0 | Acum 0
+  Acción 2 | Reward 0 | Acum 0
+  Acción 7 | Reward 0 | Acum 0
+[Epoch 10 | Ep 3] Agente: X
+  Acción 4 | Reward 0 | Acum 0
+  Acción 1 | Reward 0 | Acum 0
+  Acción 2 | Reward 0 | Acum 0
+  Acción 8 | Reward 0 | Acum 0
+  Acción 3 | Reward 0 | Acum 0
+[Epoch 10 | Ep 4] Agente: O
+  Acción 4 | Reward 0 | Acum 0
+  Acción 5 | Reward -200 | Acum -200
+  Acción 2 | Reward 0 | Acum -200
+  Acción 3 | Reward -100 | Acum -300
+[Epoch 10 | Ep 5] Agente: X
+  Acción 4 | Reward 0 | Acum 0
+  Acción 5 | Reward -100 | Acum -100
+  Acción 2 | Reward 0 | Acum -100
+  Acción 8 | Reward 0 | Acum -100
+[Epoch 10 | Ep 6] Agente: O
+  Acción 4 | Reward -100 | Acum -100
+  Acción 6 | Reward 0 | Acum -100
+  Acción 3 | Reward 0 | Acum -100
+  Acción 8 | Reward -100 | Acum -200
+[Epoch 10 | Ep 7] Agente: X
+  Acción 4 | Reward 0 | Acum 0
+  Acción 6 | Reward 0 | Acum 0
+  Acción 7 | Reward 0 | Acum 0
+  Acción 1 | Reward 0 | Acum 0
+[Epoch 10 | Ep 8] Agente: O
+  Acción 4 | Reward 0 | Acum 0
+  Acción 7 | Reward 0 | Acum 0
+  Acción 2 | Reward 0 | Acum 0
+  Acción 5 | Reward -100 | Acum -100
+  Acción 6 | Reward 0 | Acum -100
+[Epoch 10 | Ep 9] Agente: X
+  Acción 4 | Reward 0 | Acum 0
+  Acción 3 | Reward 0 | Acum 0
+  Acción 7 | Reward 0 | Acum 0
+  Acción 1 | Reward -100 | Acum -100
+[Epoch 10 | Ep 10] Agente: O
+  Acción 1 | Reward 0 | Acum 0
+  Acción 7 | Reward 0 | Acum 0
+  Acción 0 | Reward 0 | Acum 0
+  Acción 6 | Reward -100 | Acum -100
