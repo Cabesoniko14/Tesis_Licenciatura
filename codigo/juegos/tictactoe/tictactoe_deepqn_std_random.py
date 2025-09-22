@@ -1,4 +1,4 @@
-# -----------------------  TIC TAC TOE: DQN + LLM vs Aleatorio (acción incluida) -----------------------------
+# -----------------------  TIC TAC TOE: DEEP Q-LEARNING contra ALEATORIO -----------------------------
 import os
 import time
 import random
@@ -10,7 +10,6 @@ import numpy as np
 import pandas as pd
 from collections import deque
 from datetime import datetime
-from groq import Groq
 
 # --------------------  1. Clase del juego --------------------------
 class TicTacToe:
@@ -49,7 +48,7 @@ class TicTacToe:
     def is_draw(self):
         return ' ' not in self.board
 
-# --------------------  2. Clase de la red neuronal --------------------------
+# --------------------  2. Clase de la red neuronal (Q-Network) --------------------------
 class DQN(nn.Module):
     def __init__(self):
         super(DQN, self).__init__()
@@ -64,8 +63,8 @@ class DQN(nn.Module):
     def forward(self, x):
         return self.layers(x)
 
-# --------------------  3. Agente DQN + LLM --------------------------
-class DQNAgentWithLLM:
+# --------------------  3. Agente Deep Q-Learning --------------------------
+class DQNAgent:
     def __init__(self, alpha=0.001, gamma=0.9, epsilon=1.0, epsilon_decay=0.995, epsilon_min=0.1):
         self.alpha, self.gamma = alpha, gamma
         self.epsilon, self.epsilon_decay, self.epsilon_min = epsilon, epsilon_decay, epsilon_min
@@ -74,9 +73,6 @@ class DQNAgentWithLLM:
         self.optimizer = optim.Adam(self.model.parameters(), lr=self.alpha)
         self.loss_fn = nn.MSELoss()
 
-        # Conexión Groq
-        self.client = Groq(api_key="")
-
     def choose_action(self, state, available_actions):
         if random.uniform(0, 1) < self.epsilon:
             return random.choice(available_actions)
@@ -84,26 +80,6 @@ class DQNAgentWithLLM:
         q_values = self.model(state_tensor).squeeze().detach().numpy()
         best_action = np.argmax(q_values)
         return best_action if best_action in available_actions else random.choice(available_actions)
-
-    def get_llm_evaluation(self, prev_state, action, next_state, agent_letter):
-        try:
-            response = self.client.chat.completions.create(
-                messages=[{
-                    "role": "user",
-                    "content": f"El tablero antes de la acción: {prev_state}\n"
-                               f"El agente ({agent_letter}) coloca en la posición {action}\n"
-                               f"El tablero resultante: {next_state}\n"
-                               f"Evalúa esta acción y responde solo con: SUPER BAD, BAD, REGULAR, GOOD, SUPER GOOD."
-                }],
-                model="llama-3.1-8b-instant"
-            )
-            llm_value = response.choices[0].message.content.strip()
-        except Exception as e:
-            print(f"[LLM Error] {e} → fallback REGULAR")
-            llm_value = "REGULAR"
-
-        transcription = {"SUPER BAD": -200, "BAD": -100, "REGULAR": 0, "GOOD": 100, "SUPER GOOD": 200}
-        return transcription.get(llm_value, 0)
 
     def remember(self, state, action, reward, next_state, done):
         self.memory.append((state, action, reward, next_state, done))
@@ -126,9 +102,9 @@ class DQNAgentWithLLM:
             self.optimizer.step()
         if self.epsilon > self.epsilon_min: self.epsilon *= self.epsilon_decay
 
-# --------------------  4. Entrenamiento con LLM + oponente aleatorio --------------------------
-def train_dqn_agent_vs_random_llm(num_epochs=5, episodes_per_epoch=10):
-    env, agent = TicTacToe(), DQNAgentWithLLM()
+# --------------------  4. Entrenamiento --------------------------
+def train_dqn_agent_random_opponent(num_epochs=5, episodes_per_epoch=10):
+    env, agent = TicTacToe(), DQNAgent()
     total_rewards, total_time = [], 0
     wins, draws, losses = 0, 0, 0
     total_episodes = num_epochs*episodes_per_epoch
@@ -138,7 +114,7 @@ def train_dqn_agent_vs_random_llm(num_epochs=5, episodes_per_epoch=10):
     resumen_df = pd.DataFrame(columns=["Métrica","Valor"])
 
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    base = f"tictactoe_llm_random_{timestamp}_episodes_{total_episodes}"
+    base = f"tictactoe_deepqn_std_random_{timestamp}_episodes_{total_episodes}"
     os.makedirs("datos_output", exist_ok=True)
     os.makedirs("logs", exist_ok=True)
     os.makedirs("modelos", exist_ok=True)
@@ -152,52 +128,52 @@ def train_dqn_agent_vs_random_llm(num_epochs=5, episodes_per_epoch=10):
 
     with open(paths["log"], "w") as logf:
         for epoch in range(num_epochs):
-            print(f"\n=== Inicio Epoch {epoch+1}/{num_epochs} ===")
             logf.write(f"\n=== Epoch {epoch+1}/{num_epochs} ===\n")
             for ep in range(episodes_per_epoch):
                 start = time.perf_counter()
-                board_state = env.reset()
-                state = np.array([1 if x == 'X' else -1 if x == 'O' else 0 for x in board_state])
+                state = np.array([1 if x == 'X' else -1 if x == 'O' else 0 for x in env.reset()])
                 done, reward_total, steps = False, 0, 0
                 agent_letter, opponent_letter = ('X','O') if ep % 2 == 0 else ('O','X')
-                print(f"[Epoch {epoch+1} | Ep {ep+1}] Agente: {agent_letter}")
-                logf.write(f"[Epoch {epoch+1} | Ep {ep+1}] Agente: {agent_letter}\n")
 
                 while not done:
                     steps += 1
-                    prev_state = state.copy()
                     available_actions = env.available_moves()
                     action = agent.choose_action(state, available_actions)
                     env.make_move(action, agent_letter)
-                    next_state_list = env.board.copy()
-                    next_state = np.array([1 if x == 'X' else -1 if x == 'O' else 0 for x in next_state_list])
-
-                    # Reward basado en LLM evaluando acción
-                    reward = agent.get_llm_evaluation(prev_state.tolist(), action, next_state_list, agent_letter)
-                    reward_total += reward
-                    agent.remember(prev_state, action, reward, next_state, done)
-
-                    acciones_df.loc[len(acciones_df)] = [epoch+1, ep+1, agent_letter, action, next_state_list, reward, reward_total]
-                    print(f"  Acción {action} | Reward {reward} | Acum {reward_total}")
-                    logf.write(f"  Acción {action} | Reward {reward} | Acum {reward_total}\n")
 
                     # Movimiento aleatorio del oponente
                     if not env.current_winner and not env.is_draw():
                         opponent_action = random.choice(env.available_moves())
                         env.make_move(opponent_action, opponent_letter)
 
-                    done = env.current_winner is not None or env.is_draw()
-                    state = next_state
+                    next_state = np.array([1 if x == 'X' else -1 if x == 'O' else 0 for x in env.board])
+
+                    # Reward simple basado en victoria, derrota o empate
+                    if env.current_winner == agent_letter:
+                        reward = 100
+                        done = True
+                    elif env.current_winner == opponent_letter:
+                        reward = -100
+                        done = True
+                    elif env.is_draw():
+                        reward = 50
+                        done = True
+                    else:
+                        reward = 0
+
+                    reward_total += reward
+                    agent.remember(state, action, reward, next_state, done)
+                    acciones_df.loc[len(acciones_df)] = [epoch+1, ep+1, agent_letter, action, env.board.copy(), reward, reward_total]
 
                     agent.replay()
+                    state = next_state
 
                 # Contabilizar resultados
                 if env.current_winner == agent_letter: wins += 1
                 elif env.current_winner == opponent_letter: losses += 1
                 else: draws += 1
 
-                elapsed = time.perf_counter()-start
-                total_time += elapsed
+                elapsed = time.perf_counter()-start; total_time += elapsed
                 computo_df.loc[len(computo_df)] = [
                     epoch+1, ep+1, elapsed, psutil.cpu_percent(),
                     psutil.Process(os.getpid()).memory_info().rss/1024/1024,
@@ -222,4 +198,4 @@ def train_dqn_agent_vs_random_llm(num_epochs=5, episodes_per_epoch=10):
 
 # ------------------  5. Main ------------------------
 if __name__ == "__main__":
-    acciones, computo, resumen = train_dqn_agent_vs_random_llm(num_epochs=10, episodes_per_epoch=10)
+    acciones, computo, resumen = train_dqn_agent_random_opponent(num_epochs=10, episodes_per_epoch=10)
