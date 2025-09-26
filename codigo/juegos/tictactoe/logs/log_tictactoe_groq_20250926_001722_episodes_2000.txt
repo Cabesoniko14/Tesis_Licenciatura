@@ -1,0 +1,24 @@
+
+=== Epoch 1/100 ===
+[Epoch 1 | Ep 1] Agente: X
+  Acción 4 | Reward -100 | Acum -100
+  Acción 0 | Reward 0 | Acum -100
+  Acción 2 | Reward 0 | Acum -100
+  Acción 8 | Reward 0 | Acum -100
+Episodio terminado | Total Reward: -100 | Éxito: 1 | Pasos: 4
+[Epoch 1 | Ep 2] Agente: O
+  Acción 3 | Reward 0 | Acum 0
+  Acción 1 | Reward 0 | Acum 0
+  Acción 2 | Reward 0 | Acum 0
+Episodio terminado | Total Reward: 0 | Éxito: 0 | Pasos: 3
+[Epoch 1 | Ep 3] Agente: X
+  Acción 8 | Reward -100 | Acum -100
+  Acción 3 | Reward 0 | Acum -100
+  Acción 5 | Reward -100 | Acum -200
+  Acción 2 | Reward 0 | Acum -200
+Episodio terminado | Total Reward: -200 | Éxito: 1 | Pasos: 4
+[Epoch 1 | Ep 4] Agente: O
+  Acción 4 | Reward 0 | Acum 0
+  Acción 3 | Reward 0 | Acum 0
+  Acción 8 | Reward 0 | Acum 0
+  Acción 2 | Reward -100 | Acum -100

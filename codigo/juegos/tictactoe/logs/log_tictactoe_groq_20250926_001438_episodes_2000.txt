@@ -1,0 +1,6 @@
+
+=== Epoch 1/100 ===
+[Epoch 1 | Ep 1] Agente: X
+  Acción 1 | Reward 0 | Acum 0
+  Acción 7 | Reward 0 | Acum 0
+  Acción 0 | Reward 0 | Acum 0
