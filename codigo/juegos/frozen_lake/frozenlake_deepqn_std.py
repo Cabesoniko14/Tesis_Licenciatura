@@ -424,7 +424,7 @@ def evaluate_agent_dqn(
 if __name__ == "__main__":
     # Ejemplo A: entrenar con mapas ALEATORIOS por episodio (no resbaloso, 4x4)
     base = train_dqn_frozenlake(
-        num_epochs=100,
+        num_epochs=50,
         episodes_per_epoch=100,
         map_size=4,
         is_slippery=False,
