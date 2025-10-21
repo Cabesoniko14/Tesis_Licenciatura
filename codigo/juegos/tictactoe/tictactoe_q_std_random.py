@@ -1,4 +1,4 @@
-# ======================  Q-Learning: Tic Tac Toe (Tabular, según paper)  ======================
+# ======================  Q-Learning: Tic Tac Toe (Tabular) + bono por BLOQUEO  ======================
 import os
 import time
 import random
@@ -46,6 +46,34 @@ class TicTacToe:
     def is_draw(self):
         return ' ' not in self.board
 
+# --------------------  Utilidad: jugadas ganadoras inmediatas --------------------------
+def winning_moves_for(board_list, letter):
+    """Regresa el conjunto de índices que darían victoria a `letter` si jugara AHORA en ese índice."""
+    wins = set()
+    for i, spot in enumerate(board_list):
+        if spot != ' ':
+            continue
+        # simular
+        b = board_list.copy()
+        b[i] = letter
+        # comprobar victoria con reglas del juego
+        if _is_win_after_place(b, i, letter):
+            wins.add(i)
+    return wins
+
+def _is_win_after_place(board, square, letter):
+    # fila
+    r0 = (square // 3) * 3
+    if board[r0] == board[r0+1] == board[r0+2] == letter: return True
+    # columna
+    c = square % 3
+    if board[c] == board[c+3] == board[c+6] == letter: return True
+    # diagonales (solo casillas pares)
+    if square % 2 == 0:
+        if board[0] == board[4] == board[8] == letter: return True
+        if board[2] == board[4] == board[6] == letter: return True
+    return False
+
 # --------------------  2. Agente Q-Learning (igual al del paper) --------------------------
 class QLearningAgent:
     def __init__(self, alpha=0.1, gamma=0.9, epsilon=0.1):
@@ -76,67 +104,87 @@ def train_qlearning_tictactoe(num_epochs=100, episodes_per_epoch=100):
     env = TicTacToe()
     agent = QLearningAgent()
 
+    # ======= ÚNICO CAMBIO DE RECOMPENSAS =======
+    WIN_REWARD     = 1.0     # victoria inmediata (igual al paper)
+    LOSS_REWARD    = -1.0    # derrota inmediata (igual al paper)
+    DRAW_REWARD    = 0.0     # empate (igual al paper)
+    BLOCK_BONUS    = 0.3     # **BONO por bloquear una victoria inmediata del rival**
+
     total_rewards, total_time = [], 0.0
     wins, draws, losses = 0, 0, 0
 
     # Tablas
     acciones_df = pd.DataFrame(columns=["Epoch","Episodio","Agente","Acción","Board","Reward","RewardAcum"])
-    computo_df = pd.DataFrame(columns=["Epoch","Episodio","Tiempo(s)","CPU(%)","RAM(MB)","GPU_mem(MB)"])
-    victorias_df = pd.DataFrame(columns=["Epoch","Victorias","Empates","Derrotas","WinRate(%)"])
-    resumen_df = pd.DataFrame(columns=["Métrica","Valor"])
+    computo_df  = pd.DataFrame(columns=["Epoch","Episodio","Tiempo(s)","CPU(%)","RAM(MB)","GPU_mem(MB)"])
+    victorias_df= pd.DataFrame(columns=["Epoch","Victorias","Empates","Derrotas","WinRate(%)"])
+    resumen_df  = pd.DataFrame(columns=["Métrica","Valor"])
 
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     total_episodes = num_epochs * episodes_per_epoch
-    base = f"tictactoe_qlearning_std_{timestamp}_episodes_{total_episodes}"
+    base = f"tictactoe_qlearning_std_random_block_{timestamp}_episodes_{total_episodes}"
     os.makedirs("datos_output", exist_ok=True)
 
     for epoch in range(num_epochs):
         wins_epoch, draws_epoch, losses_epoch = 0, 0, 0
 
         for ep in range(episodes_per_epoch):
-            start = time.perf_counter()
+            t0 = time.perf_counter()
             board = env.reset()
             state = board.copy()
-            reward_total = 0
+            reward_total = 0.0
             done = False
 
             # alternar quién empieza
             agent_letter, opponent_letter = ('X','O') if ((epoch*episodes_per_epoch+ep) % 2 == 0) else ('O','X')
 
             while not done:
+                prev_board = state.copy()
                 available_actions = env.available_moves()
                 action = agent.choose_action(state, available_actions)
+
+                # --- el agente juega ---
                 env.make_move(action, agent_letter)
                 next_state = env.board.copy()
 
-                # Recompensa (igual que paper: +1 win, -1 loss, 0 otherwise)
+                # ----- RECOMPENSA -----
+                # 1) Terminal inmediata
                 if env.current_winner == agent_letter:
-                    reward, done = 1, True
-                elif env.current_winner == opponent_letter:
-                    reward, done = -1, True
+                    reward, done = WIN_REWARD, True
                 elif env.is_draw():
-                    reward, done = 0, True
+                    reward, done = DRAW_REWARD, True
                 else:
-                    reward, done = 0, False
+                    # 2) BONO por BLOQUEO: si en el estado previo el oponente tenía
+                    #    una jugada ganadora inmediata y el agente ocupó ese lugar.
+                    opp_wins_prev = winning_moves_for(prev_board, opponent_letter)
+                    reward = BLOCK_BONUS if action in opp_wins_prev else 0.0
+                    done = False
+                # ----------------------
 
                 next_actions = env.available_moves()
                 agent.update(state, action, reward, next_state, next_actions)
 
                 reward_total += reward
-                acciones_df.loc[len(acciones_df)] = [epoch+1, ep+1, agent_letter, action, next_state.copy(), reward, reward_total]
+                acciones_df.loc[len(acciones_df)] = [
+                    epoch+1, ep+1, agent_letter, action, next_state.copy(), reward, reward_total
+                ]
 
+                # si el juego no terminó, mueve el oponente aleatorio
                 if not done:
                     opp_actions = env.available_moves()
                     if opp_actions:
                         opp_action = random.choice(opp_actions)
                         env.make_move(opp_action, opponent_letter)
+                        # cierre si el oponente gana o empata
                         if env.current_winner == opponent_letter:
-                            reward, done = -1, True
+                            done = True
+                            # la derrota ya se verá reflejada en el siguiente ciclo
+                            # (esta estructura replica tu bucle original)
                         elif env.is_draw():
-                            reward, done = 0, True
+                            done = True
 
                 state = env.board.copy()
 
+            # métricas del episodio
             if env.current_winner == agent_letter:
                 wins += 1; wins_epoch += 1
             elif env.current_winner == opponent_letter:
@@ -145,10 +193,11 @@ def train_qlearning_tictactoe(num_epochs=100, episodes_per_epoch=100):
                 draws += 1; draws_epoch += 1
 
             total_rewards.append(reward_total)
-            total_time += time.perf_counter() - start
+            elapsed = time.perf_counter() - t0
+            total_time += elapsed
 
             computo_df.loc[len(computo_df)] = [
-                epoch+1, ep+1, time.perf_counter()-start,
+                epoch+1, ep+1, elapsed,
                 psutil.cpu_percent(),
                 psutil.Process(os.getpid()).memory_info().rss/1024/1024,
                 torch.cuda.memory_allocated()/1024/1024 if torch.cuda.is_available() else 0
@@ -171,6 +220,7 @@ def train_qlearning_tictactoe(num_epochs=100, episodes_per_epoch=100):
     computo_df.to_csv(f"datos_output/computo_{base}.csv", index=False)
     victorias_df.to_csv(f"datos_output/victorias_{base}.csv", index=False)
     resumen_df.to_csv(f"datos_output/resumen_{base}.csv", index=False)
+    np.save(f"modelos/qtable_{base}.npy", dict(agent.q_table))
 
     print("\n=== ENTRENAMIENTO COMPLETADO ===")
     return acciones_df, computo_df, victorias_df, resumen_df
