@@ -1,0 +1,7 @@
+Métrica,Valor
+Éxitos,4360.0
+Fracasos,640.0
+Tiempo total (s),39.446086830943386
+GPU usada,1.0
+Modo,fixed | is_slippery=False | size=4
+Episodios totales,5000

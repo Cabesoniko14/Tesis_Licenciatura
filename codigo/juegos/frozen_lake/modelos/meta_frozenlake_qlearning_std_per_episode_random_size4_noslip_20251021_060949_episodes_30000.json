@@ -1,0 +1,1 @@
+{"map_mode": "per_episode_random", "map_size": 4, "is_slippery": false, "n_states": 16, "n_actions": 4, "max_steps_per_ep": 50, "timestamp": "20251021_060949", "base": "frozenlake_qlearning_std_per_episode_random_size4_noslip_20251021_060949_episodes_30000"}

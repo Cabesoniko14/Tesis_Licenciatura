@@ -1,0 +1,7 @@
+Métrica,Valor
+Éxitos,2249.0
+Fracasos,7171.0
+Tiempo total (s),691.8849254530269
+GPU usada,1.0
+Entorno,FrozenLake-v1 | is_slippery=True | randomize_maps=False | size=4
+Episodios totales,10000
