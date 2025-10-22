@@ -1,0 +1,7 @@
+Métrica,Valor
+Éxitos,0.0
+Fracasos,1.0
+Tiempo total (s),19.608667146000016
+GPU usada,1.0
+Modo,per_episode_random | is_slippery=False | size=4
+Episodios totales,1

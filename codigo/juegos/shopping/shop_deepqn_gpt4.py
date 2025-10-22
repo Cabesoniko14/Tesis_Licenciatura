@@ -84,7 +84,7 @@ def evaluate_with_llm(state, action):
 
     def call_llm():
         response = client.chat.completions.create(   # ✅ nuevo formato
-            model="gpt-4-turbo",
+            model="gpt-5-mini-2025-08-07",
             messages=[{"role": "user", "content": msg}],
             temperature=0
         )
