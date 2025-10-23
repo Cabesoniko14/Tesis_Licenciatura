@@ -1,0 +1,7 @@
+Métrica,Valor
+Éxitos,3126.0
+Fracasos,1874.0
+Tiempo total (s),320.80884747599885
+GPU usada,1.0
+Modo,"connect4 | reward final: win=1, draw/loss=0"
+Episodios totales,5000
