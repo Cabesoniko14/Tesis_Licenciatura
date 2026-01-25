@@ -1,2 +1,8 @@
 jericho_venv/
+jericho_venv/
+.venv/
+venv/
+__pycache__/
+*.pyc
+
 
