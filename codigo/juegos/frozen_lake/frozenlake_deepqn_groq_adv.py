@@ -18,7 +18,7 @@ import re  # para parsear el número devuelto por el LLM
 from groq import Groq  # o deja OpenAI si prefieres; aquí uso Groq porque ya lo tienes
 
 # Cliente LLM (toma la API key de variable de entorno)
-llm_client = Groq(api_key="")
+llm_client = Groq(api_key)
 
 def _parse_first_float(text: str, lo=-1.0, hi=1.0):
     """
@@ -210,25 +210,37 @@ def reward_proxy(terminated, truncated, env_reward_last, desc, last_state_idx, l
     a_name = action_names.get(int(last_action), str(last_action))
 
     # Prompt ULTRA explícito y auto-contenido
+    #prompt = (
+    #    "Devuelve SOLO un número entre 0 y 1 (puede ser 0 o 1). SIN texto extra.\n"
+    #    "Eres el evaluador FINAL de un episodio de FrozenLake. Reglas del juego:\n"
+    #    "- El mapa es una cuadrícula con celdas:\n"
+    #    "  'S' = Start (inicio), 'F' = Frozen (camino seguro), 'H' = Hole (hoyo), 'G' = Goal (meta).\n"
+    #    "- El agente inicia en 'S' y se mueve con acciones 0=Left,1=Down,2=Right,3=Up.\n"
+    #    "- El episodio termina si llega a 'G' (meta), cae en un 'H' (hoyo), o se trunca por límite de pasos.\n"
+    #    "TU TAREA ES JUZGAR EL FINAL DEL EPISODIO PARA EL AGENTE. Generalmente, da lo mismo si se cae o si no acaba. Lo que si, debe recopmensarse muchísimo terminar el juego, e incluso más si es de forma óptima.\n"        
+    #    f"Dimensiones: H={H}, W={W}\n"
+    #    "Mapa (por filas):\n"
+    #    f"{grid_str}\n\n"
+    #    "Convención de índices: idx = r*W + c (row-major).\n"
+    #    f"Paso final observado:\n"
+    #    f"- last_state_idx={int(last_state_idx)}\n"
+    #    f"- last_action={int(last_action)} ({a_name})\n"
+    #    f"- next_state_idx={int(next_state_idx)}\n"
+    #    f"- terminated={bool(terminated)}\n"
+    #    f"- truncated={bool(truncated)}\n"
+    #    f"- env_reward_last={float(env_reward_last)}  # en Gym, 1.0 SOLO si llegó a 'G'\n"
+    #)
+
+    # Prompt para ver si el agente se mueve de acuerdo a la directiva
     prompt = (
-        "Devuelve SOLO un número entre 0 y 1 (puede ser 0 o 1). SIN texto extra.\n"
-        "Eres el evaluador FINAL de un episodio de FrozenLake. Reglas del juego:\n"
-        "- El mapa es una cuadrícula con celdas:\n"
-        "  'S' = Start (inicio), 'F' = Frozen (camino seguro), 'H' = Hole (hoyo), 'G' = Goal (meta).\n"
-        "- El agente inicia en 'S' y se mueve con acciones 0=Left,1=Down,2=Right,3=Up.\n"
-        "- El episodio termina si llega a 'G' (meta), cae en un 'H' (hoyo), o se trunca por límite de pasos.\n"
-        "TU TAREA ES JUZGAR EL FINAL DEL EPISODIO PARA EL AGENTE. Generalmente, da lo mismo si se cae o si no acaba. Lo que si, debe recopmensarse muchísimo terminar el juego, e incluso más si es de forma óptima.\n"        
-        f"Dimensiones: H={H}, W={W}\n"
-        "Mapa (por filas):\n"
-        f"{grid_str}\n\n"
-        "Convención de índices: idx = r*W + c (row-major).\n"
-        f"Paso final observado:\n"
-        f"- last_state_idx={int(last_state_idx)}\n"
-        f"- last_action={int(last_action)} ({a_name})\n"
-        f"- next_state_idx={int(next_state_idx)}\n"
-        f"- terminated={bool(terminated)}\n"
-        f"- truncated={bool(truncated)}\n"
-        f"- env_reward_last={float(env_reward_last)}  # en Gym, 1.0 SOLO si llegó a 'G'\n"
+        "Responde SOLO con un número entre: 0 o 1. SIN texto extra.\n"
+        "Tu rol es evaluar un episodio de frozen lake. .\n"
+        "Regla EXACTA:\n"
+        "- Si terminated es true Y env_reward_last es 1, entonces el agente terminó el curso llegando a la meta.\n"
+        "- En todos los demás casos (incluye truncated true o env_reward_last 0) no acabó el curso o se cayó- Si es truncated es que se cayó.\n"
+        f"terminated={bool(terminated)}\n"
+        f"truncated={bool(truncated)}\n"
+        f"env_reward_last={float(env_reward_last)}\n"
     )
 
     try:
@@ -297,7 +309,7 @@ def train_dqn_frozenlake(
     # Directorios y base
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     total_episodes = num_epochs * episodes_per_epoch
-    base = f"frozenlake_dqn_groq_own_reward_system_fast_route_{map_mode}_size{map_size}_{'slip' if is_slippery else 'noslip'}_{timestamp}_episodes_{total_episodes}"
+    base = f"frozenlake_dqn_groq_own_reward_system_fast_route_custom_prompt_preference_nonearlake_{map_mode}_size{map_size}_{'slip' if is_slippery else 'noslip'}_{timestamp}_episodes_{total_episodes}"
     os.makedirs("datos_output", exist_ok=True)
     os.makedirs("modelos", exist_ok=True)
 

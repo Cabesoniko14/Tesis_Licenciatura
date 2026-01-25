@@ -18,7 +18,7 @@ import re  # para parsear el número devuelto por el LLM
 from groq import Groq  # o deja OpenAI si prefieres; aquí uso Groq porque ya lo tienes
 
 # Cliente LLM (toma la API key de variable de entorno)
-llm_client = Groq(api_key="")
+llm_client = Groq(api_key)
 
 def _parse_first_float(text: str, lo=-1.0, hi=1.0):
     """

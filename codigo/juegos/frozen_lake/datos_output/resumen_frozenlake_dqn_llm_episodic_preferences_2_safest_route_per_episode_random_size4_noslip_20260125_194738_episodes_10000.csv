@@ -1,0 +1,11 @@
+Métrica,Valor
+Éxitos,6260.0
+Fracasos,2887.0
+Tiempo total (s),2912.0831251589425
+GPU usada,1.0
+Modo,per_episode_random | is_slippery=False | size=4
+Episodios totales,10000
+use_llm_reward,True
+directive,"Llega a la meta pero pasando lo más lejos posible de los lagos (llegar como sea sigue siendo muy bueno, lo cual merece una buena y alta calificación pero no perfecta). No ganar el episodio no merece recompensas. Es imprescindible siempre calificar bien llegar a la meta y calificar lo peor no ganar. Resta algun poco de puntos si el camino tomado es demasiago cercano a los lagos o pasa mucho cerca de ellos."
+llm_model,llama-3.1-8b-instant
+llm_temperature,0

@@ -1,0 +1,11 @@
+Métrica,Valor
+Éxitos,2729.0
+Fracasos,2227.0
+Tiempo total (s),1183.4376028918914
+GPU usada,1.0
+Modo,per_episode_random | is_slippery=False | size=4
+Episodios totales,5000
+use_llm_reward,True
+directive,"Devuelve 1 si terminó el entrenamiento ganando el mapa, 0 en cualquier otro caso."
+llm_model,llama-3.1-8b-instant
+llm_temperature,0
