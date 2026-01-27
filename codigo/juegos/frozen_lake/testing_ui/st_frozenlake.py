@@ -1,12 +1,14 @@
 # streamlit_frozenlake_unified.py
 # ============================================================
 # FrozenLake — UI unificada (Q-table .npy + DQN policy .pth)
-# - Carga Q-table (.npy) desde ./modelos o vía upload
-# - Carga policy DQN (.pth) desde ./modelos o vía upload
+# - Q-table (.npy)
+# - DQN policy (.pth) con 2 arquitecturas:
+#     (A) CNN + interpolate a 8x8 (legacy)
+#     (B) CNN + Global Average Pooling (GAP)  ✅ NUEVO
 # - Mapa fijo (4x4, 8x8) o Random NxN (N=4..8)
-# - Animación de 1 episodio (render nativo Gymnasium rgb_array)
+# - Animación 1 episodio (render Gymnasium rgb_array)
 # - Testing multi-size: barplot WinRate por tamaño (4..8),
-#   usando 1 mapa aleatorio por tamaño (misma desc para todos los episodios del tamaño)
+#   usando 1 mapa aleatorio por tamaño (misma desc para todos los episodios)
 # ============================================================
 
 import os
@@ -38,6 +40,11 @@ TILE_TO_CH = {
     b"G": 2,
     b"S": 0,  # Start tratado como Frozen
 }
+
+DQN_ARCH_OPTIONS = [
+    "CNN Interp(8x8) (legacy)",
+    "CNN GAP (GlobalAvgPool) ✅",
+]
 
 
 # --------------------------- Utils de IO ---------------------------
@@ -84,7 +91,7 @@ def encode_obs_from_desc(desc: np.ndarray, agent_idx: int) -> np.ndarray:
     return obs
 
 
-# --------------------------- DQN CNN (tu convención) ---------------------------
+# --------------------------- DQN Nets (2 arquitecturas) ---------------------------
 
 class QNetCNN(nn.Module):
     """
@@ -112,6 +119,33 @@ class QNetCNN(nn.Module):
         return self.head(feats)   # (B,4)
 
 
+class QNetCNN_GAP(nn.Module):
+    """
+    CNN size-agnostic con Global Average Pooling (GAP).
+    Soporta naturalmente tamaños 4..8 (y más) sin interpolación.
+    """
+    def __init__(self, in_channels: int = 4, n_actions: int = 4):
+        super().__init__()
+        self.features = nn.Sequential(
+            nn.Conv2d(in_channels, 64, kernel_size=3, padding=1),
+            nn.ReLU(inplace=True),
+            nn.Conv2d(64, 64, kernel_size=3, padding=1),
+            nn.ReLU(inplace=True),
+        )
+        self.gap = nn.AdaptiveAvgPool2d((1, 1))  # (B,64,H,W) -> (B,64,1,1)
+        self.head = nn.Sequential(
+            nn.Flatten(),          # -> (B,64)
+            nn.Linear(64, 128),
+            nn.ReLU(inplace=True),
+            nn.Linear(128, n_actions),
+        )
+
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        feats = self.features(x)
+        feats = self.gap(feats)
+        return self.head(feats)
+
+
 # --------------------------- Envs ---------------------------
 
 def make_fixed_env(map_size: int, is_slippery: bool, render_mode: Optional[str]):
@@ -129,7 +163,6 @@ def make_random_env(map_size: int, is_slippery: bool, seed: Optional[int], rende
 # --------------------------- Políticas ---------------------------
 
 def qtable_action(Q: np.ndarray, state: int) -> int:
-    # Q: (n_states, 4)
     if Q is None:
         return 0
     if state < 0 or state >= Q.shape[0]:
@@ -137,7 +170,7 @@ def qtable_action(Q: np.ndarray, state: int) -> int:
     return int(np.argmax(Q[int(state)]))
 
 @torch.no_grad()
-def dqn_action_from_state(policy: QNetCNN, desc: np.ndarray, state_idx: int, device: str) -> int:
+def dqn_action_from_state(policy: nn.Module, desc: np.ndarray, state_idx: int, device: str) -> int:
     x = torch.from_numpy(encode_obs_from_desc(desc, int(state_idx))).unsqueeze(0).to(device)
     q = policy(x).detach().cpu().numpy().squeeze(0)
     m = q.max()
@@ -159,6 +192,7 @@ class EvalConfig:
     model_kind: str                 # "qtable" o "dqn"
     qtable_path: Optional[str]
     dqn_path: Optional[str]
+    dqn_arch: str                   # "interp" | "gap"
     device: str
     is_slippery: bool
     max_steps: int
@@ -171,9 +205,14 @@ class EvalConfig:
 def load_qtable(path: str) -> np.ndarray:
     return np.load(path, allow_pickle=True)
 
-def load_dqn(path: str, device: str) -> QNetCNN:
-    net = QNetCNN(in_channels=4, n_actions=4).to(device)
-    net.load_state_dict(torch.load(path, map_location=device))
+def load_dqn(path: str, device: str, dqn_arch: str) -> nn.Module:
+    if dqn_arch == "gap":
+        net = QNetCNN_GAP(in_channels=4, n_actions=4).to(device)
+    else:
+        net = QNetCNN(in_channels=4, n_actions=4).to(device)
+
+    state = torch.load(path, map_location=device)
+    net.load_state_dict(state)
     net.eval()
     return net
 
@@ -190,7 +229,7 @@ def evaluate_model(cfg: EvalConfig) -> float:
     if cfg.model_kind == "qtable":
         Q = load_qtable(cfg.qtable_path)
     else:
-        policy = load_dqn(cfg.dqn_path, cfg.device)
+        policy = load_dqn(cfg.dqn_path, cfg.device, cfg.dqn_arch)
 
     successes = 0
 
@@ -236,6 +275,7 @@ def animate_one_episode(
     model_kind: str,
     qtable_path: Optional[str],
     dqn_path: Optional[str],
+    dqn_arch: str,
     map_mode: str,
     map_size: int,
     is_slippery: bool,
@@ -246,23 +286,15 @@ def animate_one_episode(
     img_width: int,
     slot,
 ) -> Dict[str, Any]:
-    """
-    Anima 1 episodio con render_mode="rgb_array".
-    map_mode:
-      - "fixed": usa map_name 4x4 u 8x8 (map_size debe ser 4 u 8)
-      - "per_episode_random": genera 1 mapa random de tamaño map_size (4..8)
-    """
     rng = np.random.default_rng(int(seed))
 
-    # cargar modelo
     Q = None
     policy = None
     if model_kind == "qtable":
         Q = load_qtable(qtable_path)
     else:
-        policy = load_dqn(dqn_path, device)
+        policy = load_dqn(dqn_path, device, dqn_arch)
 
-    # env con render
     if map_mode == "fixed":
         env, meta = make_fixed_env(map_size=int(map_size), is_slippery=bool(is_slippery), render_mode="rgb_array")
         used_seed = int(seed)
@@ -273,8 +305,12 @@ def animate_one_episode(
     obs, _ = env.reset(seed=used_seed)
     s_idx = int(obs)
 
-    # frame 0
-    render_frame(env, width=img_width, caption=f"Paso 0 | seed={used_seed} | mapa={meta if isinstance(meta,str) else f'random {map_size}x{map_size}'}", slot=slot)
+    render_frame(
+        env,
+        width=img_width,
+        caption=f"Paso 0 | seed={used_seed} | mapa={meta if isinstance(meta,str) else f'random {map_size}x{map_size}'}",
+        slot=slot,
+    )
     time.sleep(max(0.0, float(frame_delay)))
 
     reward_acc = 0.0
@@ -314,6 +350,7 @@ def evaluate_multisize_one_map_per_size(
     model_kind: str,
     qtable_path: Optional[str],
     dqn_path: Optional[str],
+    dqn_arch: str,
     sizes: List[int],
     is_slippery: bool,
     episodes_per_size: int,
@@ -321,12 +358,6 @@ def evaluate_multisize_one_map_per_size(
     base_seed: int,
     device: str,
 ) -> Dict[int, float]:
-    """
-    Para cada tamaño N en sizes:
-      - genera 1 mapa random NxN (seed derivado)
-      - evalúa episodes_per_size episodios sobre ese MISMO mapa (reset del mismo env)
-      - reporta WinRate% por tamaño
-    """
     rng = np.random.default_rng(int(base_seed))
 
     Q = None
@@ -334,18 +365,17 @@ def evaluate_multisize_one_map_per_size(
     if model_kind == "qtable":
         Q = load_qtable(qtable_path)
     else:
-        policy = load_dqn(dqn_path, device)
+        policy = load_dqn(dqn_path, device, dqn_arch)
 
     results: Dict[int, float] = {}
 
     for N in sizes:
         seed_map = int(rng.integers(0, 1_000_000_000))
-        # un solo env por tamaño, mismo desc
         env, _desc_list = make_random_env(map_size=int(N), is_slippery=bool(is_slippery), seed=seed_map, render_mode=None)
 
         wins = 0
         for ep in range(int(episodes_per_size)):
-            obs, _ = env.reset(seed=seed_map + ep)  # reseed distinto solo para reset interno, desc queda igual
+            obs, _ = env.reset(seed=seed_map + ep)
             s_idx = int(obs)
 
             for _t in range(int(max_steps)):
@@ -395,6 +425,7 @@ for k, v in {
     "_dqn_path": None,
     "_qtable_loaded": False,
     "_dqn_loaded": False,
+    "_dqn_arch": "interp",  # default
 }.items():
     if k not in ss:
         ss[k] = v
@@ -407,8 +438,18 @@ models = list_local_models("modelos")
 with st.sidebar:
     st.header("⚙️ Modelo")
 
-    model_kind = st.radio("Tipo de modelo", options=["Q-table (.npy)", "DQN policy (.pth)"], index=0)
-    kind = "qtable" if model_kind.startswith("Q-table") else "dqn"
+    model_kind_ui = st.radio("Tipo de modelo", options=["Q-table (.npy)", "DQN policy (.pth)"], index=0)
+    kind = "qtable" if model_kind_ui.startswith("Q-table") else "dqn"
+
+    # ✅ NUEVO: selector de arquitectura DQN
+    if kind == "dqn":
+        dqn_arch_ui = st.selectbox("Arquitectura DQN", options=DQN_ARCH_OPTIONS, index=0)
+        ss._dqn_arch = "gap" if "GAP" in dqn_arch_ui else "interp"
+
+        st.caption(
+            "Tip: si tu archivo se llama algo como `..._gap_...pth`, elige **CNN GAP**. "
+            "Si es de tu versión vieja, elige **Interp(8x8)**."
+        )
 
     st.divider()
     st.subheader("📦 Cargar desde ./modelos")
@@ -487,6 +528,7 @@ with colL:
                 model_kind=kind,
                 qtable_path=ss._qtable_path,
                 dqn_path=ss._dqn_path,
+                dqn_arch=ss._dqn_arch if kind == "dqn" else "interp",
                 map_mode=map_mode,
                 map_size=int(map_size),
                 is_slippery=bool(is_slippery),
@@ -514,6 +556,7 @@ with colR:
                 model_kind=kind,
                 qtable_path=ss._qtable_path,
                 dqn_path=ss._dqn_path,
+                dqn_arch=ss._dqn_arch if kind == "dqn" else "interp",
                 device=device,
                 is_slippery=bool(is_slippery),
                 max_steps=int(max_steps),
@@ -546,6 +589,7 @@ with colR:
                     model_kind=kind,
                     qtable_path=ss._qtable_path,
                     dqn_path=ss._dqn_path,
+                    dqn_arch=ss._dqn_arch if kind == "dqn" else "interp",
                     sizes=sizes,
                     is_slippery=bool(is_slippery),
                     episodes_per_size=int(eps_per_size),
@@ -556,12 +600,12 @@ with colR:
                 elapsed = time.perf_counter() - t0
 
             st.write("Resultados (WinRate%):", res)
-            fig = plot_bar_results(res, title=f"WinRate por tamaño (1 mapa random por tamaño) | modelo={kind} | slippery={is_slippery}")
+            fig = plot_bar_results(res, title=f"WinRate por tamaño (1 mapa random por tamaño) | modelo={kind} | arch={ss._dqn_arch} | slippery={is_slippery}")
             st.pyplot(fig)
             st.success(f"Listo. Tiempo: {elapsed:.2f}s")
 
 st.info(
     "Tip: si tu Q-table fue entrenada en 4x4, lo normal es que no generalice a tamaños mayores "
-    "(porque el espacio de estados cambia). Para DQN, aquí la entrada es el grid one-hot + canal del agente, "
-    "y la CNN se interpola a 8x8 para soportar tamaños 4..8."
+    "(porque el espacio de estados cambia). Para DQN, aquí la entrada es el grid one-hot + canal del agente. "
+    "Ahora puedes evaluar dos arquitecturas: Interp(8x8) y GAP."
 )
