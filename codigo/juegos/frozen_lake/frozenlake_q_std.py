@@ -1,4 +1,4 @@
-# ======================  Q-Learning: FrozenLake (Gymnasium, Tabular) — mapa aleatorio POR EPISODIO o FIJO  ======================
+# ======================  Q-Learning: FrozenLake (Gymnasium, Tabular) ======================
 import os
 import time
 import json
@@ -37,16 +37,15 @@ class QLearningAgent:
 def make_fixed_env(map_size=4, is_slippery=False, render_mode=None):
     """
     Crea el FrozenLake FIJO (mapa estándar de Gymnasium) según el tamaño.
-    map_size: 4 u 8 típicamente.
     """
     assert map_size in (4, 8), "map_size fijo soportado: 4 u 8 (mapas estándar)."
     map_name = f"{map_size}x{map_size}"
     env = gym.make("FrozenLake-v1", map_name=map_name, is_slippery=is_slippery, render_mode=render_mode)
-    return env, map_name  # (env, "4x4" o "8x8")
+    return env, map_name  
 
 def make_random_env(map_size=4, is_slippery=False, seed=None, render_mode=None):
     """
-    Crea un FrozenLake con un mapa ALEATORIO NUEVO.
+    Crea un FrozenLake con un mapa aleatorio.
     """
     desc = generate_random_map(size=map_size, seed=seed)
     env = gym.make("FrozenLake-v1", desc=desc, is_slippery=is_slippery, render_mode=render_mode)
@@ -65,7 +64,7 @@ def train_qlearning_frozenlake(
     """
     map_mode:
       - "per_episode_random": genera un mapa nuevo por episodio (mismo tamaño).
-      - "fixed": usa el mapa estándar fijo ("4x4" o "8x8") en TODOS los episodios.
+      - "fixed": usa el mapa estándar fijo ("4x4" o "8x8") en todos los episodios.
     """
     assert map_mode in ("per_episode_random", "fixed")
     n_states = map_size * map_size
@@ -90,7 +89,6 @@ def train_qlearning_frozenlake(
 
     rng = np.random.default_rng(seed)
 
-    # Si el modo es fijo, instanciamos UNA sola vez el env fijo
     fixed_env = None
     fixed_map_id = None
     if map_mode == "fixed":
@@ -111,7 +109,7 @@ def train_qlearning_frozenlake(
                     render_mode=None
                 )
             else:
-                env, map_meta = fixed_env, fixed_map_id  # reusar el fijo
+                env, map_meta = fixed_env, fixed_map_id  
 
             obs, _ = env.reset()
             s = int(obs)
@@ -147,7 +145,7 @@ def train_qlearning_frozenlake(
             ]
 
             if map_mode == "per_episode_random":
-                env.close()  # en fijo, no cerramos para reusar
+                env.close()  
 
         wr = 100.0 * success_epoch / episodes_per_epoch
         victorias_df.loc[len(victorias_df)] = [epoch+1, success_epoch, fail_epoch, wr]
@@ -197,8 +195,8 @@ def train_qlearning_frozenlake(
 def evaluate_agent(Q, episodes=100, map_size=4, is_slippery=False, max_steps=200,
                    map_mode="per_episode_random", seed=None):
     """
-    - map_mode='fixed': evalúa SIEMPRE en el mapa estándar fijo de Gymnasium (4x4 u 8x8).
-    - map_mode='per_episode_random': evalúa con mapa NUEVO en cada episodio.
+    - map_mode='fixed': evalúa SIEMPRE en el mapa estándar fijo de Gymnasium
+    - map_mode='per_episode_random': evalúa con mapa nuevo por episodio
     """
     assert map_mode in ("per_episode_random", "fixed")
     rng = np.random.default_rng(seed)
@@ -235,9 +233,9 @@ def evaluate_agent(Q, episodes=100, map_size=4, is_slippery=False, max_steps=200
 
     return 100.0 * successes / episodes
 
-# --------------------  Main (ejemplos de uso) --------------------------
+# --------------------  Main --------------------------
 if __name__ == "__main__":
-    # Ejemplo A: ENTRENAR con mapa ALEATORIO POR EPISODIO (size=4, no resbaloso)
+
     base = train_qlearning_frozenlake(
         num_epochs=50,
         episodes_per_epoch=100,
@@ -248,7 +246,7 @@ if __name__ == "__main__":
         seed=None
     )
 
-    # Cargar y evaluar en mapas aleatorios por episodio
+
     Q = np.load(f"modelos/qtable_{base}.npy")
     with open(f"modelos/meta_{base}.json", "r") as f:
         meta = json.load(f)

@@ -1,14 +1,5 @@
-# ======================  DQN: FrozenLake (Gymnasium) — Episodic LLM Reward con trayectoria + acciones  ======================
-# - NO cambio cómo pones tu API key (lo dejas igual)
-# - Recompensa: 0 en pasos no terminales, y SOLO al final (terminated/truncated) pide al LLM un valor en [0,1]
-# - En el prompt se incluye:
-#   * grid completo
-#   * camino (states idx en orden + coordenadas)
-#   * acciones en orden
-#   * causa de término: llegó a meta / cayó en hoyo / se acabaron pasos (truncated)
-#   * directiva (string) que tú defines
-#
-# NOTA: FrozenLake usa acciones: 0=Left, 1=Down, 2=Right, 3=Up
+# ======================  DQN: FrozenLake (Gymnasium)  ======================
+
 
 import os
 import time
@@ -36,7 +27,7 @@ llm_client = Groq(api_key)
 # -------------------------------------------------------
 def _parse_first_float(text: str, lo=0.0, hi=1.0):
     """
-    Extrae el primer número de un string y lo recorta a [lo, hi].
+    Extrae el primer número de un string y lo recorta
     Devuelve None si no hay número válido.
     """
     if not text:
@@ -53,8 +44,9 @@ def _parse_first_float(text: str, lo=0.0, hi=1.0):
         return None
 
 # -------------------------------------------------------
-# 0) Utils reproducibilidad (opcional)
+# 0) Utils reproducibilidad
 # -------------------------------------------------------
+
 def set_global_seeds(seed=None):
     if seed is None:
         return
@@ -64,14 +56,13 @@ def set_global_seeds(seed=None):
     torch.cuda.manual_seed_all(seed)
 
 # -------------------------------------------------------
-# 1) Observación enriquecida (mapa + agente) -> tensor
-# Capas: [FROZEN, HOLE, GOAL, AGENT]
+# 1)  Capas: [FROZEN, HOLE, GOAL, AGENT]
 # -------------------------------------------------------
 TILE_TO_CH = {
     b'F': 0,
     b'H': 1,
     b'G': 2,
-    b'S': 0,  # Start tratado como Frozen
+    b'S': 0,  
 }
 
 def idx_to_rc(idx, size):
@@ -100,8 +91,9 @@ def encode_obs_from_desc(desc, agent_idx):
 # -------------------------------------------------------
 # 2) Redes y Replay Buffer
 # -------------------------------------------------------
+
 class QNetCNN(nn.Module):
-    """CNN compacta para 4 u 8 celdas por lado."""
+    """CNN compacta para 4 o 8 celdas por lado."""
     def __init__(self, in_channels=4, n_actions=4):
         super().__init__()
         self.features = nn.Sequential(
@@ -112,7 +104,7 @@ class QNetCNN(nn.Module):
         )
         self.head = nn.Sequential(
             nn.Flatten(),
-            nn.Linear(64 * 8 * 8, 256),  # se ajusta a 8x8; si es 4x4 reacomodamos en forward
+            nn.Linear(64 * 8 * 8, 256),
             nn.ReLU(inplace=True),
             nn.Linear(256, n_actions)
         )
@@ -121,7 +113,6 @@ class QNetCNN(nn.Module):
         # x: (B, C=4, H, W) con H,W en {4,8}
         B, C, H, W = x.shape
         feats = self.features(x)
-        # Si H,W=4, adaptamos a 8x8 para reutilizar la misma head
         if H == 4 and W == 4:
             feats = nn.functional.interpolate(feats, size=(8, 8), mode='nearest')
         out = self.head(feats)
@@ -150,6 +141,7 @@ class ReplayBuffer:
 # -------------------------------------------------------
 # 3) Envs helpers
 # -------------------------------------------------------
+
 def make_fixed_env(map_size=4, is_slippery=False, render_mode=None):
     assert map_size in (4, 8), "map_size fijo soportado: 4 u 8"
     map_name = f"{map_size}x{map_size}"
@@ -162,8 +154,9 @@ def make_random_env(map_size=4, is_slippery=False, seed=None, render_mode=None):
     return env, desc
 
 # -------------------------------------------------------
-# 4) Helpers para prompt: grid + ruta + acciones + causa final
+# 4) Helpers para prompt
 # -------------------------------------------------------
+
 def _grid_to_str(desc):
     """desc: ndarray (H,W) con elementos bytes (b'S', b'F', b'H', b'G') -> string legible."""
     H, W = desc.shape
@@ -218,10 +211,7 @@ def _termination_reason(terminated, truncated, final_tile, env_reward_last):
     """
     Interpreta la causa con señales del entorno + tile final.
     """
-    # En FrozenLake usualmente:
-    # - terminated True y r=1 => llegó a G
-    # - terminated True y r=0 => cayó en H (o terminó sin reward)
-    # - truncated True => límite de pasos
+
     if bool(truncated):
         return "TRUNCATED (se acabaron los pasos / límite de pasos)"
     if bool(terminated) and float(env_reward_last) == 1.0 and final_tile == "G":
@@ -233,8 +223,9 @@ def _termination_reason(terminated, truncated, final_tile, env_reward_last):
     return "NOT_DONE"
 
 # -------------------------------------------------------
-# 5) Recompensa LLM SOLO al FINAL: incluye ruta + acciones + directiva
+# 5) Recompensa LLM Final
 # -------------------------------------------------------
+
 def reward_proxy_episode_llm(
     *,
     terminated,
@@ -243,7 +234,7 @@ def reward_proxy_episode_llm(
     desc,
     path_states,      # [s0,...,sT]
     path_actions,     # [a0,...,a(T-1)]
-    directive: str,   # tu directiva en lenguaje natural (la puedes cambiar por experimento)
+    directive: str,   # directiva apra el prompt
     lo=0.0,
     hi=1.0,
     model="llama-3.1-8b-instant",
@@ -270,7 +261,7 @@ def reward_proxy_episode_llm(
     path_str = _format_path(desc, path_states)
     actions_str = _format_actions(path_actions)
 
-    # Prompt: SOLO un número [0,1], con directiva + evidencia (ruta/acciones)
+    # Prompt con diferentes elementos para el evaluador
     prompt = (
         "Responde SOLO con un número entre 0 y 1. SIN texto extra.\n"
         "Eres un evaluador de recompensas para un episodio de FrozenLake.\n\n"
@@ -311,7 +302,6 @@ def reward_proxy_episode_llm(
             print(f"[LLM WARN] No se pudo parsear número del LLM. raw={raw!r} -> fallback expected={expected}")
             return expected
 
-        # (opcional) warning si difiere del expected binario cuando el entorno es estricto
         if float(val) != expected and expected in (0.0, 1.0):
             print(f"[LLM WARN] LLM devolvió {val} distinto a expected={expected} | reason={reason} | raw={raw!r}")
 
@@ -322,17 +312,17 @@ def reward_proxy_episode_llm(
         return expected
 
 # -------------------------------------------------------
-# 6) Entrenamiento DQN (estructura similar a tu versión)
+# 6) Entrenamiento DQN
 # -------------------------------------------------------
+
 def train_dqn_frozenlake(
     num_epochs=100,
     episodes_per_epoch=100,
     map_size=4,
     is_slippery=False,
     max_steps_per_ep=100,
-    map_mode="per_episode_random",   # "per_episode_random" o "fixed"
+    map_mode="per_episode_random",
     seed=None,
-    # Hiperparámetros DQN
     gamma=0.99,
     lr=1e-3,
     buffer_capacity=100_000,
@@ -343,7 +333,6 @@ def train_dqn_frozenlake(
     eps_start=1.0,
     eps_end=0.05,
     eps_decay_steps=50_000,
-    # ===== LLM episodic reward settings =====
     use_llm_reward=True,
     directive="Da 1 si llegó a la meta y 0 si no. Prefiere rutas cortas y seguras, evita caer en hoyos.",
     llm_model="llama-3.1-8b-instant",
@@ -414,9 +403,8 @@ def train_dqn_frozenlake(
             done = False
 
             # ===== TRAYECTORIA PARA LLM =====
-            episode_states = [s_idx]   # incluye estado inicial
-            episode_actions = []       # acciones tomadas (longitud = pasos)
-            # ===============================
+            episode_states = [s_idx]   
+            episode_actions = []       
 
             for t in range(max_steps_per_ep):
                 eps = get_epsilon(step_count)
@@ -441,8 +429,6 @@ def train_dqn_frozenlake(
                 next_obs_tensor = encode_obs_from_desc(next_desc, ns_idx)
 
                 # ===== RECOMPENSA =====
-                # - No terminal: 0.0
-                # - Terminal: si use_llm_reward, pide al LLM usando grid + camino + acciones + reason + directiva
                 if not done:
                     r = 0.0
                 else:
@@ -451,9 +437,9 @@ def train_dqn_frozenlake(
                             terminated=terminated,
                             truncated=truncated,
                             env_reward_last=r_env,
-                            desc=next_desc,                   # usar el desc actual
-                            path_states=episode_states,       # camino completo
-                            path_actions=episode_actions,     # acciones completas
+                            desc=next_desc,             
+                            path_states=episode_states,     
+                            path_actions=episode_actions,   
                             directive=directive,
                             model=llm_model,
                             temperature=llm_temperature,
@@ -461,9 +447,8 @@ def train_dqn_frozenlake(
                             hi=1.0,
                         )
                     else:
-                        # recompensa estándar del env al final (Gym): 1 si llegó a G, 0 si no.
                         r = float(r_env)
-                # =======================
+
 
                 buffer.push(obs_tensor, a, r, next_obs_tensor, float(done))
                 acciones_df.loc[len(acciones_df)] = [epoch+1, ep+1, t+1, s_idx, a, ns_idx, r, done, eps]
@@ -480,7 +465,7 @@ def train_dqn_frozenlake(
 
                     qsa = policy(s_batch_t).gather(1, a_batch_t.view(-1,1)).squeeze(1)
 
-                    # Double DQN: selección con policy, evaluación con target
+                    # Double DQN
                     with torch.no_grad():
                         next_actions = policy(s2_batch_t).argmax(dim=1)
                         q_next = target(s2_batch_t).gather(1, next_actions.view(-1,1)).squeeze(1)
@@ -578,8 +563,9 @@ def train_dqn_frozenlake(
     return base
 
 # -------------------------------------------------------
-# 7) Evaluación greedy (recompensa estándar del env para winrate)
+# 7) Evaluación greedy
 # -------------------------------------------------------
+
 @torch.no_grad()
 def evaluate_agent_dqn(
     policy_path,
@@ -636,18 +622,18 @@ def evaluate_agent_dqn(
     return 100.0 * successes / episodes
 
 # -------------------------------------------------------
-# 8) Main de ejemplo
+# 8) Main
 # -------------------------------------------------------
 if __name__ == "__main__":
-    # Puedes cambiar la directiva para tus variantes experimentales
+    # Replicar estándar
     #DIRECTIVE_base = (
     #    "Devuelve 1 si terminó el entrenamiento ganando el mapa, 0 en cualquier otro caso."
     #)
-
+    # Shortest route
     #DIRECTIVE_1_short = (
     #    "Llega a la meta pero con el camino más corto posible (llegar como sea sigue siendo muy bueno, lo cual merece una buena y muy alta calificación pero no perfecta). No ganar el episodio no merece recompensas. Es imprescindible siempre calificar bien llegar a la meta y calificar lo peor no ganar. Resta un poco de puntos si el camino tomado es demasiago largo."
     #)
-
+    # Camino más seguro
     DIRECTIVE = (
         "Llega a la meta pero pasando lo más lejos posible de los lagos (llegar como sea sigue siendo muy bueno, lo cual merece una buena y alta calificación pero no perfecta). No ganar el episodio no merece recompensas. Es imprescindible siempre calificar bien llegar a la meta y calificar lo peor no ganar. Resta algun poco de puntos si el camino tomado es demasiago cercano a los lagos o pasa mucho cerca de ellos."
     )

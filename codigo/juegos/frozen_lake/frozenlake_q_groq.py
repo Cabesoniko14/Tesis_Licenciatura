@@ -1,4 +1,4 @@
-# ======================  Q-Learning: FrozenLake (Gymnasium, Tabular) — mapa aleatorio POR EPISODIO o FIJO  ======================
+# ======================  Q-Learning: FrozenLake (Gymnasium, Tabular) ======================
 import os
 import time
 import json

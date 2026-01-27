@@ -1,4 +1,4 @@
-# ======================  DQN: FrozenLake (Gymnasium) — mapa aleatorio POR EPISODIO o FIJO  ======================
+# ======================  DQN: FrozenLake (Gymnasium)   ======================
 import os
 import time
 import json
@@ -14,16 +14,15 @@ import random
 import gymnasium as gym
 from gymnasium.envs.toy_text.frozen_lake import generate_random_map
 
-import re  # para parsear el número devuelto por el LLM
-from groq import Groq  # o deja OpenAI si prefieres; aquí uso Groq porque ya lo tienes
+import re 
+from groq import Groq 
 
 # Cliente LLM (toma la API key de variable de entorno)
 llm_client = Groq(api_key)
 
 def _parse_first_float(text: str, lo=-1.0, hi=1.0):
     """
-    Extrae el primer número de un string y lo recorta a [lo, hi].
-    Devuelve None si no hay número válido.
+    Extrae el primer número de un string y lo recorta.
     """
     if not text:
         return None
@@ -40,8 +39,9 @@ def _parse_first_float(text: str, lo=-1.0, hi=1.0):
 
 
 # -------------------------------------------------------
-# 0) Utils reproducibilidad (opcional)
+# 0) Utils reproducibilidad
 # -------------------------------------------------------
+
 def set_global_seeds(seed=None):
     if seed is None:
         return
@@ -52,14 +52,14 @@ def set_global_seeds(seed=None):
 
 
 # -------------------------------------------------------
-# 1) Observación enriquecida (mapa + agente) -> tensor
+# 1) Observación enriquecida
 # -------------------------------------------------------
-# Capas: [FROZEN, HOLE, GOAL, AGENT]
+
 TILE_TO_CH = {
     b'F': 0,
     b'H': 1,
     b'G': 2,
-    b'S': 0,  # Start tratado como Frozen
+    b'S': 0,  
 }
 
 def idx_to_rc(idx, size):
@@ -82,15 +82,17 @@ def encode_obs_from_desc(desc, agent_idx):
             obs[ch, r, c] = 1.0
 
     ar, ac = idx_to_rc(agent_idx, W)
-    obs[3, ar, ac] = 1.0  # canal del agente
+    obs[3, ar, ac] = 1.0  
     return obs
 
 
 # -------------------------------------------------------
 # 2) Redes y Replay Buffer
 # -------------------------------------------------------
+
 class QNetCNN(nn.Module):
-    """CNN compacta para 4 u 8 celdas por lado."""
+    """CNN compacta para 4 o 8 celdas por lado."""
+
     def __init__(self, in_channels=4, n_actions=4):
         super().__init__()
         self.features = nn.Sequential(
@@ -101,7 +103,7 @@ class QNetCNN(nn.Module):
         )
         self.head = nn.Sequential(
             nn.Flatten(),
-            nn.Linear(64 * 8 * 8, 256),  # se ajusta a 8x8; si es 4x4 reacomodamos en forward
+            nn.Linear(64 * 8 * 8, 256),  
             nn.ReLU(inplace=True),
             nn.Linear(256, n_actions)
         )
@@ -110,7 +112,7 @@ class QNetCNN(nn.Module):
         # x: (B, C=4, H, W) con H,W en {4,8}
         B, C, H, W = x.shape
         feats = self.features(x)
-        # Si H,W=4, adaptamos con AdaptiveAvgPool a 8x8 para reutilizar la misma head
+
         if H == 4 and W == 4:
             feats = nn.functional.interpolate(feats, size=(8, 8), mode='nearest')
         out = self.head(feats)
@@ -141,10 +143,10 @@ class ReplayBuffer:
 # -------------------------------------------------------
 # 3) Envs helpers
 # -------------------------------------------------------
+
 def make_fixed_env(map_size=4, is_slippery=False, render_mode=None):
     """
-    FrozenLake estándar de Gymnasium:
-    map_size=4 -> '4x4', map_size=8 -> '8x8'
+    FrozenLake estándar de Gymnasium
     """
     assert map_size in (4, 8), "map_size fijo soportado: 4 u 8"
     map_name = f"{map_size}x{map_size}"
@@ -158,8 +160,9 @@ def make_random_env(map_size=4, is_slippery=False, seed=None, render_mode=None):
 
 
 # -------------------------------------------------------
-# 3.5) Recompensa PROXY (idéntica a Gym, sin usar Gym)
+# 3.5) Recompensa PROXY 
 # -------------------------------------------------------
+
 def _grid_to_str(desc):
     """desc: ndarray (H,W) con elementos bytes (b'S', b'F', b'H', b'G') -> string legible."""
     H, W = desc.shape
@@ -187,12 +190,10 @@ def _grid_to_str(desc):
 
 def reward_proxy(terminated, truncated, env_reward_last, desc, last_state_idx, last_action, next_state_idx):
     """
-    MISMO CONTRATO QUE ANTES:
-    - En pasos NO terminales -> 0.0
-    - En paso TERMINAL -> pedir al LLM un número en [0,1] (idealmente 0 o 1).
+    - En pasos NO terminales -> 0
+    - En paso TERMINAL -> pedir al LLM un número en [0,1]
       Si el LLM falla, usamos la regla exacta del entorno:
         expected = 1.0 si (terminated==True y env_reward_last==1.0), si no 0.0
-    Además: imprime WARNING si el valor del LLM no coincide con expected (cuando expected es 0 o 1).
     """
     done = bool(terminated) or bool(truncated)
     if not done:
@@ -209,29 +210,7 @@ def reward_proxy(terminated, truncated, env_reward_last, desc, last_state_idx, l
     action_names = {0: "Left", 1: "Down", 2: "Right", 3: "Up"}
     a_name = action_names.get(int(last_action), str(last_action))
 
-    # Prompt ULTRA explícito y auto-contenido
-    #prompt = (
-    #    "Devuelve SOLO un número entre 0 y 1 (puede ser 0 o 1). SIN texto extra.\n"
-    #    "Eres el evaluador FINAL de un episodio de FrozenLake. Reglas del juego:\n"
-    #    "- El mapa es una cuadrícula con celdas:\n"
-    #    "  'S' = Start (inicio), 'F' = Frozen (camino seguro), 'H' = Hole (hoyo), 'G' = Goal (meta).\n"
-    #    "- El agente inicia en 'S' y se mueve con acciones 0=Left,1=Down,2=Right,3=Up.\n"
-    #    "- El episodio termina si llega a 'G' (meta), cae en un 'H' (hoyo), o se trunca por límite de pasos.\n"
-    #    "TU TAREA ES JUZGAR EL FINAL DEL EPISODIO PARA EL AGENTE. Generalmente, da lo mismo si se cae o si no acaba. Lo que si, debe recopmensarse muchísimo terminar el juego, e incluso más si es de forma óptima.\n"        
-    #    f"Dimensiones: H={H}, W={W}\n"
-    #    "Mapa (por filas):\n"
-    #    f"{grid_str}\n\n"
-    #    "Convención de índices: idx = r*W + c (row-major).\n"
-    #    f"Paso final observado:\n"
-    #    f"- last_state_idx={int(last_state_idx)}\n"
-    #    f"- last_action={int(last_action)} ({a_name})\n"
-    #    f"- next_state_idx={int(next_state_idx)}\n"
-    #    f"- terminated={bool(terminated)}\n"
-    #    f"- truncated={bool(truncated)}\n"
-    #    f"- env_reward_last={float(env_reward_last)}  # en Gym, 1.0 SOLO si llegó a 'G'\n"
-    #)
-
-    # Prompt para ver si el agente se mueve de acuerdo a la directiva
+    # Prompt para mover al agente de acuerdo a la directiva de preferencias de entreo
     prompt = (
         "Responde SOLO con un número entre: 0 o 1. SIN texto extra.\n"
         "Tu rol es evaluar un episodio de frozen lake. .\n"
@@ -273,22 +252,22 @@ def reward_proxy(terminated, truncated, env_reward_last, desc, last_state_idx, l
 
 
 # -------------------------------------------------------
-# 4) Entrenamiento DQN (estructura de guardado estilo TTT)
+# 4) Entrenamiento DQN
 # -------------------------------------------------------
+
 def train_dqn_frozenlake(
     num_epochs=100,
     episodes_per_epoch=100,
     map_size=4,
     is_slippery=False,
     max_steps_per_ep=100,
-    map_mode="per_episode_random",   # "per_episode_random" o "fixed"
+    map_mode="per_episode_random",  
     seed=None,
-    # Hiperparámetros DQN (compactos)
     gamma=0.99,
     lr=1e-3,
     buffer_capacity=100_000,
     batch_size=64,
-    start_learning_after=1_000,      # warmup
+    start_learning_after=1_000,    
     train_every=1,
     target_update_every=1_000,
     eps_start=1.0,
@@ -304,7 +283,7 @@ def train_dqn_frozenlake(
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     n_actions = 4
-    n_states = map_size * map_size  # solo meta (para reportes)
+    n_states = map_size * map_size 
 
     # Directorios y base
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -336,7 +315,6 @@ def train_dqn_frozenlake(
     buffer = ReplayBuffer(capacity=buffer_capacity)
     step_count = 0
 
-    # Epsilon schedule lineal
     def get_epsilon(t):
         if eps_decay_steps <= 0:
             return eps_end
@@ -384,12 +362,8 @@ def train_dqn_frozenlake(
                 ns_idx = int(next_obs)
                 done = terminated or truncated
                 next_obs_tensor = encode_obs_from_desc(desc if map_mode=="fixed" else env.unwrapped.desc, ns_idx)
-
-                # ===== ÚNICO CAMBIO: usar la recompensa proxy en lugar de r_env =====
                 r = reward_proxy(terminated, truncated, r_env, desc if map_mode=="fixed" else env.unwrapped.desc, s_idx, a, ns_idx)
-                # =====================================================================
 
-                # push to buffer
                 buffer.push(obs_tensor, a, r, next_obs_tensor, float(done))
 
                 # tracking
@@ -409,7 +383,7 @@ def train_dqn_frozenlake(
                     # Q(s,a)
                     qsa = policy(s_batch_t).gather(1, a_batch_t.view(-1,1)).squeeze(1)  # (B,)
 
-                    # Double DQN: argmax(policy(s2)) -> eval en target
+                    # Double DQN
                     with torch.no_grad():
                         next_actions = policy(s2_batch_t).argmax(dim=1)  # (B,)
                         q_next = target(s2_batch_t).gather(1, next_actions.view(-1,1)).squeeze(1)
@@ -506,8 +480,9 @@ def train_dqn_frozenlake(
 
 
 # -------------------------------------------------------
-# 5) Evaluación (greedy con desempate aleatorio)
+# 5) Evaluación 
 # -------------------------------------------------------
+
 @torch.no_grad()
 def evaluate_agent_dqn(
     policy_path,
@@ -566,7 +541,6 @@ def evaluate_agent_dqn(
 # 6) Main de ejemplo
 # -------------------------------------------------------
 if __name__ == "__main__":
-    # Ejemplo A: entrenar con mapas ALEATORIOS por episodio (no resbaloso, 4x4)
     base = train_dqn_frozenlake(
         num_epochs=100,
         episodes_per_epoch=100,
@@ -575,7 +549,6 @@ if __name__ == "__main__":
         max_steps_per_ep=50,
         map_mode="per_episode_random",
         seed=42,
-        # Hiperparámetros (compactos y razonables)
         gamma=0.99,
         lr=1e-3,
         buffer_capacity=100_000,
@@ -588,7 +561,7 @@ if __name__ == "__main__":
         eps_decay_steps=50_000,
     )
 
-    # Evaluación rápida (mismas condiciones de entrenamiento)
+    # Evaluación rápida
     wr = evaluate_agent_dqn(
         policy_path=f"modelos/policy_{base}.pth",
         map_size=4,
