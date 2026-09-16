@@ -1,15 +1,33 @@
 # ======================  Q-Learning: Tic Tac Toe + LLM Rewards (Groq)  ======================
 import os
+import sys
+import re
+import json
 import time
 import random
+import argparse
 import psutil
 import numpy as np
 import pandas as pd
 from collections import defaultdict
 from datetime import datetime
 import torch
-import re
+import groq
 from groq import Groq
+
+# --------------------  0. Metadatos del modelo --------------------
+MODEL_TYPE = "QLearning"     # "QLearning" | "DeepQN"
+USA_LLM = True
+OPONENTE = "random"
+REWARD_LEVEL = "accion"      # "accion" | "episodio" | "epoch"
+LLM_REWARD_STRATEGY = "replica_std_numerica"  # el prompt reproduce los mismos números del script std
+REWARD_TAG = "llmReplicaStd"
+SEED = 42                    # semilla fija para reproducibilidad (afecta elección del oponente/epsilon)
+
+LLM_PROVIDER = "Groq"
+LLM_MODEL_NAME = "openai/gpt-oss-20b"  # reemplazo 1:1 recomendado por Groq; llama-3.1-8b-instant fue deprecado el 16-ago-2026
+LLM_TEMPERATURE = 0.0
+LLM_MAX_RETRIES = 3
 
 # --------------------  1. Clase del juego --------------------------
 class TicTacToe:
@@ -73,82 +91,203 @@ class QLearningAgent:
         new_value = old_value + self.alpha * (reward + self.gamma * max_q_next - old_value)
         self.q_table[(tuple(state), action)] = new_value
 
-# --------------------  3. Evaluación de recompensas con LLM (imitando EXACTAMENTE el std) --------------------------
-client = Groq(api_key="")
+# --------------------  3. Recompensa vía LLM --------------------------
+# Por acción. Evalúa tablero antes/después de la jugada del agente, no ve al oponente.
+_PROMPT_TEMPLATE = """Evalúas UNA jugada de Tic Tac Toe para Q-Learning. Responde solo con: 1, 0.3, 0 o -1. Sin texto extra.
 
-_PROMPT_TEMPLATE = """Eres una función de recompensas para un agente de Q-Learning que juega Tic Tac Toe.
-El objetivo es que entrenes a un agente para que juegue TicTacToe, específicamente para BLOQUEAR AL OPONENTE
-Tu tarea es regresar una recompensa con un número entre -1 y 1 dependiendo de la acción que haya tomado el agente.
-Es muy mal visto que el oponente esté realizando una jugada de ganar y que el agente decida no taparla, mucho más si no es para ganar.
-Las máximas recompensas o lo mejor debería ser ganar o empatar. Lo peor perder.
-Igualmente, deambular sin sentido no es muy bien visto; hacer jugadas que no lleven a ningún lado.
-De nuevo, el agente debe jugar a BLOQUEAR al oponente.
+1    = la jugada gana la partida de inmediato
+0.3  = la jugada bloquea una victoria inmediata del oponente
+0    = cualquier otra jugada
+-1   = el oponente tenía una victoria inmediata disponible y la jugada NO la bloqueó
 
-IMPORTANTE:
-- Responde con UN SOLO NÚMERO entre en -1 y 1.
-- No añadas texto, signos extra, puntos, emojis, ni explicaciones.
-
-INFORMACIÓN DEL JUEGO EN EL MOMENTO ACTUAL
-Tablero antes: {prev_state}
+Antes: {prev_state}
 Agente: {agent_letter}
-Acción (índice 0-8): {action}
-Tablero después: {next_state}
+Acción: {action}
+Después: {next_state}
 
-Tu respuesta (solo -1, 0 o 1):
+Número:
 """
 
-def _parse_reward_int(s: str):
-    m = re.search(r"[-+]?\d+", s.strip())
+def _parse_reward_value(s: str):
+    m = re.search(r"[-+]?\d*\.?\d+", s.strip())
     if not m:
         return None
     try:
-        v = int(m.group(0))
-        if v < -1: v = -1
-        if v > 1:  v = 1
+        v = float(m.group(0))
+        if v < -1: v = -1.0
+        if v > 1:  v = 1.0
         return v
     except:
         return None
 
-def llm_reward(prev_state, action, next_state, agent_letter, max_retries=3):
-    """
-    Recompensa LLM que emula el std:
-    +1 si el agente gana con su jugada; 0 en cualquier otro caso; -1 si (raro) ya gana el oponente.
-    Solo devuelve -1/0/1. Reintenta si no recibe un número.
-    """
+def llm_reward(client, prev_state, action, next_state, agent_letter, stats,
+               model_name=LLM_MODEL_NAME, temperature=LLM_TEMPERATURE, max_retries=LLM_MAX_RETRIES):
+    stats["invocaciones_totales"] += 1
     for _ in range(max_retries):
+        stats["llamadas_api_totales"] += 1
         try:
             message = _PROMPT_TEMPLATE.format(
                 prev_state=prev_state, action=action, next_state=next_state, agent_letter=agent_letter
             )
             resp = client.chat.completions.create(
                 messages=[{"role": "user", "content": message}],
-                model="llama-3.1-8b-instant"
+                model=model_name,
+                temperature=temperature,
+                max_tokens=1024,         # el modelo soporta hasta 65,536; 250 se quedaba corto para razonar+responder
+                reasoning_effort="low",  # gpt-oss no tiene modo "none"; "low" es el mínimo posible
+                reasoning_format="hidden",  # no mezcla el rastro de razonamiento en el content
             )
-            content = resp.choices[0].message.content.strip()
-            parsed = _parse_reward_int(content)
+            raw_message = resp.choices[0].message
+            content = (raw_message.content or "").strip()
+            parsed = _parse_reward_value(content)
             if parsed is not None:
-                return float(parsed)
+                return parsed, False
         except Exception as e:
+            stats["errores_api_totales"] += 1
             print(f"[LLM Error] {e}")
-    print("[LLM Reward] Respuesta inválida → uso 0")
-    return 0.0
 
-# --------------------  4. Entrenamiento --------------------------
-def train_qlearning_tictactoe_llm(num_epochs=100, episodes_per_epoch=100):
+    stats["fallbacks_totales"] += 1
+    print(f"[LLM WARN] Respuesta inválida tras {max_retries} intentos → uso 0.0 de fallback")
+    return 0.0, True
+
+# --------------------  4. Resumen de modelos (resumen_modelos/) --------------------
+def construir_resumen_modelo(
+    base_filename,
+    timestamp,
+    num_epochs,
+    episodes_per_epoch,
+    total_episodes,
+    tiempo_total,
+    resultados_finales,
+    estructura_recompensas,
+    hiperparametros=None,
+    red_neuronal=None,
+    llm_info=None,
+    entorno=None,
+):
+    return {
+        "archivo_base": base_filename,
+        "timestamp": timestamp,
+        "modelo": {
+            "tipo": MODEL_TYPE,
+            "usa_llm": USA_LLM,
+            "oponente": OPONENTE,
+            "estrategia_recompensa_llm": LLM_REWARD_STRATEGY if USA_LLM else None,
+        },
+        "entrenamiento": {
+            "num_epochs": num_epochs,
+            "episodes_per_epoch": episodes_per_epoch,
+            "total_episodes": total_episodes,
+            "tiempo_total_segundos": round(tiempo_total, 4),
+            "tiempo_promedio_por_episodio_segundos": (
+                round(tiempo_total / total_episodes, 6) if total_episodes else None
+            ),
+            "hiperparametros": hiperparametros or {},
+        },
+        "resultados_finales": resultados_finales,
+        "estructura_recompensas": estructura_recompensas,
+        "red_neuronal": red_neuronal,
+        "llm": llm_info,
+        "entorno": entorno or {},
+    }
+
+
+def guardar_resumen_modelo(resumen, carpeta="resumen_modelos"):
+    os.makedirs(carpeta, exist_ok=True)
+    nombre_archivo = f"resumen_{resumen['archivo_base']}"
+
+    ruta_json = os.path.join(carpeta, f"{nombre_archivo}.json")
+    with open(ruta_json, "w", encoding="utf-8") as f:
+        json.dump(resumen, f, indent=2, ensure_ascii=False)
+
+    ruta_txt = os.path.join(carpeta, f"{nombre_archivo}.txt")
+    with open(ruta_txt, "w", encoding="utf-8") as f:
+        f.write(f"RESUMEN DE MODELO: {resumen['archivo_base']}\n")
+        f.write("=" * 70 + "\n\n")
+        f.write(f"Tipo de modelo : {resumen['modelo']['tipo']}\n")
+        f.write(f"Usa LLM        : {'Sí' if resumen['modelo']['usa_llm'] else 'No'}\n")
+        if resumen["modelo"].get("estrategia_recompensa_llm"):
+            f.write(f"Estrategia LLM : {resumen['modelo']['estrategia_recompensa_llm']}\n")
+        f.write(f"Oponente       : {resumen['modelo']['oponente']}\n")
+        f.write(f"Timestamp      : {resumen['timestamp']}\n\n")
+
+        f.write("-- Entrenamiento --\n")
+        for k, v in resumen["entrenamiento"].items():
+            if k == "hiperparametros":
+                f.write("  hiperparametros:\n")
+                for hk, hv in v.items():
+                    f.write(f"    {hk}: {hv}\n")
+            else:
+                f.write(f"  {k}: {v}\n")
+
+        f.write("\n-- Resultados finales --\n")
+        for k, v in resumen["resultados_finales"].items():
+            f.write(f"  {k}: {v}\n")
+
+        f.write("\n-- Estructura de recompensas --\n")
+        f.write(f"  nivel_aplicacion: {resumen['estructura_recompensas'].get('nivel')}\n")
+        f.write("  componentes:\n")
+        for comp, val in resumen["estructura_recompensas"].get("componentes", {}).items():
+            f.write(f"    {comp}: {val}\n")
+
+        f.write("\n-- Red neuronal --\n")
+        if resumen["red_neuronal"]:
+            for k, v in resumen["red_neuronal"].items():
+                f.write(f"  {k}: {v}\n")
+        else:
+            f.write("  N/A (modelo tabular, no aplica)\n")
+
+        f.write("\n-- LLM --\n")
+        if resumen["llm"]:
+            for k, v in resumen["llm"].items():
+                if k == "prompt_template":
+                    f.write(f"  prompt_template:\n{v}\n")
+                elif k == "estadisticas_de_llamadas":
+                    f.write("  estadisticas_de_llamadas:\n")
+                    for sk, sv in v.items():
+                        f.write(f"    {sk}: {sv}\n")
+                else:
+                    f.write(f"  {k}: {v}\n")
+        else:
+            f.write("  N/A (no se usó LLM en este experimento)\n")
+
+        if resumen.get("entorno"):
+            f.write("\n-- Entorno --\n")
+            for k, v in resumen["entorno"].items():
+                f.write(f"  {k}: {v}\n")
+
+    print(f"[OK] Resumen de modelo guardado en:\n  {ruta_json}\n  {ruta_txt}")
+    return ruta_json, ruta_txt
+
+# --------------------  5. Entrenamiento --------------------------
+def train_qlearning_tictactoe_llm(client, num_epochs=100, episodes_per_epoch=100):
+    random.seed(SEED)
+    np.random.seed(SEED)
+
     env = TicTacToe()
     agent = QLearningAgent()
 
     total_rewards, total_time = [], 0.0
     wins, draws, losses = 0, 0, 0
 
-    acciones_df = pd.DataFrame(columns=["Epoch","Episodio","Agente","Acción","Board","Reward","RewardAcum"])
+    llm_stats = {
+        "invocaciones_totales": 0,
+        "llamadas_api_totales": 0,
+        "fallbacks_totales": 0,
+        "errores_api_totales": 0,
+    }
+
+    acciones_df = pd.DataFrame(columns=["Epoch","Episodio","Agente","Acción","Board","Reward","RewardAcum","LLM_Fallback"])
     computo_df  = pd.DataFrame(columns=["Epoch","Episodio","Tiempo(s)","CPU(%)","RAM(MB)","GPU_mem(MB)"])
     victorias_df= pd.DataFrame(columns=["Epoch","Victorias","Empates","Derrotas","WinRate(%)"])
     resumen_df  = pd.DataFrame(columns=["Métrica","Valor"])
 
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     total_episodes = num_epochs * episodes_per_epoch
-    base = f"tictactoe_qlearning_groq_random_block_{timestamp}_episodes_{total_episodes}"
+
+    llm_tag = "conLLM" if USA_LLM else "sinLLM"
+    base = f"tictactoe_{MODEL_TYPE}_{llm_tag}_{OPONENTE}_{REWARD_TAG}_{timestamp}_ep{total_episodes}"
+
     os.makedirs("datos_output", exist_ok=True)
     os.makedirs("modelos", exist_ok=True)
 
@@ -170,16 +309,16 @@ def train_qlearning_tictactoe_llm(num_epochs=100, episodes_per_epoch=100):
                 env.make_move(action, agent_letter)
                 next_state = env.board.copy()
 
-                # Recompensa desde LLM (imitando std)
-                reward = llm_reward(state, action, next_state, agent_letter)
+                reward, fue_fallback = llm_reward(client, state, action, next_state, agent_letter, llm_stats)
                 reward_total += reward
 
                 next_actions = env.available_moves()
                 agent.update(state, action, reward, next_state, next_actions)
 
-                acciones_df.loc[len(acciones_df)] = [epoch+1, ep+1, agent_letter, action, next_state.copy(), reward, reward_total]
+                acciones_df.loc[len(acciones_df)] = [
+                    epoch+1, ep+1, agent_letter, action, next_state.copy(), reward, reward_total, fue_fallback
+                ]
 
-                # Movimiento del oponente (aleatorio) si sigue el juego
                 if not env.current_winner and not env.is_draw():
                     opp_actions = env.available_moves()
                     if opp_actions:
@@ -207,14 +346,20 @@ def train_qlearning_tictactoe_llm(num_epochs=100, episodes_per_epoch=100):
 
         win_rate_epoch = (wins_epoch / episodes_per_epoch) * 100
         victorias_df.loc[len(victorias_df)] = [epoch+1, wins_epoch, draws_epoch, losses_epoch, win_rate_epoch]
-        print(f"=== Epoch {epoch+1}/{num_epochs} terminado | winrate={win_rate_epoch:.2f}% ===")
+        print(f"=== Epoch {epoch+1}/{num_epochs} terminado | winrate={win_rate_epoch:.2f}% "
+              f"| LLM fallbacks acumulados={llm_stats['fallbacks_totales']} ===")
+
+    reward_promedio = float(np.mean(total_rewards)) if total_rewards else 0.0
+    win_rate_global = (wins / total_episodes) * 100 if total_episodes else 0.0
 
     resumen_df.loc[len(resumen_df)] = ["Victorias", wins]
     resumen_df.loc[len(resumen_df)] = ["Empates", draws]
     resumen_df.loc[len(resumen_df)] = ["Derrotas", losses]
-    resumen_df.loc[len(resumen_df)] = ["Reward promedio", np.mean(total_rewards) if total_rewards else 0]
+    resumen_df.loc[len(resumen_df)] = ["Reward promedio", reward_promedio]
     resumen_df.loc[len(resumen_df)] = ["Tiempo total (s)", total_time]
     resumen_df.loc[len(resumen_df)] = ["GPU usada", torch.cuda.is_available()]
+    resumen_df.loc[len(resumen_df)] = ["LLM fallbacks totales", llm_stats["fallbacks_totales"]]
+    resumen_df.loc[len(resumen_df)] = ["LLM invocaciones totales", llm_stats["invocaciones_totales"]]
 
     acciones_df.to_csv(f"datos_output/acciones_{base}.csv", index=False)
     computo_df.to_csv(f"datos_output/computo_{base}.csv", index=False)
@@ -222,11 +367,123 @@ def train_qlearning_tictactoe_llm(num_epochs=100, episodes_per_epoch=100):
     resumen_df.to_csv(f"datos_output/resumen_{base}.csv", index=False)
     np.save(f"modelos/qtable_{base}.npy", dict(agent.q_table))
 
+    resultados_finales = {
+        "victorias": wins,
+        "empates": draws,
+        "derrotas": losses,
+        "win_rate_%": round(win_rate_global, 2),
+        "reward_promedio": round(reward_promedio, 4),
+    }
+
+    estructura_recompensas = {
+        "nivel": REWARD_LEVEL,
+        "componentes": {
+            "fuente": "LLM (Groq) — ver bloque 'llm' de este mismo resumen para el prompt exacto",
+            "rango_valores": "{1, 0.3, 0, -1} — replica WIN_REWARD/BLOCK_BONUS/DRAW/LOSS del script sin LLM",
+            "objetivo_declarado_en_el_prompt": (
+                "1 si la jugada gana de inmediato, 0.3 si bloquea una victoria inmediata del "
+                "oponente, 0 en cualquier otra jugada neutral, -1 si había una victoria inmediata "
+                "del oponente disponible y la jugada no la bloqueó."
+            ),
+            "valor_si_el_llm_falla_o_no_responde_un_numero": 0.0,
+        },
+    }
+
+    hiperparametros = {
+        "alpha": agent.alpha,
+        "gamma": agent.gamma,
+        "epsilon": agent.epsilon,
+        "seed": SEED,
+    }
+
+    entorno = {
+        "python_version": sys.version.split()[0],
+        "numpy_version": np.__version__,
+        "pandas_version": pd.__version__,
+        "torch_version": torch.__version__,
+        "groq_version": getattr(groq, "__version__", "desconocida"),
+    }
+
+    llm_info = {
+        "proveedor": LLM_PROVIDER,
+        "modelo_llm": LLM_MODEL_NAME,
+        "temperature": LLM_TEMPERATURE,
+        "estrategia_recompensa": LLM_REWARD_STRATEGY,
+        "estrategia_descripcion": (
+            "El prompt le pide al LLM que reproduzca, con los mismos 4 números, la función de "
+            "recompensa del script sin LLM (WIN_REWARD, BLOCK_BONUS, DRAW_REWARD, y -1 como proxy "
+            "de LOSS_REWARD)."
+        ),
+        "api_key_source": "variable de entorno GROQ_API_KEY o --groq-api-key",
+        "cuando_se_invoca": (
+            "Por acción: una llamada al LLM por cada movimiento del agente, justo después de "
+            "jugarlo y antes de actualizar la Q-table. No ve la respuesta del oponente."
+        ),
+        "max_retries_por_accion": LLM_MAX_RETRIES,
+        "nota_rate_limit": (
+            "Cuenta en plan Developer (de paga) de Groq: gpt-oss-20b da 1,000 RPM / 250K TPM "
+            "(vs. 30 RPM / 1,000 RPD en free tier) — confirmado en console.groq.com/settings/limits."
+        ),
+        "parseo_respuesta": (
+            "Se extrae el primer número (entero o decimal) de la respuesta con regex y se recorta "
+            "a [-1, 1]; si no hay número parseable, se reintenta."
+        ),
+        "valor_fallback_si_falla": 0.0,
+        "prompt_template": _PROMPT_TEMPLATE,
+        "estadisticas_de_llamadas": {
+            "invocaciones_totales": llm_stats["invocaciones_totales"],
+            "llamadas_api_totales": llm_stats["llamadas_api_totales"],
+            "fallbacks_totales": llm_stats["fallbacks_totales"],
+            "fallback_rate_%": (
+                round(100 * llm_stats["fallbacks_totales"] / llm_stats["invocaciones_totales"], 2)
+                if llm_stats["invocaciones_totales"] else 0.0
+            ),
+            "errores_api_totales": llm_stats["errores_api_totales"],
+        },
+    }
+
+    resumen_modelo = construir_resumen_modelo(
+        base_filename=base,
+        timestamp=timestamp,
+        num_epochs=num_epochs,
+        episodes_per_epoch=episodes_per_epoch,
+        total_episodes=total_episodes,
+        tiempo_total=total_time,
+        resultados_finales=resultados_finales,
+        estructura_recompensas=estructura_recompensas,
+        hiperparametros=hiperparametros,
+        red_neuronal=None,
+        llm_info=llm_info,
+        entorno=entorno,
+    )
+    guardar_resumen_modelo(resumen_modelo)
+
     print("\n=== ENTRENAMIENTO COMPLETADO ===")
     return acciones_df, computo_df, victorias_df, resumen_df
 
-# --------------------  Main --------------------------
+# --------------------  6. API key + Main --------------------------
+def parse_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--groq-api-key", type=str, default=None)
+    parser.add_argument("--num-epochs", type=int, default=100)
+    parser.add_argument("--episodes-per-epoch", type=int, default=100)
+    return parser.parse_args()
+
+
 if __name__ == "__main__":
+    args = parse_args()
+
+    groq_api_key = args.groq_api_key or os.environ.get("GROQ_API_KEY")
+    if not groq_api_key:
+        raise RuntimeError(
+            "Falta la API key de Groq. Pásala con GROQ_API_KEY=tu_key antes del comando, "
+            "o con --groq-api-key tu_key."
+        )
+
+    client = Groq(api_key=groq_api_key)
+
     acciones, computo, victorias, resumen = train_qlearning_tictactoe_llm(
-        num_epochs=100, episodes_per_epoch=100
+        client=client,
+        num_epochs=args.num_epochs,
+        episodes_per_epoch=args.episodes_per_epoch,
     )

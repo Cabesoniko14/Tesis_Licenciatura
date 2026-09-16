@@ -1,0 +1,68 @@
+{
+  "archivo_base": "tictactoe_QLearning_conLLM_random_llmReplicaStd_20260916_194112_ep5",
+  "timestamp": "20260916_194112",
+  "modelo": {
+    "tipo": "QLearning",
+    "usa_llm": true,
+    "oponente": "random",
+    "estrategia_recompensa_llm": "replica_std_numerica"
+  },
+  "entrenamiento": {
+    "num_epochs": 1,
+    "episodes_per_epoch": 5,
+    "total_episodes": 5,
+    "tiempo_total_segundos": 8.535,
+    "tiempo_promedio_por_episodio_segundos": 1.706993,
+    "hiperparametros": {
+      "alpha": 0.1,
+      "gamma": 0.9,
+      "epsilon": 0.1,
+      "seed": 42
+    }
+  },
+  "resultados_finales": {
+    "victorias": 2,
+    "empates": 1,
+    "derrotas": 2,
+    "win_rate_%": 40.0,
+    "reward_promedio": 0.0
+  },
+  "estructura_recompensas": {
+    "nivel": "accion",
+    "componentes": {
+      "fuente": "LLM (DeepInfra) — ver bloque 'llm' de este mismo resumen para el prompt exacto",
+      "rango_valores": "{1, 0.3, 0, -1} — replica WIN_REWARD/BLOCK_BONUS/DRAW/LOSS del script sin LLM",
+      "objetivo_declarado_en_el_prompt": "1 si la jugada gana de inmediato, 0.3 si bloquea una victoria inmediata del oponente, 0 en cualquier otra jugada neutral, -1 si había una victoria inmediata del oponente disponible y la jugada no la bloqueó.",
+      "valor_si_el_llm_falla_o_no_responde_un_numero": 0.0
+    }
+  },
+  "red_neuronal": null,
+  "llm": {
+    "proveedor": "DeepInfra",
+    "modelo_llm": "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo",
+    "temperature": 0.0,
+    "estrategia_recompensa": "replica_std_numerica",
+    "estrategia_descripcion": "El prompt le pide al LLM que reproduzca, con los mismos 4 números, la función de recompensa del script sin LLM (WIN_REWARD, BLOCK_BONUS, DRAW_REWARD, y -1 como proxy de LOSS_REWARD).",
+    "api_key_source": "variable de entorno DEEPINFRA_API_KEY (o DEEPINFRA) o --deepinfra-api-key",
+    "cuando_se_invoca": "Por acción: una llamada al LLM por cada movimiento del agente, justo después de jugarlo y antes de actualizar la Q-table. No ve la respuesta del oponente.",
+    "max_retries_por_accion": 3,
+    "nota_seleccion_modelo": "Se probó openai/gpt-oss-20b (Groq) con reasoning_effort='low' (su mínimo posible): en una corrida corta consumió ~35K tokens de salida en razonamiento oculto no visible para una tarea que solo requiere devolver un número. Se probó también qwen/qwen3.8-27b (Groq, no-reasoning por default), que sí evitaba ese gasto pero era ~16-50x más caro por token que el llama-3.1-8b-instant original. Se migró a DeepInfra, que sigue hospedando el mismo Meta-Llama-3.1-8B-Instruct (deprecado por Groq el 16-ago-2026) a fracción del costo, sin razonamiento oculto.",
+    "parseo_respuesta": "Se extrae el primer número (entero o decimal) de la respuesta con regex y se recorta a [-1, 1]; si no hay número parseable, se reintenta.",
+    "valor_fallback_si_falla": 0.0,
+    "prompt_template": "Evalúas UNA jugada de Tic Tac Toe para Q-Learning. Responde solo con: 1, 0.3, 0 o -1. Sin texto extra.\n\n1    = la jugada gana la partida de inmediato\n0.3  = la jugada bloquea una victoria inmediata del oponente\n0    = cualquier otra jugada\n-1   = el oponente tenía una victoria inmediata disponible y la jugada NO la bloqueó\n\nAntes: {prev_state}\nAgente: {agent_letter}\nAcción: {action}\nDespués: {next_state}\n\nNúmero:\n",
+    "estadisticas_de_llamadas": {
+      "invocaciones_totales": 22,
+      "llamadas_api_totales": 66,
+      "fallbacks_totales": 22,
+      "fallback_rate_%": 100.0,
+      "errores_api_totales": 66
+    }
+  },
+  "entorno": {
+    "python_version": "3.13.15",
+    "numpy_version": "2.1.3",
+    "pandas_version": "2.2.3",
+    "torch_version": "2.11.0+cu128",
+    "openai_version": "2.54.0"
+  }
+}

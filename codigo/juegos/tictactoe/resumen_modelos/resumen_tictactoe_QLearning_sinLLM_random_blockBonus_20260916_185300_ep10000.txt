@@ -1,0 +1,40 @@
+RESUMEN DE MODELO: tictactoe_QLearning_sinLLM_random_blockBonus_20260916_185300_ep10000
+======================================================================
+
+Tipo de modelo : QLearning
+Usa LLM        : No
+Oponente       : random
+Timestamp      : 20260916_185300
+
+-- Entrenamiento --
+  num_epochs: 100
+  episodes_per_epoch: 100
+  total_episodes: 10000
+  tiempo_total_segundos: 62.3167
+  tiempo_promedio_por_episodio_segundos: 0.006232
+  hiperparametros:
+    alpha: 0.1
+    gamma: 0.9
+    epsilon: 0.1
+
+-- Resultados finales --
+  victorias: 8092
+  empates: 1079
+  derrotas: 829
+  win_rate_%: 80.92
+  reward_promedio: 0.8531
+
+-- Estructura de recompensas --
+  nivel_aplicacion: accion
+  componentes:
+    WIN_REWARD: 1.0
+    LOSS_REWARD: -1.0
+    DRAW_REWARD: 0.0
+    BLOCK_BONUS: 0.3
+    descripcion: Recompensa asignada a la última acción del agente en el turno: +1 si esa jugada gana de inmediato, 0 si empata de inmediato, +0.3 si bloquea una jugada ganadora inmediata del oponente, 0 si es una jugada intermedia sin efecto, y -1 (LOSS_REWARD) si, tras la respuesta del oponente, esa misma jugada terminó permitiendo la derrota.
+
+-- Red neuronal --
+  N/A (modelo tabular, no aplica)
+
+-- LLM --
+  N/A (no se usó LLM en este experimento)
