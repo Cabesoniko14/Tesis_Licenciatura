@@ -23,10 +23,11 @@ REWARD_LEVEL = "accion"      # "accion" | "episodio" | "epoch"
 LLM_REWARD_STRATEGY = "replica_std_numerica"  # el prompt reproduce los mismos números del script std
 REWARD_TAG = "llmReplicaStd"
 SEED = 42                    # semilla fija para reproducibilidad (afecta elección del oponente/epsilon)
+CHECKPOINT_EVERY = 10        # guarda avance parcial cada N epochs, por si se corta la sesión a medio camino
 
 LLM_PROVIDER = "DeepInfra"
 LLM_BASE_URL = "https://api.deepinfra.com/v1/openai"
-LLM_MODEL_NAME = "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo"  # no-reasoning real; mismo modelo que ya usabas en Groq antes de la deprecación
+LLM_MODEL_NAME = "deepseek-ai/DeepSeek-V4.1-Flash"  # razona por default, pero TTFT bajo (~0.78s); comparar tiempo_respuesta vs Llama
 LLM_TEMPERATURE = 0.0
 LLM_MAX_RETRIES = 3
 
@@ -130,12 +131,14 @@ def llm_reward(client, prev_state, action, next_state, agent_letter, stats,
             message = _PROMPT_TEMPLATE.format(
                 prev_state=prev_state, action=action, next_state=next_state, agent_letter=agent_letter
             )
+            t0 = time.perf_counter()
             resp = client.chat.completions.create(
                 messages=[{"role": "user", "content": message}],
                 model=model_name,
                 temperature=temperature,
-                max_tokens=20,  # sin reasoning_effort: qwen3.8-27b responde directo, no piensa por dentro
+                max_tokens=300,  # sí razona: margen para pensamiento oculto + respuesta (ajustar si sigue fallando)
             )
+            stats["tiempo_respuesta_total_segundos"] += time.perf_counter() - t0
             raw_message = resp.choices[0].message
             content = (raw_message.content or "").strip()
             parsed = _parse_reward_value(content)
@@ -274,6 +277,7 @@ def train_qlearning_tictactoe_llm(client, num_epochs=100, episodes_per_epoch=100
         "llamadas_api_totales": 0,
         "fallbacks_totales": 0,
         "errores_api_totales": 0,
+        "tiempo_respuesta_total_segundos": 0.0,
     }
 
     acciones_df = pd.DataFrame(columns=["Epoch","Episodio","Agente","Acción","Board","Reward","RewardAcum","LLM_Fallback"])
@@ -347,6 +351,14 @@ def train_qlearning_tictactoe_llm(client, num_epochs=100, episodes_per_epoch=100
         victorias_df.loc[len(victorias_df)] = [epoch+1, wins_epoch, draws_epoch, losses_epoch, win_rate_epoch]
         print(f"=== Epoch {epoch+1}/{num_epochs} terminado | winrate={win_rate_epoch:.2f}% "
               f"| LLM fallbacks acumulados={llm_stats['fallbacks_totales']} ===")
+
+        if (epoch + 1) % CHECKPOINT_EVERY == 0:
+            acciones_df.to_csv(f"datos_output/acciones_{base}.csv", index=False)
+            computo_df.to_csv(f"datos_output/computo_{base}.csv", index=False)
+            victorias_df.to_csv(f"datos_output/victorias_{base}.csv", index=False)
+            np.save(f"modelos/qtable_{base}.npy", dict(agent.q_table))
+            print(f"[CHECKPOINT] Progreso guardado hasta epoch {epoch+1}/{num_epochs} "
+                  f"(mismo nombre base, se sobrescribe cada vez)")
 
     reward_promedio = float(np.mean(total_rewards)) if total_rewards else 0.0
     win_rate_global = (wins / total_episodes) * 100 if total_episodes else 0.0
@@ -424,9 +436,12 @@ def train_qlearning_tictactoe_llm(client, num_epochs=100, episodes_per_epoch=100
             "una corrida corta consumió ~35K tokens de salida en razonamiento oculto no visible "
             "para una tarea que solo requiere devolver un número. Se probó también qwen/qwen3.8-27b "
             "(Groq, no-reasoning por default), que sí evitaba ese gasto pero era ~16-50x más caro por "
-            "token que el llama-3.1-8b-instant original. Se migró a DeepInfra, que sigue hospedando "
-            "el mismo Meta-Llama-3.1-8B-Instruct (deprecado por Groq el 16-ago-2026) a fracción del "
-            "costo, sin razonamiento oculto."
+            "token que el llama-3.1-8b-instant original. Se migró a DeepInfra con "
+            "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo (mismo modelo deprecado por Groq el "
+            "16-ago-2026, hospedado ahí a fracción del costo, sin razonamiento oculto). Esta corrida "
+            "en particular usa deepseek-ai/DeepSeek-V4.1-Flash a modo de comparación: sí razona por "
+            "default, pero con TTFT bajo (~0.78s reportado) — ver tiempo_respuesta_promedio_segundos "
+            "en estadisticas_de_llamadas para el dato real medido contra Llama."
         ),
         "parseo_respuesta": (
             "Se extrae el primer número (entero o decimal) de la respuesta con regex y se recorta "
@@ -443,6 +458,11 @@ def train_qlearning_tictactoe_llm(client, num_epochs=100, episodes_per_epoch=100
                 if llm_stats["invocaciones_totales"] else 0.0
             ),
             "errores_api_totales": llm_stats["errores_api_totales"],
+            "tiempo_respuesta_promedio_segundos": (
+                round(llm_stats["tiempo_respuesta_total_segundos"] / llm_stats["llamadas_api_totales"], 4)
+                if llm_stats["llamadas_api_totales"] else 0.0
+            ),
+            "tiempo_respuesta_total_segundos": round(llm_stats["tiempo_respuesta_total_segundos"], 2),
         },
     }
 
