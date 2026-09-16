@@ -27,7 +27,7 @@ CHECKPOINT_EVERY = 10        # guarda avance parcial cada N epochs, por si se co
 
 LLM_PROVIDER = "DeepInfra"
 LLM_BASE_URL = "https://api.deepinfra.com/v1/openai"
-LLM_MODEL_NAME = "deepseek-ai/DeepSeek-V4.1-Flash"  # razona por default, pero TTFT bajo (~0.78s); comparar tiempo_respuesta vs Llama
+LLM_MODEL_NAME = "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo"  # no-reasoning real; se probó DeepSeek V4.1 Flash y GLM/Qwen — todos más lentos por el razonamiento
 LLM_TEMPERATURE = 0.0
 LLM_MAX_RETRIES = 3
 
@@ -110,6 +110,11 @@ Después: {next_state}
 Número:
 """
 
+def _slug_modelo_llm(nombre_modelo: str) -> str:
+    """Convierte 'proveedor/Nombre-Del-Modelo' en un tag corto y seguro para nombre de archivo."""
+    corto = nombre_modelo.split("/")[-1]  # quita el prefijo del proveedor (meta-llama/, deepseek-ai/, etc.)
+    return re.sub(r"[^A-Za-z0-9.\-]+", "", corto)
+
 def _parse_reward_value(s: str):
     m = re.search(r"[-+]?\d*\.?\d+", s.strip())
     if not m:
@@ -136,7 +141,7 @@ def llm_reward(client, prev_state, action, next_state, agent_letter, stats,
                 messages=[{"role": "user", "content": message}],
                 model=model_name,
                 temperature=temperature,
-                max_tokens=300,  # sí razona: margen para pensamiento oculto + respuesta (ajustar si sigue fallando)
+                max_tokens=20,  # modelo no-reasoning, responde directo
             )
             stats["tiempo_respuesta_total_segundos"] += time.perf_counter() - t0
             raw_message = resp.choices[0].message
@@ -289,7 +294,8 @@ def train_qlearning_tictactoe_llm(client, num_epochs=100, episodes_per_epoch=100
     total_episodes = num_epochs * episodes_per_epoch
 
     llm_tag = "conLLM" if USA_LLM else "sinLLM"
-    base = f"tictactoe_{MODEL_TYPE}_{llm_tag}_{OPONENTE}_{REWARD_TAG}_{timestamp}_ep{total_episodes}"
+    modelo_llm_tag = f"_{_slug_modelo_llm(LLM_MODEL_NAME)}" if USA_LLM else ""
+    base = f"tictactoe_{MODEL_TYPE}_{llm_tag}{modelo_llm_tag}_{OPONENTE}_{REWARD_TAG}_{timestamp}_ep{total_episodes}"
 
     os.makedirs("datos_output", exist_ok=True)
     os.makedirs("modelos", exist_ok=True)
@@ -436,12 +442,13 @@ def train_qlearning_tictactoe_llm(client, num_epochs=100, episodes_per_epoch=100
             "una corrida corta consumió ~35K tokens de salida en razonamiento oculto no visible "
             "para una tarea que solo requiere devolver un número. Se probó también qwen/qwen3.8-27b "
             "(Groq, no-reasoning por default), que sí evitaba ese gasto pero era ~16-50x más caro por "
-            "token que el llama-3.1-8b-instant original. Se migró a DeepInfra con "
-            "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo (mismo modelo deprecado por Groq el "
-            "16-ago-2026, hospedado ahí a fracción del costo, sin razonamiento oculto). Esta corrida "
-            "en particular usa deepseek-ai/DeepSeek-V4.1-Flash a modo de comparación: sí razona por "
-            "default, pero con TTFT bajo (~0.78s reportado) — ver tiempo_respuesta_promedio_segundos "
-            "en estadisticas_de_llamadas para el dato real medido contra Llama."
+            "token que el llama-3.1-8b-instant original. Se probó deepseek-ai/DeepSeek-V4.1-Flash en "
+            "DeepInfra (TTFT bajo reportado, ~0.78s) pero en la práctica, al sí razonar por default, "
+            "la respuesta completa por llamada resultó notablemente más lenta que Llama — descartado "
+            "por velocidad real medida (ver tiempo_respuesta_promedio_segundos de esa corrida para el "
+            "dato). Se quedó en DeepInfra con meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo (mismo "
+            "modelo deprecado por Groq el 16-ago-2026, hospedado ahí a fracción del costo, sin "
+            "razonamiento oculto) por ser, de todo lo probado, lo más rápido y barato para esta tarea."
         ),
         "parseo_respuesta": (
             "Se extrae el primer número (entero o decimal) de la respuesta con regex y se recorta "
