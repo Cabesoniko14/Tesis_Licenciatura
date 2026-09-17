@@ -1,0 +1,310 @@
+ESTRATEGIA STD (usada aquí solo como comparación / sombra, no entrena)
+WIN_REWARD=+1.00  DRAW_REWARD=+0.00  BLOCK_BONUS=+0.30  LOSS_REWARD=-1.00
+Bloqueo = el agente ocupa una casilla que la máquina podía usar para ganar en su siguiente turno (calculado con winning_moves_for sobre el tablero previo).
+
+PROMPT DEL LLM (esta es la fuente real que entrena al agente)
+Eres un evaluador de acciones de Tic Tac Toe. Las casillas se numeran así:
+ 0 | 1 | 2 
+---+---+---
+ 3 | 4 | 5 
+---+---+---
+ 6 | 7 | 8 
+
+Las líneas ganadoras (3 en raya) son exactamente estas 8:
+Filas: (0,1,2) (3,4,5) (6,7,8)
+Columnas: (0,3,6) (1,4,7) (2,5,8)
+Diagonales: (0,4,8) (2,4,6)
+
+AGENTE = '{agent_letter}'
+MÁQUINA (oponente) = '{opponent_letter}'
+
+Tablero ANTES de que el agente jugara (así quedó tras el último movimiento de la máquina):
+{grid_antes}
+
+El AGENTE colocó '{agent_letter}' en la casilla {action} (estaba vacía).
+
+Tablero DESPUÉS de esa jugada del agente, y de la respuesta de la máquina si el juego continuó:
+{grid_despues}
+
+Asigna UN SOLO NÚMERO siguiendo este orden exacto:
+
+Paso 1: Revisa las 8 líneas de arriba en el tablero "DESPUÉS". ¿Alguna tiene las 3 casillas con '{agent_letter}'?
+  Si SÍ -> responde 1. (No sigas revisando, ya terminaste.)
+
+Paso 2: Si no aplicó el paso 1, revisa si alguna de las 8 líneas tiene las 3 casillas con '{opponent_letter}' en el tablero "DESPUÉS".
+  Si SÍ -> responde -1.
+
+Paso 3: Si no aplicó ni el paso 1 ni el 2, revisa el tablero "ANTES". Busca una línea con exactamente 2 casillas '{opponent_letter}' y la tercera casilla vacía.
+  Si esa casilla vacía es la número {action} (la que el agente acaba de ocupar) -> responde 0.3.
+
+Paso 4: Si no aplicó ninguno de los pasos anteriores -> responde 0.
+
+Responde ÚNICAMENTE con el número (1, -1, 0.3 o 0). Sin texto, sin explicación, sin los pasos.
+
+Número:
+
+
+--- Juego 1 ---
+[Turno 1] Agente (X) -> casilla 0
+[Turno 1] Máquina (O) -> casilla 5
+  LLM  : respondió '0' -> reward +0.00
+  STD  : jugada neutral (0.0) -> reward +0.00
+  Reward LLM: +0.00  |  acumulado LLM: +0.00
+  Reward STD: +0.00  |  acumulado STD: +0.00
+ X | 1 | 2 
+---+---+---
+ 3 | 4 | O 
+---+---+---
+ 6 | 7 | 8 
+
+[Turno 2] Agente (X) -> casilla 2
+[Turno 2] Máquina (O) -> casilla 8
+  LLM  : respondió '-1' -> reward -1.00
+  STD  : jugada neutral (0.0) -> reward +0.00
+  Reward LLM: -1.00  |  acumulado LLM: -1.00
+  Reward STD: +0.00  |  acumulado STD: +0.00
+ X | 1 | X 
+---+---+---
+ 3 | 4 | O 
+---+---+---
+ 6 | 7 | O 
+
+[Turno 3] Agente (X) -> casilla 7
+[Turno 3] Máquina (O) -> casilla 1
+  LLM  : respondió '1' -> reward +1.00
+  STD  : jugada neutral (0.0) -> reward +0.00
+  Reward LLM: +1.00  |  acumulado LLM: +0.00
+  Reward STD: +0.00  |  acumulado STD: +0.00
+ X | O | X 
+---+---+---
+ 3 | 4 | O 
+---+---+---
+ 6 | X | O 
+
+[Turno 4] Agente (X) -> casilla 3
+[Turno 4] Máquina (O) -> casilla 4
+  LLM  : respondió '-1' -> reward -1.00
+  STD  : jugada neutral (0.0) -> reward +0.00
+  Reward LLM: -1.00  |  acumulado LLM: -1.00
+  Reward STD: +0.00  |  acumulado STD: +0.00
+ X | O | X 
+---+---+---
+ X | O | O 
+---+---+---
+ 6 | X | O 
+
+[Turno 5] Agente (X) -> casilla 6
+  LLM  : respondió '1' -> reward +1.00
+  STD  : gana de inmediato (WIN_REWARD) -> reward +1.00
+  Reward LLM: +1.00  |  acumulado LLM: +0.00
+  Reward STD: +1.00  |  acumulado STD: +1.00
+ X | O | X 
+---+---+---
+ X | O | O 
+---+---+---
+ X | X | O 
+
+>>> VICTORIA | reward total LLM=+0.00  |  reward total STD (sombra)=+1.00
+
+--- Juego 2 ---
+[Turno 1] Agente (O) -> casilla 2
+[Turno 1] Máquina (X) -> casilla 8
+  LLM  : respondió '0' -> reward +0.00
+  STD  : jugada neutral (0.0) -> reward +0.00
+  Reward LLM: +0.00  |  acumulado LLM: +0.00
+  Reward STD: +0.00  |  acumulado STD: +0.00
+ 0 | 1 | O 
+---+---+---
+ 3 | 4 | 5 
+---+---+---
+ 6 | 7 | X 
+
+[Turno 2] Agente (O) -> casilla 6
+[Turno 2] Máquina (X) -> casilla 0
+  LLM  : respondió '1' -> reward +1.00
+  STD  : jugada neutral (0.0) -> reward +0.00
+  Reward LLM: +1.00  |  acumulado LLM: +1.00
+  Reward STD: +0.00  |  acumulado STD: +0.00
+ X | 1 | O 
+---+---+---
+ 3 | 4 | 5 
+---+---+---
+ O | 7 | X 
+
+[Turno 3] Agente (O) -> casilla 5
+[Turno 3] Máquina (X) -> casilla 1
+  LLM  : respondió '1' -> reward +1.00
+  STD  : jugada neutral (0.0) -> reward +0.00
+  Reward LLM: +1.00  |  acumulado LLM: +2.00
+  Reward STD: +0.00  |  acumulado STD: +0.00
+ X | X | O 
+---+---+---
+ 3 | 4 | O 
+---+---+---
+ O | 7 | X 
+
+[Turno 4] Agente (O) -> casilla 7
+[Turno 4] Máquina (X) -> casilla 4
+  LLM  : respondió '1' -> reward +1.00
+  STD  : esta jugada llevó a perder tras la respuesta de la máquina (LOSS_REWARD) -> reward -1.00
+  Reward LLM: +1.00  |  acumulado LLM: +3.00
+  Reward STD: -1.00  |  acumulado STD: -1.00
+ X | X | O 
+---+---+---
+ 3 | X | O 
+---+---+---
+ O | O | X 
+
+>>> DERROTA | reward total LLM=+3.00  |  reward total STD (sombra)=-1.00
+
+--- Juego 3 ---
+[Turno 1] Agente (X) -> casilla 8
+[Turno 1] Máquina (O) -> casilla 1
+  LLM  : respondió '1' -> reward +1.00
+  STD  : jugada neutral (0.0) -> reward +0.00
+  Reward LLM: +1.00  |  acumulado LLM: +1.00
+  Reward STD: +0.00  |  acumulado STD: +0.00
+ 0 | O | 2 
+---+---+---
+ 3 | 4 | 5 
+---+---+---
+ 6 | 7 | X 
+
+[Turno 2] Agente (X) -> casilla 2
+[Turno 2] Máquina (O) -> casilla 4
+  LLM  : respondió '1' -> reward +1.00
+  STD  : jugada neutral (0.0) -> reward +0.00
+  Reward LLM: +1.00  |  acumulado LLM: +2.00
+  Reward STD: +0.00  |  acumulado STD: +0.00
+ 0 | O | X 
+---+---+---
+ 3 | O | 5 
+---+---+---
+ 6 | 7 | X 
+
+[Turno 3] Agente (X) -> casilla 0
+[Turno 3] Máquina (O) -> casilla 3
+  LLM  : respondió '1' -> reward +1.00
+  STD  : jugada neutral (0.0) -> reward +0.00
+  Reward LLM: +1.00  |  acumulado LLM: +3.00
+  Reward STD: +0.00  |  acumulado STD: +0.00
+ X | O | X 
+---+---+---
+ O | O | 5 
+---+---+---
+ 6 | 7 | X 
+
+[Turno 4] Agente (X) -> casilla 7
+[Turno 4] Máquina (O) -> casilla 6
+  LLM  : respondió '1' -> reward +1.00
+  STD  : bloquea a la máquina (BLOCK_BONUS) -> reward +0.30
+  Reward LLM: +1.00  |  acumulado LLM: +4.00
+  Reward STD: +0.30  |  acumulado STD: +0.30
+ X | O | X 
+---+---+---
+ O | O | 5 
+---+---+---
+ O | X | X 
+
+[Turno 5] Agente (X) -> casilla 5
+  LLM  : respondió '1' -> reward +1.00
+  STD  : gana de inmediato (WIN_REWARD) -> reward +1.00
+  Reward LLM: +1.00  |  acumulado LLM: +5.00
+  Reward STD: +1.00  |  acumulado STD: +1.30
+ X | O | X 
+---+---+---
+ O | O | X 
+---+---+---
+ O | X | X 
+
+>>> VICTORIA | reward total LLM=+5.00  |  reward total STD (sombra)=+1.30
+
+--- Juego 4 ---
+[Turno 1] Agente (O) -> casilla 7
+[Turno 1] Máquina (X) -> casilla 4
+  LLM  : respondió '1' -> reward +1.00
+  STD  : jugada neutral (0.0) -> reward +0.00
+  Reward LLM: +1.00  |  acumulado LLM: +1.00
+  Reward STD: +0.00  |  acumulado STD: +0.00
+ 0 | 1 | 2 
+---+---+---
+ 3 | X | 5 
+---+---+---
+ 6 | O | 8 
+
+[Turno 2] Agente (O) -> casilla 2
+[Turno 2] Máquina (X) -> casilla 0
+  LLM  : respondió '1' -> reward +1.00
+  STD  : jugada neutral (0.0) -> reward +0.00
+  Reward LLM: +1.00  |  acumulado LLM: +2.00
+  Reward STD: +0.00  |  acumulado STD: +0.00
+ X | 1 | O 
+---+---+---
+ 3 | X | 5 
+---+---+---
+ 6 | O | 8 
+
+[Turno 3] Agente (O) -> casilla 1
+[Turno 3] Máquina (X) -> casilla 3
+  LLM  : respondió '0' -> reward +0.00
+  STD  : jugada neutral (0.0) -> reward +0.00
+  Reward LLM: +0.00  |  acumulado LLM: +2.00
+  Reward STD: +0.00  |  acumulado STD: +0.00
+ X | O | O 
+---+---+---
+ X | X | 5 
+---+---+---
+ 6 | O | 8 
+
+[Turno 4] Agente (O) -> casilla 5
+[Turno 4] Máquina (X) -> casilla 8
+  LLM  : respondió '1' -> reward +1.00
+  STD  : esta jugada llevó a perder tras la respuesta de la máquina (LOSS_REWARD) -> reward -1.00
+  Reward LLM: +1.00  |  acumulado LLM: +3.00
+  Reward STD: -1.00  |  acumulado STD: -1.00
+ X | O | O 
+---+---+---
+ X | X | O 
+---+---+---
+ 6 | O | X 
+
+>>> DERROTA | reward total LLM=+3.00  |  reward total STD (sombra)=-1.00
+
+--- Juego 5 ---
+[Turno 1] Agente (X) -> casilla 6
+[Turno 1] Máquina (O) -> casilla 0
+  LLM  : respondió '0' -> reward +0.00
+  STD  : jugada neutral (0.0) -> reward +0.00
+  Reward LLM: +0.00  |  acumulado LLM: +0.00
+  Reward STD: +0.00  |  acumulado STD: +0.00
+ O | 1 | 2 
+---+---+---
+ 3 | 4 | 5 
+---+---+---
+ X | 7 | 8 
+
+[Turno 2] Agente (X) -> casilla 8
+[Turno 2] Máquina (O) -> casilla 2
+  LLM  : respondió '1' -> reward +1.00
+  STD  : jugada neutral (0.0) -> reward +0.00
+  Reward LLM: +1.00  |  acumulado LLM: +1.00
+  Reward STD: +0.00  |  acumulado STD: +0.00
+ O | 1 | O 
+---+---+---
+ 3 | 4 | 5 
+---+---+---
+ X | 7 | X 
+
+[Turno 3] Agente (X) -> casilla 3
+[Turno 3] Máquina (O) -> casilla 1
+  LLM  : respondió '1' -> reward +1.00
+  STD  : esta jugada llevó a perder tras la respuesta de la máquina (LOSS_REWARD) -> reward -1.00
+  Reward LLM: +1.00  |  acumulado LLM: +2.00
+  Reward STD: -1.00  |  acumulado STD: -1.00
+ O | O | O 
+---+---+---
+ X | 4 | 5 
+---+---+---
+ X | 7 | X 
+
+>>> DERROTA | reward total LLM=+2.00  |  reward total STD (sombra)=-1.00

@@ -1,0 +1,293 @@
+ESTRATEGIA STD (usada aquí solo como comparación / sombra, no entrena)
+WIN_REWARD=+1.00  DRAW_REWARD=+0.00  BLOCK_BONUS=+0.30  LOSS_REWARD=-1.00
+Bloqueo = el agente ocupa una casilla que el oponente podía usar para ganar en su siguiente turno (calculado con winning_moves_for sobre el tablero previo).
+
+PROMPT DEL LLM (esta es la fuente real que entrena al agente)
+Tic Tac Toe. Las casillas se numeran así:
+ 0 | 1 | 2 
+---+---+---
+ 3 | 4 | 5 
+---+---+---
+ 6 | 7 | 8 
+
+Antes de la jugada:
+{grid_antes}
+
+'{agent_letter}' jugó en la casilla {action}.
+
+Después de la jugada:
+{grid_despues}
+
+Responde con UN SOLO NÚMERO, sin texto extra:
+1    = en "Después" hay 3 '{agent_letter}' en línea (fila, columna o diagonal) -> la jugada GANÓ ahora mismo.
+0.3  = en "Antes" el oponente tenía una jugada ganadora disponible (2 fichas en línea con una casilla vacía) y esta jugada ocupó esa casilla vacía.
+0    = ninguno de los casos anteriores.
+-1   = en "Antes" el oponente tenía una jugada ganadora disponible y esta jugada NO la ocupó.
+
+Número:
+
+
+--- Juego 1 ---
+[Turno 1] Oponente (O) -> casilla 5
+[Turno 1] Agente (X) -> casilla 0
+  LLM  : respondió '0' (propuesto +0.00)
+  STD  : jugada neutral (0.0)
+  Reward LLM: +0.00  |  acumulado LLM: +0.00
+  Reward STD: +0.00  |  acumulado STD: +0.00
+ X | 1 | 2 
+---+---+---
+ 3 | 4 | O 
+---+---+---
+ 6 | 7 | 8 
+
+[Turno 2] Oponente (O) -> casilla 8
+[Turno 2] Agente (X) -> casilla 2
+  LLM  : respondió '-1' (propuesto -1.00)
+  STD  : jugada neutral (0.0)
+  Reward LLM: -1.00  |  acumulado LLM: -1.00
+  Reward STD: +0.00  |  acumulado STD: +0.00
+ X | 1 | X 
+---+---+---
+ 3 | 4 | O 
+---+---+---
+ 6 | 7 | O 
+
+[Turno 3] Oponente (O) -> casilla 1
+[Turno 3] Agente (X) -> casilla 7
+  LLM  : respondió '0' (propuesto +0.00)
+  STD  : jugada neutral (0.0)
+  Reward LLM: +0.00  |  acumulado LLM: -1.00
+  Reward STD: +0.00  |  acumulado STD: +0.00
+ X | O | X 
+---+---+---
+ 3 | 4 | O 
+---+---+---
+ 6 | X | O 
+
+[Turno 4] Oponente (O) -> casilla 4
+[Turno 4] Agente (X) -> casilla 3
+  LLM  : respondió '-1' (propuesto -1.00)
+  STD  : jugada neutral (0.0)
+  Reward LLM: -1.00  |  acumulado LLM: -2.00
+  Reward STD: +0.00  |  acumulado STD: +0.00
+ X | O | X 
+---+---+---
+ X | O | O 
+---+---+---
+ 6 | X | O 
+
+[Turno 5] Agente (X) -> casilla 6
+  LLM  : respondió '-1' (propuesto -1.00)
+  STD  : gana de inmediato (WIN_REWARD)
+  Reward LLM: -1.00  |  acumulado LLM: -3.00
+  Reward STD: +1.00  |  acumulado STD: +1.00
+ X | O | X 
+---+---+---
+ X | O | O 
+---+---+---
+ X | X | O 
+
+>>> VICTORIA | reward total LLM=-3.00  |  reward total STD (sombra)=+1.00
+
+--- Juego 2 ---
+[Turno 1] Oponente (X) -> casilla 8
+[Turno 1] Agente (O) -> casilla 2
+  LLM  : respondió '0' (propuesto +0.00)
+  STD  : jugada neutral (0.0)
+  Reward LLM: +0.00  |  acumulado LLM: +0.00
+  Reward STD: +0.00  |  acumulado STD: +0.00
+ 0 | 1 | O 
+---+---+---
+ 3 | 4 | 5 
+---+---+---
+ 6 | 7 | X 
+
+[Turno 2] Oponente (X) -> casilla 0
+[Turno 2] Agente (O) -> casilla 6
+  LLM  : respondió '0' (propuesto +0.00)
+  STD  : jugada neutral (0.0)
+  Reward LLM: +0.00  |  acumulado LLM: +0.00
+  Reward STD: +0.00  |  acumulado STD: +0.00
+ X | 1 | O 
+---+---+---
+ 3 | 4 | 5 
+---+---+---
+ O | 7 | X 
+
+[Turno 3] Oponente (X) -> casilla 1
+[Turno 3] Agente (O) -> casilla 5
+  LLM  : respondió '0' (propuesto +0.00)
+  STD  : jugada neutral (0.0)
+  Reward LLM: +0.00  |  acumulado LLM: +0.00
+  Reward STD: +0.00  |  acumulado STD: +0.00
+ X | X | O 
+---+---+---
+ 3 | 4 | O 
+---+---+---
+ O | 7 | X 
+
+[Turno 4] Oponente (X) -> casilla 4
+[Turno 4] Agente (O) -> casilla 7
+  LLM  : respondió '-1' (propuesto -1.00)  -> SOBREESCRITO a -1.00 (el oponente ganó después)
+  STD  : esta jugada llevó a perder tras la respuesta del oponente (LOSS_REWARD)  [recalculado tras ver al oponente]
+  Reward LLM: -1.00  |  acumulado LLM: -1.00
+  Reward STD: -1.00  |  acumulado STD: -1.00
+ X | X | O 
+---+---+---
+ 3 | X | O 
+---+---+---
+ O | O | X 
+
+>>> DERROTA | reward total LLM=-1.00  |  reward total STD (sombra)=-1.00
+
+--- Juego 3 ---
+[Turno 1] Oponente (O) -> casilla 1
+[Turno 1] Agente (X) -> casilla 8
+  LLM  : respondió '0' (propuesto +0.00)
+  STD  : jugada neutral (0.0)
+  Reward LLM: +0.00  |  acumulado LLM: +0.00
+  Reward STD: +0.00  |  acumulado STD: +0.00
+ 0 | O | 2 
+---+---+---
+ 3 | 4 | 5 
+---+---+---
+ 6 | 7 | X 
+
+[Turno 2] Oponente (O) -> casilla 4
+[Turno 2] Agente (X) -> casilla 2
+  LLM  : respondió '-1' (propuesto -1.00)
+  STD  : jugada neutral (0.0)
+  Reward LLM: -1.00  |  acumulado LLM: -1.00
+  Reward STD: +0.00  |  acumulado STD: +0.00
+ 0 | O | X 
+---+---+---
+ 3 | O | 5 
+---+---+---
+ 6 | 7 | X 
+
+[Turno 3] Oponente (O) -> casilla 3
+[Turno 3] Agente (X) -> casilla 0
+  LLM  : respondió '-1' (propuesto -1.00)
+  STD  : jugada neutral (0.0)
+  Reward LLM: -1.00  |  acumulado LLM: -2.00
+  Reward STD: +0.00  |  acumulado STD: +0.00
+ X | O | X 
+---+---+---
+ O | O | 5 
+---+---+---
+ 6 | 7 | X 
+
+[Turno 4] Oponente (O) -> casilla 6
+[Turno 4] Agente (X) -> casilla 7
+  LLM  : respondió '0' (propuesto +0.00)
+  STD  : bloquea al oponente (BLOCK_BONUS)
+  Reward LLM: +0.00  |  acumulado LLM: -2.00
+  Reward STD: +0.30  |  acumulado STD: +0.30
+ X | O | X 
+---+---+---
+ O | O | 5 
+---+---+---
+ O | X | X 
+
+[Turno 5] Agente (X) -> casilla 5
+  LLM  : respondió '-1' (propuesto -1.00)
+  STD  : gana de inmediato (WIN_REWARD)
+  Reward LLM: -1.00  |  acumulado LLM: -3.00
+  Reward STD: +1.00  |  acumulado STD: +1.30
+ X | O | X 
+---+---+---
+ O | O | X 
+---+---+---
+ O | X | X 
+
+>>> VICTORIA | reward total LLM=-3.00  |  reward total STD (sombra)=+1.30
+
+--- Juego 4 ---
+[Turno 1] Oponente (X) -> casilla 4
+[Turno 1] Agente (O) -> casilla 7
+  LLM  : respondió '-1' (propuesto -1.00)
+  STD  : jugada neutral (0.0)
+  Reward LLM: -1.00  |  acumulado LLM: -1.00
+  Reward STD: +0.00  |  acumulado STD: +0.00
+ 0 | 1 | 2 
+---+---+---
+ 3 | X | 5 
+---+---+---
+ 6 | O | 8 
+
+[Turno 2] Oponente (X) -> casilla 0
+[Turno 2] Agente (O) -> casilla 2
+  LLM  : respondió '0' (propuesto +0.00)
+  STD  : jugada neutral (0.0)
+  Reward LLM: +0.00  |  acumulado LLM: -1.00
+  Reward STD: +0.00  |  acumulado STD: +0.00
+ X | 1 | O 
+---+---+---
+ 3 | X | 5 
+---+---+---
+ 6 | O | 8 
+
+[Turno 3] Oponente (X) -> casilla 3
+[Turno 3] Agente (O) -> casilla 1
+  LLM  : respondió '0' (propuesto +0.00)
+  STD  : jugada neutral (0.0)
+  Reward LLM: +0.00  |  acumulado LLM: -1.00
+  Reward STD: +0.00  |  acumulado STD: +0.00
+ X | O | O 
+---+---+---
+ X | X | 5 
+---+---+---
+ 6 | O | 8 
+
+[Turno 4] Oponente (X) -> casilla 8
+[Turno 4] Agente (O) -> casilla 5
+  LLM  : respondió '-1' (propuesto -1.00)  -> SOBREESCRITO a -1.00 (el oponente ganó después)
+  STD  : esta jugada llevó a perder tras la respuesta del oponente (LOSS_REWARD)  [recalculado tras ver al oponente]
+  Reward LLM: -1.00  |  acumulado LLM: -2.00
+  Reward STD: -1.00  |  acumulado STD: -1.00
+ X | O | O 
+---+---+---
+ X | X | O 
+---+---+---
+ 6 | O | X 
+
+>>> DERROTA | reward total LLM=-2.00  |  reward total STD (sombra)=-1.00
+
+--- Juego 5 ---
+[Turno 1] Oponente (O) -> casilla 0
+[Turno 1] Agente (X) -> casilla 6
+  LLM  : respondió '-1' (propuesto -1.00)
+  STD  : jugada neutral (0.0)
+  Reward LLM: -1.00  |  acumulado LLM: -1.00
+  Reward STD: +0.00  |  acumulado STD: +0.00
+ O | 1 | 2 
+---+---+---
+ 3 | 4 | 5 
+---+---+---
+ X | 7 | 8 
+
+[Turno 2] Oponente (O) -> casilla 2
+[Turno 2] Agente (X) -> casilla 8
+  LLM  : respondió '0' (propuesto +0.00)
+  STD  : jugada neutral (0.0)
+  Reward LLM: +0.00  |  acumulado LLM: -1.00
+  Reward STD: +0.00  |  acumulado STD: +0.00
+ O | 1 | O 
+---+---+---
+ 3 | 4 | 5 
+---+---+---
+ X | 7 | X 
+
+[Turno 3] Oponente (O) -> casilla 1
+[Turno 3] Agente (X) -> casilla 3
+  LLM  : respondió '0' (propuesto +0.00)  -> SOBREESCRITO a -1.00 (el oponente ganó después)
+  STD  : esta jugada llevó a perder tras la respuesta del oponente (LOSS_REWARD)  [recalculado tras ver al oponente]
+  Reward LLM: -1.00  |  acumulado LLM: -2.00
+  Reward STD: -1.00  |  acumulado STD: -1.00
+ O | O | O 
+---+---+---
+ X | 4 | 5 
+---+---+---
+ X | 7 | X 
+
+>>> DERROTA | reward total LLM=-2.00  |  reward total STD (sombra)=-1.00

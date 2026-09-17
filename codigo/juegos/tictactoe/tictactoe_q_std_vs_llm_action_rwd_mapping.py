@@ -1,4 +1,7 @@
-# ======================  Traza: 5 juegos, std vs LLM  ======================
+# ======================  Traza: 5 juegos con LLM (real) + comparación std (sombra)  ======================
+# El LLM evalúa la jugada del agente DESPUÉS de conocer el resultado final del turno completo
+# (incluyendo la respuesta de la máquina, si la hubo) -- para que juzgar victoria/derrota sea
+# leer el tablero, no predecir el futuro. El std se calcula en paralelo solo para comparar.
 import os
 import re
 import random
@@ -18,7 +21,6 @@ LLM_BASE_URL = "https://api.deepinfra.com/v1/openai"
 LLM_MODEL_NAME = "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo"
 LLM_TEMPERATURE = 0.0
 LLM_MAX_RETRIES = 3
-LLM_LOSS_REWARD = -1.0
 
 class TicTacToe:
     def __init__(self):
@@ -86,6 +88,15 @@ def render_board(board):
             f"---+---+---\n"
             f" {c(6)} | {c(7)} | {c(8)} ")
 
+def render_board_prompt(board):
+    def c(i):
+        return board[i] if board[i] != ' ' else '.'
+    return (f" {c(0)} | {c(1)} | {c(2)} \n"
+            f"---+---+---\n"
+            f" {c(3)} | {c(4)} | {c(5)} \n"
+            f"---+---+---\n"
+            f" {c(6)} | {c(7)} | {c(8)} ")
+
 class QLearningAgent:
     def __init__(self, alpha=0.1, gamma=0.9, epsilon=0.1):
         self.q_table = defaultdict(float)
@@ -110,17 +121,45 @@ class QLearningAgent:
         new_value = old_value + self.alpha * (reward + self.gamma * max_q_next - old_value)
         self.q_table[(tuple(state), action)] = new_value
 
-_PROMPT_TEMPLATE = """Evalúas UNA jugada de Tic Tac Toe para Q-Learning. Responde solo con: 1, 0.3, 0 o -1. Sin texto extra.
+_INDICE_MAP = (" 0 | 1 | 2 \n"
+               "---+---+---\n"
+               " 3 | 4 | 5 \n"
+               "---+---+---\n"
+               " 6 | 7 | 8 ")
 
-1    = la jugada gana la partida de inmediato
-0.3  = la jugada bloquea una victoria inmediata del oponente
-0    = cualquier otra jugada
--1   = el oponente tenía una victoria inmediata disponible y la jugada NO la bloqueó
+_PROMPT_TEMPLATE = """Eres un evaluador de acciones de Tic Tac Toe. Las casillas se numeran así:
+""" + _INDICE_MAP + """
 
-Antes: {prev_state}
-Agente: {agent_letter}
-Acción: {action}
-Después: {next_state}
+Las líneas ganadoras (3 en raya) son exactamente estas 8:
+Filas: (0,1,2) (3,4,5) (6,7,8)
+Columnas: (0,3,6) (1,4,7) (2,5,8)
+Diagonales: (0,4,8) (2,4,6)
+
+AGENTE = '{agent_letter}'
+MÁQUINA (oponente) = '{opponent_letter}'
+
+Tablero ANTES de que el agente jugara (así quedó tras el último movimiento de la máquina):
+{grid_antes}
+
+El AGENTE colocó '{agent_letter}' en la casilla {action} (estaba vacía).
+
+Tablero DESPUÉS de esa jugada del agente, y de la respuesta de la máquina si el juego continuó:
+{grid_despues}
+
+Asigna UN SOLO NÚMERO siguiendo este orden exacto:
+
+Paso 1: Revisa las 8 líneas de arriba en el tablero "DESPUÉS". ¿Alguna tiene las 3 casillas con '{agent_letter}'?
+  Si SÍ -> responde 1. (No sigas revisando, ya terminaste.)
+
+Paso 2: Si no aplicó el paso 1, revisa si alguna de las 8 líneas tiene las 3 casillas con '{opponent_letter}' en el tablero "DESPUÉS".
+  Si SÍ -> responde -1.
+
+Paso 3: Si no aplicó ni el paso 1 ni el 2, revisa el tablero "ANTES". Busca una línea con exactamente 2 casillas '{opponent_letter}' y la tercera casilla vacía.
+  Si esa casilla vacía es la número {action} (la que el agente acaba de ocupar) -> responde 0.3.
+
+Paso 4: Si no aplicó ninguno de los pasos anteriores -> responde 0.
+
+Responde ÚNICAMENTE con el número (1, -1, 0.3 o 0). Sin texto, sin explicación, sin los pasos.
 
 Número:
 """
@@ -137,11 +176,15 @@ def _parse_reward_value(s: str):
     except:
         return None
 
-def llm_reward(client, prev_state, action, next_state, agent_letter, max_retries=LLM_MAX_RETRIES):
+def llm_reward(client, prev_state, action, next_state, agent_letter, opponent_letter, max_retries=LLM_MAX_RETRIES):
     for _ in range(max_retries):
         try:
             message = _PROMPT_TEMPLATE.format(
-                prev_state=prev_state, action=action, next_state=next_state, agent_letter=agent_letter
+                grid_antes=render_board_prompt(prev_state),
+                grid_despues=render_board_prompt(next_state),
+                agent_letter=agent_letter,
+                opponent_letter=opponent_letter,
+                action=action,
             )
             resp = client.chat.completions.create(
                 messages=[{"role": "user", "content": message}],
@@ -157,11 +200,24 @@ def llm_reward(client, prev_state, action, next_state, agent_letter, max_retries
             print(f"[LLM Error] {e}")
     return 0.0, "(sin respuesta válida)"
 
-def jugar_std(agent, agent_letter, opponent_letter, log):
+def reward_std_sombra(gano_agente, gano_maquina, empato, fue_bloqueo):
+    if gano_agente:
+        return WIN_REWARD, "gana de inmediato (WIN_REWARD)"
+    elif gano_maquina:
+        return LOSS_REWARD, "esta jugada llevó a perder tras la respuesta de la máquina (LOSS_REWARD)"
+    elif empato:
+        return DRAW_REWARD, "empate (DRAW_REWARD)"
+    elif fue_bloqueo:
+        return BLOCK_BONUS, "bloquea a la máquina (BLOCK_BONUS)"
+    return 0.0, "jugada neutral (0.0)"
+
+def jugar_llm_con_sombra(agent, agent_letter, opponent_letter, client, log):
     env = TicTacToe()
     state = env.reset()
-    reward_total = 0.0
+    reward_llm_total = 0.0
+    reward_std_total = 0.0
     done = False
+    turno = 1
 
     while not done:
         prev_board = state.copy()
@@ -171,122 +227,81 @@ def jugar_std(agent, agent_letter, opponent_letter, log):
         next_state = env.board.copy()
 
         fue_bloqueo = action in winning_moves_for(prev_board, opponent_letter)
+        gano_agente = env.current_winner == agent_letter
+        empato = env.is_draw()
+        gano_maquina = False
 
-        if env.current_winner == agent_letter:
-            reward, done = WIN_REWARD, True
-        elif env.is_draw():
-            reward, done = DRAW_REWARD, True
-        else:
-            reward = BLOCK_BONUS if fue_bloqueo else 0.0
-            done = False
+        log.append(f"[Turno {turno}] Agente ({agent_letter}) -> casilla {action}")
+
+        if not (gano_agente or empato):
             opp_actions = env.available_moves()
             if opp_actions:
                 opp_action = random.choice(opp_actions)
+                log.append(f"[Turno {turno}] Máquina ({opponent_letter}) -> casilla {opp_action}")
                 env.make_move(opp_action, opponent_letter)
                 next_state = env.board.copy()
-                if env.current_winner == opponent_letter:
-                    reward = LOSS_REWARD
-                    done = True
-                elif env.is_draw():
-                    done = True
+                gano_maquina = env.current_winner == opponent_letter
+                empato = env.is_draw()
+
+        done = gano_agente or gano_maquina or empato
+
+        reward_std, motivo_std = reward_std_sombra(gano_agente, gano_maquina, empato, fue_bloqueo)
+        reward_llm, respuesta_cruda = llm_reward(client, prev_board, action, next_state, agent_letter, opponent_letter)
 
         next_actions = env.available_moves()
-        agent.update(state, action, reward, next_state, next_actions)
-        reward_total += reward
+        agent.update(state, action, reward_llm, next_state, next_actions)  # el Q-learning real usa el reward del LLM
 
-        log.append(f"Agente ({agent_letter}) -> casilla {action}  |  reward={reward:+.2f}  acumulado={reward_total:+.2f}")
+        reward_llm_total += reward_llm
+        reward_std_total += reward_std
+
+        log.append(f"  LLM  : respondió '{respuesta_cruda}' -> reward {reward_llm:+.2f}")
+        log.append(f"  STD  : {motivo_std} -> reward {reward_std:+.2f}")
+        log.append(f"  Reward LLM: {reward_llm:+.2f}  |  acumulado LLM: {reward_llm_total:+.2f}")
+        log.append(f"  Reward STD: {reward_std:+.2f}  |  acumulado STD: {reward_std_total:+.2f}")
         log.append(render_board(next_state))
         log.append("")
 
         state = env.board.copy()
+        turno += 1
 
     if env.current_winner == agent_letter:
-        return "VICTORIA", reward_total
+        resultado = "VICTORIA"
     elif env.current_winner == opponent_letter:
-        return "DERROTA", reward_total
-    return "EMPATE", reward_total
-
-def jugar_llm(agent, agent_letter, opponent_letter, client, log):
-    env = TicTacToe()
-    state = env.reset()
-    reward_total = 0.0
-    done = False
-
-    while not done:
-        available_actions = env.available_moves()
-        action = agent.choose_action(state, available_actions)
-        env.make_move(action, agent_letter)
-        next_state = env.board.copy()
-
-        reward, respuesta_cruda = llm_reward(client, state, action, next_state, agent_letter)
-
-        if env.current_winner == agent_letter or env.is_draw():
-            done = True
-        else:
-            done = False
-            opp_actions = env.available_moves()
-            if opp_actions:
-                opp_action = random.choice(opp_actions)
-                env.make_move(opp_action, opponent_letter)
-                next_state = env.board.copy()
-                if env.current_winner == opponent_letter:
-                    reward = LLM_LOSS_REWARD
-                    done = True
-                elif env.is_draw():
-                    done = True
-
-        next_actions = env.available_moves()
-        agent.update(state, action, reward, next_state, next_actions)
-        reward_total += reward
-
-        log.append(f"Agente ({agent_letter}) -> casilla {action}  |  LLM respondió '{respuesta_cruda}'  |  reward={reward:+.2f}  acumulado={reward_total:+.2f}")
-        log.append(render_board(next_state))
-        log.append("")
-
-        state = env.board.copy()
-
-    if env.current_winner == agent_letter:
-        return "VICTORIA", reward_total
-    elif env.current_winner == opponent_letter:
-        return "DERROTA", reward_total
-    return "EMPATE", reward_total
+        resultado = "DERROTA"
+    else:
+        resultado = "EMPATE"
+    return resultado, reward_llm_total, reward_std_total
 
 def encabezado():
     return (
-        "ESTRATEGIA STD\n"
+        "ESTRATEGIA STD (usada aquí solo como comparación / sombra, no entrena)\n"
         f"WIN_REWARD={WIN_REWARD:+.2f}  DRAW_REWARD={DRAW_REWARD:+.2f}  "
         f"BLOCK_BONUS={BLOCK_BONUS:+.2f}  LOSS_REWARD={LOSS_REWARD:+.2f}\n"
-        "Bloqueo = el agente ocupa una casilla que el oponente podía usar para ganar "
+        "Bloqueo = el agente ocupa una casilla que la máquina podía usar para ganar "
         "en su siguiente turno (calculado con winning_moves_for sobre el tablero previo).\n\n"
-        "PROMPT DEL LLM\n"
+        "PROMPT DEL LLM (esta es la fuente real que entrena al agente)\n"
         f"{_PROMPT_TEMPLATE}\n"
     )
 
 def correr_traza(client, num_juegos=NUM_JUEGOS):
-    agent_std = QLearningAgent()
-    agent_llm = QLearningAgent()
+    agent = QLearningAgent()
     log = [encabezado()]
 
     for i in range(num_juegos):
         seed_juego = SEED + i
         agent_letter, opponent_letter = ('X', 'O') if i % 2 == 0 else ('O', 'X')
 
-        log.append(f"--- Juego {i+1} | STD ---")
+        log.append(f"--- Juego {i+1} ---")
         random.seed(seed_juego)
-        resultado_std, reward_std = jugar_std(agent_std, agent_letter, opponent_letter, log)
-        log.append(f">>> {resultado_std} | reward total={reward_std:+.2f}\n")
-
-        log.append(f"--- Juego {i+1} | LLM ---")
-        random.seed(seed_juego)
-        resultado_llm, reward_llm = jugar_llm(agent_llm, agent_letter, opponent_letter, client, log)
-        log.append(f">>> {resultado_llm} | reward total={reward_llm:+.2f}\n")
+        resultado, reward_llm, reward_std = jugar_llm_con_sombra(agent, agent_letter, opponent_letter, client, log)
+        log.append(f">>> {resultado} | reward total LLM={reward_llm:+.2f}  |  reward total STD (sombra)={reward_std:+.2f}\n")
 
     texto_completo = "\n".join(log)
     print(texto_completo)
 
     os.makedirs("datos_output", exist_ok=True)
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    ruta = f"datos_output/traza_5_juegos_std_vs_llm_{timestamp}.txt"
+    ruta = f"datos_output/traza_5_juegos_llm_vs_std_sombra_{timestamp}.txt"
     with open(ruta, "w", encoding="utf-8") as f:
         f.write(texto_completo)
 
