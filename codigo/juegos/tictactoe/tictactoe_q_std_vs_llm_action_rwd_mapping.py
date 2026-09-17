@@ -18,7 +18,7 @@ DRAW_REWARD = 0.0
 BLOCK_BONUS = 0.3
 
 LLM_BASE_URL = "https://api.deepinfra.com/v1/openai"
-LLM_MODEL_NAME = "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo"
+LLM_MODEL_NAME = "deepseek-ai/DeepSeek-V4.1-Flash"  # modelo con razonamiento, para comparar precisión vs Llama-3.1-8B (sin razonamiento)
 LLM_TEMPERATURE = 0.0
 LLM_MAX_RETRIES = 3
 
@@ -139,11 +139,14 @@ Responde solo con el número.
 """
 
 def _parse_reward_value(s: str):
-    m = re.search(r"[-+]?\d*\.?\d+", s.strip())
-    if not m:
+    # Toma el ÚLTIMO número de la respuesta, no el primero -- si el modelo razona en texto
+    # antes de concluir, el primer número que aparece suele ser basura de en medio del
+    # razonamiento (una casilla que mencionó, etc.), no su veredicto final.
+    matches = re.findall(r"[-+]?\d*\.?\d+", s.strip())
+    if not matches:
         return None
     try:
-        v = float(m.group(0))
+        v = float(matches[-1])
         if v < -1: v = -1.0
         if v > 1:  v = 1.0
         return v
@@ -164,9 +167,10 @@ def llm_reward(client, prev_state, action, next_state, agent_letter, opponent_le
                 messages=[{"role": "user", "content": message}],
                 model=LLM_MODEL_NAME,
                 temperature=LLM_TEMPERATURE,
-                max_tokens=20,
+                max_tokens=300,  # este modelo razona: necesita margen para pensar + responder
             )
             content = (resp.choices[0].message.content or "").strip()
+            print(f"[LLM RAW] {content!r}")
             parsed = _parse_reward_value(content)
             if parsed is not None:
                 return parsed, content
@@ -248,6 +252,8 @@ def jugar_llm_con_sombra(agent, agent_letter, opponent_letter, client, log):
 
 def encabezado():
     return (
+        f"MODELO LLM USADO EN ESTA CORRIDA: {LLM_MODEL_NAME}\n"
+        "(para comparar contra corridas hechas con meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo)\n\n"
         "ESTRATEGIA STD (usada aquí solo como comparación / sombra, no entrena)\n"
         f"WIN_REWARD={WIN_REWARD:+.2f}  DRAW_REWARD={DRAW_REWARD:+.2f}  "
         f"BLOCK_BONUS={BLOCK_BONUS:+.2f}  LOSS_REWARD={LOSS_REWARD:+.2f}\n"
@@ -275,7 +281,8 @@ def correr_traza(client, num_juegos=NUM_JUEGOS):
 
     os.makedirs("datos_output", exist_ok=True)
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    ruta = f"datos_output/traza_5_juegos_llm_vs_std_sombra_{timestamp}.txt"
+    modelo_tag = re.sub(r"[^A-Za-z0-9.\-]+", "", LLM_MODEL_NAME.split("/")[-1])
+    ruta = f"datos_output/traza_5_juegos_llm_vs_std_sombra_{modelo_tag}_{timestamp}.txt"
     with open(ruta, "w", encoding="utf-8") as f:
         f.write(texto_completo)
 

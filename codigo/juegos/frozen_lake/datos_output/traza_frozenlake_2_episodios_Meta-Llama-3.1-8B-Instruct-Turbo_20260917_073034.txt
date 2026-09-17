@@ -1,0 +1,180 @@
+MODELO LLM: meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo (vía DeepInfra)
+MAPA: 4x4  |  is_slippery=False
+STD: reward = el reward nativo de Gym en cada paso (0 siempre, 1 solo si llega a 'G').
+Este experimento le pide al LLM que replique EXACTAMENTE eso, sin preferencias de ruta.
+
+PROMPT DEL LLM (se consulta solo en el paso final del episodio)
+Eres una función de recompensas para un episodio de FrozenLake.
+
+El episodio terminó: {terminated}
+Llegó a la meta ('G'): {llego_meta}
+
+Si llegó a la meta, responde 1.
+Si no llegó a la meta, responde 0.
+
+Responde solo con el número.
+
+
+--- Episodio 1 ---
+Mapa (S=inicio, F=seguro, H=hoyo, G=meta):
+SFHF
+FHFF
+FFFH
+FHFG
+
+[Paso 1] estado=0 -> acción=Left -> estado=0 (casilla 'S')
+  Reward STD: +0.00  |  acumulado STD: +0.00
+  Reward LLM: +0.00  |  acumulado LLM: +0.00
+
+[Paso 2] estado=0 -> acción=Left -> estado=0 (casilla 'S')
+  Reward STD: +0.00  |  acumulado STD: +0.00
+  Reward LLM: +0.00  |  acumulado LLM: +0.00
+
+[Paso 3] estado=0 -> acción=Right -> estado=1 (casilla 'F')
+  Reward STD: +0.00  |  acumulado STD: +0.00
+  Reward LLM: +0.00  |  acumulado LLM: +0.00
+
+[Paso 4] estado=1 -> acción=Left -> estado=0 (casilla 'S')
+  Reward STD: +0.00  |  acumulado STD: +0.00
+  Reward LLM: +0.00  |  acumulado LLM: +0.00
+
+[Paso 5] estado=0 -> acción=Right -> estado=1 (casilla 'F')
+  Reward STD: +0.00  |  acumulado STD: +0.00
+  Reward LLM: +0.00  |  acumulado LLM: +0.00
+
+[Paso 6] estado=1 -> acción=Right -> estado=2 (casilla 'H')
+  terminated=True  truncated=False  env_reward=0
+  LLM respondió: '0'
+  Reward STD: +0.00  |  acumulado STD: +0.00
+  Reward LLM: +0.00  |  acumulado LLM: +0.00
+
+>>> HOYO | acumulado STD=+0.00  |  acumulado LLM=+0.00
+
+--- Episodio 2 ---
+Mapa (S=inicio, F=seguro, H=hoyo, G=meta):
+SFFH
+FFFF
+FFHH
+FFFG
+
+[Paso 1] estado=0 -> acción=Right -> estado=1 (casilla 'F')
+  Reward STD: +0.00  |  acumulado STD: +0.00
+  Reward LLM: +0.00  |  acumulado LLM: +0.00
+
+[Paso 2] estado=1 -> acción=Right -> estado=2 (casilla 'F')
+  Reward STD: +0.00  |  acumulado STD: +0.00
+  Reward LLM: +0.00  |  acumulado LLM: +0.00
+
+[Paso 3] estado=2 -> acción=Left -> estado=1 (casilla 'F')
+  Reward STD: +0.00  |  acumulado STD: +0.00
+  Reward LLM: +0.00  |  acumulado LLM: +0.00
+
+[Paso 4] estado=1 -> acción=Up -> estado=1 (casilla 'F')
+  Reward STD: +0.00  |  acumulado STD: +0.00
+  Reward LLM: +0.00  |  acumulado LLM: +0.00
+
+[Paso 5] estado=1 -> acción=Down -> estado=5 (casilla 'F')
+  Reward STD: +0.00  |  acumulado STD: +0.00
+  Reward LLM: +0.00  |  acumulado LLM: +0.00
+
+[Paso 6] estado=5 -> acción=Left -> estado=4 (casilla 'F')
+  Reward STD: +0.00  |  acumulado STD: +0.00
+  Reward LLM: +0.00  |  acumulado LLM: +0.00
+
+[Paso 7] estado=4 -> acción=Up -> estado=0 (casilla 'S')
+  Reward STD: +0.00  |  acumulado STD: +0.00
+  Reward LLM: +0.00  |  acumulado LLM: +0.00
+
+[Paso 8] estado=0 -> acción=Up -> estado=0 (casilla 'S')
+  Reward STD: +0.00  |  acumulado STD: +0.00
+  Reward LLM: +0.00  |  acumulado LLM: +0.00
+
+[Paso 9] estado=0 -> acción=Down -> estado=4 (casilla 'F')
+  Reward STD: +0.00  |  acumulado STD: +0.00
+  Reward LLM: +0.00  |  acumulado LLM: +0.00
+
+[Paso 10] estado=4 -> acción=Down -> estado=8 (casilla 'F')
+  Reward STD: +0.00  |  acumulado STD: +0.00
+  Reward LLM: +0.00  |  acumulado LLM: +0.00
+
+[Paso 11] estado=8 -> acción=Right -> estado=9 (casilla 'F')
+  Reward STD: +0.00  |  acumulado STD: +0.00
+  Reward LLM: +0.00  |  acumulado LLM: +0.00
+
+[Paso 12] estado=9 -> acción=Up -> estado=5 (casilla 'F')
+  Reward STD: +0.00  |  acumulado STD: +0.00
+  Reward LLM: +0.00  |  acumulado LLM: +0.00
+
+[Paso 13] estado=5 -> acción=Right -> estado=6 (casilla 'F')
+  Reward STD: +0.00  |  acumulado STD: +0.00
+  Reward LLM: +0.00  |  acumulado LLM: +0.00
+
+[Paso 14] estado=6 -> acción=Left -> estado=5 (casilla 'F')
+  Reward STD: +0.00  |  acumulado STD: +0.00
+  Reward LLM: +0.00  |  acumulado LLM: +0.00
+
+[Paso 15] estado=5 -> acción=Left -> estado=4 (casilla 'F')
+  Reward STD: +0.00  |  acumulado STD: +0.00
+  Reward LLM: +0.00  |  acumulado LLM: +0.00
+
+[Paso 16] estado=4 -> acción=Down -> estado=8 (casilla 'F')
+  Reward STD: +0.00  |  acumulado STD: +0.00
+  Reward LLM: +0.00  |  acumulado LLM: +0.00
+
+[Paso 17] estado=8 -> acción=Down -> estado=12 (casilla 'F')
+  Reward STD: +0.00  |  acumulado STD: +0.00
+  Reward LLM: +0.00  |  acumulado LLM: +0.00
+
+[Paso 18] estado=12 -> acción=Right -> estado=13 (casilla 'F')
+  Reward STD: +0.00  |  acumulado STD: +0.00
+  Reward LLM: +0.00  |  acumulado LLM: +0.00
+
+[Paso 19] estado=13 -> acción=Left -> estado=12 (casilla 'F')
+  Reward STD: +0.00  |  acumulado STD: +0.00
+  Reward LLM: +0.00  |  acumulado LLM: +0.00
+
+[Paso 20] estado=12 -> acción=Down -> estado=12 (casilla 'F')
+  Reward STD: +0.00  |  acumulado STD: +0.00
+  Reward LLM: +0.00  |  acumulado LLM: +0.00
+
+[Paso 21] estado=12 -> acción=Down -> estado=12 (casilla 'F')
+  Reward STD: +0.00  |  acumulado STD: +0.00
+  Reward LLM: +0.00  |  acumulado LLM: +0.00
+
+[Paso 22] estado=12 -> acción=Left -> estado=12 (casilla 'F')
+  Reward STD: +0.00  |  acumulado STD: +0.00
+  Reward LLM: +0.00  |  acumulado LLM: +0.00
+
+[Paso 23] estado=12 -> acción=Left -> estado=12 (casilla 'F')
+  Reward STD: +0.00  |  acumulado STD: +0.00
+  Reward LLM: +0.00  |  acumulado LLM: +0.00
+
+[Paso 24] estado=12 -> acción=Right -> estado=13 (casilla 'F')
+  Reward STD: +0.00  |  acumulado STD: +0.00
+  Reward LLM: +0.00  |  acumulado LLM: +0.00
+
+[Paso 25] estado=13 -> acción=Left -> estado=12 (casilla 'F')
+  Reward STD: +0.00  |  acumulado STD: +0.00
+  Reward LLM: +0.00  |  acumulado LLM: +0.00
+
+[Paso 26] estado=12 -> acción=Down -> estado=12 (casilla 'F')
+  Reward STD: +0.00  |  acumulado STD: +0.00
+  Reward LLM: +0.00  |  acumulado LLM: +0.00
+
+[Paso 27] estado=12 -> acción=Up -> estado=8 (casilla 'F')
+  Reward STD: +0.00  |  acumulado STD: +0.00
+  Reward LLM: +0.00  |  acumulado LLM: +0.00
+
+[Paso 28] estado=8 -> acción=Down -> estado=12 (casilla 'F')
+  Reward STD: +0.00  |  acumulado STD: +0.00
+  Reward LLM: +0.00  |  acumulado LLM: +0.00
+
+[Paso 29] estado=12 -> acción=Up -> estado=8 (casilla 'F')
+  Reward STD: +0.00  |  acumulado STD: +0.00
+  Reward LLM: +0.00  |  acumulado LLM: +0.00
+
+[Paso 30] estado=8 -> acción=Left -> estado=8 (casilla 'F')
+  Reward STD: +0.00  |  acumulado STD: +0.00
+  Reward LLM: +0.00  |  acumulado LLM: +0.00
+
+>>> TRUNCADO (se acabaron los pasos) | acumulado STD=+0.00  |  acumulado LLM=+0.00
