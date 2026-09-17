@@ -1,0 +1,86 @@
+{
+  "archivo_base": "frozenlake_DeepQN_conLLM_Meta-Llama-3.1-8B-Instruct-Turbo_per_episode_random_size4_noslip_llmReplicaStd_20260917_161652_ep10000",
+  "timestamp": "20260917_161652",
+  "modelo": {
+    "tipo": "DeepQN",
+    "usa_llm": true,
+    "estrategia_recompensa_llm": "replica_std_binaria"
+  },
+  "entrenamiento": {
+    "num_epochs": 100,
+    "episodes_per_epoch": 100,
+    "total_episodes": 10000,
+    "tiempo_total_segundos": 6682.1178,
+    "tiempo_promedio_por_episodio_segundos": 0.668212,
+    "hiperparametros": {
+      "gamma": 0.99,
+      "lr": 0.001,
+      "buffer_capacity": 100000,
+      "batch_size": 64,
+      "start_learning_after": 2000,
+      "train_every": 1,
+      "target_update_every": 1000,
+      "eps_start": 1.0,
+      "eps_end": 0.05,
+      "eps_decay_steps": 50000,
+      "seed": 42,
+      "map_size": 4,
+      "is_slippery": false,
+      "map_mode": "per_episode_random",
+      "max_steps_per_ep": 50
+    }
+  },
+  "resultados_finales": {
+    "exitos": 7460,
+    "fracasos": 2478,
+    "win_rate_%": 74.6
+  },
+  "estructura_recompensas": {
+    "nivel": "episodio",
+    "componentes": {
+      "fuente": "LLM (DeepInfra) — replica el reward nativo de Gym, sin preferencias de ruta",
+      "rango_valores": "{0, 1}",
+      "regla": "1 si terminated=True y env_reward==1.0 (llegó a 'G'); 0 en cualquier otro caso (hoyo o truncado por límite de pasos)"
+    }
+  },
+  "red_neuronal": {
+    "arquitectura": "QNetCNN (Double DQN)",
+    "entrada": "tensor (4, H, W): canales [FROZEN, HOLE, GOAL, AGENT] one-hot sobre el mapa",
+    "capas_conv": "Conv2d(4->32, k3, pad1) + ReLU -> Conv2d(32->64, k3, pad1) + ReLU",
+    "adaptacion_tamano": "si el mapa es 4x4, se interpola a 8x8 (nearest) antes de la head, para reusar la misma head en mapas 4x4 y 8x8",
+    "head": "Flatten -> Linear(64*8*8 -> 256) + ReLU -> Linear(256 -> n_actions=4)",
+    "funcion_de_perdida": "MSELoss",
+    "optimizador": "Adam",
+    "variante": "Double DQN (acción elegida por policy, evaluada por target)",
+    "red_objetivo": "se sincroniza con policy cada 1000 steps"
+  },
+  "llm": {
+    "proveedor": "DeepInfra",
+    "modelo_llm": "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo",
+    "temperature": 0.0,
+    "estrategia_recompensa": "replica_std_binaria",
+    "api_key_source": "variable de entorno DEEPINFRA_API_KEY (o DEEPINFRA) o --deepinfra-api-key",
+    "cuando_se_invoca": "Una vez por episodio, solo cuando termina (terminated o truncated). En pasos intermedios el reward es 0.0 sin consultar al LLM.",
+    "max_retries_por_llamada": 3,
+    "parseo_respuesta": "Se extrae el último número de la respuesta con regex y se recorta a [0, 1]; si no hay número parseable, se reintenta.",
+    "valor_fallback_si_falla": 0.0,
+    "prompt_template": "Eres una función de recompensas para un episodio de FrozenLake.\n\nEl episodio terminó: {terminated}\nLlegó a la meta ('G'): {llego_meta}\n\nSi llegó a la meta, responde 1.\nSi no llegó a la meta, responde 0.\n\nResponde solo con el número.\n",
+    "estadisticas_de_llamadas": {
+      "invocaciones_totales": 9938,
+      "llamadas_api_totales": 9938,
+      "fallbacks_totales": 0,
+      "fallback_rate_%": 0.0,
+      "errores_api_totales": 0,
+      "tiempo_respuesta_promedio_segundos": 0.6134,
+      "tiempo_respuesta_total_segundos": 6095.84
+    }
+  },
+  "entorno": {
+    "python_version": "3.13.15",
+    "numpy_version": "2.1.3",
+    "pandas_version": "2.2.3",
+    "torch_version": "2.11.0+cu128",
+    "openai_version": "2.54.0",
+    "gymnasium_version": "1.3.0"
+  }
+}
