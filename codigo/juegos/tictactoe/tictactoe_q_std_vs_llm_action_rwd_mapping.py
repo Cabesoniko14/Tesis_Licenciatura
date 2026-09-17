@@ -121,47 +121,21 @@ class QLearningAgent:
         new_value = old_value + self.alpha * (reward + self.gamma * max_q_next - old_value)
         self.q_table[(tuple(state), action)] = new_value
 
-_INDICE_MAP = (" 0 | 1 | 2 \n"
-               "---+---+---\n"
-               " 3 | 4 | 5 \n"
-               "---+---+---\n"
-               " 6 | 7 | 8 ")
+_PROMPT_TEMPLATE = """Eres una función de recompensas para un agente aprendiendo Tic Tac Toe.
 
-_PROMPT_TEMPLATE = """Eres un evaluador de acciones de Tic Tac Toe. Las casillas se numeran así:
-""" + _INDICE_MAP + """
-
-Las líneas ganadoras (3 en raya) son exactamente estas 8:
-Filas: (0,1,2) (3,4,5) (6,7,8)
-Columnas: (0,3,6) (1,4,7) (2,5,8)
-Diagonales: (0,4,8) (2,4,6)
-
-AGENTE = '{agent_letter}'
-MÁQUINA (oponente) = '{opponent_letter}'
-
-Tablero ANTES de que el agente jugara (así quedó tras el último movimiento de la máquina):
+Estado actual:
 {grid_antes}
 
-El AGENTE colocó '{agent_letter}' en la casilla {action} (estaba vacía).
+El agente ('{agent_letter}') jugó en la casilla {action}.
 
-Tablero DESPUÉS de esa jugada del agente, y de la respuesta de la máquina si el juego continuó:
+Estado siguiente:
 {grid_despues}
 
-Asigna UN SOLO NÚMERO siguiendo este orden exacto:
+Si el agente ganó la partida, responde 1.
+Si el agente perdió la partida, responde -1.
+Si no pasó ninguna de las dos, responde 0.
 
-Paso 1: Revisa las 8 líneas de arriba en el tablero "DESPUÉS". ¿Alguna tiene las 3 casillas con '{agent_letter}'?
-  Si SÍ -> responde 1. (No sigas revisando, ya terminaste.)
-
-Paso 2: Si no aplicó el paso 1, revisa si alguna de las 8 líneas tiene las 3 casillas con '{opponent_letter}' en el tablero "DESPUÉS".
-  Si SÍ -> responde -1.
-
-Paso 3: Si no aplicó ni el paso 1 ni el 2, revisa el tablero "ANTES". Busca una línea con exactamente 2 casillas '{opponent_letter}' y la tercera casilla vacía.
-  Si esa casilla vacía es la número {action} (la que el agente acaba de ocupar) -> responde 0.3.
-
-Paso 4: Si no aplicó ninguno de los pasos anteriores -> responde 0.
-
-Responde ÚNICAMENTE con el número (1, -1, 0.3 o 0). Sin texto, sin explicación, sin los pasos.
-
-Número:
+Responde solo con el número.
 """
 
 def _parse_reward_value(s: str):
