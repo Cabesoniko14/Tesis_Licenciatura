@@ -1,0 +1,343 @@
+ESTRATEGIA STD
+WIN_REWARD=+1.00  DRAW_REWARD=+0.00  BLOCK_BONUS=+0.30  LOSS_REWARD=-1.00
+Bloqueo = el agente ocupa una casilla que el oponente podía usar para ganar en su siguiente turno (calculado con winning_moves_for sobre el tablero previo).
+
+PROMPT DEL LLM
+Evalúas UNA jugada de Tic Tac Toe para Q-Learning. Responde solo con: 1, 0.3, 0 o -1. Sin texto extra.
+
+1    = la jugada gana la partida de inmediato
+0.3  = la jugada bloquea una victoria inmediata del oponente
+0    = cualquier otra jugada
+-1   = el oponente tenía una victoria inmediata disponible y la jugada NO la bloqueó
+
+Antes: {prev_state}
+Agente: {agent_letter}
+Acción: {action}
+Después: {next_state}
+
+Número:
+
+
+--- Juego 1 | STD ---
+Agente (X) -> casilla 0  |  reward=+0.00  acumulado=+0.00
+ X | 1 | 2 
+---+---+---
+ 3 | 4 | O 
+---+---+---
+ 6 | 7 | 8 
+
+Agente (X) -> casilla 2  |  reward=+0.00  acumulado=+0.00
+ X | 1 | X 
+---+---+---
+ 3 | 4 | O 
+---+---+---
+ 6 | 7 | O 
+
+Agente (X) -> casilla 7  |  reward=+0.00  acumulado=+0.00
+ X | O | X 
+---+---+---
+ 3 | 4 | O 
+---+---+---
+ 6 | X | O 
+
+Agente (X) -> casilla 3  |  reward=+0.00  acumulado=+0.00
+ X | O | X 
+---+---+---
+ X | O | O 
+---+---+---
+ 6 | X | O 
+
+Agente (X) -> casilla 6  |  reward=+1.00  acumulado=+1.00
+ X | O | X 
+---+---+---
+ X | O | O 
+---+---+---
+ X | X | O 
+
+>>> VICTORIA | reward total=+1.00
+
+--- Juego 1 | LLM ---
+Agente (X) -> casilla 0  |  LLM respondió '0'  |  reward=+0.00  acumulado=+0.00
+ X | 1 | 2 
+---+---+---
+ 3 | 4 | O 
+---+---+---
+ 6 | 7 | 8 
+
+Agente (X) -> casilla 2  |  LLM respondió '0'  |  reward=+0.00  acumulado=+0.00
+ X | 1 | X 
+---+---+---
+ 3 | 4 | O 
+---+---+---
+ 6 | 7 | O 
+
+Agente (X) -> casilla 7  |  LLM respondió '1'  |  reward=+1.00  acumulado=+1.00
+ X | O | X 
+---+---+---
+ 3 | 4 | O 
+---+---+---
+ 6 | X | O 
+
+Agente (X) -> casilla 3  |  LLM respondió '1'  |  reward=+1.00  acumulado=+2.00
+ X | O | X 
+---+---+---
+ X | O | O 
+---+---+---
+ 6 | X | O 
+
+Agente (X) -> casilla 6  |  LLM respondió '0.3'  |  reward=+0.30  acumulado=+2.30
+ X | O | X 
+---+---+---
+ X | O | O 
+---+---+---
+ X | X | O 
+
+>>> VICTORIA | reward total=+2.30
+
+--- Juego 2 | STD ---
+Agente (O) -> casilla 2  |  reward=+0.00  acumulado=+0.00
+ 0 | 1 | O 
+---+---+---
+ 3 | 4 | 5 
+---+---+---
+ 6 | 7 | X 
+
+Agente (O) -> casilla 6  |  reward=+0.00  acumulado=+0.00
+ X | 1 | O 
+---+---+---
+ 3 | 4 | 5 
+---+---+---
+ O | 7 | X 
+
+Agente (O) -> casilla 5  |  reward=+0.00  acumulado=+0.00
+ X | X | O 
+---+---+---
+ 3 | 4 | O 
+---+---+---
+ O | 7 | X 
+
+Agente (O) -> casilla 7  |  reward=-1.00  acumulado=-1.00
+ X | X | O 
+---+---+---
+ 3 | X | O 
+---+---+---
+ O | O | X 
+
+>>> DERROTA | reward total=-1.00
+
+--- Juego 2 | LLM ---
+Agente (O) -> casilla 2  |  LLM respondió '0'  |  reward=+0.00  acumulado=+0.00
+ 0 | 1 | O 
+---+---+---
+ 3 | 4 | 5 
+---+---+---
+ 6 | 7 | X 
+
+Agente (O) -> casilla 6  |  LLM respondió '0'  |  reward=+0.00  acumulado=+0.00
+ X | 1 | O 
+---+---+---
+ 3 | 4 | 5 
+---+---+---
+ O | 7 | X 
+
+Agente (O) -> casilla 5  |  LLM respondió '0.3'  |  reward=+0.30  acumulado=+0.30
+ X | X | O 
+---+---+---
+ 3 | 4 | O 
+---+---+---
+ O | 7 | X 
+
+Agente (O) -> casilla 7  |  LLM respondió '-1'  |  reward=-1.00  acumulado=-0.70
+ X | X | O 
+---+---+---
+ 3 | X | O 
+---+---+---
+ O | O | X 
+
+>>> DERROTA | reward total=-0.70
+
+--- Juego 3 | STD ---
+Agente (X) -> casilla 8  |  reward=+0.00  acumulado=+0.00
+ 0 | O | 2 
+---+---+---
+ 3 | 4 | 5 
+---+---+---
+ 6 | 7 | X 
+
+Agente (X) -> casilla 2  |  reward=+0.00  acumulado=+0.00
+ 0 | O | X 
+---+---+---
+ 3 | O | 5 
+---+---+---
+ 6 | 7 | X 
+
+Agente (X) -> casilla 0  |  reward=+0.00  acumulado=+0.00
+ X | O | X 
+---+---+---
+ O | O | 5 
+---+---+---
+ 6 | 7 | X 
+
+Agente (X) -> casilla 7  |  reward=+0.30  acumulado=+0.30
+ X | O | X 
+---+---+---
+ O | O | 5 
+---+---+---
+ O | X | X 
+
+Agente (X) -> casilla 5  |  reward=+1.00  acumulado=+1.30
+ X | O | X 
+---+---+---
+ O | O | X 
+---+---+---
+ O | X | X 
+
+>>> VICTORIA | reward total=+1.30
+
+--- Juego 3 | LLM ---
+Agente (X) -> casilla 8  |  LLM respondió '0'  |  reward=+0.00  acumulado=+0.00
+ 0 | O | 2 
+---+---+---
+ 3 | 4 | 5 
+---+---+---
+ 6 | 7 | X 
+
+Agente (X) -> casilla 2  |  LLM respondió '0'  |  reward=+0.00  acumulado=+0.00
+ 0 | O | X 
+---+---+---
+ 3 | O | 5 
+---+---+---
+ 6 | 7 | X 
+
+Agente (X) -> casilla 0  |  LLM respondió '0.3'  |  reward=+0.30  acumulado=+0.30
+ X | O | X 
+---+---+---
+ O | O | 5 
+---+---+---
+ 6 | 7 | X 
+
+Agente (X) -> casilla 7  |  LLM respondió '0'  |  reward=+0.00  acumulado=+0.30
+ X | O | X 
+---+---+---
+ O | O | 5 
+---+---+---
+ O | X | X 
+
+Agente (X) -> casilla 5  |  LLM respondió '0.3'  |  reward=+0.30  acumulado=+0.60
+ X | O | X 
+---+---+---
+ O | O | X 
+---+---+---
+ O | X | X 
+
+>>> VICTORIA | reward total=+0.60
+
+--- Juego 4 | STD ---
+Agente (O) -> casilla 7  |  reward=+0.00  acumulado=+0.00
+ 0 | 1 | 2 
+---+---+---
+ 3 | X | 5 
+---+---+---
+ 6 | O | 8 
+
+Agente (O) -> casilla 2  |  reward=+0.00  acumulado=+0.00
+ X | 1 | O 
+---+---+---
+ 3 | X | 5 
+---+---+---
+ 6 | O | 8 
+
+Agente (O) -> casilla 1  |  reward=+0.00  acumulado=+0.00
+ X | O | O 
+---+---+---
+ X | X | 5 
+---+---+---
+ 6 | O | 8 
+
+Agente (O) -> casilla 5  |  reward=-1.00  acumulado=-1.00
+ X | O | O 
+---+---+---
+ X | X | O 
+---+---+---
+ 6 | O | X 
+
+>>> DERROTA | reward total=-1.00
+
+--- Juego 4 | LLM ---
+Agente (O) -> casilla 7  |  LLM respondió '0'  |  reward=+0.00  acumulado=+0.00
+ 0 | 1 | 2 
+---+---+---
+ 3 | X | 5 
+---+---+---
+ 6 | O | 8 
+
+Agente (O) -> casilla 2  |  LLM respondió '0'  |  reward=+0.00  acumulado=+0.00
+ X | 1 | O 
+---+---+---
+ 3 | X | 5 
+---+---+---
+ 6 | O | 8 
+
+Agente (O) -> casilla 1  |  LLM respondió '0.3'  |  reward=+0.30  acumulado=+0.30
+ X | O | O 
+---+---+---
+ X | X | 5 
+---+---+---
+ 6 | O | 8 
+
+Agente (O) -> casilla 5  |  LLM respondió '0.3'  |  reward=-1.00  acumulado=-0.70
+ X | O | O 
+---+---+---
+ X | X | O 
+---+---+---
+ 6 | O | X 
+
+>>> DERROTA | reward total=-0.70
+
+--- Juego 5 | STD ---
+Agente (X) -> casilla 6  |  reward=+0.00  acumulado=+0.00
+ O | 1 | 2 
+---+---+---
+ 3 | 4 | 5 
+---+---+---
+ X | 7 | 8 
+
+Agente (X) -> casilla 8  |  reward=+0.00  acumulado=+0.00
+ O | 1 | O 
+---+---+---
+ 3 | 4 | 5 
+---+---+---
+ X | 7 | X 
+
+Agente (X) -> casilla 3  |  reward=-1.00  acumulado=-1.00
+ O | O | O 
+---+---+---
+ X | 4 | 5 
+---+---+---
+ X | 7 | X 
+
+>>> DERROTA | reward total=-1.00
+
+--- Juego 5 | LLM ---
+Agente (X) -> casilla 6  |  LLM respondió '0'  |  reward=+0.00  acumulado=+0.00
+ O | 1 | 2 
+---+---+---
+ 3 | 4 | 5 
+---+---+---
+ X | 7 | 8 
+
+Agente (X) -> casilla 8  |  LLM respondió '0'  |  reward=+0.00  acumulado=+0.00
+ O | 1 | O 
+---+---+---
+ 3 | 4 | 5 
+---+---+---
+ X | 7 | X 
+
+Agente (X) -> casilla 3  |  LLM respondió '0.3'  |  reward=-1.00  acumulado=-1.00
+ O | O | O 
+---+---+---
+ X | 4 | 5 
+---+---+---
+ X | 7 | X 
+
+>>> DERROTA | reward total=-1.00
