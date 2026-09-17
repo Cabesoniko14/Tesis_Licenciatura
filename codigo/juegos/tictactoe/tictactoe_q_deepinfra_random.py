@@ -30,6 +30,7 @@ LLM_BASE_URL = "https://api.deepinfra.com/v1/openai"
 LLM_MODEL_NAME = "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo"  # no-reasoning real; se probó DeepSeek V4.1 Flash y GLM/Qwen — todos más lentos por el razonamiento
 LLM_TEMPERATURE = 0.0
 LLM_MAX_RETRIES = 3
+LLM_LOSS_REWARD = -1.0        # aplicado en código (no por el LLM) cuando la jugada del agente permite la derrota
 
 # --------------------  1. Clase del juego --------------------------
 class TicTacToe:
@@ -318,9 +319,30 @@ def train_qlearning_tictactoe_llm(client, num_epochs=100, episodes_per_epoch=100
                 env.make_move(action, agent_letter)
                 next_state = env.board.copy()
 
+                # El LLM evalúa SOLO la jugada del agente (no ve al oponente, por diseño del prompt)
                 reward, fue_fallback = llm_reward(client, state, action, next_state, agent_letter, llm_stats)
-                reward_total += reward
 
+                if env.current_winner == agent_letter or env.is_draw():
+                    done = True
+                else:
+                    done = False
+                    # FIX (mismo que en el script std): el oponente responde AQUÍ, antes de armar
+                    # next_state/next_actions y de actualizar Q. Así el update usa el estado que
+                    # REALMENTE sigue en la partida (no uno a medio turno), y podemos aplicar
+                    # LLM_LOSS_REWARD si la jugada del agente terminó permitiendo la derrota —
+                    # algo que el LLM no puede detectar porque nunca ve la respuesta del oponente.
+                    opp_actions = env.available_moves()
+                    if opp_actions:
+                        opp_action = random.choice(opp_actions)
+                        env.make_move(opp_action, opponent_letter)
+                        next_state = env.board.copy()
+                        if env.current_winner == opponent_letter:
+                            reward = LLM_LOSS_REWARD
+                            done = True
+                        elif env.is_draw():
+                            done = True
+
+                reward_total += reward
                 next_actions = env.available_moves()
                 agent.update(state, action, reward, next_state, next_actions)
 
@@ -328,12 +350,6 @@ def train_qlearning_tictactoe_llm(client, num_epochs=100, episodes_per_epoch=100
                     epoch+1, ep+1, agent_letter, action, next_state.copy(), reward, reward_total, fue_fallback
                 ]
 
-                if not env.current_winner and not env.is_draw():
-                    opp_actions = env.available_moves()
-                    if opp_actions:
-                        env.make_move(random.choice(opp_actions), opponent_letter)
-
-                done = env.current_winner is not None or env.is_draw()
                 state = env.board.copy()
 
             if env.current_winner == agent_letter:
@@ -395,12 +411,22 @@ def train_qlearning_tictactoe_llm(client, num_epochs=100, episodes_per_epoch=100
     estructura_recompensas = {
         "nivel": REWARD_LEVEL,
         "componentes": {
-            "fuente": "LLM (DeepInfra) — ver bloque 'llm' de este mismo resumen para el prompt exacto",
+            "fuente": (
+                "Combinada: 1/0.3/0 vienen del LLM (DeepInfra); el -1 por derrota lo aplica el "
+                "código, no el LLM, tras la respuesta del oponente (ver LLM_LOSS_REWARD)"
+            ),
             "rango_valores": "{1, 0.3, 0, -1} — replica WIN_REWARD/BLOCK_BONUS/DRAW/LOSS del script sin LLM",
             "objetivo_declarado_en_el_prompt": (
                 "1 si la jugada gana de inmediato, 0.3 si bloquea una victoria inmediata del "
                 "oponente, 0 en cualquier otra jugada neutral, -1 si había una victoria inmediata "
                 "del oponente disponible y la jugada no la bloqueó."
+            ),
+            "correccion_derrota": (
+                "FIX aplicado (igual que en el script std): el oponente responde antes de armar "
+                "next_state/next_actions y de actualizar Q. Si su respuesta gana la partida, el "
+                "reward de la última jugada del agente se sobreescribe a LLM_LOSS_REWARD=-1.0 en "
+                "código — el LLM nunca ve esto porque su prompt solo recibe el tablero antes/después "
+                "de la jugada del agente, no la respuesta del oponente."
             ),
             "valor_si_el_llm_falla_o_no_responde_un_numero": 0.0,
         },
@@ -428,13 +454,16 @@ def train_qlearning_tictactoe_llm(client, num_epochs=100, episodes_per_epoch=100
         "estrategia_recompensa": LLM_REWARD_STRATEGY,
         "estrategia_descripcion": (
             "El prompt le pide al LLM que reproduzca, con los mismos 4 números, la función de "
-            "recompensa del script sin LLM (WIN_REWARD, BLOCK_BONUS, DRAW_REWARD, y -1 como proxy "
-            "de LOSS_REWARD)."
+            "recompensa del script sin LLM (WIN_REWARD, BLOCK_BONUS, DRAW_REWARD). El LOSS_REWARD "
+            "es la excepción: lo aplica el código (LLM_LOSS_REWARD), no el LLM — ver "
+            "'correccion_derrota' en estructura_recompensas."
         ),
         "api_key_source": "variable de entorno DEEPINFRA_API_KEY (o DEEPINFRA) o --deepinfra-api-key",
         "cuando_se_invoca": (
             "Por acción: una llamada al LLM por cada movimiento del agente, justo después de "
-            "jugarlo y antes de actualizar la Q-table. No ve la respuesta del oponente."
+            "jugarlo. El agente.update() ocurre DESPUÉS de que el oponente responde (mismo orden "
+            "que el script std), para que next_state/next_actions reflejen la transición completa "
+            "del entorno y no un estado a medio turno."
         ),
         "max_retries_por_accion": LLM_MAX_RETRIES,
         "nota_seleccion_modelo": (
