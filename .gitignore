@@ -1,0 +1,13 @@
+# Python
+__pycache__/
+*.pyc
+
+# Entornos 
+venv/
+.venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Credenciales
+.env
