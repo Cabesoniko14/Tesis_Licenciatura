@@ -1,0 +1,27 @@
+{
+  "id": "A2",
+  "descripcion": "DQN, mapa fijo, LLM réplica de la recompensa de Gym",
+  "episodios": 10000,
+  "victorias": 5763,
+  "hoyos": 4189,
+  "truncados": 48,
+  "winrate_entrenamiento_%": 57.63,
+  "winrate_greedy_final_%": 100.0,
+  "tiempo_total_segundos": 7086.53,
+  "llm": {
+    "invocaciones_totales": 10000,
+    "llamadas_api_totales": 10000,
+    "fallbacks_totales": 0,
+    "errores_api_totales": 0,
+    "tiempo_respuesta_total_segundos": 3878.733097209043,
+    "tokens_entrada_totales": 3761808,
+    "tokens_salida_totales": 26743
+  },
+  "python": "3.13.16",
+  "torch": "2.14.1+cu130",
+  "acuerdo_llm": {
+    "derrotas_premiadas": 2,
+    "victorias_castigadas": 3,
+    "tiempo_llm_%": 54.7
+  }
+}

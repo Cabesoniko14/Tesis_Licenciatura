@@ -1,0 +1,59 @@
+EXPERIMENTO: A2 | DQN, mapa fijo, LLM réplica de la recompensa de Gym
+Resultado del episodio: HOYO | recompensa de Gym: 0.0
+
+===== PROMPT =====
+Eres una función de recompensas para un episodio de FrozenLake.
+
+REGLAS DEL ENTORNO:
+- Mapa de 4x4. Celdas: 'S' inicio, 'F' hielo seguro, 'H' hoyo, 'G' meta.
+- El episodio termina si el agente llega a 'G' o cae en un 'H'. Si se acaban los pasos, se trunca.
+
+MAPA (fila por fila, de arriba hacia abajo):
+SFFF
+FHFH
+FFFH
+HFFG
+
+CAMINO DEL AGENTE:
+Inicio: fila 0, columna 0 ('S')
+Paso 1: Left -> fila 0, columna 0 ('S')
+Paso 2: Up -> fila 0, columna 0 ('S')
+Paso 3: Right -> fila 0, columna 1 ('F')
+Paso 4: Right -> fila 0, columna 2 ('F')
+Paso 5: Up -> fila 0, columna 2 ('F')
+Paso 6: Up -> fila 0, columna 2 ('F')
+Paso 7: Down -> fila 1, columna 2 ('F')
+Paso 8: Up -> fila 0, columna 2 ('F')
+Paso 9: Down -> fila 1, columna 2 ('F')
+Paso 10: Up -> fila 0, columna 2 ('F')
+Paso 11: Up -> fila 0, columna 2 ('F')
+Paso 12: Left -> fila 0, columna 1 ('F')
+Paso 13: Left -> fila 0, columna 0 ('S')
+Paso 14: Right -> fila 0, columna 1 ('F')
+Paso 15: Up -> fila 0, columna 1 ('F')
+Paso 16: Right -> fila 0, columna 2 ('F')
+Paso 17: Right -> fila 0, columna 3 ('F')
+Paso 18: Up -> fila 0, columna 3 ('F')
+Paso 19: Up -> fila 0, columna 3 ('F')
+Paso 20: Left -> fila 0, columna 2 ('F')
+Paso 21: Left -> fila 0, columna 1 ('F')
+Paso 22: Down -> fila 1, columna 1 ('H')
+
+FIN DEL EPISODIO:
+- Terminó: sí. Se truncó por límite de pasos: no.
+- Casilla final: 'H' (hoyo)
+
+DIRECTIVA:
+Responde SI si el agente llegó a la meta 'G'. Responde NO en cualquier otro caso (cayó en un hoyo o se acabaron los pasos).
+
+Responde solo con una palabra: SI o NO.
+
+===== RESPUESTA DEL LLM =====
+'NO'
+
+===== REGLA =====
+Primera palabra de la respuesta que sea una categoría válida, convertida a recompensa: {'NO': 0.0, 'SI': 1.0}; 3 intentos; si no hay categoría válida, r = 0.0
+
+===== RECOMPENSA =====
+categoría = NO -> r = 0.0 (fallback=False) asignada a la última transición; las 21 anteriores valen 0
+tokens entrada=619 | salida=2 | latencia=1.75 s
