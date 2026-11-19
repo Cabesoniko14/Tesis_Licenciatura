@@ -1,7 +1,6 @@
 # ======================  Frozen Lake: correr un experimento desde su config  ======================
 # Uso:
-#   python correr.py --config ../configs/B3.json [--salida DIR] [--humo] [--traza]
-#   python correr.py --reanudar ../runs/B3_20261125_153000
+
 import os
 import sys
 import json
@@ -44,7 +43,7 @@ def crear_agente(cfg):
         return QLearningAgent(n, 4, alpha=q["alpha"], gamma=q["gamma"], epsilon=q["epsilon"])
     return DQNAgent(cfg["dqn"], n_actions=4, device="cpu")
 
-# --------------------  2. Un episodio --------------------
+# --------------------  2. Episodio --------------------
 def jugar_episodio(cfg, agente, env, desc, entrenar=True, cliente=None, llm_stats=None):
     """Juega un episodio. Si entrenar=True actualiza el agente y, si toca, llama al LLM al final."""
     es_dqn = cfg["agente"] == "dqn"
@@ -260,7 +259,7 @@ def correr(cfg, run_dir, reanudar=False):
         os.remove(ck)
     print(f"\n=== {cfg['id']} COMPLETADO | {run_dir} ===")
 
-# --------------------  7. Traza de un episodio (ejemplo para SN-1) --------------------
+# --------------------  7. Traza de un episodio  --------------------
 def traza(cfg, run_dir):
     if cfg["recompensa"]["fuente"] != "llm":
         print(f"[TRAZA] {cfg['id']} no usa LLM: no hay prompt que mostrar")
