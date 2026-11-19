@@ -1,6 +1,7 @@
 # ======================  Frozen Lake: correr un experimento desde su config  ======================
 # Uso:
-
+#   python correr.py --config ../configs/B3.json [--salida DIR] [--humo] [--traza]
+#   python correr.py --reanudar ../runs/B3_20261125_153000
 import os
 import sys
 import json
@@ -19,7 +20,7 @@ import matplotlib.pyplot as plt
 
 from common import (set_global_seeds, semillas_de_mapas, make_env, desc_a_filas,
                     encode_obs_from_desc, metricas_ruta, ACCION_NOMBRE)
-from prompts import construir_prompt
+from prompts import construir_prompt, categorias
 from agentes import QLearningAgent, DQNAgent
 from llm_reward import crear_cliente, nuevas_stats, llm_reward
 
@@ -43,7 +44,7 @@ def crear_agente(cfg):
         return QLearningAgent(n, 4, alpha=q["alpha"], gamma=q["gamma"], epsilon=q["epsilon"])
     return DQNAgent(cfg["dqn"], n_actions=4, device="cpu")
 
-# --------------------  2. Episodio --------------------
+# --------------------  2. Un episodio --------------------
 def jugar_episodio(cfg, agente, env, desc, entrenar=True, cliente=None, llm_stats=None):
     """Juega un episodio. Si entrenar=True actualiza el agente y, si toca, llama al LLM al final."""
     es_dqn = cfg["agente"] == "dqn"
@@ -69,7 +70,8 @@ def jugar_episodio(cfg, agente, env, desc, entrenar=True, cliente=None, llm_stat
             r = 0.0
             if done:
                 prompt = construir_prompt(desc, estados, acciones, terminated, truncated, cfg["recompensa"]["directiva"])
-                r, registro_llm = llm_reward(cliente, prompt, cfg["llm"], llm_stats)
+                r, registro_llm = llm_reward(cliente, prompt, cfg["llm"], llm_stats,
+                                             categorias(cfg["recompensa"]["directiva"]))
 
         obs2 = encode_obs_from_desc(desc, s2) if es_dqn else None
         if entrenar:
@@ -194,6 +196,7 @@ def correr(cfg, run_dir, reanudar=False):
                 tablas["llm_llamadas"].append({"epoca": epoca, "episodio": ep, "r_env": res["r_env"], **reg})
             fila = {"epoca": epoca, "episodio": ep, "seed_mapa": seed_mapa, "mapa": "|".join(desc_a_filas(desc)),
                     "resultado": res["resultado"], "r_env": res["r_env"], "r_llm": reg["r_llm"] if reg else None,
+                    "categoria_llm": reg["categoria"] if reg else None,
                     "tiempo_s": dt, **metricas_ruta(desc, res["estados"]),
                     "acciones": "".join(ACCION_NOMBRE[a][0] for a in res["acciones"])}
             filas_ep.append(fila)
@@ -259,7 +262,7 @@ def correr(cfg, run_dir, reanudar=False):
         os.remove(ck)
     print(f"\n=== {cfg['id']} COMPLETADO | {run_dir} ===")
 
-# --------------------  7. Traza de un episodio  --------------------
+# --------------------  7. Traza de un episodio (ejemplo para SN-1) --------------------
 def traza(cfg, run_dir):
     if cfg["recompensa"]["fuente"] != "llm":
         print(f"[TRAZA] {cfg['id']} no usa LLM: no hay prompt que mostrar")
@@ -274,9 +277,10 @@ def traza(cfg, run_dir):
              f"Resultado del episodio: {res['resultado']} | recompensa de Gym: {res['r_env']}\n\n"
              f"===== PROMPT =====\n{res['prompt']}\n"
              f"===== RESPUESTA DEL LLM =====\n{reg['respuesta']!r}\n\n"
-             f"===== REGLA =====\nPrimer número de la respuesta, recortado a [0, 1]; "
-             f"{cfg['llm']['reintentos']} intentos; si no hay número, r = {cfg['llm']['fallback']}\n\n"
-             f"===== RECOMPENSA =====\nr = {reg['r_llm']} (fallback={reg['fallback']}) asignada a la última transición; "
+             f"===== REGLA =====\nPrimera palabra de la respuesta que sea una categoría válida, convertida a recompensa: "
+             f"{categorias(cfg['recompensa']['directiva'])}; {cfg['llm']['reintentos']} intentos; "
+             f"si no hay categoría válida, r = {cfg['llm']['fallback']}\n\n"
+             f"===== RECOMPENSA =====\ncategoría = {reg['categoria']} -> r = {reg['r_llm']} (fallback={reg['fallback']}) asignada a la última transición; "
              f"las {len(res['acciones']) - 1} anteriores valen 0\n"
              f"tokens entrada={reg['tokens_entrada']} | salida={reg['tokens_salida']} | latencia={reg['latencia_s']:.2f} s\n")
     print(texto)
