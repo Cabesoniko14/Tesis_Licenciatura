@@ -2,6 +2,7 @@
 import os
 import re
 import time
+import unicodedata
 
 from openai import OpenAI
 
@@ -21,18 +22,24 @@ def nuevas_stats():
     }
 
 # --------------------  2. Regla de conversión --------------------
-def _parse_reward_value(s):
-    """Primer número de la respuesta, recortado a [0, 1]. None si no hay número."""
-    m = re.search(r"[-+]?\d*\.?\d+", s.strip())
-    if not m:
-        return None
-    return max(0.0, min(1.0, float(m.group(0))))
+def _palabras(s):
+    """'Sí.' -> ['SI']; quita acentos y signos, pasa a mayúsculas."""
+    s = unicodedata.normalize("NFD", s.upper())
+    s = "".join(c for c in s if unicodedata.category(c) != "Mn")
+    return re.findall(r"[A-Z]+", s)
+
+def _parse_categoria(s, categorias):
+    """Primera palabra de la respuesta que sea una categoría válida. None si no hay ninguna."""
+    for palabra in _palabras(s):
+        if palabra in categorias:
+            return palabra, categorias[palabra]
+    return None, None
 
 # --------------------  3. Llamada --------------------
-def llm_reward(client, prompt, cfg_llm, stats):
-    """Regresa (r, registro). Si no hay número tras los reintentos, r = fallback."""
+def llm_reward(client, prompt, cfg_llm, stats, categorias):
+    """Regresa (r, registro). Si no hay categoría válida tras los reintentos, r = fallback."""
     stats["invocaciones_totales"] += 1
-    registro = {"respuesta": None, "r_llm": None, "fallback": False, "intentos": 0,
+    registro = {"respuesta": None, "categoria": None, "r_llm": None, "fallback": False, "intentos": 0,
                 "tokens_entrada": 0, "tokens_salida": 0, "latencia_s": 0.0}
 
     for _ in range(cfg_llm["reintentos"]):
@@ -58,10 +65,11 @@ def llm_reward(client, prompt, cfg_llm, stats):
 
             content = (resp.choices[0].message.content or "").strip()
             registro["respuesta"] = content
-            parsed = _parse_reward_value(content)
-            if parsed is not None:
-                registro["r_llm"] = parsed
-                return parsed, registro
+            categoria, valor = _parse_categoria(content, categorias)
+            if categoria is not None:
+                registro["categoria"] = categoria
+                registro["r_llm"] = valor
+                return valor, registro
         except Exception as e:
             stats["errores_api_totales"] += 1
             print(f"[LLM Error] {e}")
