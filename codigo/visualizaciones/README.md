@@ -1,6 +1,5 @@
 # Visualizaciones
 
-Aquí vivirá el estilo compartido de las gráficas (colores fijos por condición, tipografía, tamaños)
-que usan `frozen_lake/analisis/figuras.py` y `tictactoe/analisis/figuras.py`.
+Aquí se guardan tanto las gráficas de cada ejecución para TicTacToe y FrozenLake como las gráficas resultantes del análisis final con todos los experimentos por cada juego.
 
-El notebook anterior (`viz_generator.ipynb`) y sus imágenes están en `_deprecado/2026-11-17/`.
+Las versiones anteriores de las gráficas pueden ser encontradas en `_deprecado/2026-11-17/`.
