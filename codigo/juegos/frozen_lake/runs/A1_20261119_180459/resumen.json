@@ -1,0 +1,14 @@
+{
+  "id": "A1",
+  "descripcion": "DQN, mapa fijo, recompensa de Gym",
+  "episodios": 10000,
+  "victorias": 5919,
+  "hoyos": 4080,
+  "truncados": 1,
+  "winrate_entrenamiento_%": 59.19,
+  "winrate_greedy_final_%": 100.0,
+  "tiempo_total_segundos": 4796.18,
+  "llm": null,
+  "python": "3.13.18",
+  "torch": "2.14.1+cpu"
+}
