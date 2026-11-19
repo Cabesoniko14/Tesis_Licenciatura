@@ -1,0 +1,31 @@
+variante,mapa,clase,n,aciertos,aciertos_%,ic95_bajo_%,ic95_alto_%,sin_respuesta_valida,tokens_salida_prom,latencia_prom_s
+V1 numerado + número,aleatorio,HOYO,30,30,100.0,88.6,100.0,0,2.0,0.351
+V1 numerado + número,aleatorio,META,30,2,6.7,1.8,21.3,0,2.0,0.338
+V1 numerado + número,aleatorio,TRUNCADO,30,30,100.0,88.6,100.0,0,2.07,0.364
+V1 numerado + número,fijo,HOYO,30,29,96.7,83.3,99.4,1,2.43,0.322
+V1 numerado + número,fijo,META,30,3,10.0,3.5,25.6,0,2.0,0.383
+V1 numerado + número,fijo,TRUNCADO,30,30,100.0,88.6,100.0,0,2.0,0.316
+V2 sin numeración + número,aleatorio,HOYO,30,30,100.0,88.6,100.0,0,2.0,0.35
+V2 sin numeración + número,aleatorio,META,30,10,33.3,19.2,51.2,0,2.07,0.443
+V2 sin numeración + número,aleatorio,TRUNCADO,30,30,100.0,88.6,100.0,0,2.0,0.479
+V2 sin numeración + número,fijo,HOYO,30,30,100.0,88.6,100.0,0,2.0,0.335
+V2 sin numeración + número,fijo,META,30,12,40.0,24.6,57.7,0,2.1,0.307
+V2 sin numeración + número,fijo,TRUNCADO,30,30,100.0,88.6,100.0,0,2.0,0.346
+V3 numerado + categoría,aleatorio,HOYO,30,26,86.7,70.3,94.7,2,2.53,0.373
+V3 numerado + categoría,aleatorio,META,30,27,90.0,74.4,96.5,3,3.23,0.42
+V3 numerado + categoría,aleatorio,TRUNCADO,30,13,43.3,27.4,60.8,12,4.07,0.349
+V3 numerado + categoría,fijo,HOYO,30,22,73.3,55.6,85.8,7,3.67,0.423
+V3 numerado + categoría,fijo,META,30,28,93.3,78.7,98.2,2,3.1,0.36
+V3 numerado + categoría,fijo,TRUNCADO,30,10,33.3,19.2,51.2,14,4.2,0.367
+V4 sin numeración + categoría,aleatorio,HOYO,30,30,100.0,88.6,100.0,0,2.77,0.377
+V4 sin numeración + categoría,aleatorio,META,30,30,100.0,88.6,100.0,0,2.53,0.383
+V4 sin numeración + categoría,aleatorio,TRUNCADO,30,29,96.7,83.3,99.4,1,2.93,0.32
+V4 sin numeración + categoría,fijo,HOYO,30,30,100.0,88.6,100.0,0,2.73,0.378
+V4 sin numeración + categoría,fijo,META,30,29,96.7,83.3,99.4,1,2.8,0.361
+V4 sin numeración + categoría,fijo,TRUNCADO,30,28,93.3,78.7,98.2,2,3.03,0.408
+V5 sin numeración + número + dato de meta,aleatorio,HOYO,30,30,100.0,88.6,100.0,0,2.0,0.323
+V5 sin numeración + número + dato de meta,aleatorio,META,30,18,60.0,42.3,75.4,0,2.0,0.465
+V5 sin numeración + número + dato de meta,aleatorio,TRUNCADO,30,30,100.0,88.6,100.0,0,2.0,0.325
+V5 sin numeración + número + dato de meta,fijo,HOYO,30,30,100.0,88.6,100.0,0,2.0,0.332
+V5 sin numeración + número + dato de meta,fijo,META,30,23,76.7,59.1,88.2,0,2.0,0.308
+V5 sin numeración + número + dato de meta,fijo,TRUNCADO,30,30,100.0,88.6,100.0,0,2.0,0.401

@@ -1,0 +1,370 @@
+########## V1 numerado + número (mapa fijo, episodio que llega a la meta)
+Eres una función de recompensas para un episodio de FrozenLake.
+
+REGLAS DEL ENTORNO:
+- Mapa de 4x4. Celdas: 'S' inicio, 'F' hielo seguro, 'H' hoyo, 'G' meta.
+- Acciones: 0=Left, 1=Down, 2=Right, 3=Up.
+- El episodio termina si el agente llega a 'G' o cae en un 'H'. Si se acaban los pasos, se trunca.
+
+MAPA (por filas):
+00: SFFF
+01: FHFH
+02: FFFH
+03: HFFG
+
+ÍNDICES DE CADA CELDA (por filas):
+00 01 02 03
+04 05 06 07
+08 09 10 11
+12 13 14 15
+
+CAMINO DEL AGENTE:
+00: inicio -> idx=00 (r=0,c=0) 'S'
+01: Right -> idx=01 (r=0,c=1) 'F'
+02: Right -> idx=02 (r=0,c=2) 'F'
+03: Left -> idx=01 (r=0,c=1) 'F'
+04: Right -> idx=02 (r=0,c=2) 'F'
+05: Right -> idx=03 (r=0,c=3) 'F'
+06: Right -> idx=03 (r=0,c=3) 'F'
+07: Left -> idx=02 (r=0,c=2) 'F'
+08: Up -> idx=02 (r=0,c=2) 'F'
+09: Up -> idx=02 (r=0,c=2) 'F'
+10: Left -> idx=01 (r=0,c=1) 'F'
+11: Up -> idx=01 (r=0,c=1) 'F'
+12: Right -> idx=02 (r=0,c=2) 'F'
+13: Up -> idx=02 (r=0,c=2) 'F'
+14: Right -> idx=03 (r=0,c=3) 'F'
+15: Left -> idx=02 (r=0,c=2) 'F'
+16: Down -> idx=06 (r=1,c=2) 'F'
+17: Up -> idx=02 (r=0,c=2) 'F'
+18: Down -> idx=06 (r=1,c=2) 'F'
+19: Up -> idx=02 (r=0,c=2) 'F'
+20: Left -> idx=01 (r=0,c=1) 'F'
+21: Left -> idx=00 (r=0,c=0) 'S'
+22: Left -> idx=00 (r=0,c=0) 'S'
+23: Up -> idx=00 (r=0,c=0) 'S'
+24: Left -> idx=00 (r=0,c=0) 'S'
+25: Down -> idx=04 (r=1,c=0) 'F'
+26: Left -> idx=04 (r=1,c=0) 'F'
+27: Left -> idx=04 (r=1,c=0) 'F'
+28: Up -> idx=00 (r=0,c=0) 'S'
+29: Left -> idx=00 (r=0,c=0) 'S'
+30: Right -> idx=01 (r=0,c=1) 'F'
+31: Up -> idx=01 (r=0,c=1) 'F'
+32: Up -> idx=01 (r=0,c=1) 'F'
+33: Right -> idx=02 (r=0,c=2) 'F'
+34: Down -> idx=06 (r=1,c=2) 'F'
+35: Down -> idx=10 (r=2,c=2) 'F'
+36: Down -> idx=14 (r=3,c=2) 'F'
+37: Up -> idx=10 (r=2,c=2) 'F'
+38: Up -> idx=06 (r=1,c=2) 'F'
+39: Down -> idx=10 (r=2,c=2) 'F'
+40: Up -> idx=06 (r=1,c=2) 'F'
+41: Down -> idx=10 (r=2,c=2) 'F'
+42: Down -> idx=14 (r=3,c=2) 'F'
+43: Down -> idx=14 (r=3,c=2) 'F'
+44: Right -> idx=15 (r=3,c=3) 'G'
+
+FIN DEL EPISODIO:
+- terminated=True, truncated=False
+- casilla final: 'G'
+
+DIRECTIVA:
+Da 1 si el agente llegó a la meta 'G'. Da 0 en cualquier otro caso (cayó en un hoyo o se acabaron los pasos).
+
+Responde solo con un número entre 0 y 1, sin texto extra.
+
+>>> Respuesta del LLM: '0'
+
+########## V2 sin numeración + número (mapa fijo, episodio que llega a la meta)
+Eres una función de recompensas para un episodio de FrozenLake.
+
+REGLAS DEL ENTORNO:
+- Mapa de 4x4. Celdas: 'S' inicio, 'F' hielo seguro, 'H' hoyo, 'G' meta.
+- El episodio termina si el agente llega a 'G' o cae en un 'H'. Si se acaban los pasos, se trunca.
+
+MAPA (fila por fila, de arriba hacia abajo):
+SFFF
+FHFH
+FFFH
+HFFG
+
+CAMINO DEL AGENTE:
+Inicio: fila 0, columna 0 ('S')
+Paso 1: Right -> fila 0, columna 1 ('F')
+Paso 2: Right -> fila 0, columna 2 ('F')
+Paso 3: Left -> fila 0, columna 1 ('F')
+Paso 4: Right -> fila 0, columna 2 ('F')
+Paso 5: Right -> fila 0, columna 3 ('F')
+Paso 6: Right -> fila 0, columna 3 ('F')
+Paso 7: Left -> fila 0, columna 2 ('F')
+Paso 8: Up -> fila 0, columna 2 ('F')
+Paso 9: Up -> fila 0, columna 2 ('F')
+Paso 10: Left -> fila 0, columna 1 ('F')
+Paso 11: Up -> fila 0, columna 1 ('F')
+Paso 12: Right -> fila 0, columna 2 ('F')
+Paso 13: Up -> fila 0, columna 2 ('F')
+Paso 14: Right -> fila 0, columna 3 ('F')
+Paso 15: Left -> fila 0, columna 2 ('F')
+Paso 16: Down -> fila 1, columna 2 ('F')
+Paso 17: Up -> fila 0, columna 2 ('F')
+Paso 18: Down -> fila 1, columna 2 ('F')
+Paso 19: Up -> fila 0, columna 2 ('F')
+Paso 20: Left -> fila 0, columna 1 ('F')
+Paso 21: Left -> fila 0, columna 0 ('S')
+Paso 22: Left -> fila 0, columna 0 ('S')
+Paso 23: Up -> fila 0, columna 0 ('S')
+Paso 24: Left -> fila 0, columna 0 ('S')
+Paso 25: Down -> fila 1, columna 0 ('F')
+Paso 26: Left -> fila 1, columna 0 ('F')
+Paso 27: Left -> fila 1, columna 0 ('F')
+Paso 28: Up -> fila 0, columna 0 ('S')
+Paso 29: Left -> fila 0, columna 0 ('S')
+Paso 30: Right -> fila 0, columna 1 ('F')
+Paso 31: Up -> fila 0, columna 1 ('F')
+Paso 32: Up -> fila 0, columna 1 ('F')
+Paso 33: Right -> fila 0, columna 2 ('F')
+Paso 34: Down -> fila 1, columna 2 ('F')
+Paso 35: Down -> fila 2, columna 2 ('F')
+Paso 36: Down -> fila 3, columna 2 ('F')
+Paso 37: Up -> fila 2, columna 2 ('F')
+Paso 38: Up -> fila 1, columna 2 ('F')
+Paso 39: Down -> fila 2, columna 2 ('F')
+Paso 40: Up -> fila 1, columna 2 ('F')
+Paso 41: Down -> fila 2, columna 2 ('F')
+Paso 42: Down -> fila 3, columna 2 ('F')
+Paso 43: Down -> fila 3, columna 2 ('F')
+Paso 44: Right -> fila 3, columna 3 ('G')
+
+FIN DEL EPISODIO:
+- Terminó: sí. Se truncó por límite de pasos: no.
+- Casilla final: 'G' (meta)
+
+DIRECTIVA:
+Da 1 si el agente llegó a la meta 'G'. Da 0 en cualquier otro caso (cayó en un hoyo o se acabaron los pasos).
+
+Responde solo con un número entre 0 y 1, sin texto extra.
+
+>>> Respuesta del LLM: '0'
+
+########## V3 numerado + categoría (mapa fijo, episodio que llega a la meta)
+Eres una función de recompensas para un episodio de FrozenLake.
+
+REGLAS DEL ENTORNO:
+- Mapa de 4x4. Celdas: 'S' inicio, 'F' hielo seguro, 'H' hoyo, 'G' meta.
+- Acciones: 0=Left, 1=Down, 2=Right, 3=Up.
+- El episodio termina si el agente llega a 'G' o cae en un 'H'. Si se acaban los pasos, se trunca.
+
+MAPA (por filas):
+00: SFFF
+01: FHFH
+02: FFFH
+03: HFFG
+
+ÍNDICES DE CADA CELDA (por filas):
+00 01 02 03
+04 05 06 07
+08 09 10 11
+12 13 14 15
+
+CAMINO DEL AGENTE:
+00: inicio -> idx=00 (r=0,c=0) 'S'
+01: Right -> idx=01 (r=0,c=1) 'F'
+02: Right -> idx=02 (r=0,c=2) 'F'
+03: Left -> idx=01 (r=0,c=1) 'F'
+04: Right -> idx=02 (r=0,c=2) 'F'
+05: Right -> idx=03 (r=0,c=3) 'F'
+06: Right -> idx=03 (r=0,c=3) 'F'
+07: Left -> idx=02 (r=0,c=2) 'F'
+08: Up -> idx=02 (r=0,c=2) 'F'
+09: Up -> idx=02 (r=0,c=2) 'F'
+10: Left -> idx=01 (r=0,c=1) 'F'
+11: Up -> idx=01 (r=0,c=1) 'F'
+12: Right -> idx=02 (r=0,c=2) 'F'
+13: Up -> idx=02 (r=0,c=2) 'F'
+14: Right -> idx=03 (r=0,c=3) 'F'
+15: Left -> idx=02 (r=0,c=2) 'F'
+16: Down -> idx=06 (r=1,c=2) 'F'
+17: Up -> idx=02 (r=0,c=2) 'F'
+18: Down -> idx=06 (r=1,c=2) 'F'
+19: Up -> idx=02 (r=0,c=2) 'F'
+20: Left -> idx=01 (r=0,c=1) 'F'
+21: Left -> idx=00 (r=0,c=0) 'S'
+22: Left -> idx=00 (r=0,c=0) 'S'
+23: Up -> idx=00 (r=0,c=0) 'S'
+24: Left -> idx=00 (r=0,c=0) 'S'
+25: Down -> idx=04 (r=1,c=0) 'F'
+26: Left -> idx=04 (r=1,c=0) 'F'
+27: Left -> idx=04 (r=1,c=0) 'F'
+28: Up -> idx=00 (r=0,c=0) 'S'
+29: Left -> idx=00 (r=0,c=0) 'S'
+30: Right -> idx=01 (r=0,c=1) 'F'
+31: Up -> idx=01 (r=0,c=1) 'F'
+32: Up -> idx=01 (r=0,c=1) 'F'
+33: Right -> idx=02 (r=0,c=2) 'F'
+34: Down -> idx=06 (r=1,c=2) 'F'
+35: Down -> idx=10 (r=2,c=2) 'F'
+36: Down -> idx=14 (r=3,c=2) 'F'
+37: Up -> idx=10 (r=2,c=2) 'F'
+38: Up -> idx=06 (r=1,c=2) 'F'
+39: Down -> idx=10 (r=2,c=2) 'F'
+40: Up -> idx=06 (r=1,c=2) 'F'
+41: Down -> idx=10 (r=2,c=2) 'F'
+42: Down -> idx=14 (r=3,c=2) 'F'
+43: Down -> idx=14 (r=3,c=2) 'F'
+44: Right -> idx=15 (r=3,c=3) 'G'
+
+FIN DEL EPISODIO:
+- terminated=True, truncated=False
+- casilla final: 'G'
+
+DIRECTIVA:
+Responde SI si el agente llegó a la meta 'G'. Responde NO en cualquier otro caso (cayó en un hoyo o se acabaron los pasos).
+
+Responde solo con una palabra: SI o NO.
+
+>>> Respuesta del LLM: 'La respuesta es SI.'
+
+########## V4 sin numeración + categoría (mapa fijo, episodio que llega a la meta)
+Eres una función de recompensas para un episodio de FrozenLake.
+
+REGLAS DEL ENTORNO:
+- Mapa de 4x4. Celdas: 'S' inicio, 'F' hielo seguro, 'H' hoyo, 'G' meta.
+- El episodio termina si el agente llega a 'G' o cae en un 'H'. Si se acaban los pasos, se trunca.
+
+MAPA (fila por fila, de arriba hacia abajo):
+SFFF
+FHFH
+FFFH
+HFFG
+
+CAMINO DEL AGENTE:
+Inicio: fila 0, columna 0 ('S')
+Paso 1: Right -> fila 0, columna 1 ('F')
+Paso 2: Right -> fila 0, columna 2 ('F')
+Paso 3: Left -> fila 0, columna 1 ('F')
+Paso 4: Right -> fila 0, columna 2 ('F')
+Paso 5: Right -> fila 0, columna 3 ('F')
+Paso 6: Right -> fila 0, columna 3 ('F')
+Paso 7: Left -> fila 0, columna 2 ('F')
+Paso 8: Up -> fila 0, columna 2 ('F')
+Paso 9: Up -> fila 0, columna 2 ('F')
+Paso 10: Left -> fila 0, columna 1 ('F')
+Paso 11: Up -> fila 0, columna 1 ('F')
+Paso 12: Right -> fila 0, columna 2 ('F')
+Paso 13: Up -> fila 0, columna 2 ('F')
+Paso 14: Right -> fila 0, columna 3 ('F')
+Paso 15: Left -> fila 0, columna 2 ('F')
+Paso 16: Down -> fila 1, columna 2 ('F')
+Paso 17: Up -> fila 0, columna 2 ('F')
+Paso 18: Down -> fila 1, columna 2 ('F')
+Paso 19: Up -> fila 0, columna 2 ('F')
+Paso 20: Left -> fila 0, columna 1 ('F')
+Paso 21: Left -> fila 0, columna 0 ('S')
+Paso 22: Left -> fila 0, columna 0 ('S')
+Paso 23: Up -> fila 0, columna 0 ('S')
+Paso 24: Left -> fila 0, columna 0 ('S')
+Paso 25: Down -> fila 1, columna 0 ('F')
+Paso 26: Left -> fila 1, columna 0 ('F')
+Paso 27: Left -> fila 1, columna 0 ('F')
+Paso 28: Up -> fila 0, columna 0 ('S')
+Paso 29: Left -> fila 0, columna 0 ('S')
+Paso 30: Right -> fila 0, columna 1 ('F')
+Paso 31: Up -> fila 0, columna 1 ('F')
+Paso 32: Up -> fila 0, columna 1 ('F')
+Paso 33: Right -> fila 0, columna 2 ('F')
+Paso 34: Down -> fila 1, columna 2 ('F')
+Paso 35: Down -> fila 2, columna 2 ('F')
+Paso 36: Down -> fila 3, columna 2 ('F')
+Paso 37: Up -> fila 2, columna 2 ('F')
+Paso 38: Up -> fila 1, columna 2 ('F')
+Paso 39: Down -> fila 2, columna 2 ('F')
+Paso 40: Up -> fila 1, columna 2 ('F')
+Paso 41: Down -> fila 2, columna 2 ('F')
+Paso 42: Down -> fila 3, columna 2 ('F')
+Paso 43: Down -> fila 3, columna 2 ('F')
+Paso 44: Right -> fila 3, columna 3 ('G')
+
+FIN DEL EPISODIO:
+- Terminó: sí. Se truncó por límite de pasos: no.
+- Casilla final: 'G' (meta)
+
+DIRECTIVA:
+Responde SI si el agente llegó a la meta 'G'. Responde NO en cualquier otro caso (cayó en un hoyo o se acabaron los pasos).
+
+Responde solo con una palabra: SI o NO.
+
+>>> Respuesta del LLM: 'SI.'
+
+########## V5 sin numeración + número + dato de meta (mapa fijo, episodio que llega a la meta)
+Eres una función de recompensas para un episodio de FrozenLake.
+
+REGLAS DEL ENTORNO:
+- Mapa de 4x4. Celdas: 'S' inicio, 'F' hielo seguro, 'H' hoyo, 'G' meta.
+- El episodio termina si el agente llega a 'G' o cae en un 'H'. Si se acaban los pasos, se trunca.
+
+MAPA (fila por fila, de arriba hacia abajo):
+SFFF
+FHFH
+FFFH
+HFFG
+
+CAMINO DEL AGENTE:
+Inicio: fila 0, columna 0 ('S')
+Paso 1: Right -> fila 0, columna 1 ('F')
+Paso 2: Right -> fila 0, columna 2 ('F')
+Paso 3: Left -> fila 0, columna 1 ('F')
+Paso 4: Right -> fila 0, columna 2 ('F')
+Paso 5: Right -> fila 0, columna 3 ('F')
+Paso 6: Right -> fila 0, columna 3 ('F')
+Paso 7: Left -> fila 0, columna 2 ('F')
+Paso 8: Up -> fila 0, columna 2 ('F')
+Paso 9: Up -> fila 0, columna 2 ('F')
+Paso 10: Left -> fila 0, columna 1 ('F')
+Paso 11: Up -> fila 0, columna 1 ('F')
+Paso 12: Right -> fila 0, columna 2 ('F')
+Paso 13: Up -> fila 0, columna 2 ('F')
+Paso 14: Right -> fila 0, columna 3 ('F')
+Paso 15: Left -> fila 0, columna 2 ('F')
+Paso 16: Down -> fila 1, columna 2 ('F')
+Paso 17: Up -> fila 0, columna 2 ('F')
+Paso 18: Down -> fila 1, columna 2 ('F')
+Paso 19: Up -> fila 0, columna 2 ('F')
+Paso 20: Left -> fila 0, columna 1 ('F')
+Paso 21: Left -> fila 0, columna 0 ('S')
+Paso 22: Left -> fila 0, columna 0 ('S')
+Paso 23: Up -> fila 0, columna 0 ('S')
+Paso 24: Left -> fila 0, columna 0 ('S')
+Paso 25: Down -> fila 1, columna 0 ('F')
+Paso 26: Left -> fila 1, columna 0 ('F')
+Paso 27: Left -> fila 1, columna 0 ('F')
+Paso 28: Up -> fila 0, columna 0 ('S')
+Paso 29: Left -> fila 0, columna 0 ('S')
+Paso 30: Right -> fila 0, columna 1 ('F')
+Paso 31: Up -> fila 0, columna 1 ('F')
+Paso 32: Up -> fila 0, columna 1 ('F')
+Paso 33: Right -> fila 0, columna 2 ('F')
+Paso 34: Down -> fila 1, columna 2 ('F')
+Paso 35: Down -> fila 2, columna 2 ('F')
+Paso 36: Down -> fila 3, columna 2 ('F')
+Paso 37: Up -> fila 2, columna 2 ('F')
+Paso 38: Up -> fila 1, columna 2 ('F')
+Paso 39: Down -> fila 2, columna 2 ('F')
+Paso 40: Up -> fila 1, columna 2 ('F')
+Paso 41: Down -> fila 2, columna 2 ('F')
+Paso 42: Down -> fila 3, columna 2 ('F')
+Paso 43: Down -> fila 3, columna 2 ('F')
+Paso 44: Right -> fila 3, columna 3 ('G')
+
+FIN DEL EPISODIO:
+- Terminó: sí. Se truncó por límite de pasos: no.
+- Llegó a la meta: sí
+- Casilla final: 'G' (meta)
+
+DIRECTIVA:
+Da 1 si el agente llegó a la meta 'G'. Da 0 en cualquier otro caso (cayó en un hoyo o se acabaron los pasos).
+
+Responde solo con un número entre 0 y 1, sin texto extra.
+
+>>> Respuesta del LLM: '1'
+

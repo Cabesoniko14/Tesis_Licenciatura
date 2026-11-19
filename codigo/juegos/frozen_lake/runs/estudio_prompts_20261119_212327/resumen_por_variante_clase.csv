@@ -1,0 +1,16 @@
+variante,clase,n,aciertos,aciertos_%,ic95_bajo_%,ic95_alto_%,sin_respuesta_valida,tokens_salida_prom,latencia_prom_s
+V1 numerado + número,HOYO,60,59,98.3,91.1,99.7,1,2.22,0.336
+V1 numerado + número,META,60,5,8.3,3.6,18.1,0,2.0,0.361
+V1 numerado + número,TRUNCADO,60,60,100.0,94.0,100.0,0,2.03,0.34
+V2 sin numeración + número,HOYO,60,60,100.0,94.0,100.0,0,2.0,0.343
+V2 sin numeración + número,META,60,22,36.7,25.6,49.3,0,2.08,0.375
+V2 sin numeración + número,TRUNCADO,60,60,100.0,94.0,100.0,0,2.0,0.413
+V3 numerado + categoría,HOYO,60,48,80.0,68.2,88.2,9,3.1,0.398
+V3 numerado + categoría,META,60,55,91.7,81.9,96.4,5,3.17,0.39
+V3 numerado + categoría,TRUNCADO,60,23,38.3,27.1,51.0,26,4.13,0.358
+V4 sin numeración + categoría,HOYO,60,60,100.0,94.0,100.0,0,2.75,0.377
+V4 sin numeración + categoría,META,60,59,98.3,91.1,99.7,1,2.67,0.372
+V4 sin numeración + categoría,TRUNCADO,60,57,95.0,86.3,98.3,3,2.98,0.364
+V5 sin numeración + número + dato de meta,HOYO,60,60,100.0,94.0,100.0,0,2.0,0.328
+V5 sin numeración + número + dato de meta,META,60,41,68.3,55.8,78.7,0,2.0,0.386
+V5 sin numeración + número + dato de meta,TRUNCADO,60,60,100.0,94.0,100.0,0,2.0,0.363

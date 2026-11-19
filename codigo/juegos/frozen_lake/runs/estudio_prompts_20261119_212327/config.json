@@ -1,0 +1,41 @@
+{
+  "llm": {
+    "proveedor": "deepinfra",
+    "base_url": "https://api.deepinfra.com/v1/openai",
+    "modelo": "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo",
+    "temperatura": 0.0,
+    "max_tokens": 10,
+    "reintentos": 3,
+    "fallback": 0.0,
+    "api_key_env": "DEEPINFRA_API_KEY"
+  },
+  "n_por_clase_y_mapa": 30,
+  "mapas": {
+    "fijo": {
+      "tamano": 4,
+      "modo": "fijo",
+      "nombre_gym": "4x4",
+      "resbaloso": false,
+      "max_pasos": 50
+    },
+    "aleatorio": {
+      "tamano": 4,
+      "modo": "aleatorio",
+      "resbaloso": false,
+      "max_pasos": 50
+    }
+  },
+  "clases": [
+    "META",
+    "HOYO",
+    "TRUNCADO"
+  ],
+  "variantes": [
+    "V1 numerado + número",
+    "V2 sin numeración + número",
+    "V3 numerado + categoría",
+    "V4 sin numeración + categoría",
+    "V5 sin numeración + número + dato de meta"
+  ],
+  "semilla_episodios": 2026
+}
