@@ -1,6 +1,8 @@
 # ======================  Frozen Lake: prompt del LLM como función de recompensas  ======================
 from common import ACCION_NOMBRE, desc_a_filas, idx_to_rc, tile_at
 
+NOMBRE_CASILLA = {"S": "inicio", "F": "hielo seguro", "H": "hoyo", "G": "meta"}
+
 # --------------------  1. Directivas --------------------
 # Lo único que cambia entre experimentos con LLM. El resto del prompt es igual para todos.
 DIRECTIVAS = {
@@ -23,25 +25,22 @@ DIRECTIVAS = {
 }
 
 # --------------------  2. Plantilla --------------------
+# Sin líneas numeradas (00:, 01:, ...): con ellas Llama 3.1 8B respondía 0 de reflejo, incluso en victorias.
 _PROMPT_TEMPLATE = """Eres una función de recompensas para un episodio de FrozenLake.
 
 REGLAS DEL ENTORNO:
 - Mapa de {H}x{W}. Celdas: 'S' inicio, 'F' hielo seguro, 'H' hoyo, 'G' meta.
-- Acciones: 0=Left, 1=Down, 2=Right, 3=Up.
 - El episodio termina si el agente llega a 'G' o cae en un 'H'. Si se acaban los pasos, se trunca.
 
-MAPA (por filas):
+MAPA (fila por fila, de arriba hacia abajo):
 {mapa}
-
-ÍNDICES DE CADA CELDA (por filas):
-{indices}
 
 CAMINO DEL AGENTE:
 {camino}
 
 FIN DEL EPISODIO:
-- terminated={terminated}, truncated={truncated}
-- casilla final: '{casilla_final}'
+- Terminó: {termino}. Se truncó por límite de pasos: {trunco}.
+- Casilla final: '{casilla_final}' ({nombre_final})
 
 DIRECTIVA:
 {directiva}
@@ -53,17 +52,16 @@ Responde solo con un número entre 0 y 1, sin texto extra.
 def construir_prompt(desc, estados, acciones, terminated, truncated, directiva):
     """estados: [s0, ..., sT]; acciones: [a0, ..., a(T-1)]; directiva: llave de DIRECTIVAS."""
     H, W = desc.shape
-    mapa = "\n".join(f"{r:02d}: {fila}" for r, fila in enumerate(desc_a_filas(desc)))
-    indices = "\n".join(" ".join(f"{r * W + c:02d}" for c in range(W)) for r in range(H))
-
     r0, c0 = idx_to_rc(estados[0], W)
-    camino = [f"00: inicio -> idx={estados[0]:02d} (r={r0},c={c0}) '{tile_at(desc, estados[0])}'"]
+    camino = [f"Inicio: fila {r0}, columna {c0} ('{tile_at(desc, estados[0])}')"]
     for i, (a, s) in enumerate(zip(acciones, estados[1:]), start=1):
         r, c = idx_to_rc(s, W)
-        camino.append(f"{i:02d}: {ACCION_NOMBRE[int(a)]} -> idx={s:02d} (r={r},c={c}) '{tile_at(desc, s)}'")
+        camino.append(f"Paso {i}: {ACCION_NOMBRE[int(a)]} -> fila {r}, columna {c} ('{tile_at(desc, s)}')")
+    casilla_final = tile_at(desc, estados[-1])
 
     return _PROMPT_TEMPLATE.format(
-        H=H, W=W, mapa=mapa, indices=indices, camino="\n".join(camino),
-        terminated=bool(terminated), truncated=bool(truncated),
-        casilla_final=tile_at(desc, estados[-1]), directiva=DIRECTIVAS[directiva],
+        H=H, W=W, mapa="\n".join(desc_a_filas(desc)), camino="\n".join(camino),
+        termino="sí" if terminated else "no", trunco="sí" if truncated else "no",
+        casilla_final=casilla_final, nombre_final=NOMBRE_CASILLA[casilla_final],
+        directiva=DIRECTIVAS[directiva],
     )
