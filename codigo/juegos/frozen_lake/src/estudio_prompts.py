@@ -20,7 +20,6 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
 from common import make_env, semillas_de_mapas, idx_to_rc, tile_at, desc_a_filas, ACCION_NOMBRE
-from prompts import construir_prompt, DIRECTIVAS
 from llm_reward import crear_cliente
 
 RUNS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "runs")
@@ -31,7 +30,12 @@ MAPAS = {
     "aleatorio": {"tamano": 4, "modo": "aleatorio", "resbaloso": False, "max_pasos": 50},
 }
 
-# --------------------  1. Prompt original (con numeración) --------------------
+# Copias congeladas de los prompts comparados: el estudio no depende de prompts.py, que ya usa categorías.
+DIRECTIVA_NUM = ("Da 1 si el agente llegó a la meta 'G'. "
+                 "Da 0 en cualquier otro caso (cayó en un hoyo o se acabaron los pasos).")
+NOMBRE_CASILLA = {"S": "inicio", "F": "hielo seguro", "H": "hoyo", "G": "meta"}
+
+# --------------------  1. Prompts base: con numeración y sin numeración --------------------
 # Primera versión de prompts.py, con la que se corrió A2 el 19 nov y el LLM castigó todas las victorias.
 _PROMPT_NUMERADO = """Eres una función de recompensas para un episodio de FrozenLake.
 
@@ -70,7 +74,42 @@ def prompt_numerado(desc, estados, acciones, terminated, truncated):
         camino.append(f"{i:02d}: {ACCION_NOMBRE[int(a)]} -> idx={s:02d} (r={r},c={c}) '{tile_at(desc, s)}'")
     return _PROMPT_NUMERADO.format(H=H, W=W, mapa=mapa, indices=indices, camino="\n".join(camino),
                                    terminated=bool(terminated), truncated=bool(truncated),
-                                   casilla_final=tile_at(desc, estados[-1]), directiva=DIRECTIVAS["replica"])
+                                   casilla_final=tile_at(desc, estados[-1]), directiva=DIRECTIVA_NUM)
+
+_PROMPT_SIN_NUMERACION = """Eres una función de recompensas para un episodio de FrozenLake.
+
+REGLAS DEL ENTORNO:
+- Mapa de {H}x{W}. Celdas: 'S' inicio, 'F' hielo seguro, 'H' hoyo, 'G' meta.
+- El episodio termina si el agente llega a 'G' o cae en un 'H'. Si se acaban los pasos, se trunca.
+
+MAPA (fila por fila, de arriba hacia abajo):
+{mapa}
+
+CAMINO DEL AGENTE:
+{camino}
+
+FIN DEL EPISODIO:
+- Terminó: {termino}. Se truncó por límite de pasos: {trunco}.
+- Casilla final: '{casilla_final}' ({nombre_final})
+
+DIRECTIVA:
+{directiva}
+
+Responde solo con un número entre 0 y 1, sin texto extra.
+"""
+
+def prompt_sin_numeracion(desc, estados, acciones, terminated, truncated):
+    H, W = desc.shape
+    r0, c0 = idx_to_rc(estados[0], W)
+    camino = [f"Inicio: fila {r0}, columna {c0} ('{tile_at(desc, estados[0])}')"]
+    for i, (a, s) in enumerate(zip(acciones, estados[1:]), start=1):
+        r, c = idx_to_rc(s, W)
+        camino.append(f"Paso {i}: {ACCION_NOMBRE[int(a)]} -> fila {r}, columna {c} ('{tile_at(desc, s)}')")
+    casilla_final = tile_at(desc, estados[-1])
+    return _PROMPT_SIN_NUMERACION.format(H=H, W=W, mapa="\n".join(desc_a_filas(desc)), camino="\n".join(camino),
+                                         termino="sí" if terminated else "no", trunco="sí" if truncated else "no",
+                                         casilla_final=casilla_final, nombre_final=NOMBRE_CASILLA[casilla_final],
+                                         directiva=DIRECTIVA_NUM)
 
 # --------------------  2. Variantes --------------------
 FINAL_NUM = "Responde solo con un número entre 0 y 1, sin texto extra."
@@ -79,7 +118,7 @@ DIRECTIVA_CAT = ("Responde SI si el agente llegó a la meta 'G'. "
 FINAL_CAT = "Responde solo con una palabra: SI o NO."
 
 def a_categoria(p):
-    return p.replace(DIRECTIVAS["replica"], DIRECTIVA_CAT).replace(FINAL_NUM, FINAL_CAT)
+    return p.replace(DIRECTIVA_NUM, DIRECTIVA_CAT).replace(FINAL_NUM, FINAL_CAT)
 
 def con_dato_meta(p, gano):
     return p.replace("- Casilla final:", f"- Llegó a la meta: {'sí' if gano else 'no'}\n- Casilla final:")
@@ -95,11 +134,11 @@ def leer_categoria(t):
 # ep = (desc, estados, acciones, terminated, truncated, clase)
 VARIANTES = {
     "V1 numerado + número":          (lambda ep: prompt_numerado(*ep[:5]), leer_numero),
-    "V2 sin numeración + número":     (lambda ep: construir_prompt(*ep[:5], "replica"), leer_numero),
+    "V2 sin numeración + número":     (lambda ep: prompt_sin_numeracion(*ep[:5]), leer_numero),
     "V3 numerado + categoría":        (lambda ep: a_categoria(prompt_numerado(*ep[:5])), leer_categoria),
-    "V4 sin numeración + categoría":  (lambda ep: a_categoria(construir_prompt(*ep[:5], "replica")), leer_categoria),
+    "V4 sin numeración + categoría":  (lambda ep: a_categoria(prompt_sin_numeracion(*ep[:5])), leer_categoria),
     "V5 sin numeración + número + dato de meta":
-                                      (lambda ep: con_dato_meta(construir_prompt(*ep[:5], "replica"), ep[5] == "META"), leer_numero),
+                                      (lambda ep: con_dato_meta(prompt_sin_numeracion(*ep[:5]), ep[5] == "META"), leer_numero),
 }
 
 # --------------------  3. Episodios de prueba --------------------
