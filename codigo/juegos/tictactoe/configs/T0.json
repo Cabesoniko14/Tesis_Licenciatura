@@ -1,0 +1,41 @@
+{
+  "id": "T0",
+  "juego": {
+    "oponente": "aleatorio",
+    "agente_empieza": true,
+    "letra_agente": "X"
+  },
+  "descripcion": "Q-Learning tabular, recompensa estándar por jugada",
+  "agente": "qlearning",
+  "recompensa": {
+    "fuente": "estandar",
+    "cuando": "por_jugada",
+    "valores": {
+      "gana": 1.0,
+      "bloquea": 0.3,
+      "otra": 0.0,
+      "empate": 0.0,
+      "pierde": -1.0
+    }
+  },
+  "llm": null,
+  "qlearning": {
+    "alpha": 0.1,
+    "gamma": 0.9,
+    "epsilon": 0.1
+  },
+  "dqn": null,
+  "entrenamiento": {
+    "epocas": 100,
+    "episodios_por_epoca": 100,
+    "semilla": 42,
+    "determinista": true,
+    "checkpoint_cada": 10
+  },
+  "evaluacion": {
+    "cada_epoca": true,
+    "partidas": 100,
+    "semilla_prueba": 123,
+    "greedy": true
+  }
+}

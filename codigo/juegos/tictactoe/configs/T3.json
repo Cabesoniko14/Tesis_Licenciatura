@@ -1,0 +1,51 @@
+{
+  "id": "T3",
+  "juego": {
+    "oponente": "aleatorio",
+    "agente_empieza": true,
+    "letra_agente": "X"
+  },
+  "descripcion": "DQN, recompensa estándar por jugada",
+  "agente": "dqn",
+  "recompensa": {
+    "fuente": "estandar",
+    "cuando": "por_jugada",
+    "valores": {
+      "gana": 1.0,
+      "bloquea": 0.3,
+      "otra": 0.0,
+      "empate": 0.0,
+      "pierde": -1.0
+    }
+  },
+  "llm": null,
+  "qlearning": null,
+  "dqn": {
+    "red": "mlp",
+    "gamma": 0.99,
+    "lr": 0.001,
+    "batch": 64,
+    "buffer": 100000,
+    "inicio_aprendizaje": 1000,
+    "entrenar_cada": 1,
+    "copia_red_objetivo": 1000,
+    "eps_inicio": 1.0,
+    "eps_fin": 0.05,
+    "eps_pasos": 30000,
+    "double_dqn": true,
+    "clip_gradiente": 10.0
+  },
+  "entrenamiento": {
+    "epocas": 100,
+    "episodios_por_epoca": 100,
+    "semilla": 42,
+    "determinista": true,
+    "checkpoint_cada": 10
+  },
+  "evaluacion": {
+    "cada_epoca": true,
+    "partidas": 100,
+    "semilla_prueba": 123,
+    "greedy": true
+  }
+}

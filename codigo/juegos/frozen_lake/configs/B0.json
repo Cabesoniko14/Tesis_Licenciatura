@@ -1,0 +1,38 @@
+{
+  "id": "B0",
+  "juego": "frozen_lake",
+  "descripcion": "(Opcional) Q-Learning tabular, mapas aleatorios, recompensa de Gym",
+  "agente": "qlearning",
+  "mapa": {
+    "tamano": 4,
+    "modo": "aleatorio",
+    "semilla_mapas": 42,
+    "resbaloso": false,
+    "max_pasos": 50
+  },
+  "recompensa": {
+    "fuente": "gym",
+    "directiva": null,
+    "cuando": "cada_paso"
+  },
+  "llm": null,
+  "qlearning": {
+    "alpha": 0.1,
+    "gamma": 0.9,
+    "epsilon": 0.1
+  },
+  "dqn": null,
+  "entrenamiento": {
+    "epocas": 100,
+    "episodios_por_epoca": 100,
+    "semilla": 42,
+    "determinista": true,
+    "checkpoint_cada": 10
+  },
+  "evaluacion": {
+    "cada_epoca": true,
+    "episodios": 100,
+    "semilla_mapas_prueba": 123,
+    "greedy": true
+  }
+}

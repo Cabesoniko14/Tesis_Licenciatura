@@ -1,0 +1,57 @@
+{
+  "id": "B4",
+  "juego": "frozen_lake",
+  "descripcion": "DQN, mapas aleatorios, LLM con directiva compleja: ruta más segura (lejos de hoyos)",
+  "agente": "dqn",
+  "mapa": {
+    "tamano": 4,
+    "modo": "aleatorio",
+    "semilla_mapas": 42,
+    "resbaloso": false,
+    "max_pasos": 50
+  },
+  "recompensa": {
+    "fuente": "llm",
+    "directiva": "segura",
+    "cuando": "fin_episodio"
+  },
+  "llm": {
+    "proveedor": "deepinfra",
+    "base_url": "https://api.deepinfra.com/v1/openai",
+    "modelo": "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo",
+    "temperatura": 0.0,
+    "max_tokens": 10,
+    "reintentos": 3,
+    "fallback": 0.0,
+    "api_key_env": "DEEPINFRA_API_KEY"
+  },
+  "qlearning": null,
+  "dqn": {
+    "red": "cnn",
+    "gamma": 0.99,
+    "lr": 0.001,
+    "batch": 64,
+    "buffer": 100000,
+    "inicio_aprendizaje": 2000,
+    "entrenar_cada": 1,
+    "copia_red_objetivo": 1000,
+    "eps_inicio": 1.0,
+    "eps_fin": 0.05,
+    "eps_pasos": 50000,
+    "double_dqn": true,
+    "clip_gradiente": 10.0
+  },
+  "entrenamiento": {
+    "epocas": 100,
+    "episodios_por_epoca": 100,
+    "semilla": 42,
+    "determinista": true,
+    "checkpoint_cada": 10
+  },
+  "evaluacion": {
+    "cada_epoca": true,
+    "episodios": 100,
+    "semilla_mapas_prueba": 123,
+    "greedy": true
+  }
+}

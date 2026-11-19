@@ -1,0 +1,51 @@
+{
+  "id": "T1",
+  "juego": {
+    "oponente": "aleatorio",
+    "agente_empieza": true,
+    "letra_agente": "X"
+  },
+  "descripcion": "Q-Learning tabular, LLM réplica de T0 evaluando cada jugada (ve el turno completo)",
+  "agente": "qlearning",
+  "recompensa": {
+    "fuente": "llm",
+    "directiva": "replica_jugada",
+    "cuando": "por_jugada",
+    "valores": {
+      "gana": 1.0,
+      "bloquea": 0.3,
+      "otra": 0.0,
+      "empate": 0.0,
+      "pierde": -1.0
+    }
+  },
+  "llm": {
+    "proveedor": "deepinfra",
+    "base_url": "https://api.deepinfra.com/v1/openai",
+    "modelo": "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo",
+    "temperatura": 0.0,
+    "max_tokens": 10,
+    "reintentos": 3,
+    "fallback": 0.0,
+    "api_key_env": "DEEPINFRA_API_KEY"
+  },
+  "qlearning": {
+    "alpha": 0.1,
+    "gamma": 0.9,
+    "epsilon": 0.1
+  },
+  "dqn": null,
+  "entrenamiento": {
+    "epocas": 100,
+    "episodios_por_epoca": 100,
+    "semilla": 42,
+    "determinista": true,
+    "checkpoint_cada": 10
+  },
+  "evaluacion": {
+    "cada_epoca": true,
+    "partidas": 100,
+    "semilla_prueba": 123,
+    "greedy": true
+  }
+}
