@@ -1,18 +1,9 @@
-# Deprecados — juegos fuera de la tesina
+# Deprecados
 
-Movido el 2026-11-17 a `codigo/juegos/_deprecado/2026-11-17/`. Nada se borró: todo sigue en el repo y en el historial de git.
+Movido el 2026-11-17 a `codigo/juegos/_deprecado/2026-11-17/`.
 
-La tesina solo reporta Tic-Tac-Toe y Frozen Lake. Estos juegos fueron pruebas exploratorias.
+Contenido tanto de juegos anteriores que no llegaron a la versión final de la tesina como de versiones anteriores del código y experimentos que terminaron siendo obsoletos o re-ejecutados con la versión productiva del código.
 
-| Juego | Qué había | Último commit | Estado |
-| --- | --- | --- | --- |
-| `connect_four/` | DQN estándar contra oponente aleatorio, óptimo y self-play (3 scripts) | 2025-10-23 "trial unsuccesful" | Sin resultados concluyentes. La tesina lo menciona en §3.2.1 y promete resultados que no aparecen: corregir ese párrafo |
-| `jericho/` | Zork con DQN estándar, DQN + Groq, v2 y aleatorio; incluye `zork1-3.z5` | 2024-12-13 | Exploratorio (juego de texto); no aparece en la tesina |
-| `shopping/` | Tienda simulada con DQN estándar, DQN + Groq y DQN + GPT-4 | 2025-10-22 | Exploratorio; no aparece en la tesina |
-
-## Visualizaciones
-
-`codigo/visualizaciones/viz_generator.ipynb` y `imagenes/g1–g5` se movieron a `codigo/visualizaciones/_deprecado/2026-11-17/`. Generaban las Figs. 4.1–4.6 desde archivos que ya están deprecados. Cada juego tendrá su propio `analisis/figuras.py`; `codigo/visualizaciones/` queda para el estilo compartido de las gráficas.
 
 ## Lista completa de archivos
 
