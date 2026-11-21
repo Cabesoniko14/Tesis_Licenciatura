@@ -1,0 +1,14 @@
+{
+  "id": "B1",
+  "descripcion": "DQN, mapas aleatorios, recompensa de Gym",
+  "episodios": 10000,
+  "victorias": 7454,
+  "hoyos": 2460,
+  "truncados": 86,
+  "winrate_entrenamiento_%": 74.54,
+  "winrate_greedy_final_%": 74.0,
+  "tiempo_total_segundos": 4147.58,
+  "llm": null,
+  "python": "3.13.16",
+  "torch": "2.14.1+cu130"
+}

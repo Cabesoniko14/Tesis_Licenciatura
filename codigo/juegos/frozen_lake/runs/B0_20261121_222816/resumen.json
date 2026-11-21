@@ -1,0 +1,14 @@
+{
+  "id": "B0",
+  "descripcion": "(Opcional) Q-Learning tabular, mapas aleatorios, recompensa de Gym",
+  "episodios": 10000,
+  "victorias": 3736,
+  "hoyos": 6261,
+  "truncados": 3,
+  "winrate_entrenamiento_%": 37.36,
+  "winrate_greedy_final_%": 35.0,
+  "tiempo_total_segundos": 4.94,
+  "llm": null,
+  "python": "3.13.16",
+  "torch": "2.14.1+cu130"
+}
