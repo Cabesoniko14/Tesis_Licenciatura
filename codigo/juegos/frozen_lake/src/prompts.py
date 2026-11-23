@@ -41,6 +41,15 @@ DIRECTIVAS = {
         "categorias": ["FALLO", "REGULAR", "BIEN", "EXCELENTE"],
         "minimo_exito": 0.6,
     },
+    "borde_estricto": {
+        "texto": (
+            "Responde SI solo si el agente llegó a la meta 'G' y todas las casillas de su camino están en el borde "
+            "del mapa (primera o última fila, primera o última columna). "
+            "Responde NO en cualquier otro caso: si no llegó a la meta, o si pasó por alguna casilla del interior del mapa."
+        ),
+        "categorias": ["NO", "SI"],
+        "minimo_exito": 1.0,
+    },
 }
 
 def categorias(directiva):
