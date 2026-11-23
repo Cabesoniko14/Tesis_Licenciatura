@@ -1,7 +1,7 @@
 {
   "id": "B4",
   "juego": "frozen_lake",
-  "descripcion": "DQN, mapas aleatorios, LLM con directiva compleja: ruta más segura (lejos de hoyos)",
+  "descripcion": "DQN, mapas aleatorios, LLM con directiva binaria: SI solo si llega a la meta con toda la ruta por el borde",
   "agente": "dqn",
   "mapa": {
     "tamano": 4,
@@ -12,7 +12,7 @@
   },
   "recompensa": {
     "fuente": "llm",
-    "directiva": "segura",
+    "directiva": "borde_estricto",
     "cuando": "fin_episodio"
   },
   "llm": {
