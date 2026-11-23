@@ -1,0 +1,17 @@
+{
+  "id": "B3",
+  "parcial": true,
+  "epocas_completadas": 20,
+  "episodios": 2000,
+  "winrate_entrenamiento_%": 17.55,
+  "winrate_greedy_ultima_%": 6.0,
+  "llm": {
+    "invocaciones_totales": 2000,
+    "llamadas_api_totales": 2013,
+    "fallbacks_totales": 1,
+    "errores_api_totales": 0,
+    "tiempo_respuesta_total_segundos": 890.6836835819964,
+    "tokens_entrada_totales": 1173141,
+    "tokens_salida_totales": 10448
+  }
+}
