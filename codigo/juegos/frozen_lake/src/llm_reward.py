@@ -8,7 +8,8 @@ from openai import OpenAI
 
 # --------------------  1. Cliente y estadísticas --------------------
 def crear_cliente(cfg_llm):
-    return OpenAI(api_key=os.environ[cfg_llm["api_key_env"]], base_url=cfg_llm["base_url"])
+    return OpenAI(api_key=os.environ[cfg_llm["api_key_env"]], base_url=cfg_llm["base_url"],
+                  timeout=60, max_retries=0)
 
 def nuevas_stats():
     return {
