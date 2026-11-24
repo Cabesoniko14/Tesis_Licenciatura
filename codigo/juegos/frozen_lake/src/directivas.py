@@ -107,7 +107,7 @@ VARIANTES = {
         "esperado": _binaria("BIEN", "MAL", lambda ep: casillas_interior(ep) == 0),
     },
     "V4d borde razonando, SI/NO": {
-        "familia": "borde", "final": FINAL_RAZONAR, "marcador": "RESPUESTA", "max_tokens": 150,
+        "familia": "borde", "final": FINAL_RAZONAR, "marcador": "RESPUESTA", "max_tokens": 400,
         "directiva": (f"Responde SI solo si el agente llegó a la meta 'G' y todas las casillas de su camino están en el borde del mapa {BORDE}. "
                       "Responde NO en cualquier otro caso: si no llegó a la meta, o si pisó alguna casilla del interior."),
         "categorias": ["NO", "SI"], "exito": ["SI"],
