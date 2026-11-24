@@ -1,0 +1,278 @@
+########## V1 réplica (respuesta correcta: SI)
+Eres una función de recompensas para un episodio de FrozenLake.
+
+REGLAS DEL ENTORNO:
+- Mapa de 4x4. Celdas: 'S' inicio, 'F' hielo seguro, 'H' hoyo, 'G' meta.
+- El episodio termina si el agente llega a 'G' o cae en un 'H'. Si se acaban los pasos, se trunca.
+
+MAPA (fila por fila, de arriba hacia abajo):
+SFFH
+FFFF
+HFFF
+HFFG
+
+CAMINO DEL AGENTE:
+Inicio: fila 0, columna 0 ('S')
+Paso 1: Down -> fila 1, columna 0 ('F')
+Paso 2: Right -> fila 1, columna 1 ('F')
+Paso 3: Right -> fila 1, columna 2 ('F')
+Paso 4: Down -> fila 2, columna 2 ('F')
+Paso 5: Down -> fila 3, columna 2 ('F')
+Paso 6: Right -> fila 3, columna 3 ('G')
+
+FIN DEL EPISODIO:
+- Terminó: sí. Se truncó por límite de pasos: no.
+- Casilla final: 'G' (meta)
+
+DIRECTIVA:
+Responde SI si el agente llegó a la meta 'G'. Responde NO en cualquier otro caso (cayó en un hoyo o se acabaron los pasos).
+
+Responde solo con una palabra: SI o NO.
+
+>>> Respuesta del LLM: 'SI.'
+
+########## V2a ≤8 pasos, pasos numerados (respuesta correcta: NO)
+Eres una función de recompensas para un episodio de FrozenLake.
+
+REGLAS DEL ENTORNO:
+- Mapa de 4x4. Celdas: 'S' inicio, 'F' hielo seguro, 'H' hoyo, 'G' meta.
+- El episodio termina si el agente llega a 'G' o cae en un 'H'. Si se acaban los pasos, se trunca.
+
+MAPA (fila por fila, de arriba hacia abajo):
+SHFH
+FHFF
+FFFH
+FFFG
+
+CAMINO DEL AGENTE:
+Inicio: fila 0, columna 0 ('S')
+Paso 1: Down -> fila 1, columna 0 ('F')
+Paso 2: Down -> fila 2, columna 0 ('F')
+Paso 3: Right -> fila 2, columna 1 ('F')
+Paso 4: Right -> fila 2, columna 2 ('F')
+Paso 5: Up -> fila 1, columna 2 ('F')
+Paso 6: Up -> fila 0, columna 2 ('F')
+Paso 7: Down -> fila 1, columna 2 ('F')
+Paso 8: Down -> fila 2, columna 2 ('F')
+Paso 9: Down -> fila 3, columna 2 ('F')
+Paso 10: Right -> fila 3, columna 3 ('G')
+
+FIN DEL EPISODIO:
+- Terminó: sí. Se truncó por límite de pasos: no.
+- Casilla final: 'G' (meta)
+
+DIRECTIVA:
+Responde SI solo si el agente llegó a la meta 'G' en 8 pasos o menos. Responde NO en cualquier otro caso.
+
+Responde solo con una palabra: SI o NO.
+
+>>> Respuesta del LLM: 'SI.'
+
+########## V2b ≤8 pasos, sin numerar (respuesta correcta: NO)
+Eres una función de recompensas para un episodio de FrozenLake.
+
+REGLAS DEL ENTORNO:
+- Mapa de 4x4. Celdas: 'S' inicio, 'F' hielo seguro, 'H' hoyo, 'G' meta.
+- El episodio termina si el agente llega a 'G' o cae en un 'H'. Si se acaban los pasos, se trunca.
+
+MAPA (fila por fila, de arriba hacia abajo):
+SHFH
+FHFF
+FFFH
+FFFG
+
+CAMINO DEL AGENTE:
+Inicio: fila 0, columna 0 ('S')
+- Down -> fila 1, columna 0 ('F')
+- Down -> fila 2, columna 0 ('F')
+- Right -> fila 2, columna 1 ('F')
+- Right -> fila 2, columna 2 ('F')
+- Up -> fila 1, columna 2 ('F')
+- Up -> fila 0, columna 2 ('F')
+- Down -> fila 1, columna 2 ('F')
+- Down -> fila 2, columna 2 ('F')
+- Down -> fila 3, columna 2 ('F')
+- Right -> fila 3, columna 3 ('G')
+
+FIN DEL EPISODIO:
+- Terminó: sí. Se truncó por límite de pasos: no.
+- Casilla final: 'G' (meta)
+
+DIRECTIVA:
+Responde SI solo si el agente llegó a la meta 'G' en 8 pasos o menos. Responde NO en cualquier otro caso.
+
+Responde solo con una palabra: SI o NO.
+
+>>> Respuesta del LLM: 'SI.'
+
+########## V3 sin repetir casillas (respuesta correcta: NO)
+Eres una función de recompensas para un episodio de FrozenLake.
+
+REGLAS DEL ENTORNO:
+- Mapa de 4x4. Celdas: 'S' inicio, 'F' hielo seguro, 'H' hoyo, 'G' meta.
+- El episodio termina si el agente llega a 'G' o cae en un 'H'. Si se acaban los pasos, se trunca.
+
+MAPA (fila por fila, de arriba hacia abajo):
+SFFF
+FFFH
+FFHF
+HFFG
+
+CAMINO DEL AGENTE:
+Inicio: fila 0, columna 0 ('S')
+Paso 1: Down -> fila 1, columna 0 ('F')
+Paso 2: Right -> fila 1, columna 1 ('F')
+Paso 3: Right -> fila 1, columna 2 ('F')
+Paso 4: Left -> fila 1, columna 1 ('F')
+Paso 5: Down -> fila 2, columna 1 ('F')
+Paso 6: Down -> fila 3, columna 1 ('F')
+Paso 7: Right -> fila 3, columna 2 ('F')
+Paso 8: Right -> fila 3, columna 3 ('G')
+
+FIN DEL EPISODIO:
+- Terminó: sí. Se truncó por límite de pasos: no.
+- Casilla final: 'G' (meta)
+
+DIRECTIVA:
+Responde SI solo si el agente llegó a la meta 'G' sin volver nunca a una casilla en la que ya había estado. Responde NO en cualquier otro caso: si no llegó a la meta, o si pisó alguna casilla más de una vez.
+
+Responde solo con una palabra: SI o NO.
+
+>>> Respuesta del LLM: 'NO.'
+
+########## V4a borde graduado (respuesta correcta: BIEN)
+Eres una función de recompensas para un episodio de FrozenLake.
+
+REGLAS DEL ENTORNO:
+- Mapa de 4x4. Celdas: 'S' inicio, 'F' hielo seguro, 'H' hoyo, 'G' meta.
+- El episodio termina si el agente llega a 'G' o cae en un 'H'. Si se acaban los pasos, se trunca.
+
+MAPA (fila por fila, de arriba hacia abajo):
+SFHF
+FHHH
+FFFF
+HFFG
+
+CAMINO DEL AGENTE:
+Inicio: fila 0, columna 0 ('S')
+Paso 1: Down -> fila 1, columna 0 ('F')
+Paso 2: Down -> fila 2, columna 0 ('F')
+Paso 3: Right -> fila 2, columna 1 ('F')
+Paso 4: Down -> fila 3, columna 1 ('F')
+Paso 5: Right -> fila 3, columna 2 ('F')
+Paso 6: Right -> fila 3, columna 3 ('G')
+
+FIN DEL EPISODIO:
+- Terminó: sí. Se truncó por límite de pasos: no.
+- Casilla final: 'G' (meta)
+
+DIRECTIVA:
+Califica la ruta del agente con una de estas palabras:
+- FALLO: no llegó a la meta 'G' (cayó en un hoyo o se acabaron los pasos).
+- REGULAR: llegó a la meta, pero pisó dos o más casillas del interior del mapa.
+- BIEN: llegó a la meta y pisó exactamente una casilla del interior del mapa.
+- EXCELENTE: llegó a la meta y todas las casillas de su camino están en el borde del mapa (primera o última fila, primera o última columna; todas las demás casillas son el interior).
+
+Responde solo con una palabra: EXCELENTE, BIEN, REGULAR o FALLO.
+
+>>> Respuesta del LLM: 'FALLO.'
+
+########## V4b borde SI/NO (respuesta correcta: NO)
+Eres una función de recompensas para un episodio de FrozenLake.
+
+REGLAS DEL ENTORNO:
+- Mapa de 4x4. Celdas: 'S' inicio, 'F' hielo seguro, 'H' hoyo, 'G' meta.
+- El episodio termina si el agente llega a 'G' o cae en un 'H'. Si se acaban los pasos, se trunca.
+
+MAPA (fila por fila, de arriba hacia abajo):
+SFHF
+FHHH
+FFFF
+HFFG
+
+CAMINO DEL AGENTE:
+Inicio: fila 0, columna 0 ('S')
+Paso 1: Down -> fila 1, columna 0 ('F')
+Paso 2: Down -> fila 2, columna 0 ('F')
+Paso 3: Right -> fila 2, columna 1 ('F')
+Paso 4: Down -> fila 3, columna 1 ('F')
+Paso 5: Right -> fila 3, columna 2 ('F')
+Paso 6: Right -> fila 3, columna 3 ('G')
+
+FIN DEL EPISODIO:
+- Terminó: sí. Se truncó por límite de pasos: no.
+- Casilla final: 'G' (meta)
+
+DIRECTIVA:
+Responde SI solo si el agente llegó a la meta 'G' y todas las casillas de su camino están en el borde del mapa (primera o última fila, primera o última columna; todas las demás casillas son el interior). Responde NO en cualquier otro caso: si no llegó a la meta, o si pisó alguna casilla del interior.
+
+Responde solo con una palabra: SI o NO.
+
+>>> Respuesta del LLM: 'SI'
+
+########## V4c borde BIEN/MAL (respuesta correcta: MAL)
+Eres una función de recompensas para un episodio de FrozenLake.
+
+REGLAS DEL ENTORNO:
+- Mapa de 4x4. Celdas: 'S' inicio, 'F' hielo seguro, 'H' hoyo, 'G' meta.
+- El episodio termina si el agente llega a 'G' o cae en un 'H'. Si se acaban los pasos, se trunca.
+
+MAPA (fila por fila, de arriba hacia abajo):
+SFHF
+FHHH
+FFFF
+HFFG
+
+CAMINO DEL AGENTE:
+Inicio: fila 0, columna 0 ('S')
+Paso 1: Down -> fila 1, columna 0 ('F')
+Paso 2: Down -> fila 2, columna 0 ('F')
+Paso 3: Right -> fila 2, columna 1 ('F')
+Paso 4: Down -> fila 3, columna 1 ('F')
+Paso 5: Right -> fila 3, columna 2 ('F')
+Paso 6: Right -> fila 3, columna 3 ('G')
+
+FIN DEL EPISODIO:
+- Terminó: sí. Se truncó por límite de pasos: no.
+- Casilla final: 'G' (meta)
+
+DIRECTIVA:
+Responde BIEN solo si el agente llegó a la meta 'G' y todas las casillas de su camino están en el borde del mapa (primera o última fila, primera o última columna; todas las demás casillas son el interior). Responde MAL en cualquier otro caso: si no llegó a la meta, o si pisó alguna casilla del interior.
+
+Responde solo con una palabra: BIEN o MAL.
+
+>>> Respuesta del LLM: 'MAL.'
+
+########## V4d borde razonando, SI/NO (respuesta correcta: NO)
+Eres una función de recompensas para un episodio de FrozenLake.
+
+REGLAS DEL ENTORNO:
+- Mapa de 4x4. Celdas: 'S' inicio, 'F' hielo seguro, 'H' hoyo, 'G' meta.
+- El episodio termina si el agente llega a 'G' o cae en un 'H'. Si se acaban los pasos, se trunca.
+
+MAPA (fila por fila, de arriba hacia abajo):
+SFHF
+FHHH
+FFFF
+HFFG
+
+CAMINO DEL AGENTE:
+Inicio: fila 0, columna 0 ('S')
+Paso 1: Down -> fila 1, columna 0 ('F')
+Paso 2: Down -> fila 2, columna 0 ('F')
+Paso 3: Right -> fila 2, columna 1 ('F')
+Paso 4: Down -> fila 3, columna 1 ('F')
+Paso 5: Right -> fila 3, columna 2 ('F')
+Paso 6: Right -> fila 3, columna 3 ('G')
+
+FIN DEL EPISODIO:
+- Terminó: sí. Se truncó por límite de pasos: no.
+- Casilla final: 'G' (meta)
+
+DIRECTIVA:
+Responde SI solo si el agente llegó a la meta 'G' y todas las casillas de su camino están en el borde del mapa (primera o última fila, primera o última columna; todas las demás casillas son el interior). Responde NO en cualquier otro caso: si no llegó a la meta, o si pisó alguna casilla del interior.
+
+Primero escribe en una línea las casillas del interior del mapa que pisó el agente, o 'ninguna'. Después, en otra línea, escribe RESPUESTA: SI o RESPUESTA: NO.
+
+>>> Respuesta del LLM: 'El camino del agente es:\nS -> F -> F -> F -> F -> F -> G\n\nLas casillas del interior del mapa que pisó el agente son:\nninguna\n\nRESPUESTA: NO'
+

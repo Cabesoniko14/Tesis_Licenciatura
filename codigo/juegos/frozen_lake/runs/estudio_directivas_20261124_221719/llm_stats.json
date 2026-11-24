@@ -1,0 +1,9 @@
+{
+  "invocaciones_totales": 810,
+  "llamadas_api_totales": 861,
+  "fallbacks_totales": 11,
+  "errores_api_totales": 2,
+  "tiempo_respuesta_total_segundos": 3008.633116720997,
+  "tokens_entrada_totales": 446674,
+  "tokens_salida_totales": 36077
+}

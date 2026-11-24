@@ -1,0 +1,139 @@
+{
+  "llm": {
+    "proveedor": "deepinfra",
+    "base_url": "https://api.deepinfra.com/v1/openai",
+    "modelo": "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo",
+    "temperatura": 0.0,
+    "max_tokens": 10,
+    "reintentos": 3,
+    "fallback": 0.0,
+    "api_key_env": "DEEPINFRA_API_KEY"
+  },
+  "n_por_clase": 30,
+  "mapa": {
+    "tamano": 4,
+    "modo": "aleatorio",
+    "resbaloso": false,
+    "max_pasos": 50
+  },
+  "max_pasos": 14,
+  "semilla_episodios": 2026,
+  "familias": {
+    "resultado": [
+      "META",
+      "NO_META"
+    ],
+    "pasos": [
+      "META_SI",
+      "META_NO",
+      "NO_META"
+    ],
+    "repetir": [
+      "META_SI",
+      "META_NO",
+      "NO_META"
+    ],
+    "borde": [
+      "META_BORDE",
+      "META_1_INTERIOR",
+      "META_2+_INTERIOR",
+      "NO_META"
+    ]
+  },
+  "variantes": {
+    "V1 réplica": {
+      "familia": "resultado",
+      "directiva": "Responde SI si el agente llegó a la meta 'G'. Responde NO en cualquier otro caso (cayó en un hoyo o se acabaron los pasos).",
+      "categorias": [
+        "NO",
+        "SI"
+      ],
+      "exito": [
+        "SI"
+      ]
+    },
+    "V2a ≤8 pasos, pasos numerados": {
+      "familia": "pasos",
+      "directiva": "Responde SI solo si el agente llegó a la meta 'G' en 8 pasos o menos. Responde NO en cualquier otro caso.",
+      "categorias": [
+        "NO",
+        "SI"
+      ],
+      "exito": [
+        "SI"
+      ]
+    },
+    "V2b ≤8 pasos, sin numerar": {
+      "familia": "pasos",
+      "numerado": false,
+      "directiva": "Responde SI solo si el agente llegó a la meta 'G' en 8 pasos o menos. Responde NO en cualquier otro caso.",
+      "categorias": [
+        "NO",
+        "SI"
+      ],
+      "exito": [
+        "SI"
+      ]
+    },
+    "V3 sin repetir casillas": {
+      "familia": "repetir",
+      "directiva": "Responde SI solo si el agente llegó a la meta 'G' sin volver nunca a una casilla en la que ya había estado. Responde NO en cualquier otro caso: si no llegó a la meta, o si pisó alguna casilla más de una vez.",
+      "categorias": [
+        "NO",
+        "SI"
+      ],
+      "exito": [
+        "SI"
+      ]
+    },
+    "V4a borde graduado": {
+      "familia": "borde",
+      "directiva": "Califica la ruta del agente con una de estas palabras:\n- FALLO: no llegó a la meta 'G' (cayó en un hoyo o se acabaron los pasos).\n- REGULAR: llegó a la meta, pero pisó dos o más casillas del interior del mapa.\n- BIEN: llegó a la meta y pisó exactamente una casilla del interior del mapa.\n- EXCELENTE: llegó a la meta y todas las casillas de su camino están en el borde del mapa (primera o última fila, primera o última columna; todas las demás casillas son el interior).",
+      "categorias": [
+        "FALLO",
+        "REGULAR",
+        "BIEN",
+        "EXCELENTE"
+      ],
+      "exito": [
+        "EXCELENTE"
+      ]
+    },
+    "V4b borde SI/NO": {
+      "familia": "borde",
+      "directiva": "Responde SI solo si el agente llegó a la meta 'G' y todas las casillas de su camino están en el borde del mapa (primera o última fila, primera o última columna; todas las demás casillas son el interior). Responde NO en cualquier otro caso: si no llegó a la meta, o si pisó alguna casilla del interior.",
+      "categorias": [
+        "NO",
+        "SI"
+      ],
+      "exito": [
+        "SI"
+      ]
+    },
+    "V4c borde BIEN/MAL": {
+      "familia": "borde",
+      "directiva": "Responde BIEN solo si el agente llegó a la meta 'G' y todas las casillas de su camino están en el borde del mapa (primera o última fila, primera o última columna; todas las demás casillas son el interior). Responde MAL en cualquier otro caso: si no llegó a la meta, o si pisó alguna casilla del interior.",
+      "categorias": [
+        "MAL",
+        "BIEN"
+      ],
+      "exito": [
+        "BIEN"
+      ]
+    },
+    "V4d borde razonando, SI/NO": {
+      "familia": "borde",
+      "final": "Primero escribe en una línea las casillas del interior del mapa que pisó el agente, o 'ninguna'. Después, en otra línea, escribe RESPUESTA: SI o RESPUESTA: NO.",
+      "marcador": "RESPUESTA",
+      "max_tokens": 400,
+      "directiva": "Responde SI solo si el agente llegó a la meta 'G' y todas las casillas de su camino están en el borde del mapa (primera o última fila, primera o última columna; todas las demás casillas son el interior). Responde NO en cualquier otro caso: si no llegó a la meta, o si pisó alguna casilla del interior.",
+      "categorias": [
+        "NO",
+        "SI"
+      ],
+      "exito": [
+        "SI"
+      ]
+    }
+  }
+}

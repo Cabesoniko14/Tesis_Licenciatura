@@ -1,0 +1,28 @@
+variante,clase,n,aciertos,aciertos_%,ic95_bajo_%,ic95_alto_%,sin_respuesta_valida,tokens_salida_prom,latencia_prom_s
+V1 réplica,META,30,30,100.0,88.6,100.0,0,2.73,0.567
+V1 réplica,NO_META,30,30,100.0,88.6,100.0,0,2.7,0.511
+"V2a ≤8 pasos, pasos numerados",META_NO,30,1,3.3,0.6,16.7,0,2.83,0.477
+"V2a ≤8 pasos, pasos numerados",META_SI,30,29,96.7,83.3,99.4,0,2.77,0.545
+"V2a ≤8 pasos, pasos numerados",NO_META,30,30,100.0,88.6,100.0,0,3.1,0.511
+"V2b ≤8 pasos, sin numerar",META_NO,30,0,0.0,0.0,11.4,0,2.83,0.474
+"V2b ≤8 pasos, sin numerar",META_SI,30,29,96.7,83.3,99.4,0,2.77,0.544
+"V2b ≤8 pasos, sin numerar",NO_META,30,29,96.7,83.3,99.4,0,2.93,0.512
+V3 sin repetir casillas,META_NO,30,11,36.7,21.9,54.5,0,2.87,0.475
+V3 sin repetir casillas,META_SI,30,22,73.3,55.6,85.8,0,3.0,0.531
+V3 sin repetir casillas,NO_META,30,30,100.0,88.6,100.0,0,2.87,0.603
+V4a borde graduado,META_1_INTERIOR,30,2,6.7,1.8,21.3,0,5.43,0.735
+V4a borde graduado,META_2+_INTERIOR,30,1,3.3,0.6,16.7,0,5.67,0.801
+V4a borde graduado,META_BORDE,30,18,60.0,42.3,75.4,0,5.4,0.721
+V4a borde graduado,NO_META,30,27,90.0,74.4,96.5,0,4.9,0.645
+V4b borde SI/NO,META_1_INTERIOR,30,11,36.7,21.9,54.5,0,3.0,0.511
+V4b borde SI/NO,META_2+_INTERIOR,30,7,23.3,11.8,40.9,0,3.37,0.529
+V4b borde SI/NO,META_BORDE,30,18,60.0,42.3,75.4,0,2.8,0.582
+V4b borde SI/NO,NO_META,30,30,100.0,88.6,100.0,0,3.07,0.52
+V4c borde BIEN/MAL,META_1_INTERIOR,30,27,90.0,74.4,96.5,0,3.07,0.514
+V4c borde BIEN/MAL,META_2+_INTERIOR,30,27,90.0,74.4,96.5,0,3.4,0.563
+V4c borde BIEN/MAL,META_BORDE,30,4,13.3,5.3,29.7,0,3.2,0.527
+V4c borde BIEN/MAL,NO_META,30,30,100.0,88.6,100.0,0,3.23,0.677
+"V4d borde razonando, SI/NO",META_1_INTERIOR,30,9,30.0,16.7,47.9,3,364.63,25.511
+"V4d borde razonando, SI/NO",META_2+_INTERIOR,30,9,30.0,16.7,47.9,3,254.27,17.895
+"V4d borde razonando, SI/NO",META_BORDE,30,15,50.0,33.2,66.8,0,123.33,9.264
+"V4d borde razonando, SI/NO",NO_META,30,24,80.0,62.7,90.5,5,382.4,34.543

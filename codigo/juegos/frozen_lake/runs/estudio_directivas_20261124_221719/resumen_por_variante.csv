@@ -1,0 +1,9 @@
+variante,n,aciertos,aciertos_%,ic95_bajo_%,ic95_alto_%,sin_respuesta_valida,tokens_salida_prom,latencia_prom_s,aciertos_binario_%
+V1 réplica,60,60,100.0,94.0,100.0,0,2.72,0.539,100.0
+"V2a ≤8 pasos, pasos numerados",90,60,66.7,56.4,75.5,0,2.9,0.511,66.7
+"V2b ≤8 pasos, sin numerar",90,58,64.4,54.1,73.6,0,2.84,0.51,64.4
+V3 sin repetir casillas,90,63,70.0,59.9,78.5,0,2.91,0.536,70.0
+V4a borde graduado,120,48,40.0,31.7,48.9,0,5.35,0.725,58.3
+V4b borde SI/NO,120,66,55.0,46.1,63.6,0,3.06,0.536,55.0
+V4c borde BIEN/MAL,120,88,73.3,64.8,80.4,0,3.22,0.57,73.3
+"V4d borde razonando, SI/NO",120,57,47.5,38.8,56.4,11,281.16,21.803,47.5
