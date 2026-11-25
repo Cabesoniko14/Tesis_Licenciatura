@@ -1,0 +1,9 @@
+directiva,esperado,EMPATE,GANA,OTRA,PIERDE
+replica_jugada,BLOQUEA,0,1,29,0
+replica_jugada,EMPATE,0,5,25,0
+replica_jugada,GANA,0,30,0,0
+replica_jugada,OTRA,0,0,29,1
+replica_jugada,PIERDE,0,0,13,17
+replica_resultado,EMPATE,25,5,0,0
+replica_resultado,GANA,0,30,0,0
+replica_resultado,PIERDE,0,0,0,30

@@ -1,0 +1,309 @@
+########## replica_jugada (respuesta correcta: GANA)
+Eres una función de recompensas para una partida de Tic-Tac-Toe (gato).
+
+REGLAS DEL JUEGO:
+- Tablero de 3x3. 'X' son las fichas del agente, 'O' las del rival y '.' una casilla vacía.
+- Las filas y las columnas se cuentan desde 0, empezando arriba a la izquierda.
+- Gana quien completa tres fichas en línea (fila, columna o diagonal). Si el tablero se llena sin ganador, es empate.
+
+TABLERO ANTES DE LA JUGADA DEL AGENTE:
+. . O
+. X X
+O X O
+
+JUGADA DEL AGENTE: fila 1, columna 0
+
+TABLERO DESPUÉS DE LA JUGADA DEL AGENTE:
+. . O
+X X X
+O X O
+
+RESPUESTA DEL RIVAL: no jugó, la partida ya había terminado
+
+TABLERO AL FINAL DEL TURNO:
+. . O
+X X X
+O X O
+
+FIN DEL TURNO:
+- La partida terminó: sí. Ganador: el agente ('X').
+
+DIRECTIVA:
+Califica el turno del agente con una de estas palabras. Si aplican varias, usa la primera de la lista:
+- GANA: con su jugada, el agente completó tres en línea y ganó la partida.
+- PIERDE: después de la jugada del agente, el rival completó tres en línea y ganó la partida.
+- BLOQUEA: antes de la jugada, el rival tenía dos fichas en línea con la tercera casilla vacía, y el agente jugó justo en esa casilla.
+- EMPATE: al final del turno el tablero quedó lleno sin ganador.
+- OTRA: cualquier otra jugada.
+
+Responde solo con una palabra: GANA, BLOQUEA, EMPATE, OTRA o PIERDE.
+
+>>> Respuesta del LLM: 'GANA'
+
+########## replica_jugada (respuesta correcta: PIERDE)
+Eres una función de recompensas para una partida de Tic-Tac-Toe (gato).
+
+REGLAS DEL JUEGO:
+- Tablero de 3x3. 'X' son las fichas del agente, 'O' las del rival y '.' una casilla vacía.
+- Las filas y las columnas se cuentan desde 0, empezando arriba a la izquierda.
+- Gana quien completa tres fichas en línea (fila, columna o diagonal). Si el tablero se llena sin ganador, es empate.
+
+TABLERO ANTES DE LA JUGADA DEL AGENTE:
+X X O
+. O O
+. X .
+
+JUGADA DEL AGENTE: fila 1, columna 0
+
+TABLERO DESPUÉS DE LA JUGADA DEL AGENTE:
+X X O
+X O O
+. X .
+
+RESPUESTA DEL RIVAL: fila 2, columna 2
+
+TABLERO AL FINAL DEL TURNO:
+X X O
+X O O
+. X O
+
+FIN DEL TURNO:
+- La partida terminó: sí. Ganador: el rival ('O').
+
+DIRECTIVA:
+Califica el turno del agente con una de estas palabras. Si aplican varias, usa la primera de la lista:
+- GANA: con su jugada, el agente completó tres en línea y ganó la partida.
+- PIERDE: después de la jugada del agente, el rival completó tres en línea y ganó la partida.
+- BLOQUEA: antes de la jugada, el rival tenía dos fichas en línea con la tercera casilla vacía, y el agente jugó justo en esa casilla.
+- EMPATE: al final del turno el tablero quedó lleno sin ganador.
+- OTRA: cualquier otra jugada.
+
+Responde solo con una palabra: GANA, BLOQUEA, EMPATE, OTRA o PIERDE.
+
+>>> Respuesta del LLM: 'PIERDE.'
+
+########## replica_jugada (respuesta correcta: BLOQUEA)
+Eres una función de recompensas para una partida de Tic-Tac-Toe (gato).
+
+REGLAS DEL JUEGO:
+- Tablero de 3x3. 'X' son las fichas del agente, 'O' las del rival y '.' una casilla vacía.
+- Las filas y las columnas se cuentan desde 0, empezando arriba a la izquierda.
+- Gana quien completa tres fichas en línea (fila, columna o diagonal). Si el tablero se llena sin ganador, es empate.
+
+TABLERO ANTES DE LA JUGADA DEL AGENTE:
+. . O
+. . X
+O X .
+
+JUGADA DEL AGENTE: fila 1, columna 1
+
+TABLERO DESPUÉS DE LA JUGADA DEL AGENTE:
+. . O
+. X X
+O X .
+
+RESPUESTA DEL RIVAL: fila 2, columna 2
+
+TABLERO AL FINAL DEL TURNO:
+. . O
+. X X
+O X O
+
+FIN DEL TURNO:
+- La partida terminó: no. Ganador: ninguno.
+
+DIRECTIVA:
+Califica el turno del agente con una de estas palabras. Si aplican varias, usa la primera de la lista:
+- GANA: con su jugada, el agente completó tres en línea y ganó la partida.
+- PIERDE: después de la jugada del agente, el rival completó tres en línea y ganó la partida.
+- BLOQUEA: antes de la jugada, el rival tenía dos fichas en línea con la tercera casilla vacía, y el agente jugó justo en esa casilla.
+- EMPATE: al final del turno el tablero quedó lleno sin ganador.
+- OTRA: cualquier otra jugada.
+
+Responde solo con una palabra: GANA, BLOQUEA, EMPATE, OTRA o PIERDE.
+
+>>> Respuesta del LLM: 'OTRA.'
+
+########## replica_jugada (respuesta correcta: EMPATE)
+Eres una función de recompensas para una partida de Tic-Tac-Toe (gato).
+
+REGLAS DEL JUEGO:
+- Tablero de 3x3. 'X' son las fichas del agente, 'O' las del rival y '.' una casilla vacía.
+- Las filas y las columnas se cuentan desde 0, empezando arriba a la izquierda.
+- Gana quien completa tres fichas en línea (fila, columna o diagonal). Si el tablero se llena sin ganador, es empate.
+
+TABLERO ANTES DE LA JUGADA DEL AGENTE:
+X O X
+X O O
+O X .
+
+JUGADA DEL AGENTE: fila 2, columna 2
+
+TABLERO DESPUÉS DE LA JUGADA DEL AGENTE:
+X O X
+X O O
+O X X
+
+RESPUESTA DEL RIVAL: no jugó, la partida ya había terminado
+
+TABLERO AL FINAL DEL TURNO:
+X O X
+X O O
+O X X
+
+FIN DEL TURNO:
+- La partida terminó: sí. Ganador: ninguno.
+
+DIRECTIVA:
+Califica el turno del agente con una de estas palabras. Si aplican varias, usa la primera de la lista:
+- GANA: con su jugada, el agente completó tres en línea y ganó la partida.
+- PIERDE: después de la jugada del agente, el rival completó tres en línea y ganó la partida.
+- BLOQUEA: antes de la jugada, el rival tenía dos fichas en línea con la tercera casilla vacía, y el agente jugó justo en esa casilla.
+- EMPATE: al final del turno el tablero quedó lleno sin ganador.
+- OTRA: cualquier otra jugada.
+
+Responde solo con una palabra: GANA, BLOQUEA, EMPATE, OTRA o PIERDE.
+
+>>> Respuesta del LLM: 'OTRA.'
+
+########## replica_jugada (respuesta correcta: OTRA)
+Eres una función de recompensas para una partida de Tic-Tac-Toe (gato).
+
+REGLAS DEL JUEGO:
+- Tablero de 3x3. 'X' son las fichas del agente, 'O' las del rival y '.' una casilla vacía.
+- Las filas y las columnas se cuentan desde 0, empezando arriba a la izquierda.
+- Gana quien completa tres fichas en línea (fila, columna o diagonal). Si el tablero se llena sin ganador, es empate.
+
+TABLERO ANTES DE LA JUGADA DEL AGENTE:
+. . .
+. . .
+. . .
+
+JUGADA DEL AGENTE: fila 2, columna 1
+
+TABLERO DESPUÉS DE LA JUGADA DEL AGENTE:
+. . .
+. . .
+. X .
+
+RESPUESTA DEL RIVAL: fila 0, columna 1
+
+TABLERO AL FINAL DEL TURNO:
+. O .
+. . .
+. X .
+
+FIN DEL TURNO:
+- La partida terminó: no. Ganador: ninguno.
+
+DIRECTIVA:
+Califica el turno del agente con una de estas palabras. Si aplican varias, usa la primera de la lista:
+- GANA: con su jugada, el agente completó tres en línea y ganó la partida.
+- PIERDE: después de la jugada del agente, el rival completó tres en línea y ganó la partida.
+- BLOQUEA: antes de la jugada, el rival tenía dos fichas en línea con la tercera casilla vacía, y el agente jugó justo en esa casilla.
+- EMPATE: al final del turno el tablero quedó lleno sin ganador.
+- OTRA: cualquier otra jugada.
+
+Responde solo con una palabra: GANA, BLOQUEA, EMPATE, OTRA o PIERDE.
+
+>>> Respuesta del LLM: 'OTRA.'
+
+########## replica_resultado (respuesta correcta: GANA)
+Eres una función de recompensas para una partida de Tic-Tac-Toe (gato).
+
+REGLAS DEL JUEGO:
+- Tablero de 3x3. 'X' son las fichas del agente, 'O' las del rival y '.' una casilla vacía.
+- Las filas y las columnas se cuentan desde 0, empezando arriba a la izquierda.
+- Gana quien completa tres fichas en línea (fila, columna o diagonal). Si el tablero se llena sin ganador, es empate.
+
+JUGADAS DE LA PARTIDA, EN ORDEN:
+- Agente ('X'): fila 1, columna 2
+- Rival ('O'): fila 0, columna 2
+- Agente ('X'): fila 2, columna 1
+- Rival ('O'): fila 2, columna 0
+- Agente ('X'): fila 1, columna 1
+- Rival ('O'): fila 2, columna 2
+- Agente ('X'): fila 1, columna 0
+
+TABLERO FINAL:
+. . O
+X X X
+O X O
+
+FIN DE LA PARTIDA:
+- Ganador: el agente ('X').
+
+DIRECTIVA:
+Responde GANA si la partida la ganó el agente, PIERDE si la ganó el rival y EMPATE si terminó sin ganador.
+
+Responde solo con una palabra: GANA, EMPATE o PIERDE.
+
+>>> Respuesta del LLM: 'GANA.'
+
+########## replica_resultado (respuesta correcta: EMPATE)
+Eres una función de recompensas para una partida de Tic-Tac-Toe (gato).
+
+REGLAS DEL JUEGO:
+- Tablero de 3x3. 'X' son las fichas del agente, 'O' las del rival y '.' una casilla vacía.
+- Las filas y las columnas se cuentan desde 0, empezando arriba a la izquierda.
+- Gana quien completa tres fichas en línea (fila, columna o diagonal). Si el tablero se llena sin ganador, es empate.
+
+JUGADAS DE LA PARTIDA, EN ORDEN:
+- Agente ('X'): fila 2, columna 1
+- Rival ('O'): fila 0, columna 1
+- Agente ('X'): fila 0, columna 0
+- Rival ('O'): fila 1, columna 2
+- Agente ('X'): fila 1, columna 0
+- Rival ('O'): fila 1, columna 1
+- Agente ('X'): fila 0, columna 2
+- Rival ('O'): fila 2, columna 0
+- Agente ('X'): fila 2, columna 2
+
+TABLERO FINAL:
+X O X
+X O O
+O X X
+
+FIN DE LA PARTIDA:
+- Ganador: ninguno.
+
+DIRECTIVA:
+Responde GANA si la partida la ganó el agente, PIERDE si la ganó el rival y EMPATE si terminó sin ganador.
+
+Responde solo con una palabra: GANA, EMPATE o PIERDE.
+
+>>> Respuesta del LLM: 'EMPATE.'
+
+########## replica_resultado (respuesta correcta: PIERDE)
+Eres una función de recompensas para una partida de Tic-Tac-Toe (gato).
+
+REGLAS DEL JUEGO:
+- Tablero de 3x3. 'X' son las fichas del agente, 'O' las del rival y '.' una casilla vacía.
+- Las filas y las columnas se cuentan desde 0, empezando arriba a la izquierda.
+- Gana quien completa tres fichas en línea (fila, columna o diagonal). Si el tablero se llena sin ganador, es empate.
+
+JUGADAS DE LA PARTIDA, EN ORDEN:
+- Agente ('X'): fila 0, columna 1
+- Rival ('O'): fila 0, columna 2
+- Agente ('X'): fila 2, columna 1
+- Rival ('O'): fila 1, columna 2
+- Agente ('X'): fila 0, columna 0
+- Rival ('O'): fila 1, columna 1
+- Agente ('X'): fila 1, columna 0
+- Rival ('O'): fila 2, columna 2
+
+TABLERO FINAL:
+X X O
+X O O
+. X O
+
+FIN DE LA PARTIDA:
+- Ganador: el rival ('O').
+
+DIRECTIVA:
+Responde GANA si la partida la ganó el agente, PIERDE si la ganó el rival y EMPATE si terminó sin ganador.
+
+Responde solo con una palabra: GANA, EMPATE o PIERDE.
+
+>>> Respuesta del LLM: 'PIERDE.'
+

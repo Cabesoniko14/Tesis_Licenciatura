@@ -1,0 +1,48 @@
+{
+  "llm": {
+    "proveedor": "deepinfra",
+    "base_url": "https://api.deepinfra.com/v1/openai",
+    "modelo": "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo",
+    "temperatura": 0.0,
+    "max_tokens": 10,
+    "reintentos": 3,
+    "fallback": 0.0,
+    "api_key_env": "DEEPINFRA_API_KEY"
+  },
+  "juego": {
+    "oponente": "aleatorio",
+    "agente_empieza": true,
+    "letra_agente": "X"
+  },
+  "valores": {
+    "gana": 1.0,
+    "bloquea": 0.3,
+    "otra": 0.0,
+    "empate": 0.0,
+    "pierde": -1.0
+  },
+  "n_por_respuesta": 30,
+  "semilla_casos": 2026,
+  "directivas": {
+    "replica_jugada": {
+      "tipo": "jugada",
+      "texto": "Califica el turno del agente con una de estas palabras. Si aplican varias, usa la primera de la lista:\n- GANA: con su jugada, el agente completó tres en línea y ganó la partida.\n- PIERDE: después de la jugada del agente, el rival completó tres en línea y ganó la partida.\n- BLOQUEA: antes de la jugada, el rival tenía dos fichas en línea con la tercera casilla vacía, y el agente jugó justo en esa casilla.\n- EMPATE: al final del turno el tablero quedó lleno sin ganador.\n- OTRA: cualquier otra jugada.",
+      "categorias": {
+        "GANA": "gana",
+        "PIERDE": "pierde",
+        "BLOQUEA": "bloquea",
+        "EMPATE": "empate",
+        "OTRA": "otra"
+      }
+    },
+    "replica_resultado": {
+      "tipo": "partida",
+      "texto": "Responde GANA si la partida la ganó el agente, PIERDE si la ganó el rival y EMPATE si terminó sin ganador.",
+      "categorias": {
+        "GANA": "gana",
+        "EMPATE": "empate",
+        "PIERDE": "pierde"
+      }
+    }
+  }
+}
