@@ -1,0 +1,18 @@
+{
+  "id": "T3",
+  "descripcion": "DQN, recompensa estándar por jugada",
+  "partidas": 10000,
+  "victorias": 7655,
+  "empates": 952,
+  "derrotas": 1393,
+  "winrate_entrenamiento_%": 76.55,
+  "greedy_final_%": {
+    "victorias": 93.0,
+    "empates": 4.0,
+    "derrotas": 3.0
+  },
+  "tiempo_total_segundos": 142.63,
+  "llm": null,
+  "python": "3.13.16",
+  "torch": "2.14.1+cu130"
+}
