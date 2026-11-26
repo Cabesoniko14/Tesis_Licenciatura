@@ -1,0 +1,18 @@
+{
+  "id": "T0",
+  "descripcion": "Q-Learning tabular, recompensa estándar por jugada",
+  "partidas": 10000,
+  "victorias": 7729,
+  "empates": 1346,
+  "derrotas": 925,
+  "winrate_entrenamiento_%": 77.29,
+  "greedy_final_%": {
+    "victorias": 87.0,
+    "empates": 12.0,
+    "derrotas": 1.0
+  },
+  "tiempo_total_segundos": 4.49,
+  "llm": null,
+  "python": "3.13.16",
+  "torch": "2.14.1+cu130"
+}
