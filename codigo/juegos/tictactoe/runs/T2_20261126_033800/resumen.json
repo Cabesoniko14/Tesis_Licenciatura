@@ -1,0 +1,35 @@
+{
+  "id": "T2",
+  "descripcion": "Q-Learning tabular, LLM evalúa solo el resultado al final de la partida",
+  "partidas": 10000,
+  "victorias": 8824,
+  "empates": 538,
+  "derrotas": 638,
+  "winrate_entrenamiento_%": 88.24,
+  "greedy_final_%": {
+    "victorias": 96.0,
+    "empates": 3.0,
+    "derrotas": 1.0
+  },
+  "tiempo_total_segundos": 5712.03,
+  "llm": {
+    "invocaciones_totales": 10000,
+    "llamadas_api_totales": 10165,
+    "fallbacks_totales": 80,
+    "errores_api_totales": 5,
+    "tiempo_respuesta_total_segundos": 5386.136065603019,
+    "tokens_entrada_totales": 3216768,
+    "tokens_salida_totales": 41613
+  },
+  "python": "3.13.16",
+  "torch": "2.14.1+cu130",
+  "acuerdo_llm": {
+    "acuerdo_%": 97.97,
+    "por_categoria_esperada_%": {
+      "EMPATE": 76.77,
+      "GANA": 100.0,
+      "PIERDE": 87.77
+    },
+    "tiempo_llm_%": 94.3
+  }
+}
